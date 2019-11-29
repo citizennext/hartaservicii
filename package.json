@@ -3,27 +3,58 @@
   "version": "0.2.0",
   "author": "Cezar Neaga <cezar.neaga@citizennext.ro>",
   "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf .cache && yarn start",
+    "lint": "eslint . --ext ts --ext tsx",
+    "format": "prettier --config ./.prettierrc --write src/**/*.tsx",
+    "start": "gatsby develop",
+    "build:dir": "mkdirp ./public/icons/",
+    "build:favicons": "node scripts/favicons",
+    "build": "npm run build:dir && npm run build:favicons && gatsby build",
+    "test": "NODE_ENV=test ava **/*.test.js --verbose",
+    "type-check": "tsc --pretty --noEmit --skipLibCheck"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "ava"
+    ]
+  },
   "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "@mdx-js/react": "^1.5.1",
     "gatsby": "^2.18.5",
+    "gatsby-plugin-catch-links": "^2.1.19",
     "gatsby-plugin-manifest": "^2.2.30",
+    "gatsby-plugin-netlify": "^2.1.27",
+    "gatsby-plugin-netlify-cache": "^1.2.0",
     "gatsby-plugin-offline": "^3.0.25",
-    "gatsby-plugin-postcss": "^2.1.16",
     "gatsby-plugin-purgecss": "^4.0.1",
     "gatsby-plugin-react-helmet": "^3.1.16",
+    "gatsby-plugin-sharp": "^2.3.4",
+    "gatsby-plugin-sitemap": "^2.2.22",
+    "gatsby-plugin-theme-ui": "^0.2.43",
+    "gatsby-plugin-typescript": "^2.1.20",
+    "gatsby-source-filesystem": "^2.1.39",
+    "gatsby-transformer-sharp": "^2.3.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "theme-ui": "^0.2.49"
   },
   "devDependencies": {
+    "@babel/core": "^7.7.4",
     "@typescript-eslint/eslint-plugin": "^2.9.0",
     "@typescript-eslint/parser": "^2.9.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.1",
     "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-flowtype": "^4.5.2",
+    "eslint-plugin-graphql": "^3.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
+    "graphql-typescript-definitions": "^0.18.1",
     "prettier": "^1.19.1",
     "typescript": "^3.7.2"
   },
