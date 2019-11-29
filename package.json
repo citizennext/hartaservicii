@@ -1,10 +1,37 @@
 {
   "name": "harta-servicii",
-  "version": "1.0.0",
+  "version": "0.2.0",
+  "author": "Cezar Neaga <cezar.neaga@citizennext.ro>",
   "license": "MIT",
   "dependencies": {
     "gatsby": "^2.18.5",
+    "gatsby-plugin-manifest": "^2.2.30",
+    "gatsby-plugin-offline": "^3.0.25",
+    "gatsby-plugin-postcss": "^2.1.16",
+    "gatsby-plugin-purgecss": "^4.0.1",
+    "gatsby-plugin-react-helmet": "^3.1.16",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.9.0",
+    "@typescript-eslint/parser": "^2.9.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.7.1",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/citizennext/harta-servicii"
+  },
+  "bugs": {
+    "url": "https://github.com/citizennext/harta-servicii/issues"
   }
 }
