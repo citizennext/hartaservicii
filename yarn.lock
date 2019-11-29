@@ -12218,6 +12218,16 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typeface-koho@^0.0.61:
+  version "0.0.61"
+  resolved "https://registry.yarnpkg.com/typeface-koho/-/typeface-koho-0.0.61.tgz#14fdf90e3833340ab91afb860e9d6d1a0c17fb8a"
+  integrity sha512-4Ddtxjemjqe2CJ0H4801Kiu1rZwz/t592X42rjUwpWeo3B2OP0IY1PuFK0jgsvcTvpMxbxV0w2CD2e3ttP7oLg==
+
+typeface-montserrat@^0.0.75:
+  version "0.0.75"
+  resolved "https://registry.yarnpkg.com/typeface-montserrat/-/typeface-montserrat-0.0.75.tgz#b796d9c767ab8ed1343271985beb1e44b382b7b3"
+  integrity sha512-8ski20t3hdwu2T85pVfjK4jsDbwW8yWzd+LAKxYEmu+JVLVlB7G2yfmdKZz06pUwYCLVFvHvup+NYYulHDpE+w==
+
 typescript@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.2.tgz#27e489b95fa5909445e9fef5ee48d81697ad18fb"
