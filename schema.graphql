@@ -1617,8 +1617,6 @@ enum SiteFieldsEnum {
   siteMetadata___siteTitleShort
   siteMetadata___siteDescription
   siteMetadata___siteUrl
-  siteMetadata___themeColor
-  siteMetadata___backgroundColor
   siteMetadata___logo
   siteMetadata___social___twitter
   siteMetadata___social___fbAppId
@@ -2159,8 +2157,6 @@ type SiteSiteMetadata {
   siteTitleShort: String
   siteDescription: String
   siteUrl: String
-  themeColor: String
-  backgroundColor: String
   logo: String
   social: SiteSiteMetadataSocial
 }
@@ -2170,8 +2166,6 @@ input SiteSiteMetadataFilterInput {
   siteTitleShort: StringQueryOperatorInput
   siteDescription: StringQueryOperatorInput
   siteUrl: StringQueryOperatorInput
-  themeColor: StringQueryOperatorInput
-  backgroundColor: StringQueryOperatorInput
   logo: StringQueryOperatorInput
   social: SiteSiteMetadataSocialFilterInput
 }
