@@ -1,4 +1,3 @@
-// @ts-check
 const siteConfig = require('./site-config')
 
 module.exports = {
@@ -8,10 +7,9 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-theme-ui',
+    'gatsby-theme-style-guide',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
-    // 'gatsby-transformer-json',
-    // 'gatsby-transformer-remark',
     {
       resolve: `gatsby-source-filesystem`,
       options: {

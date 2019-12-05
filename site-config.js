@@ -1,16 +1,14 @@
 const path = require('path')
 
 module.exports = {
-  siteTitle: 'New Paradigm Ventures',
-  siteTitleShort: 'NPV',
-  siteDescription: 'Building the social innovation and impact finance field',
-  siteUrl: 'https://npv.netlify.com',
-  themeColor: '#000',
-  backgroundColor: '#fff',
+  siteTitle: 'Harta Serviciilor Sociale din România',
+  siteTitleShort: 'HSSR',
+  siteDescription: 'Îngrijim și suntem îngrijiți mai bine',
+  siteUrl: 'https://serviciisociale.ro',
   pathPrefix: null,
-  logo: path.resolve(__dirname, 'src/images/icon.png'),
+  logo: path.resolve(__dirname, 'src/images/harta-icon.png'),
   social: {
-    twitter: 'nikolaushutter',
+    twitter: 'cezarneaga',
     fbAppId: '123',
   },
 }
