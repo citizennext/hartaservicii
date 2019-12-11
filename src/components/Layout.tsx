@@ -8,7 +8,7 @@ import { DrawerProvider } from './DrawerContext'
 import Navbar from './NavBar'
 import Global from './Global'
 import 'typeface-montserrat'
-import 'typeface-koho'
+import '@openfonts/koho_all'
 const Wrapper = styled.div`
   padding: 0px 20px;
   overflow: hidden;
@@ -22,25 +22,55 @@ const Wrapper = styled.div`
     max-width: 1170px;
     margin: 0 auto;
   }
-  .reusecore__navbar {
-    width: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    transition: all 0.3s ease;
-  }
 `
 const Layout: React.FC<{ location?: any }> = ({ children, location }) => (
   <ThemeProvider theme={theme}>
     <Global />
-    <Wrapper>
+    <div
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        maxWidth: 1170,
+        mx: 'auto',
+        px: 4,
+        variant: 'layout.root',
+      }}>
       <Sticky top={0} innerZ={9} activeClass="sticky-nav-active">
-        <DrawerProvider>
-          <Navbar />
-        </DrawerProvider>
+        <header
+          sx={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            variant: 'layout.header',
+          }}>
+          <DrawerProvider>
+            <Navbar />
+          </DrawerProvider>
+        </header>
       </Sticky>
-      {children}
-    </Wrapper>
+      <main
+        sx={{
+          width: '100%',
+          flex: '1 1 auto',
+          variant: 'layout.main',
+        }}>
+        <div
+          sx={{
+            mx: 'auto',
+            variant: 'layout.container',
+          }}>
+          {children}
+        </div>
+      </main>
+      <footer
+        sx={{
+          width: '100%',
+          variant: 'layout.footer',
+        }}>
+        Footer content
+      </footer>
+    </div>
     <div id="overlay-root" />
   </ThemeProvider>
 )

@@ -38,10 +38,7 @@ function FilterButton({ action, label, count }: Omit<Props, 'children'>) {
     </ThemeProvider>
   )
 }
-function AlternativeButton({
-  action,
-  label = 'Detalii',
-}: Omit<Props, 'children' | 'count'>) {
+function AlternativeButton({ action, label = 'Detalii' }: Omit<Props, 'children' | 'count'>) {
   return (
     <Button variant="alternative" onClick={action} style={{}}>
       <Triangle
@@ -73,12 +70,9 @@ function SocialButton({ action, label, children }: Omit<Props, 'count'>) {
     </Button>
   )
 }
-function DetailsButton({
-  action,
-  label = 'Detalii',
-}: Omit<Props, 'children' | 'count'>) {
+function DetailsButton({ action, label = 'Detalii', ...rest }: Omit<Props, 'children' | 'count'>) {
   return (
-    <Button variant="primary" onClick={action} style={{}}>
+    <Button variant="primary" onClick={action} {...rest}>
       <Triangle
         size={8}
         fill="black"
@@ -100,11 +94,4 @@ function MainButton({ action, label }: Omit<Props, 'children' | 'count'>) {
     </Button>
   )
 }
-export {
-  AlternativeButton,
-  DetailsButton,
-  FilterButton,
-  MainButton,
-  MoreButton,
-  SocialButton,
-}
+export { AlternativeButton, DetailsButton, FilterButton, MainButton, MoreButton, SocialButton }

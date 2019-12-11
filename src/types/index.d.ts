@@ -2,8 +2,12 @@ declare module '@theme-ui/components' {
   const Button: any
   const IconButton: any
   const Text: any
+  const Card: any
+  const Heading: any
+  const Image: any
+  const Input: any
 
-  export { Button, Text, IconButton }
+  export { Button, Text, IconButton, Card, Heading, Image, Input }
 }
 
 declare module '*.bmp' {
@@ -39,9 +43,7 @@ declare module '*.webp' {
 declare module '*.svg' {
   import * as React from 'react'
 
-  export const ReactComponent: React.FunctionComponent<React.SVGProps<
-    SVGSVGElement
-  >>
+  export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 
   const src: string
   export default src

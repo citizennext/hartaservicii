@@ -1,98 +1,50 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
-interface Props {
-  description?: string
-  lang: string
-  meta?: { name: string; content: string }
-  keywords?: string[]
-  title: string
+import config from '../config'
+type Props = {
+  postTitle?: string
+  summary?: string
+  postImage?: string
+  slug?: string
+  isRepeatable?: boolean
 }
-function SEO({ description, lang, meta, keywords, title }: Props) {
+const SEO = ({ postTitle, summary, postImage, slug, isRepeatable }: Props) => {
+  const title = postTitle || config.title
+  const description = summary || config.description
+  const image = `${postImage}` || config.image
+  const url = slug ? `${config.url}${slug}` : config.url
+
   return (
-    <StaticQuery
-      query={detailsQuery}
-      render={data => {
-        const metaDescription =
-          description || data.site.siteMetadata.siteDescription
-        return (
-          <Helmet
-            htmlAttributes={{ lang }}
-            title={title}
-            titleTemplate={`%s | ${data.site.siteMetadata.siteTitle}`}
-            meta={[
-              {
-                name: `description`,
-                content: metaDescription,
-              },
-              {
-                property: `og:title`,
-                content: title,
-              },
-              {
-                property: `fb:app_id`,
-                content: data.site.siteMetadata.social.fbAppId,
-              },
-              {
-                property: `og:description`,
-                content: metaDescription,
-              },
-              {
-                property: `og:type`,
-                content: `website`,
-              },
-              {
-                name: `twitter:card`,
-                content: `summary`,
-              },
-              {
-                name: `twitter:creator`,
-                content: data.site.siteMetadata.social.twitter,
-              },
-              {
-                name: `twitter:title`,
-                content: title,
-              },
-              {
-                name: `twitter:description`,
-                content: metaDescription,
-              },
-            ]
-              .concat(
-                keywords && keywords.length > 0
-                  ? {
-                      name: `keywords`,
-                      content: keywords.join(`, `),
-                    }
-                  : []
-              )
-              .concat(meta || [])}
-          />
-        )
-      }}
-    />
+    <Helmet>
+      <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js?features=default,Symbol" />
+      {postTitle ? <title>{`${postTitle} | ${config.title}`}</title> : <title>{`${config.title}`}</title>}
+      {/* General tags */}
+      <meta name="description" content={description} />
+      <meta name="image" content={image} />
+      {/* OpenGraph tags */}
+      <meta property="og:url" content={url} />
+      {isRepeatable ? <meta property="og:type" content="article" /> : null}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={image} />
+      <meta property="fb:app_id" content={config.fbAppID} />
+      {/* Twitter Card tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content={config.twitter} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
+      <html lang="ro" />
+    </Helmet>
   )
 }
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  keywords: [],
+SEO.propTypes = {
+  postTitle: PropTypes.string,
+  summary: PropTypes.string,
+  slug: PropTypes.string.isRequired,
+  isRepeatable: PropTypes.bool,
+  postImage: PropTypes.string,
 }
 
 export default SEO
-
-const detailsQuery = graphql`
-  query DefaultSEOQuery {
-    site {
-      siteMetadata {
-        siteTitle
-        siteDescription
-        social {
-          twitter
-          fbAppId
-        }
-      }
-    }
-  }
-`

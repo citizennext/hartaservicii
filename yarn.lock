@@ -1317,6 +1317,11 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
+"@openfonts/koho_all@^1.44.1":
+  version "1.44.1"
+  resolved "https://registry.yarnpkg.com/@openfonts/koho_all/-/koho_all-1.44.1.tgz#85675c718c397d75ea5f6c1214aeed87c9f9880b"
+  integrity sha512-IRMLgPC0yc8Lp9Hw6nsj6HYu5nuZh9c3qjn0gmsELAHBGbG0Bw4Gx59dLhH8mEcFJspigJb4mkFYeCyKpPSbPw==
+
 "@pieh/friendly-errors-webpack-plugin@1.7.0-chalk-2":
   version "1.7.0-chalk-2"
   resolved "https://registry.yarnpkg.com/@pieh/friendly-errors-webpack-plugin/-/friendly-errors-webpack-plugin-1.7.0-chalk-2.tgz#2e9da9d3ade9d18d013333eb408c457d04eabac0"
@@ -5919,6 +5924,15 @@ gatsby-graphiql-explorer@^0.2.29:
   dependencies:
     "@babel/runtime" "^7.7.4"
 
+gatsby-image@^2.2.34:
+  version "2.2.34"
+  resolved "https://registry.yarnpkg.com/gatsby-image/-/gatsby-image-2.2.34.tgz#bfefb56d731806ec63d5bd59e00ff01f552b02e0"
+  integrity sha512-eGrmA56s9QBSG4XI8EfXC6e5N7DajZp0SMh6RqmDY0hvFoO5/cchTAz04LttQGRsx495SAFhsKQekcDg5mwTuA==
+  dependencies:
+    "@babel/runtime" "^7.7.4"
+    object-fit-images "^3.2.4"
+    prop-types "^15.7.2"
+
 gatsby-link@^2.2.25:
   version "2.2.25"
   resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-2.2.25.tgz#24b7ca8e607f64a26d72a455041f629cc37230d3"
@@ -9130,6 +9144,11 @@ object-copy@^0.1.0:
     copy-descriptor "^0.1.0"
     define-property "^0.2.5"
     kind-of "^3.0.3"
+
+object-fit-images@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/object-fit-images/-/object-fit-images-3.2.4.tgz#6c299d38fdf207746e5d2d46c2877f6f25d15b52"
+  integrity sha512-G+7LzpYfTfqUyrZlfrou/PLLLAPNC52FTy5y1CBywX+1/FkxIloOyQXBmZ3Zxa2AWO+lMF0JTuvqbr7G5e5CWg==
 
 object-hash@^1.1.4:
   version "1.3.1"
@@ -12575,11 +12594,6 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-
-typeface-koho@^0.0.61:
-  version "0.0.61"
-  resolved "https://registry.yarnpkg.com/typeface-koho/-/typeface-koho-0.0.61.tgz#14fdf90e3833340ab91afb860e9d6d1a0c17fb8a"
-  integrity sha512-4Ddtxjemjqe2CJ0H4801Kiu1rZwz/t592X42rjUwpWeo3B2OP0IY1PuFK0jgsvcTvpMxbxV0w2CD2e3ttP7oLg==
 
 typeface-montserrat@^0.0.75:
   version "0.0.75"

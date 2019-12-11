@@ -10,6 +10,18 @@ module.exports = {
     'gatsby-theme-style-guide',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
+    // {
+    //   resolve: `gatsby-plugin-prefetch-google-fonts`,
+    //   options: {
+    //     fonts: [
+    //       {
+    //         family: `KoHo`,
+    //         subsets: [`latin-ext`],
+    //         variants: [`400`, `400i`, `700`, `700i`],
+    //       },
+    //     ],
+    //   },
+    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
