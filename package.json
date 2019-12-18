@@ -1,10 +1,7 @@
 {
   "name": "harta-servicii",
   "version": "0.2.0",
-  "author": {
-    "Cezar Neaga <cezar.neaga@citizennext.ro>"
-    "Stefan Iurasog <si@codesicle.com>"
-  },
+  "author": "Cezar Neaga <cezar.neaga@citizennext.ro>",
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf .cache && yarn start",
@@ -23,7 +20,10 @@
     ]
   },
   "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "@mdx-js/react": "^1.5.1",
     "@openfonts/koho_all": "^1.44.1",
+    "@theme-ui/components": "^0.2.49",
     "gatsby": "^2.18.5",
     "gatsby-image": "^2.2.34",
     "gatsby-plugin-catch-links": "^2.1.19",
@@ -40,11 +40,13 @@
     "gatsby-source-filesystem": "^2.1.39",
     "gatsby-theme-style-guide": "^0.2.49",
     "gatsby-transformer-sharp": "^2.3.6",
+    "rc-drawer": "^3.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-feather": "^2.0.3",
     "react-helmet": "^5.2.1",
     "react-stickynode": "^2.1.1",
+    "theme-ui": "^0.2.49",
     "typeface-montserrat": "^0.0.75"
   },
   "devDependencies": {
@@ -71,9 +73,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/citizennext/hartaservicii"
+    "url": "https://github.com/citizennext/harta-servicii"
   },
   "bugs": {
-    "url": "https://github.com/citizennext/hartaservicii/issues"
+    "url": "https://github.com/citizennext/harta-servicii/issues"
   }
 }

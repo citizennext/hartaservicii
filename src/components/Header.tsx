@@ -1,12 +1,14 @@
 /** @jsx jsx */
 import React from 'react'
+import {jsx} from '@emotion/core'
 
-export default class Pages extends React.Component {
+export default class Header extends React.Component {
 
     render() {
+
         return (
             <>
-                <div>Pages</div>
+                <div>Header</div>
             </>
         );
     }
