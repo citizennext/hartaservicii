@@ -2,6 +2,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // import React from 'react'
 import {jsx} from '@emotion/core'
+import '../assets/theme/src/style.sass'
+
 
 type Props = {
     children?: React.ReactNode

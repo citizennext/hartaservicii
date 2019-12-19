@@ -6,7 +6,7 @@ import Footer from '../Footer'
 import TestContent from './Test/Content'
 import Layout from '../Layout'
 import SidebarLeft from './Test/SidebarLeft'
-import SidebarRight from './Test/SidebarLeft'
+import SidebarRight from './Test/SidebarRight'
 
 export default class Test extends React.Component {
     render() {
