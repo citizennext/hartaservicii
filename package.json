@@ -99,6 +99,7 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,sass,md}": [
       "prettier --config ./.prettierrc --write",
+      "eslint . --ext ts --ext tsx",
       "git add"
     ]
   }
