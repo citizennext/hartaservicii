@@ -1,2 +1,11 @@
+@tailwind preflight;
+
+@tailwind components;
+
+@tailwind utilities;
+
 body
     color: red !important
+
+footer
+    background-color: #978585
