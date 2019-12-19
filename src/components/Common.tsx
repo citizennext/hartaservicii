@@ -7,9 +7,7 @@ export default class Common extends React.Component {
 
     render() {
         return (
-            <>
-                <div>Common</div>
-            </>
+            <div>Common</div>
         );
     }
 }

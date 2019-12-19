@@ -7,9 +7,9 @@ export default class Content extends React.Component {
     render() {
         return (
             <div>
-                <div>Home Page Content</div>
+                <div>Test Page Content</div>
                 <br/>
-                <a href="/test">TEST</a>
+                <a href="/">HomePage</a>
             </div>
         );
     }

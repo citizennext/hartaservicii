@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import React from 'react'
 import {jsx} from '@emotion/core'
+import Test from '../components/pages/Test'
 
-export default class IndexData extends React.Component {
-
+export default class TestPage extends React.Component {
     render() {
         return (
-            <div>IndexData</div>
+            <Test />
         );
     }
 }

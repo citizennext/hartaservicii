@@ -2,11 +2,11 @@
 import React from 'react'
 import {jsx} from '@emotion/core'
 
-export default class IndexData extends React.Component {
+export default class SidebarRight extends React.Component {
 
     render() {
         return (
-            <div>IndexData</div>
+            <div>[ Sidebar Left ]</div>
         );
     }
 }
