@@ -8,6 +8,6 @@ import Data from '../../../data/global'
 
 export default class SidebarRight extends React.Component {
   render() {
-    return <div>{Data.pages.test.sidebarLeft}</div>
+    return <div>{Data.page.test.sidebarLeft}</div>
   }
 }
