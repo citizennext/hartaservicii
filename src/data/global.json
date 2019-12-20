@@ -1,3 +1,27 @@
-/**
- * @todo - St3phan - global Data string
- */
+{
+  "header": {},
+  "footer": {},
+  "pages": {
+    "test": {
+      "seo": {
+        "title": "Lorem Ipsum Dolor",
+        "keyword": "Lorem, Ipsum, Dolor",
+        "description": "Lorem Ipsum Dolor"
+      },
+      "browser": {
+        "title": "Lorem Ipsum Dolor"
+      },
+      "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
+      "sidebarLeft": "[ Sidebar Left - Lorem Ipsum Dolor ]",
+      "sidebarRight": "[ Sidebar Right - Lorem Ipsum Dolor ]",
+      "links": {
+        "homepage": {
+          "label": "HomePage",
+          "url": "/",
+          "title": "Home Page"
+        }
+      }
+    },
+    "homepage": {}
+  }
+}
