@@ -1,4 +1,9 @@
 {
+  "head": {
+    "lang": "ro",
+    "siteUrl": "http://www.domain.com",
+    "favicon": "Lorem Ipsum Dolor"
+  },
   "header": {},
   "footer": {
     "texts": {
@@ -12,15 +17,12 @@
       }
     }
   },
-  "pages": {
+  "page": {
     "test": {
       "seo": {
         "title": "Lorem Ipsum Dolor",
-        "keyword": "Lorem, Ipsum, Dolor",
+        "keywords": "Lorem, Ipsum, Dolor",
         "description": "Lorem Ipsum Dolor"
-      },
-      "browser": {
-        "title": "Lorem Ipsum Dolor"
       },
       "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
       "sidebarLeft": "[ Sidebar Left - Lorem Ipsum Dolor ]",
@@ -33,6 +35,12 @@
         }
       }
     },
-    "homepage": {}
+    "homepage": {
+      "seo": {
+        "title": "HomePage",
+        "keywords": "HomePage, Lorem, Ipsum, Dolor",
+        "description": "HomePage - Lorem Ipsum Dolor"
+      }
+    }
   }
 }

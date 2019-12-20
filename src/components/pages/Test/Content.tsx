@@ -4,7 +4,7 @@ import { jsx } from '@emotion/core'
 // @todo st3phan - it must import on common and fixed validation
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
-import Data from '../../../data/global'
+import Data from '../../../data/global.json'
 
 export default class Content extends React.Component {
   // constructor (props) {
@@ -15,10 +15,10 @@ export default class Content extends React.Component {
   render() {
     return (
       <div>
-        <div>{Data.pages.test.content}</div>
+        <div>{Data.page.test.content}</div>
         <br />
-        <a href={Data.pages.test.links.homepage.url} title={Data.pages.test.links.homepage.title}>
-          {Data.pages.test.links.homepage.label}
+        <a href={Data.page.test.links.homepage.url} title={Data.page.test.links.homepage.title}>
+          {Data.page.test.links.homepage.label}
         </a>
       </div>
     )
