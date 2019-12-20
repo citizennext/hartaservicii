@@ -8,6 +8,7 @@ export default class Footer extends React.Component {
     render() {
         return (
                 <footer>
+					<div className={'border-celeste border-t-8 mx-10'}></div>
 					<img src={logo_light} />
                 	<p>este un proiect realizat de <a href="https://citizennext.ro/contribute">Asociația Citizen Next</a> cu</p>
                 	<p>sprijinul <a href="https://www.omvpetrom.com/ro">OMV Petrom</a> prin programul <a href="https://taraluiandrei.ro/">Țara lui Andrei</a>.</p>
