@@ -29,7 +29,7 @@ const Navigation: React.FC<Props> = props => {
     <nav className={props.navClass}>
       <ul>
         {Object.values(nav)
-          .filter(item => item.navigation.nav === true)
+          .filter(item => item.navigation.nav)
           .map(item => (
             <li key={item.navigation.label}>
               <Link to={item.navigation.url} title={item.navigation.title}>
