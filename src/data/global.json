@@ -4,6 +4,13 @@
     "siteUrl": "http://www.domain.com",
     "favicon": "Lorem Ipsum Dolor"
   },
+  "externalLinks": {
+    "anpc": {
+      "label": "ANPC",
+      "title": "ANPC",
+      "url": "https://anpc.ro/"
+    }
+  },
   "header": {},
   "footer": {
     "texts": {
@@ -18,6 +25,22 @@
     }
   },
   "page": {
+    "homepage": {
+      "seo": {
+        "title": "HomePage",
+        "keywords": "HomePage, Lorem, Ipsum, Dolor",
+        "description": "HomePage - Lorem Ipsum Dolor"
+      },
+      "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
+      "sidebarLeft": null,
+      "sidebarRight": null,
+      "navigation": {
+        "label": "HomePage",
+        "url": "/",
+        "title": "Home Page",
+        "nav": true
+      }
+    },
     "test": {
       "seo": {
         "title": "Lorem Ipsum Dolor",
@@ -27,15 +50,14 @@
       "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
       "sidebarLeft": "[ Sidebar Left - Lorem Ipsum Dolor ]",
       "sidebarRight": "[ Sidebar Right - Lorem Ipsum Dolor ]",
-      "links": {
-        "homepage": {
-          "label": "HomePage",
-          "url": "/",
-          "title": "Home Page"
-        }
+      "navigation": {
+        "label": "TestPage",
+        "url": "/test",
+        "title": "Test Page",
+        "nav": true
       }
     },
-    "homepage": {
+    "test2": {
       "seo": {
         "title": "HomePage",
         "keywords": "HomePage, Lorem, Ipsum, Dolor",
