@@ -2,7 +2,7 @@
 import React from 'react'
 import { jsx } from '@emotion/core'
 import Data from '../../../data/global.json'
-import hero from Data.page.homepage.images.intro.src
+import hero from '../../../assets/images/hp_hero.png'
 
 export default class Content extends React.Component {
   render() {
@@ -18,7 +18,7 @@ export default class Content extends React.Component {
         </div>
         <div id="section2" className="md:flex">
           <div className="section-list  md:w-1/2">
-            <img src="../../../assets/images/hp_hero.png" />
+            <img src={hero} />
             <h3>{Data.page.homepage.content.section2.title}</h3>
             <ol className="list-decimal">
               <li>{Data.page.homepage.content.section2.list1}</li>
@@ -38,8 +38,6 @@ export default class Content extends React.Component {
             <button>{Data.page.homepage.links.section3.label}</button>
           </div>
         </div>
-
-        <button onClick="/test">TEST</button>
       </div>
     )
   }

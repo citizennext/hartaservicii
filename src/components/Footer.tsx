@@ -1,8 +1,9 @@
 /** @jsx jsx */
 import React from 'react'
 import { jsx } from '@emotion/core'
-import logoLight from '../assets/images/logo_light.svg'
+import { Link } from 'gatsby'
 import Data from '../data/global.json'
+import logoLight from '../assets/images/logo_light.svg'
 
 export default class Footer extends React.Component {
   render() {
@@ -25,34 +26,34 @@ export default class Footer extends React.Component {
           <nav className="hidden sm:block">
             <ul>
               <li>
-                <a title="Harta" href="…">
+                <Link title="Harta" to="…">
                   Harta
-                </a>
+                </Link>
               </li>
               <li>
-                <a title="Harta" href="…">
+                <Link title="Harta" to="…">
                   Despre noi
-                </a>
+                </Link>
               </li>
               <li>
-                <a title="Harta" href="…">
+                <Link title="Harta" to="…">
                   Noutăți
-                </a>
+                </Link>
               </li>
               <li>
-                <a title="Harta" href="…">
+                <Link title="Harta" to="…">
                   Parteneri
-                </a>
+                </Link>
               </li>
               <li>
-                <a title="Harta" href="…">
+                <Link title="Harta" to="…">
                   Statistici
-                </a>
+                </Link>
               </li>
               <li>
-                <a title="Harta" href="…">
+                <Link title="Harta" to="…">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
