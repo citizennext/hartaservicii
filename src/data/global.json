@@ -34,7 +34,7 @@
       "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
       "sidebarLeft": null,
       "sidebarRight": null,
-      "nav": {
+      "navigation": {
         "label": "HomePage",
         "url": "/",
         "title": "Home Page",
@@ -50,7 +50,7 @@
       "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
       "sidebarLeft": "[ Sidebar Left - Lorem Ipsum Dolor ]",
       "sidebarRight": "[ Sidebar Right - Lorem Ipsum Dolor ]",
-      "nav": {
+      "navigation": {
         "label": "TestPage",
         "url": "/test",
         "title": "Test Page",
@@ -66,7 +66,7 @@
       "content": "[ Test Content Page 2 - Lorem Ipsum Dolor 2 ]",
       "sidebarLeft": "[ Sidebar Left 2 - Lorem Ipsum Dolor 2 ]",
       "sidebarRight": "[ Sidebar Right 2 - Lorem Ipsum Dolor 2 ]",
-      "nav": {
+      "navigation": {
         "label": "TestPage2",
         "url": "/test2",
         "title": "Test Page 2",

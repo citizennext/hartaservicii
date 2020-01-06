@@ -3,10 +3,24 @@ import React from 'react'
 import { jsx } from '@emotion/core'
 import { Link } from 'gatsby'
 
+type NavItem = {
+  label: string
+  url: string
+  title: string
+  nav: boolean
+}
+
+type Page = {
+  navigation: NavItem
+}
+
+type Pages = {
+  [key: string]: Page
+}
+
 type Props = {
-  item?: object
   navClass?: string
-  nav?: object
+  nav: Pages
 }
 
 const Navigation: React.FC<Props> = props => {
@@ -15,11 +29,11 @@ const Navigation: React.FC<Props> = props => {
     <nav className={props.navClass}>
       <ul>
         {Object.values(nav)
-          .filter(item => item.nav.nav === true)
+          .filter(item => item.navigation.nav === true)
           .map(item => (
-            <li key={item.nav.label}>
-              <Link to={item.nav.url} title={item.nav.title}>
-                {item.nav.label}
+            <li key={item.navigation.label}>
+              <Link to={item.navigation.url} title={item.navigation.title}>
+                {item.navigation.label}
               </Link>
             </li>
           ))}

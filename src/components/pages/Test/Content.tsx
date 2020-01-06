@@ -5,6 +5,7 @@ import { jsx } from '@emotion/core'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import Data from '../../../data/global.json'
+import { Link } from 'gatsby'
 
 export default class Content extends React.Component {
   // constructor (props) {
@@ -17,9 +18,9 @@ export default class Content extends React.Component {
       <div>
         <div>{Data.page.test.content}</div>
         <br />
-        <a href={Data.page.test.links.homepage.url} title={Data.page.test.links.homepage.title}>
-          {Data.page.test.links.homepage.label}
-        </a>
+        <Link to={Data.page.homepage.navigation.url} title={Data.page.homepage.navigation.title}>
+          {Data.page.homepage.navigation.label}
+        </Link>
       </div>
     )
   }
