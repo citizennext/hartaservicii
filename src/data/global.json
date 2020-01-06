@@ -4,9 +4,32 @@
     "siteUrl": "http://www.domain.com",
     "favicon": "Lorem Ipsum Dolor"
   },
+  "externalLinks": {
+    "anpc": {
+      "label": "ANPC",
+      "title": "ANPC",
+      "url": "https://anpc.ro/"
+    }
+  },
   "header": {},
   "footer": {},
   "page": {
+    "homepage": {
+      "seo": {
+        "title": "HomePage",
+        "keywords": "HomePage, Lorem, Ipsum, Dolor",
+        "description": "HomePage - Lorem Ipsum Dolor"
+      },
+      "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
+      "sidebarLeft": null,
+      "sidebarRight": null,
+      "nav": {
+        "label": "HomePage",
+        "url": "/",
+        "title": "Home Page",
+        "nav": true
+      }
+    },
     "test": {
       "seo": {
         "title": "Lorem Ipsum Dolor",
@@ -16,19 +39,27 @@
       "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
       "sidebarLeft": "[ Sidebar Left - Lorem Ipsum Dolor ]",
       "sidebarRight": "[ Sidebar Right - Lorem Ipsum Dolor ]",
-      "links": {
-        "homepage": {
-          "label": "HomePage",
-          "url": "/",
-          "title": "Home Page"
-        }
+      "nav": {
+        "label": "TestPage",
+        "url": "/test",
+        "title": "Test Page",
+        "nav": true
       }
     },
-    "homepage": {
+    "test2": {
       "seo": {
-        "title": "HomePage",
-        "keywords": "HomePage, Lorem, Ipsum, Dolor",
-        "description": "HomePage - Lorem Ipsum Dolor"
+        "title": "Lorem Ipsum Dolor 2",
+        "keywords": "Lorem, Ipsum, Dolor 2",
+        "description": "Lorem Ipsum Dolor 2"
+      },
+      "content": "[ Test Content Page 2 - Lorem Ipsum Dolor 2 ]",
+      "sidebarLeft": "[ Sidebar Left 2 - Lorem Ipsum Dolor 2 ]",
+      "sidebarRight": "[ Sidebar Right 2 - Lorem Ipsum Dolor 2 ]",
+      "nav": {
+        "label": "TestPage2",
+        "url": "/test2",
+        "title": "Test Page 2",
+        "nav": false
       }
     }
   }
