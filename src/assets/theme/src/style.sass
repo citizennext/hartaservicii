@@ -43,12 +43,17 @@ a
     &.mini
         @apply text-xs
 
+
+/* sections */
+.section-list
+    @apply bg-snow
+
 @import "tailwindcss/components"
 
 button
     @apply bg-celeste
     @apply rounded-full
-    @apply items-center
+    @apply text-center
     @apply w-full
     @apply text-lg
     @apply leading-tight
@@ -57,7 +62,7 @@ button
     @screen md
         @apply max-w-xs
 
-    &:after
+    &:not(.small):after
         content: ''
         background-image: url('../../images/icon_arroww.svg')
         background-size: 22px 22px
@@ -87,8 +92,26 @@ button
         @apply pt-10
         @apply px-5
 
+    &.small
+        @apply text-sm
+        @apply leading-tight
+        @apply tracking-wide
+        @apply text-left
+        background: white
+        @apply uppercase
+
+    &.small:before
+        content: '▶'
+        @apply px-5
+
 
 @import "tailwindcss/utilities"
 
 footer
-    background-color: #978585
+    @apply bg-burg
+    @apply text-snow
+    @apply font-sans
+
+    a
+        @apply text-snow
+        @apply font-semibold
