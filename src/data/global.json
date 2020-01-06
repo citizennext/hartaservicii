@@ -12,7 +12,18 @@
     }
   },
   "header": {},
-  "footer": {},
+  "footer": {
+    "texts": {
+      "copyright": "Asociația Citizen Next — toate drepturile rezervate © "
+    },
+    "links": {
+      "asociatia": {
+        "title": "Asociația Citizen Next",
+        "url": "https://citizennext.ro/contribute",
+        "text": "Asociația Citizen Next"
+      }
+    }
+  },
   "page": {
     "homepage": {
       "seo": {
