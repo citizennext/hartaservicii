@@ -17,6 +17,11 @@ module.exports = {
       lg: '1024px',
       xl: '1280px',
     },
+    listStyleType: {
+      none: 'none',
+      disc: 'disc',
+      decimal: 'decimal'
+    },
     extend: {
       fontSize: {
         '1xl': '1.375rem',
