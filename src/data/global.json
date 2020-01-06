@@ -40,6 +40,47 @@
         "title": "HomePage",
         "keywords": "HomePage, Lorem, Ipsum, Dolor",
         "description": "HomePage - Lorem Ipsum Dolor"
+      },
+      "content": {
+        "title": "Îngrijim și suntem îngrijiți mai bine",
+        "intro": "...când ne cunoaștem drepturile, modalitățile de acces la servicii și localizarea acestora.",
+        "section2": {
+          "title": "Ești furnizor de servicii sociale?",
+          "list1": "Caută serviciul pe care îl oferi pe hartă.",
+          "list2": "Dacă nu apare sau apare dar vrei să modifici datele, dă-ne de știre.",
+          "list3": "Vezi ce alte servicii sunt în zona ta."
+        },
+        "section3": {
+          "title": "Ești beneficiar sau însoțitor?",
+          "list1": "Caută serviciul de care ai nevoie în zona ta.",
+          "list2": "Poți să filtrezi după tipul de serviciu oferit, localizare, privat sau public.",
+          "list3": "Găsești nu doar date de contact dar și locația exactă."
+        }
+      },
+      "images": {
+        "intro": {
+          "src": "assets/images/hp_hero.png"
+        },
+        "section2": {
+          "src": "assets/images/hp_section2.png"
+        }
+      },
+      "links": {
+        "intro": {
+          "url": "/",
+          "title": "",
+          "label": "detalii"
+        },
+        "section2": {
+          "url": "/",
+          "title": "Deschide harta",
+          "label": "Deschide harta"
+        },
+        "section3": {
+          "url": "/",
+          "title": "Deschide harta",
+          "label": "Deschide harta"
+        }
       }
     }
   }
