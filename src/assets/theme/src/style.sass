@@ -21,6 +21,7 @@ h3
     @apply leading-tight
     @apply font-bold
     @apply text-black
+    @apply pb-2
 
 h4
     @apply text-lg
@@ -46,16 +47,20 @@ a
 /* elements */
 ol
     counter-reset: li
+    margin-left: 3.7em
+
+    li
+        @apply relative
 
     li:before
         counter-increment: li
         content: "0"counter(li)  ". "
-        display: inline-block
-        width: 1.5em
         list-style: decimal-leading-zero
+        left: -2em
         @apply text-leaf
         @apply text-3xxl
         @apply font-bold
+        @apply absolute
 
 #search
     &:before
@@ -70,15 +75,16 @@ ol
         left: 13px
         @apply bg-left
 
+.wide
+    @apply w-screen
+    @apply relative
+    left: calc(-50vw + 50%);
+    @apply pl-8
 
 /* Circular Progress Bar */
 .circularprogressbar
-    svg
-        margin: 60px auto 120px
-
-#progressInput
-    margin: 200px auto
-    width: 200px
+    svg:first-child
+        margin: 0 auto
 
 .circle-background,
 .circle-progress
@@ -91,23 +97,43 @@ ol
     stroke: #CDE5C0
 
 .circle-publice
-    font-size: 1em
+    @apply text-3xxl
+    @apply font-thin
     fill: #CDE5C0
 
 .circle-private
-    font-size: 1em
+    @apply font-thin
+    @apply text-3xxl
     fill: #6FBAB6
 
+.circle-total
+    @apply text-sm
+    @apply text-center
+
+.circle-total-amount
+    @apply leading-tight
+    @apply text-3xl
+    @apply font-hairline
+    @apply text-burg
+    @apply text-center
+
+/* Blog */
+.date
+    @apply text-celeste
+    @apply text-xs
 
 /* sections */
 .section
-    @apply px-8
+    @apply w-full
+
+    .interior
+        @apply px-8
 
 #hero
     @apply bg-snow
 
 .section-list
-    @apply
+    @apply relative
 
 @import "tailwindcss/components"
 
@@ -115,11 +141,13 @@ button
     @apply bg-celeste
     @apply rounded-full
     @apply text-center
-    @apply w-full
+    width: 320px
+    max-width: 86vw
     @apply text-lg
     @apply leading-tight
     @apply py-3
     position: relative
+    @apply m-auto
     @screen md
         @apply max-w-xs
 
@@ -155,19 +183,54 @@ button
 
     &.small
         @apply text-sm
+        @apply font-bold
         @apply leading-tight
         @apply tracking-wide
         @apply text-left
         @apply bg-white
         @apply uppercase
         @apply w-5/12
+        @apply py-1
+
+    &.small.invert
+        @apply bg-leaf
 
     &.small:before
         content: '▶'
-        @apply px-5
+        @apply px-3
 
+    &.arrowonly
+        @apply bg-snow
+        @apply p-4
+        height: 38px
+        width: 38px
+        left: 88%
+        bottom: 8%
+
+    &.arrowonly:after
+        content: ''
+        background-image: url('../../images/icon_arrowg.svg')
+        background-size: contain
+        height: 26px
+        width: 26px
+        position: absolute
+        background-repeat: no-repeat
+        top: 6px
+        right: 6px
 
 @import "tailwindcss/utilities"
+
+header
+    margin-top: 20px
+    height: 80px
+
+    .menu_icon
+        float: right
+        margin-top: 26px
+        margin-right: 26px
+
+    .nav-header
+        @apply hidden
 
 footer
     @apply bg-burg
