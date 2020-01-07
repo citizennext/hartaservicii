@@ -2,7 +2,7 @@
 
 body
     @apply text-lg
-    @apply bg-grey
+    @apply bg-white
 
 h1
     @apply text-3xl
@@ -43,10 +43,71 @@ a
     &.mini
         @apply text-xs
 
+/* elements */
+ol
+    counter-reset: li
+
+    li:before
+        counter-increment: li
+        content: "0"counter(li)  ". "
+        display: inline-block
+        width: 1.5em
+        list-style: decimal-leading-zero
+        @apply text-leaf
+        @apply text-3xxl
+        @apply font-bold
+
+#search
+    &:before
+        content: ''
+        background-image: url('../../images/icon_search.svg')
+        background-size: 22px 22px
+        height: 22px
+        width: 22px
+        position: absolute
+        background-repeat: no-repeat
+        top: 13px
+        left: 13px
+        @apply bg-left
+
+
+/* Circular Progress Bar */
+.circularprogressbar
+    svg
+        margin: 60px auto 120px
+
+#progressInput
+    margin: 200px auto
+    width: 200px
+
+.circle-background,
+.circle-progress
+    fill: none
+
+.circle-background
+    stroke: #6FBAB6
+
+.circle-progress
+    stroke: #CDE5C0
+
+.circle-publice
+    font-size: 1em
+    fill: #CDE5C0
+
+.circle-private
+    font-size: 1em
+    fill: #6FBAB6
+
 
 /* sections */
-.section-list
+.section
+    @apply px-8
+
+#hero
     @apply bg-snow
+
+.section-list
+    @apply
 
 @import "tailwindcss/components"
 
@@ -97,8 +158,9 @@ button
         @apply leading-tight
         @apply tracking-wide
         @apply text-left
-        background: white
+        @apply bg-white
         @apply uppercase
+        @apply w-5/12
 
     &.small:before
         content: '▶'
