@@ -7,6 +7,7 @@ module.exports = {
       grey: '#E5E5E5',
       celeste: '#6FBBB7',
       leaf: '#CEE6C1',
+      leaf2: '#CDE5C0',
       brown: '#877272',
       lightbrown: '#C4C3C3',
       snow: '#EDF7EF',
@@ -27,6 +28,7 @@ module.exports = {
       fontSize: {
         '1xl': '1.375rem',
         '3xl': '1.625rem',
+        '3xxl': '1.875rem'
       }
     }
   },
