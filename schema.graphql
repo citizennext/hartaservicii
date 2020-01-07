@@ -1820,6 +1820,10 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___theme_color
   pluginCreator___pluginOptions___display
   pluginCreator___pluginOptions___icon
+  pluginCreator___pluginOptions___mergeSecurityHeaders
+  pluginCreator___pluginOptions___mergeLinkHeaders
+  pluginCreator___pluginOptions___mergeCachingHeaders
+  pluginCreator___pluginOptions___generateMatchPathRewrites
   pluginCreator___pluginOptions___cachePublic
   pluginCreator___pluginOptions___pathCheck
   pluginCreator___nodeAPIs
@@ -2004,6 +2008,10 @@ enum SitePluginFieldsEnum {
   pluginOptions___theme_color
   pluginOptions___display
   pluginOptions___icon
+  pluginOptions___mergeSecurityHeaders
+  pluginOptions___mergeLinkHeaders
+  pluginOptions___mergeCachingHeaders
+  pluginOptions___generateMatchPathRewrites
   pluginOptions___cachePublic
   pluginOptions___pathCheck
   nodeAPIs
@@ -2130,6 +2138,10 @@ type SitePluginPluginOptions {
   theme_color: String
   display: String
   icon: String
+  mergeSecurityHeaders: Boolean
+  mergeLinkHeaders: Boolean
+  mergeCachingHeaders: Boolean
+  generateMatchPathRewrites: Boolean
   cachePublic: Boolean
   pathCheck: Boolean
 }
@@ -2143,6 +2155,10 @@ input SitePluginPluginOptionsFilterInput {
   theme_color: StringQueryOperatorInput
   display: StringQueryOperatorInput
   icon: StringQueryOperatorInput
+  mergeSecurityHeaders: BooleanQueryOperatorInput
+  mergeLinkHeaders: BooleanQueryOperatorInput
+  mergeCachingHeaders: BooleanQueryOperatorInput
+  generateMatchPathRewrites: BooleanQueryOperatorInput
   cachePublic: BooleanQueryOperatorInput
   pathCheck: BooleanQueryOperatorInput
 }
