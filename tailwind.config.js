@@ -24,6 +24,9 @@ module.exports = {
       disc: 'disc',
       decimal: 'decimal'
     },
+    inset: {
+      '1/4': '25%'
+    },
     extend: {
       fontSize: {
         '1xl': '1.375rem',
