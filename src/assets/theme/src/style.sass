@@ -13,7 +13,7 @@
 
 body
     @apply text-lg
-    @apply bg-grey
+    @apply bg-white
 
 h1
     @apply text-3xl
@@ -32,6 +32,7 @@ h3
     @apply leading-tight
     @apply font-bold
     @apply text-black
+    @apply pb-2
 
 h4
     @apply text-lg
@@ -54,21 +55,114 @@ a
     &.mini
         @apply text-xs
 
+/* elements */
+ol
+    counter-reset: li
+    margin-left: 3.7em
+
+    li
+        @apply relative
+
+    li:before
+        counter-increment: li
+        content: "0"counter(li)  ". "
+        list-style: decimal-leading-zero
+        left: -2em
+        @apply text-leaf
+        @apply text-3xxl
+        @apply font-bold
+        @apply absolute
+
+#search
+    &:before
+        content: ''
+        background-image: url('../../images/icon_search.svg')
+        background-size: 22px 22px
+        height: 22px
+        width: 22px
+        position: absolute
+        background-repeat: no-repeat
+        top: 13px
+        left: 13px
+        @apply bg-left
+
+.wide
+    @apply w-screen
+    @apply relative
+    left: calc(-50vw + 50%);
+    @apply pl-8
+
+/* Circular Progress Bar */
+.circularprogressbar
+    svg:first-child
+        margin: 0 auto
+
+.circle-background,
+.circle-progress
+    fill: none
+
+.circle-background
+    stroke: #6FBAB6
+
+.circle-progress
+    stroke: #CDE5C0
+
+.circle-publice
+    @apply text-3xxl
+    @apply font-thin
+    fill: #CDE5C0
+
+.circle-private
+    @apply font-thin
+    @apply text-3xxl
+    fill: #6FBAB6
+
+.circle-total
+    @apply text-sm
+    @apply text-center
+
+.circle-total-amount
+    @apply leading-tight
+    @apply text-3xl
+    @apply font-hairline
+    @apply text-burg
+    @apply text-center
+
+/* Blog */
+.date
+    @apply text-celeste
+    @apply text-xs
+
+/* sections */
+.section
+    @apply w-full
+
+    .interior
+        @apply px-8
+
+#hero
+    @apply bg-snow
+
+.section-list
+    @apply relative
+
 @import "tailwindcss/components"
 
 button
     @apply bg-celeste
     @apply rounded-full
-    @apply items-center
-    @apply w-full
+    @apply text-center
+    width: 320px
+    max-width: 86vw
     @apply text-lg
     @apply leading-tight
     @apply py-3
     position: relative
+    @apply m-auto
     @screen md
         @apply max-w-xs
 
-    &:after
+    &:not(.small):after
         content: ''
         background-image: url('../../images/icon_arroww.svg')
         background-size: 22px 22px
@@ -98,11 +192,65 @@ button
         @apply pt-10
         @apply px-5
 
+    &.small
+        @apply text-sm
+        @apply font-bold
+        @apply leading-tight
+        @apply tracking-wide
+        @apply text-left
+        @apply bg-white
+        @apply uppercase
+        @apply w-5/12
+        @apply py-1
+
+    &.small.invert
+        @apply bg-leaf
+
+    &.small:before
+        content: '▶'
+        @apply px-3
+
+    &.arrowonly
+        @apply bg-snow
+        @apply p-4
+        height: 38px
+        width: 38px
+        left: 88%
+        bottom: 8%
+
+    &.arrowonly:after
+        content: ''
+        background-image: url('../../images/icon_arrowg.svg')
+        background-size: contain
+        height: 26px
+        width: 26px
+        position: absolute
+        background-repeat: no-repeat
+        top: 6px
+        right: 6px
 
 @import "tailwindcss/utilities"
 
+header
+    margin-top: 20px
+    height: 80px
+
+    .menu_icon
+        float: right
+        margin-top: 26px
+        margin-right: 26px
+
+    .nav-header
+        @apply hidden
+
 footer
-    background-color: #978585
+    @apply bg-burg
+    @apply text-snow
+    @apply font-sans
+
+    a
+        @apply text-snow
+        @apply font-semibold
 
 .leaflet-container
     height: 640px

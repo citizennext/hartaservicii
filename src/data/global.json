@@ -56,7 +56,7 @@
         "label": "TestPage",
         "url": "/test",
         "title": "Test Page",
-        "nav": true
+        "nav": false
       }
     },
     "homepage": {
@@ -85,7 +85,7 @@
         "label": "HomePage",
         "url": "/",
         "title": "Home Page",
-        "nav": true
+        "nav": false
       },
       "images": {
         "intro": {
@@ -111,6 +111,46 @@
           "title": "Deschide harta",
           "label": "Deschide harta"
         }
+      }
+    },
+    "desprenoi": {
+      "navigation": {
+        "label": "Despre noi",
+        "url": "/",
+        "title": "Despre noi",
+        "nav": true
+      }
+    },
+    "noutati": {
+      "navigation": {
+        "label": "Noutăți",
+        "url": "/",
+        "title": "Noutăți",
+        "nav": true
+      }
+    },
+    "parteneri": {
+      "navigation": {
+        "label": "Parteneri",
+        "url": "/",
+        "title": "Parteneri",
+        "nav": true
+      }
+    },
+    "statistici": {
+      "navigation": {
+        "label": "Statistici",
+        "url": "/",
+        "title": "Statistici",
+        "nav": true
+      }
+    },
+    "contact": {
+      "navigation": {
+        "label": "Contact",
+        "url": "/",
+        "title": "Contact",
+        "nav": true
       }
     }
   },

@@ -8,7 +8,6 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
-        <div>Header</div>
         <Navigation navClass="nav-header" nav={Data.page} />
       </header>
     )
