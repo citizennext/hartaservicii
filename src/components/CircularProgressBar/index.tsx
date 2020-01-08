@@ -18,7 +18,7 @@ export default class CircularProgressBar extends React.Component {
     const dashOffset = dashArray - (dashArray * percentage) / 100
 
     return (
-      <div>
+      <div className={`${this.props.class}`}>
         <svg width={this.props.sqSize} height={this.props.sqSize} viewBox={viewBox}>
           <circle
             className="circle-background"
@@ -80,4 +80,5 @@ CircularProgressBar.defaultProps = {
   publice: 1396,
   private: 1154,
   strokeWidth: 30,
+  class: '',
 }
