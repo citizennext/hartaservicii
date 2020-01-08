@@ -1,0 +1,99 @@
+// Custom
+
+
+body
+@apply text-lg
+@apply bg-grey
+
+h1
+@apply text-3xl
+@apply leading-tight
+@apply font-bold
+@apply text-black
+
+h2
+@apply text-1xl
+@apply leading-tight
+@apply font-semibold
+@apply text-black
+
+h3
+@apply text-lg
+@apply leading-tight
+@apply font-bold
+@apply text-black
+
+h4
+@apply text-lg
+@apply leading-tight
+@apply font-semibold
+@apply text-black
+
+p
+    &.notes
+    @apply text-sm
+    @apply leading-tight
+
+a
+@apply text-black
+@apply underline
+
+    &:hover
+    @apply text-celeste
+
+    &.mini
+    @apply text-xs
+
+@import "tailwindcss/components"
+
+button
+@apply bg-celeste
+@apply rounded-full
+@apply items-center
+@apply w-full
+@apply text-lg
+@apply leading-tight
+@apply py-3
+    position: relative
+@screen md
+@apply max-w-xs
+
+    &:after
+        content: ''
+        background-image: url('../../images/icon_arroww.svg')
+        background-size: 22px 22px
+        height: 22px
+        width: 22px
+        position: absolute
+        background-repeat: no-repeat
+        top: 13px
+        right: 13px
+    @apply bg-left
+
+    &:hover
+    @apply bg-leaf
+
+    &.social:before
+        content: ''
+        background-image: url('../../images/icon_FB.svg')
+        background-size: 15px 29px
+        position: absolute
+        background-repeat: no-repeat
+        bottom: 1px
+        left: 1px
+    @apply bg-bottom
+    @apply border-white
+    @apply border-2
+    @apply rounded-full
+    @apply pt-10
+    @apply px-5
+
+
+@import "tailwindcss/utilities"
+
+footer
+    background-color: #978585
+
+.leaflet-container
+    //height: 852px
+    height: 640px

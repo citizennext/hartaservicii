@@ -25,20 +25,22 @@
     }
   },
   "page": {
-    "test2": {
+    "harta": {
       "seo": {
-        "title": "TestPage 2",
-        "keywords": "TestPage 2, Lorem, Ipsum, Dolor",
-        "description": "TestPage 2 - Lorem Ipsum Dolor"
+        "title": "Harta",
+        "keywords": "Harta Google Map",
+        "description": "Harta Google Map"
       },
-      "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
+      "content": {
+        "title": "Harta Google Map Content"
+      },
       "sidebarLeft": null,
       "sidebarRight": null,
       "navigation": {
-        "label": "TestPage2",
-        "url": "/test2",
-        "title": "Test Page 2",
-        "nav": false
+        "label": "Harta",
+        "url": "/harta",
+        "title": "Harta",
+        "nav": true
       }
     },
     "test": {
@@ -110,6 +112,14 @@
           "label": "Deschide harta"
         }
       }
+    }
+  },
+  "locations": {
+    "loc_1": {
+      "address": "str. Miron Costin nr. 2",
+      "city": "Alba Iulia",
+      "district": "Alba",
+      "address_point": ""
     }
   }
 }

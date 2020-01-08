@@ -75,5 +75,15 @@ module.exports = {
         postCssPlugins: [require('tailwindcss')],
       },
     },
+    {
+      resolve: 'gatsby-plugin-react-leaflet',
+      options: {
+        linkStyles: true,
+        preferCanvas: true,
+        maxWidth: '100%',
+        maxHeight: 600,
+        className: 'st3phan'
+      }
+    }
   ],
 }
