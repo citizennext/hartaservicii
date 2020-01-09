@@ -62,6 +62,10 @@ a
         @apply text-xs
 
 /* elements */
+.separator
+    @apply absolute
+    @apply w-full
+
 ol
     counter-reset: li
     margin-left: 3.7em
@@ -73,6 +77,10 @@ ol
         font-family: KoHo
         @screen md
             @apply ml-8
+
+        @screen xl
+            @apply ml-24
+            @apply mr-24
 
 
     li:before
@@ -88,7 +96,27 @@ ol
         @screen md
             left: -1.8em
 
+        @screen xl
+            left: -2.3em
+
 #search
+    width: 84.8vw
+    max-width: 318px
+
+    @screen md
+        max-width: 595px
+        left: calc(50% - 297.5px)
+
+    @screen xl
+        max-width: 770px
+        left: calc(50% - 385px)
+
+.search-icon
+    @apply relative
+    @apply w-screen
+    @screen md
+        left: -50%
+
     &:before
         content: ''
         background-image: url('../../images/icon_search.svg')
@@ -97,19 +125,14 @@ ol
         width: 22px
         position: absolute
         background-repeat: no-repeat
-        top: 13px
-        left: 13px
-        @apply bg-left
+        top: -86px
+        left: 3.5%
+        z-index: 9
+        @screen md
+            left: 13.5%
+        @screen xl
+            left: 24.5%
 
-.wide
-    @apply w-screen
-    @apply relative
-    @apply pl-8
-    left: calc(-50vw + 50%)
-    @screen md
-        @apply w-auto
-        @apply pl-0
-        left: auto
 
 /* Circular Progress Bar */
 .circularprogressbar
@@ -126,7 +149,7 @@ ol
 .circle-progress
     stroke: #CDE5C0
 
-.circle-publice
+.circle-public
     @apply text-3xxl
     @apply font-thin
     fill: #CDE5C0
@@ -146,6 +169,10 @@ ol
     @apply font-hairline
     @apply text-burg
     @apply text-center
+
+/* Progress Bar */
+.progressbar-image
+    bottom: 0
 
 /* Blog */
 .blog-post
@@ -171,10 +198,28 @@ ol
     @apply w-full
 
     .interior
-        @apply px-8
+        @apply relative
+        @apply mx-8
+        @screen xl
+            @apply mx-auto
+
+.wide
+    @apply w-screen
+    @apply relative
+    left: calc(-50vw + 50%)
+    @apply max-w-screen
+    @screen md
+        @apply max-w-full
+        @apply w-auto
+        @apply pl-0
+        left: auto
 
 #hero
     @apply bg-snow
+
+    img
+        @screen md
+            min-height: 410px
 
 .section-list
     @apply relative
@@ -185,8 +230,8 @@ button
     @apply bg-celeste
     @apply rounded-full
     @apply text-center
-    width: 320px
-    max-width: 86vw
+    width: 86vw
+    max-width: 320px
     @apply text-lg
     @apply font-medium
     @apply leading-tight
@@ -195,7 +240,13 @@ button
     @apply m-auto
     font-family: Montserrat
     @screen md
-        @apply max-w-xs
+        max-width: 320px
+
+    &.section-button
+        @apply absolute
+
+        @screen md
+            left: calc(50% - 160px)
 
     &:not(.small):after
         content: ''
@@ -278,7 +329,6 @@ header
         margin-right: 26px
 
     .nav-header
-        @apply hidden
 
 footer
     @apply bg-burg
@@ -288,6 +338,13 @@ footer
     a
         @apply text-snow
         @apply font-semibold
+
+    li:before
+        @screen md
+            content: '¬ '
+
+        @screen xl
+            content: '| '
 
 .leaflet-container
     height: 640px
