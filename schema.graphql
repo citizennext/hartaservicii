@@ -3529,7 +3529,6 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___preferCanvas
   pluginCreator___pluginOptions___maxWidth
   pluginCreator___pluginOptions___maxHeight
-  pluginCreator___pluginOptions___className
   pluginCreator___pluginOptions___typeName
   pluginCreator___pluginOptions___fieldName
   pluginCreator___pluginOptions___url
@@ -3731,7 +3730,6 @@ enum SitePluginFieldsEnum {
   pluginOptions___preferCanvas
   pluginOptions___maxWidth
   pluginOptions___maxHeight
-  pluginOptions___className
   pluginOptions___typeName
   pluginOptions___fieldName
   pluginOptions___url
@@ -3872,7 +3870,6 @@ type SitePluginPluginOptions {
   preferCanvas: Boolean
   maxWidth: String
   maxHeight: Int
-  className: String
   typeName: String
   fieldName: String
   url: String
@@ -3900,7 +3897,6 @@ input SitePluginPluginOptionsFilterInput {
   preferCanvas: BooleanQueryOperatorInput
   maxWidth: StringQueryOperatorInput
   maxHeight: IntQueryOperatorInput
-  className: StringQueryOperatorInput
   typeName: StringQueryOperatorInput
   fieldName: StringQueryOperatorInput
   url: StringQueryOperatorInput

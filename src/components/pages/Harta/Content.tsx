@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { Map, Marker, TileLayer } from 'react-leaflet';
 import { LatLngTuple } from 'leaflet';
+import { Map, Marker, Tooltip, TileLayer } from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
 
 type State = {
   lat: number;
   lng: number;
+};
+
+type Provider = {
+  id: string;
+  coordinates: LatLngTuple;
+  name: string;
 };
 
 export default class SimpleExample extends Component<{}, State> {
@@ -35,17 +42,26 @@ export default class SimpleExample extends Component<{}, State> {
       <StaticQuery
         query={query}
         render={data => {
-          const providers = data.hasura.providers;
+          const providers = data.hasura.providers as Provider[];
 
           return (
-            <Map center={position} zoom={this.state.zoom} scrollWheelZoom={this.state.scrollWheelZoom}>
+            <Map
+              center={position}
+              zoom={this.state.zoom}
+              maxZoom={20}
+              scrollWheelZoom={this.state.scrollWheelZoom}
+              className="markercluster-map">
               <TileLayer
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              {Object.values(providers).map(item => (
-                <Marker position={item.coordinates} key={1} />
-              ))}
+              <MarkerClusterGroup showCoverageOnHover={false}>
+                {Object.values(providers).map((item, index) => (
+                  <Marker position={item.coordinates} key={`marker-${item.id}-${index}`}>
+                    <Tooltip>{item.name}</Tooltip>
+                  </Marker>
+                ))}
+              </MarkerClusterGroup>
             </Map>
           );
         }}
