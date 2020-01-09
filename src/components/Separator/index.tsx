@@ -1,5 +1,15 @@
 import React from 'react';
 
+type Props = {
+  color: string;
+  class: string;
+  button: string;
+  top: string;
+  height: string;
+};
+{
+  /*@todo Seco -> it must be redeclare to Separator parameters*/
+}
 export default class Separator extends React.Component {
   render() {
     return (

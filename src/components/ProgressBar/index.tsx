@@ -5,6 +5,7 @@ type Props = {
   shelters: number;
   skids: number;
   strokeWidth: number;
+  class: string;
 };
 
 function ProgressBar(props: Props) {

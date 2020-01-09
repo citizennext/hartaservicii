@@ -1,8 +1,11 @@
 /** @jsx jsx */
-import React from 'react';
-import { jsx } from '@emotion/core';
+import React, { Fragment, useContext } from 'react';
+import { jsx } from 'theme-ui';
 import { Link } from 'gatsby';
-import RcDrawer from 'rc-drawer';
+import Drawer from './Drawer/Drawer';
+import { DrawerContext } from './Drawer/DrawerContext';
+import { useWindowSize } from '../hooks/useWindowSize';
+import Menu from '../assets/images/icon_menu_mobile.svg';
 
 type NavItem = {
   label: string;
@@ -22,26 +25,60 @@ type Pages = {
 type Props = {
   navClass?: string;
   nav: Pages;
+  drawer: boolean;
+};
+
+type classA = {
+  classApplied: string;
 };
 
 const Navigation: React.FC<Props> = props => {
   const nav = props.nav;
+  // @ts-ignore
+  const { state, dispatch } = useContext(DrawerContext);
+  const openDrawer = () => {
+    dispatch((current: boolean) => !current);
+  };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const windowSize = useWindowSize();
+
   return (
-    <RcDrawer>
-      <nav className={props.navClass}>
-        <ul>
-          {Object.values(nav)
-            .filter(item => item.navigation.nav)
-            .map(item => (
-              <li key={item.navigation.label}>
-                <Link to={item.navigation.url} title={item.navigation.title}>
-                  {item.navigation.label}
-                </Link>
-              </li>
-            ))}
-        </ul>
-      </nav>
-    </RcDrawer>
+    <Fragment>
+      {props.drawer && windowSize.width && windowSize.width < 768 ? (
+        <div className="hamburger-menu">
+          <img className="menu_icon" src={Menu} />
+          <Drawer className={props.navClass} width="300px" placement="right" open={state} toggleHandler={openDrawer}>
+            <nav>
+              <ul className="navigation">
+                {Object.values(nav)
+                  .filter(item => item.navigation.nav)
+                  .map((item, index) => (
+                    <li key={`${item.navigation.url}-${index}`}>
+                      <Link to={item.navigation.url} title={item.navigation.title}>
+                        {item.navigation.label}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </nav>
+          </Drawer>
+        </div>
+      ) : (
+        <nav className={props.navClass}>
+          <ul className="navigation">
+            {Object.values(nav)
+              .filter(item => item.navigation.nav)
+              .map((item, index) => (
+                <li key={`${item.navigation.url}-${index}`}>
+                  <Link to={item.navigation.url} title={item.navigation.title}>
+                    {item.navigation.label}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </nav>
+      )}
+    </Fragment>
   );
 };
 

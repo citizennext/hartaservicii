@@ -1,4 +1,7 @@
-const siteConfig = require('./site-config')
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+const siteConfig = require('./site-config');
 
 module.exports = {
   siteMetadata: {
@@ -11,23 +14,23 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
     {
-       resolve: `gatsby-plugin-prefetch-google-fonts`,
-       options: {
-         fonts: [
-           {
-             family: `KoHo`,
-             subsets: [`latin-ext`],
-             variants: [`400`, `400i`, `700`, `700i`],
-           },
-           {
-             family: `Montserrat`,
-             subsets: [`latin-ext`],
-             variants: [`400`, `400i`, `700`, `700i`],
-           }
-         ],
-         display: 'swap'
-       },
-     },
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `KoHo`,
+            subsets: [`latin-ext`],
+            variants: [`400`, `400i`, `700`, `700i`],
+          },
+          {
+            family: `Montserrat`,
+            subsets: [`latin-ext`],
+            variants: [`400`, `400i`, `700`, `700i`],
+          },
+        ],
+        display: 'swap',
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -91,7 +94,7 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-source-graphql",
+      resolve: 'gatsby-source-graphql',
       options: {
         typeName: 'MyQuery',
         fieldName: 'hasura',
@@ -103,4 +106,4 @@ module.exports = {
       }
     }
   ],
-}
+};

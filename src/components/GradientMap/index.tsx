@@ -1,5 +1,7 @@
 import React from 'react';
-type Props = {};
+type Props = {
+  class: string;
+};
 
 function GradientMap(props: Props) {
   return (

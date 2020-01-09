@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import React from 'react'
-import { jsx } from '@emotion/core'
+import React from 'react';
+import { jsx } from '@emotion/core';
 // @todo st3phan - it must import on common and fixed validation
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
-import Data from '../../../data/global.json'
-import { Link } from 'gatsby'
+import Data from '../../../data/global.json';
+import { Link } from 'gatsby';
 
 export default class Content extends React.Component {
   // constructor (props) {
@@ -41,6 +41,6 @@ export default class Content extends React.Component {
           {Data.page.homepage.navigation.label}
         </Link>
       </div>
-    )
+    );
   }
 }
