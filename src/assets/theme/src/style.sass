@@ -1,4 +1,5 @@
-@import "tailwindcss/base"
+@import "~tailwindcss/base"
+@import '~react-leaflet-markercluster/dist/styles.min.css'
 @import "variables"
 @import "fonts"
 @import "typography"
@@ -9,6 +10,7 @@
 @import "header"
 @import "footer"
 @import "main"
+@import "nav"
 @import "custom"
 
 body
@@ -277,8 +279,9 @@ header
         margin-top: 26px
         margin-right: 26px
 
-    .nav-header
-        @apply hidden
+    // @todo Seco -> navigation show on desktop
+    //.nav-header
+    //    @apply hidden
 
 footer
     @apply bg-burg
