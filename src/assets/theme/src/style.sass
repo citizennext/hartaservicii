@@ -23,12 +23,14 @@ h1
     @apply leading-tight
     @apply font-bold
     @apply text-black
+    font-family: Montserrat
 
 h2
     @apply text-1xl
     @apply leading-tight
     @apply font-semibold
     @apply text-black
+    font-family: Montserrat
 
 h3
     @apply text-lg
@@ -36,14 +38,18 @@ h3
     @apply font-bold
     @apply text-black
     @apply pb-2
+    font-family: Montserrat
 
 h4
     @apply text-lg
     @apply leading-tight
     @apply font-semibold
     @apply text-black
+    font-family: Montserrat
 
 p
+    font-family: KoHo
+    @apply text-lg
     &.notes
         @apply text-sm
         @apply leading-tight
@@ -62,19 +68,28 @@ a
 ol
     counter-reset: li
     margin-left: 3.7em
+    @screen md
+        margin-left: 0
 
     li
         @apply relative
+        font-family: KoHo
+        @screen md
+            @apply ml-8
+
 
     li:before
         counter-increment: li
         content: "0"counter(li)  ". "
         list-style: decimal-leading-zero
         left: -2em
+        font-family: Montserrat
         @apply text-leaf
         @apply text-3xxl
         @apply font-bold
         @apply absolute
+        @screen md
+            left: -1.8em
 
 #search
     &:before
@@ -94,6 +109,10 @@ ol
     @apply relative
     @apply pl-8
     left: calc(-50vw + 50%)
+    @screen md
+        @apply w-auto
+        @apply pl-0
+        left: auto
 
 /* Circular Progress Bar */
 .circularprogressbar
@@ -132,9 +151,23 @@ ol
     @apply text-center
 
 /* Blog */
-.date
-    @apply text-celeste
-    @apply text-xs
+.blog-post
+    img
+        @apply hidden
+        @screen md
+            @apply block
+
+    &:first-child
+        img
+            @apply block
+
+    .excerpt
+        @apply text-lg
+
+    .date
+        @apply text-celeste
+        @apply text-xs
+
 
 /* sections */
 .section
@@ -158,10 +191,12 @@ button
     width: 320px
     max-width: 86vw
     @apply text-lg
+    @apply font-medium
     @apply leading-tight
     @apply py-3
     position: relative
     @apply m-auto
+    font-family: Montserrat
     @screen md
         @apply max-w-xs
 
@@ -220,6 +255,8 @@ button
         width: 38px
         left: 88%
         bottom: 8%
+        @screen md
+            left: 0
 
     &.arrowonly:after
         content: ''

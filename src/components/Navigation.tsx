@@ -1,38 +1,33 @@
 /** @jsx jsx */
-import React, { Fragment } from 'react'
-import { jsx } from '@emotion/core'
-import { Link } from 'gatsby'
-import Logo from '../assets/images/logo.svg'
-import Menu from '../assets/images/icon_menu_mobile.svg'
+import React from 'react';
+import { jsx } from '@emotion/core';
+import { Link } from 'gatsby';
+import RcDrawer from 'rc-drawer';
 
 type NavItem = {
-  label: string
-  url: string
-  title: string
-  nav: boolean
-}
+  label: string;
+  url: string;
+  title: string;
+  nav: boolean;
+};
 
 type Page = {
-  navigation: NavItem
-}
+  navigation: NavItem;
+};
 
 type Pages = {
-  [key: string]: Page
-}
+  [key: string]: Page;
+};
 
 type Props = {
-  navClass?: string
-  nav: Pages
-}
+  navClass?: string;
+  nav: Pages;
+};
 
 const Navigation: React.FC<Props> = props => {
-  const nav = props.nav
+  const nav = props.nav;
   return (
-    <Fragment>
-      <img className="menu_icon" src={Menu} />
-      <Link to="/" style={{ height: 70 }}>
-        <img src={Logo} alt="" />
-      </Link>
+    <RcDrawer>
       <nav className={props.navClass}>
         <ul>
           {Object.values(nav)
@@ -46,8 +41,8 @@ const Navigation: React.FC<Props> = props => {
             ))}
         </ul>
       </nav>
-    </Fragment>
-  )
-}
+    </RcDrawer>
+  );
+};
 
-export default Navigation
+export default Navigation;
