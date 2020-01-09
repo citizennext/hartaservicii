@@ -1,0 +1,165 @@
+{
+  "head": {
+    "lang": "ro",
+    "siteUrl": "http://www.domain.com",
+    "favicon": "Lorem Ipsum Dolor"
+  },
+  "externalLinks": {
+    "anpc": {
+      "label": "ANPC",
+      "title": "ANPC",
+      "url": "https://anpc.ro/"
+    }
+  },
+  "header": {},
+  "footer": {
+    "texts": {
+      "copyright": "Asociația Citizen Next — toate drepturile rezervate © "
+    },
+    "links": {
+      "asociatia": {
+        "title": "Asociația Citizen Next",
+        "url": "https://citizennext.ro/contribute",
+        "text": "Asociația Citizen Next"
+      }
+    }
+  },
+  "page": {
+    "harta": {
+      "seo": {
+        "title": "Harta",
+        "keywords": "Harta Google Map",
+        "description": "Harta Google Map"
+      },
+      "content": {
+        "title": "Harta Google Map Content"
+      },
+      "sidebarLeft": null,
+      "sidebarRight": null,
+      "navigation": {
+        "label": "Harta",
+        "url": "/harta",
+        "title": "Harta",
+        "nav": true
+      }
+    },
+    "test": {
+      "seo": {
+        "title": "Lorem Ipsum Dolor",
+        "keywords": "Lorem, Ipsum, Dolor",
+        "description": "Lorem Ipsum Dolor"
+      },
+      "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
+      "sidebarLeft": "[ Sidebar Left - Lorem Ipsum Dolor ]",
+      "sidebarRight": "[ Sidebar Right - Lorem Ipsum Dolor ]",
+      "navigation": {
+        "label": "TestPage",
+        "url": "/test",
+        "title": "Test Page",
+        "nav": false
+      }
+    },
+    "homepage": {
+      "seo": {
+        "title": "HomePage",
+        "keywords": "HomePage, Lorem, Ipsum, Dolor",
+        "description": "HomePage - Lorem Ipsum Dolor"
+      },
+      "content": {
+        "title": "Îngrijim și suntem îngrijiți mai bine",
+        "intro": "...când ne cunoaștem drepturile, modalitățile de acces la servicii și localizarea acestora.",
+        "section2": {
+          "title": "Ești furnizor de servicii sociale?",
+          "list1": "Caută serviciul pe care îl oferi pe hartă.",
+          "list2": "Dacă nu apare sau apare dar vrei să modifici datele, dă-ne de știre.",
+          "list3": "Vezi ce alte servicii sunt în zona ta."
+        },
+        "section3": {
+          "title": "Ești beneficiar sau însoțitor?",
+          "list1": "Caută serviciul de care ai nevoie în zona ta.",
+          "list2": "Poți să filtrezi după tipul de serviciu oferit, localizare, privat sau public.",
+          "list3": "Găsești nu doar date de contact dar și locația exactă."
+        }
+      },
+      "navigation": {
+        "label": "HomePage",
+        "url": "/",
+        "title": "Home Page",
+        "nav": false
+      },
+      "images": {
+        "intro": {
+          "src": "assets/images/hp_hero.png"
+        },
+        "section2": {
+          "src": "assets/images/hp_section2.png"
+        }
+      },
+      "links": {
+        "intro": {
+          "url": "/",
+          "title": "",
+          "label": "detalii"
+        },
+        "section2": {
+          "url": "/",
+          "title": "Deschide harta",
+          "label": "Deschide harta"
+        },
+        "section3": {
+          "url": "/",
+          "title": "Deschide harta",
+          "label": "Deschide harta"
+        }
+      }
+    },
+    "desprenoi": {
+      "navigation": {
+        "label": "Despre noi",
+        "url": "/",
+        "title": "Despre noi",
+        "nav": true
+      }
+    },
+    "noutati": {
+      "navigation": {
+        "label": "Noutăți",
+        "url": "/",
+        "title": "Noutăți",
+        "nav": true
+      }
+    },
+    "parteneri": {
+      "navigation": {
+        "label": "Parteneri",
+        "url": "/",
+        "title": "Parteneri",
+        "nav": true
+      }
+    },
+    "statistici": {
+      "navigation": {
+        "label": "Statistici",
+        "url": "/",
+        "title": "Statistici",
+        "nav": true
+      }
+    },
+    "contact": {
+      "navigation": {
+        "label": "Contact",
+        "url": "/",
+        "title": "Contact",
+        "nav": true
+      }
+    }
+  },
+  "locations": {
+    "loc_1": {
+      "address": "str. Miron Costin nr. 2",
+      "city": "Alba Iulia",
+      "district": "Alba",
+      "address_point": ""
+    }
+  }
+}
