@@ -1,4 +1,7 @@
-const siteConfig = require('./site-config')
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+const siteConfig = require('./site-config');
 
 module.exports = {
   siteMetadata: {
@@ -11,23 +14,23 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
     {
-       resolve: `gatsby-plugin-prefetch-google-fonts`,
-       options: {
-         fonts: [
-           {
-             family: `KoHo`,
-             subsets: [`latin-ext`],
-             variants: [`400`, `400i`, `700`, `700i`],
-           },
-           {
-             family: `Montserrat`,
-             subsets: [`latin-ext`],
-             variants: [`400`, `400i`, `700`, `700i`],
-           }
-         ],
-         display: 'swap'
-       },
-     },
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `KoHo`,
+            subsets: [`latin-ext`],
+            variants: [`400`, `400i`, `700`, `700i`],
+          },
+          {
+            family: `Montserrat`,
+            subsets: [`latin-ext`],
+            variants: [`400`, `400i`, `700`, `700i`],
+          },
+        ],
+        display: 'swap',
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -88,19 +91,19 @@ module.exports = {
         preferCanvas: true,
         maxWidth: '100%',
         maxHeight: 600,
-      }
+      },
     },
     {
-      resolve: "gatsby-source-graphql",
+      resolve: 'gatsby-source-graphql',
       options: {
         typeName: process.env.GATSBY_HASURA_GRAPHQL_TYPE_NAME,
         fieldName: process.env.GATSBY_HASURA_GRAPHQL_FIELD_NAME,
         url: process.env.GATSBY_HASURA_GRAPHQL_URL,
-        refetchInterval: 10,
+        refetchInterval: 60,
         headers: {
-          "content-type": `application/json`
-        }
-      }
-    }
+          'content-type': `application/json`,
+        },
+      },
+    },
   ],
-}
+};
