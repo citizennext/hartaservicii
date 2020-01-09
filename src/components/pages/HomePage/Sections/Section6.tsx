@@ -1,11 +1,11 @@
-import React from 'react'
-import Illu from '../../../../assets/images/illu_partner.svg'
-import Notype from '../../../../assets/images/logo_notype.svg'
+import React from 'react';
+import Illu from '../../../../assets/images/illu_partner.svg';
+import Notype from '../../../../assets/images/logo_notype.svg';
 
 export default class Content extends React.Component {
   render() {
     return (
-      <div id="section6" className="section blogposts bg-white pt-12 md:pt-24 md:pb-32">
+      <div id="section6" className="section blogposts bg-white pt-12 md:pt-24 md:pb-32 xl:max-w-gridt xl:m-auto">
         <div className="interior md:flex">
           <div className="md:w-1/2 md:mr-2">
             <h3 className="wide">Hai alături de noi</h3>
@@ -25,6 +25,6 @@ export default class Content extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
