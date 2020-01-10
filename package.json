@@ -65,7 +65,15 @@
     "theme-ui": "^0.2.52",
     "typeface-montserrat": "^0.0.75",
     "webpack": "^4.41.4",
-    "yallist": "^4.0.0"
+    "yallist": "^4.0.0",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "gatsby-source-graphql": "^2.1.30",
+    "gatsby-plugin-react-leaflet": "^2.0.11",
+    "react-leaflet": "^2.6.1",
+    "leaflet": "^1.6.0",
+    "leaflet.markercluster": "^1.0.0",
+    "react-leaflet-markercluster": "^2.0.0-rc3"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

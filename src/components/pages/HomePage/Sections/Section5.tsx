@@ -7,7 +7,7 @@ import ArrowB from '../../../../assets/images/icon_arrowb.svg';
 export default class Content extends React.Component {
   render() {
     return (
-      <div id="section5" className="section blogposts bg-white">
+      <div id="section5" className="section blogposts bg-white xl:max-w-gridd xl:m-auto xl:px-8">
         <div className="interior md:flex">
           <div className="md:w-1/2 md:mr-2">
             <h3 className="border-b-8 border-leaf wide">Istoric Proiect</h3>
