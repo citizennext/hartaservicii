@@ -10,7 +10,7 @@ type Props = {
 
 function BlogPost(props: Props) {
   return (
-    <div className={`${props.class} relative blog-post md:w-1/2 md:mx-2`}>
+    <div className={`${props.classBlogPost} relative blog-post md:w-1/2 md:mx-2`}>
       <img src={echipa} className="md:w-full" />
       <h3 className="border-t-8 border-burg pt-4">{props.title}</h3>
       <p className="date">{props.date}</p>
