@@ -96,10 +96,10 @@ module.exports = {
     {
       resolve: 'gatsby-source-graphql',
       options: {
-        typeName: 'MyQuery',
-        fieldName: 'hasura',
-        url: 'https://hasura.serviciisociale.ro/v1/graphql',
-        refetchInterval: 10,
+        typeName: process.env.GATSBY_HASURA_GRAPHQL_TYPE_NAME,
+        fieldName: process.env.GATSBY_HASURA_GRAPHQL_FIELD_NAME,
+        url: process.env.GATSBY_HASURA_GRAPHQL_URL,
+        refetchInterval: 60,
         headers: {
           "content-type": `application/json`
         }
