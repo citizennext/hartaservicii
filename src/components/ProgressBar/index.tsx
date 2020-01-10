@@ -2,8 +2,8 @@ import React from 'react';
 import siluette from '../../assets/images/siluette.svg';
 type Props = {
   sqSize: number;
-  firstbar: number;
-  secondbar: number;
+  firstBar: number;
+  secondBar: number;
   strokeWidth: number;
   classProgressBar: string;
 };
@@ -24,7 +24,7 @@ function ProgressBar(props: Props) {
             y1="260"
             y2="260"
             x1="0"
-            x2={props.secondbar}
+            x2={props.secondBar}
             transform={`rotate(-90 ${props.sqSize / 2} ${props.sqSize / 2})`}
             strokeWidth={`${props.strokeWidth}px`}
           />
@@ -33,7 +33,7 @@ function ProgressBar(props: Props) {
             y1="165"
             y2="165"
             x1="0"
-            x2={props.firstbar}
+            x2={props.firstBar}
             strokeWidth={`${props.strokeWidth}px`}
             transform={`rotate(-90 ${props.sqSize / 2} ${props.sqSize / 2})`}
           />
@@ -56,8 +56,8 @@ function ProgressBar(props: Props) {
           <path d="M0.355103 4.22156H294.645" stroke="#968584" strokeWidth="7" strokeMiterlimit="10" />
         </svg>
       </div>
-      <p className="circle-total pt-4">{`${props.firstbar}`}</p>
-      <p className="circle-total-amount">{`${props.secondbar}`}</p>
+      <p className="circle-total pt-4">{`${props.firstBar}`}</p>
+      <p className="circle-total-amount">{`${props.secondBar}`}</p>
       <p className="circle-total pb-6">Centre servicii sociale</p>
     </div>
   );
@@ -65,8 +65,8 @@ function ProgressBar(props: Props) {
 
 ProgressBar.defaultProps = {
   sqSize: 310,
-  firstbar: 21,
-  secondbar: 538,
+  firstBar: 21,
+  secondBar: 538,
   strokeWidth: 42,
 };
 
