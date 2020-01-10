@@ -4,7 +4,7 @@ type Props = {
   strokeWidth: number;
   public: number;
   private: number;
-  class: string;
+  classCircularBar: string;
 };
 
 function CircularProgressBar(props: Props) {
@@ -24,7 +24,7 @@ function CircularProgressBar(props: Props) {
   const dashOffset = dashArray - (dashArray * percentage) / 100;
 
   return (
-    <div className={`${props.class}`}>
+    <div className={`${props.classCircularBar}`}>
       <svg width={props.sqSize} height={props.sqSize} viewBox={viewBox}>
         <circle
           className="circle-background"
@@ -79,7 +79,7 @@ CircularProgressBar.defaultProps = {
   public: 1396,
   private: 1154,
   strokeWidth: 30,
-  class: '',
+  classCircularBar: '',
 };
 
 export default CircularProgressBar;

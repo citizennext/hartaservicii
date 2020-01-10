@@ -5,7 +5,7 @@ type Props = {
   shelters: number;
   skids: number;
   strokeWidth: number;
-  class: string;
+  classProgressBar: string;
 };
 
 function ProgressBar(props: Props) {
@@ -15,7 +15,7 @@ function ProgressBar(props: Props) {
   const viewBox = `0 0 ${sqSize} ${sqSize}`;
 
   return (
-    <div className={`${props.class}`}>
+    <div className={`${props.classProgressBar}`}>
       <div style={{ maxWidth: '320px' }} className="relative xl:m-auto">
         <img className="progressbar-image md:absolute" src={siluette} />
         <svg width={props.sqSize} height={props.sqSize} viewBox={viewBox} className="xl:m-auto">
