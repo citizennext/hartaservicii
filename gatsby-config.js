@@ -91,7 +91,7 @@ module.exports = {
         preferCanvas: true,
         maxWidth: '100%',
         maxHeight: 600,
-      }
+      },
     },
     {
       resolve: 'gatsby-source-graphql',
@@ -101,9 +101,16 @@ module.exports = {
         url: process.env.GATSBY_HASURA_GRAPHQL_URL,
         refetchInterval: 60,
         headers: {
-          "content-type": `application/json`
-        }
-      }
-    }
+          'content-type': `application/json`,
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-graphql-image',
+      options: {
+        schemaName: process.env.GATSBY_HASURA_GRAPHQL_TYPE_NAME,
+        imageFieldName: 'url',
+      },
+    },
   ],
 };
