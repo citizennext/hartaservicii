@@ -1938,6 +1938,7 @@ type HASURA_Blog implements HASURA_Node {
   createdAt: HASURA_DateTime!
   id: ID!
   image: HASURA_Asset
+  publishedAt: HASURA_DateTime
   slug: String!
   status: HASURA_Status!
   summary: String!
@@ -1959,6 +1960,7 @@ type HASURA_BlogConnection {
 input HASURA_BlogCreateInput {
   content: HASURA_RichTextAST
   image: HASURA_AssetCreateOneWithoutImageBlogInput
+  publishedAt: HASURA_DateTime
   slug: String!
   status: HASURA_Status
   summary: String!
@@ -1972,6 +1974,7 @@ input HASURA_BlogCreateManyWithoutImageInput {
 
 input HASURA_BlogCreateWithoutImageInput {
   content: HASURA_RichTextAST
+  publishedAt: HASURA_DateTime
   slug: String!
   status: HASURA_Status
   summary: String!
@@ -1994,6 +1997,8 @@ enum HASURA_BlogOrderByInput {
   createdAt_DESC
   id_ASC
   id_DESC
+  publishedAt_ASC
+  publishedAt_DESC
   slug_ASC
   slug_DESC
   status_ASC
@@ -2010,6 +2015,7 @@ type HASURA_BlogPreviousValues {
   content: HASURA_RichText
   createdAt: HASURA_DateTime!
   id: ID!
+  publishedAt: HASURA_DateTime
   slug: String!
   status: HASURA_Status!
   summary: String!
@@ -2089,6 +2095,28 @@ input HASURA_BlogScalarWhereInput {
 
   """All values starting with the given string."""
   id_starts_with: ID
+  publishedAt: HASURA_DateTime
+
+  """All values greater than the given value."""
+  publishedAt_gt: HASURA_DateTime
+
+  """All values greater than or equal the given value."""
+  publishedAt_gte: HASURA_DateTime
+
+  """All values that are contained in given list."""
+  publishedAt_in: [HASURA_DateTime!]
+
+  """All values less than the given value."""
+  publishedAt_lt: HASURA_DateTime
+
+  """All values less than or equal the given value."""
+  publishedAt_lte: HASURA_DateTime
+
+  """All values that are not equal to given value."""
+  publishedAt_not: HASURA_DateTime
+
+  """All values that are not contained in given list."""
+  publishedAt_not_in: [HASURA_DateTime!]
   slug: String
 
   """All values containing the given string."""
@@ -2283,6 +2311,7 @@ input HASURA_BlogSubscriptionWhereInput {
 input HASURA_BlogUpdateInput {
   content: HASURA_RichTextAST
   image: HASURA_AssetUpdateOneWithoutImageBlogInput
+  publishedAt: HASURA_DateTime
   slug: String
   status: HASURA_Status
   summary: String
@@ -2291,6 +2320,7 @@ input HASURA_BlogUpdateInput {
 
 input HASURA_BlogUpdateManyDataInput {
   content: HASURA_RichTextAST
+  publishedAt: HASURA_DateTime
   slug: String
   status: HASURA_Status
   summary: String
@@ -2299,6 +2329,7 @@ input HASURA_BlogUpdateManyDataInput {
 
 input HASURA_BlogUpdateManyMutationInput {
   content: HASURA_RichTextAST
+  publishedAt: HASURA_DateTime
   slug: String
   status: HASURA_Status
   summary: String
@@ -2324,6 +2355,7 @@ input HASURA_BlogUpdateManyWithWhereNestedInput {
 
 input HASURA_BlogUpdateWithoutImageDataInput {
   content: HASURA_RichTextAST
+  publishedAt: HASURA_DateTime
   slug: String
   status: HASURA_Status
   summary: String
@@ -2414,6 +2446,28 @@ input HASURA_BlogWhereInput {
   """All values starting with the given string."""
   id_starts_with: ID
   image: HASURA_AssetWhereInput
+  publishedAt: HASURA_DateTime
+
+  """All values greater than the given value."""
+  publishedAt_gt: HASURA_DateTime
+
+  """All values greater than or equal the given value."""
+  publishedAt_gte: HASURA_DateTime
+
+  """All values that are contained in given list."""
+  publishedAt_in: [HASURA_DateTime!]
+
+  """All values less than the given value."""
+  publishedAt_lt: HASURA_DateTime
+
+  """All values less than or equal the given value."""
+  publishedAt_lte: HASURA_DateTime
+
+  """All values that are not equal to given value."""
+  publishedAt_not: HASURA_DateTime
+
+  """All values that are not contained in given list."""
+  publishedAt_not_in: [HASURA_DateTime!]
   slug: String
 
   """All values containing the given string."""

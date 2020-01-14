@@ -4,9 +4,9 @@ import { graphql, StaticQuery } from 'gatsby';
 const query = graphql`
   query {
     hasura {
-      blogs(last: 3, orderBy: createdAt_DESC, where: { status: PUBLISHED }) {
+      blogs(last: 3, orderBy: publishedAt_DESC, where: { status: PUBLISHED }) {
         id
-        createdAt
+        publishedAt
         title
         summary
         slug
