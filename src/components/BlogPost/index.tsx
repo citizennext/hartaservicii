@@ -22,7 +22,7 @@ function BlogPost(props: Props) {
           timeZone: 'UTC',
           weekday: 'long',
           year: 'numeric',
-          month: 'long',
+          month: 'short',
           day: 'numeric',
         })}
       </p>
