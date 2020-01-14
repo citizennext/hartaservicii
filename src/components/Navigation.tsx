@@ -28,10 +28,6 @@ type Props = {
   drawer: boolean;
 };
 
-type classA = {
-  classApplied: string;
-};
-
 const Navigation: React.FC<Props> = props => {
   const nav = props.nav;
   // @ts-ignore
