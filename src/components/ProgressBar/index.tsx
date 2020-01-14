@@ -56,9 +56,9 @@ function ProgressBar(props: Props) {
           <path d="M0.355103 4.22156H294.645" stroke="#968584" strokeWidth="7" strokeMiterlimit="10" />
         </svg>
       </div>
-      <p className="circle-total pt-4">{`${props.firstBar}`}</p>
-      <p className="circle-total-amount">{`${props.secondBar}`}</p>
-      <p className="circle-total pb-6">Centre servicii sociale</p>
+      <p className="progress-first-amount">{`${props.firstBar}`}</p>
+      <p className="progress-second-amount">{`${props.secondBar}`}</p>
+      <p className="progress-copy">Centre servicii sociale</p>
     </div>
   );
 }

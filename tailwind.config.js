@@ -25,13 +25,19 @@ module.exports = {
 			decimal: 'decimal'
 		},
 		extend: {
+			margin: {
+				'36': '9rem',
+			},
+			borderWidth: {
+				'6': '6px',
+			},
 			spacing: {
 				's': '6px',
 			},
 			maxWidth: {
 				'screen': '100vw',
 				'gridt': '717px',
-				'griddw': '1170px',
+				'griddw': '1206px',
 				'gridd': '1036px'
 			},
 			inset: {
