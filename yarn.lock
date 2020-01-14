@@ -6166,6 +6166,11 @@ gatsby-plugin-catch-links@^2.1.21:
     "@babel/runtime" "^7.7.6"
     escape-string-regexp "^1.0.5"
 
+gatsby-plugin-graphql-image@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-graphql-image/-/gatsby-plugin-graphql-image-1.0.1.tgz#29632a854d87e4f6a6669c007bd4ef651a228faa"
+  integrity sha512-9MsOtI2hfqUAFfyxpiftIvMBU9OW0t+f1i1k+XfNt8wv9gclq57xVQONdV1LAXqasIJ9yQh48m77FWL7g0uPhQ==
+
 gatsby-plugin-manifest@^2.2.33:
   version "2.2.33"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.2.33.tgz#4c9dafaffef8df452f863bc0af56f36c99b15388"
