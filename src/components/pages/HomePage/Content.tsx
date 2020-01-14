@@ -1,6 +1,4 @@
-/** @jsx jsx */
 import React, { Fragment } from 'react';
-import { jsx } from '@emotion/core';
 import Hero from './Sections/Hero';
 import Section2 from './Sections/Section2';
 import Section3 from './Sections/Section3';

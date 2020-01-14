@@ -2991,6 +2991,7 @@ enum HASURA_order_by {
 type HASURA_Page implements HASURA_Node {
   content: HASURA_RichText
   createdAt: HASURA_DateTime!
+  header: String
   id: ID!
   image: HASURA_Asset
   slug: String!
@@ -3013,6 +3014,7 @@ type HASURA_PageConnection {
 
 input HASURA_PageCreateInput {
   content: HASURA_RichTextAST
+  header: String
   image: HASURA_AssetCreateOneWithoutImagePageInput
   slug: String!
   status: HASURA_Status
@@ -3027,6 +3029,7 @@ input HASURA_PageCreateManyWithoutImageInput {
 
 input HASURA_PageCreateWithoutImageInput {
   content: HASURA_RichTextAST
+  header: String
   slug: String!
   status: HASURA_Status
   summary: String!
@@ -3062,6 +3065,8 @@ enum HASURA_PageOrderByInput {
   content_DESC
   createdAt_ASC
   createdAt_DESC
+  header_ASC
+  header_DESC
   id_ASC
   id_DESC
   slug_ASC
@@ -3079,6 +3084,7 @@ enum HASURA_PageOrderByInput {
 type HASURA_PagePreviousValues {
   content: HASURA_RichText
   createdAt: HASURA_DateTime!
+  header: String
   id: ID!
   slug: String!
   status: HASURA_Status!
@@ -3119,6 +3125,46 @@ input HASURA_PageScalarWhereInput {
 
   """All values that are not contained in given list."""
   createdAt_not_in: [HASURA_DateTime!]
+  header: String
+
+  """All values containing the given string."""
+  header_contains: String
+
+  """All values ending with the given string."""
+  header_ends_with: String
+
+  """All values greater than the given value."""
+  header_gt: String
+
+  """All values greater than or equal the given value."""
+  header_gte: String
+
+  """All values that are contained in given list."""
+  header_in: [String!]
+
+  """All values less than the given value."""
+  header_lt: String
+
+  """All values less than or equal the given value."""
+  header_lte: String
+
+  """All values that are not equal to given value."""
+  header_not: String
+
+  """All values not containing the given string."""
+  header_not_contains: String
+
+  """All values not ending with the given string."""
+  header_not_ends_with: String
+
+  """All values that are not contained in given list."""
+  header_not_in: [String!]
+
+  """All values not starting with the given string."""
+  header_not_starts_with: String
+
+  """All values starting with the given string."""
+  header_starts_with: String
   id: ID
 
   """All values containing the given string."""
@@ -3352,6 +3398,7 @@ input HASURA_PageSubscriptionWhereInput {
 
 input HASURA_PageUpdateInput {
   content: HASURA_RichTextAST
+  header: String
   image: HASURA_AssetUpdateOneWithoutImagePageInput
   slug: String
   status: HASURA_Status
@@ -3361,6 +3408,7 @@ input HASURA_PageUpdateInput {
 
 input HASURA_PageUpdateManyDataInput {
   content: HASURA_RichTextAST
+  header: String
   slug: String
   status: HASURA_Status
   summary: String
@@ -3369,6 +3417,7 @@ input HASURA_PageUpdateManyDataInput {
 
 input HASURA_PageUpdateManyMutationInput {
   content: HASURA_RichTextAST
+  header: String
   slug: String
   status: HASURA_Status
   summary: String
@@ -3394,6 +3443,7 @@ input HASURA_PageUpdateManyWithWhereNestedInput {
 
 input HASURA_PageUpdateWithoutImageDataInput {
   content: HASURA_RichTextAST
+  header: String
   slug: String
   status: HASURA_Status
   summary: String
@@ -3443,6 +3493,46 @@ input HASURA_PageWhereInput {
 
   """All values that are not contained in given list."""
   createdAt_not_in: [HASURA_DateTime!]
+  header: String
+
+  """All values containing the given string."""
+  header_contains: String
+
+  """All values ending with the given string."""
+  header_ends_with: String
+
+  """All values greater than the given value."""
+  header_gt: String
+
+  """All values greater than or equal the given value."""
+  header_gte: String
+
+  """All values that are contained in given list."""
+  header_in: [String!]
+
+  """All values less than the given value."""
+  header_lt: String
+
+  """All values less than or equal the given value."""
+  header_lte: String
+
+  """All values that are not equal to given value."""
+  header_not: String
+
+  """All values not containing the given string."""
+  header_not_contains: String
+
+  """All values not ending with the given string."""
+  header_not_ends_with: String
+
+  """All values that are not contained in given list."""
+  header_not_in: [String!]
+
+  """All values not starting with the given string."""
+  header_not_starts_with: String
+
+  """All values starting with the given string."""
+  header_starts_with: String
   id: ID
 
   """All values containing the given string."""
