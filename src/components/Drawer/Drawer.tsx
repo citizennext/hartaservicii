@@ -29,7 +29,7 @@ const Drawer: React.FC<Props> = ({ children, width, closeButton, closeButtonStyl
         open={open}
         level={null}
         handler={false}
-        maskStyle={{ background: 'rgba(151, 133, 133, 0.6)' }}>
+        maskStyle={{ backgroundColor: 'rgba(151, 133, 133, 0.6)', opacity: 1 }}>
         <DrawerClose onClick={toggleHandler} style={closeButtonStyle}>
           {closeButton}
         </DrawerClose>
