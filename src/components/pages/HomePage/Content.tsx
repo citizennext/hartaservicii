@@ -3,10 +3,10 @@ import React, { Fragment } from 'react';
 import { jsx } from '@emotion/core';
 import Hero from './Sections/Hero';
 import Section2 from './Sections/Section2';
-import Section3 from './Sections/Section3';
-import Section4 from './Sections/Section4';
+import Statistics from './Sections/Statistics';
+import Blog from './Sections/Blog';
 import Section5 from './Sections/Section5';
-import Section6 from './Sections/Section6';
+import Contact from './Sections/Contact';
 
 export default class Content extends React.Component {
   render() {
@@ -14,10 +14,10 @@ export default class Content extends React.Component {
       <Fragment>
         <Hero />
         <Section2 />
-        <Section3 />
-        <Section4 />
+        <Statistics />
+        <Blog />
         <Section5 />
-        <Section6 />
+        <Contact />
       </Fragment>
     );
   }

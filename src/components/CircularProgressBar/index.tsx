@@ -46,16 +46,16 @@ function CircularProgressBar(props: Props) {
             strokeDashoffset: dashOffset,
           }}
         />
-        <text className="circle-private" x="25%" y="45%" dy=".3em" textAnchor="middle">
+        <text className="circle-private" x="30%" y="45%" dy=".3em" textAnchor="middle">
           {`${props.private}`}
         </text>
-        <text x="15%" y="55%" className="block text-xl text-black">
+        <text x="15%" y="55%" className="block uppercase text-base text-black">
           private
         </text>
-        <text className="circle-public" x="75%" y="45%" dy=".3em" textAnchor="middle">
+        <text className="circle-public" x="70%" y="45%" dy=".3em" textAnchor="middle">
           {`${props.public}`}
         </text>
-        <text x="65%" y="55%" className="block text-xl text-black">
+        <text x="65%" y="55%" className="block uppercase text-base text-black">
           publice
         </text>
       </svg>
@@ -69,7 +69,7 @@ function CircularProgressBar(props: Props) {
       </svg>
       <p className="circle-total pt-4">TOTAL</p>
       <p className="circle-total-amount">{`${total}`}</p>
-      <p className="circle-total pb-6">Centre servicii sociale acreditate pe tot teritoriul țării</p>
+      <p className="circle-total pb-20">Centre servicii sociale acreditate pe tot teritoriul țării</p>
     </div>
   );
 }
