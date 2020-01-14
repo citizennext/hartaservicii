@@ -6,7 +6,7 @@ const query = graphql`
     hasura {
       blogs(last: 3, orderBy: createdAt_DESC, where: { status: PUBLISHED }) {
         id
-        createdAt
+        publishedAt
         title
         summary
         slug
