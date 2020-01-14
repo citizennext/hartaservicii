@@ -1,11 +1,10 @@
-/** @jsx jsx */
 import React, { Fragment, useContext } from 'react';
-import { jsx } from 'theme-ui';
 import { Link } from 'gatsby';
 import Drawer from './Drawer/Drawer';
 import { DrawerContext } from './Drawer/DrawerContext';
 import { useWindowSize } from '../hooks/useWindowSize';
-import Menu from '../assets/images/icon_menu_mobile.svg';
+// import Menu from '../assets/images/icon_menu_mobile.svg';
+import { Close, Menu } from './Icons';
 
 type NavItem = {
   label: string;
@@ -46,8 +45,14 @@ const Navigation: React.FC<Props> = props => {
     <Fragment>
       {props.drawer && windowSize.width && windowSize.width < 768 ? (
         <div className="hamburger-menu">
-          <img className="menu_icon" src={Menu} />
-          <Drawer className={props.navClass} width="300px" placement="right" open={state} toggleHandler={openDrawer}>
+          <Menu className="menu_icon text-brown" />
+          <Drawer
+            className={props.navClass}
+            width="300px"
+            placement="right"
+            open={state}
+            toggleHandler={openDrawer}
+            closeButton={<Close size={22} style={{ color: 'white' }} />}>
             <nav>
               <ul className="navigation">
                 {Object.values(nav)

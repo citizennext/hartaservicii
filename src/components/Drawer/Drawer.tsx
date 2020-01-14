@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 
   /** Used to render icon, button, text or any elements inside the closeButton prop. */
-  closeButton?: JSX.Element;
+  closeButton?: any;
   closeButtonStyle?: any;
 
   /** Set drawer width. Default value is 300px. */

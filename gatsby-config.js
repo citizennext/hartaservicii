@@ -81,7 +81,7 @@ module.exports = {
       resolve: `gatsby-plugin-sass`,
       options: {
         // Configure SASS to process Tailwind
-        postCssPlugins: [require('tailwindcss')],
+        postCssPlugins: [require('tailwindcss'), require('./tailwind.config.js')],
       },
     },
     {
