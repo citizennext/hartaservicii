@@ -11,12 +11,14 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
-        <Link to="/" style={{ height: 70 }}>
-          <img src={Logo} alt="" />
-        </Link>
-        <DrawerProvider>
-          <Navigation navClass="nav-header" nav={Data.page} drawer={true} />
-        </DrawerProvider>
+        <div className="interior">
+          <Link to="/">
+            <img src={Logo} alt="" />
+          </Link>
+          <DrawerProvider>
+            <Navigation navClass="nav-header" nav={Data.page} drawer={true} />
+          </DrawerProvider>
+        </div>
       </header>
     );
   }

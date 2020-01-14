@@ -1,32 +1,96 @@
 // @todo Seco -> it must be stylized
-.hamburger-menu
-    position: fixed
-    top: 0
-    right: 0
-    width: 50px
-    height: 50px
+header
+    .menu_icon
+        float: right
+        margin-top: 26px
+        margin-right: 26px
 
-    & > div
-        width: 20px
-        height: 18px
-        position: absolute
-        top: 26px
-        right: 26px
-        cursor: pointer
+    @apply sticky
+    @apply bg-white
+    z-index: 99999
+    top: 0
+    width: 100%
+    height: 80px
+    display: block
+
+    .interior
+        height: 80px
+        @apply relative
+
+    a
+        img
+            @apply absolute
+            top: 0
+            left: 0
+            height: 70px
+            width: 150px
+
+    .hamburger-menu
+        float: right
+        top: 0
+        right: 50px
+        width: 50px
+        height: 50px
+
+        & > div
+            width: 20px
+            height: 18px
+            position: absolute
+            top: 26px
+            right: 26px
+            cursor: pointer
 
 .drawer
     [class*="DrawerClose"]
-        width: 30px
-        height: 30px
-        background-color: red
-        position: absolute
-        top: 0
-        right: 0
+         width: 30px
+         height: 30px
+         position: absolute
+         z-index: 999999
+         top: 15px
+         right: 55px
 
-        &:before
-            content: "X"
-            color: white
-            position: absolute
-            width: 100%
-            height: 100%
-            text-align: center
+         &:before
+             @apply text-3xl
+             content: "X"
+             color: white
+             position: absolute
+             width: 100%
+             height: 100%
+             text-align: center
+
+    .drawer-content
+         @apply bg-burg
+         width: 300px
+
+.navigation
+    margin-top: 123px
+    padding-left: 20px
+
+    @screen md
+        margin-top: 0
+        padding-top: 50px
+
+    li
+        list-style: none
+        margin-bottom: 1em
+        border-left: 3px solid #fff
+        display: inline-block
+
+        @screen md
+            border-left: 3px solid #EDF7EF
+
+        a
+            @apply text-white
+            font-weight: 500
+            font-size: 22px
+            font-family: Montserrat
+            line-height: 1
+            padding: 0 0.5em 0 0.5em
+            -webkit-text-decoration: none
+            text-decoration: none
+
+            @screen md
+                @apply text-black
+                padding: 0 5px 0 8px
+                font-size: 14px
+
