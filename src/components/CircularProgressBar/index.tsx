@@ -2,9 +2,12 @@ import React from 'react';
 type Props = {
   sqSize: number;
   strokeWidth: number;
-  public: number;
-  private: number;
+  firstBar: number;
+  secondBar: number;
+  firstBarLabel: string;
+  secondBarLabel: string;
   classCircularBar: string;
+  title: string;
 };
 
 function CircularProgressBar(props: Props) {
@@ -17,9 +20,9 @@ function CircularProgressBar(props: Props) {
   // Arc length at 100% coverage is the circle circumference
   const dashArray = radius * Math.PI * 2;
   // Total Institutions
-  const total = props.public + props.private;
+  const total = props.firstBar + props.secondBar;
   // Scale 100% coverage overlay with the actual percent of public
-  const percentage = (props.public * 100) / total;
+  const percentage = (props.firstBar * 100) / total;
   // Offset
   const dashOffset = dashArray - (dashArray * percentage) / 100;
 
@@ -46,17 +49,17 @@ function CircularProgressBar(props: Props) {
             strokeDashoffset: dashOffset,
           }}
         />
-        <text className="circle-private" x="25%" y="45%" dy=".3em" textAnchor="middle">
-          {`${props.private}`}
+        <text className="circle-private" x="30%" y="45%" dy=".3em" textAnchor="middle">
+          {`${props.secondBar}`}
         </text>
-        <text x="15%" y="55%" className="block text-xl text-black">
-          private
+        <text x="15%" y="55%" className="block uppercase text-base text-black">
+          {props.secondBarLabel}
         </text>
-        <text className="circle-public" x="75%" y="45%" dy=".3em" textAnchor="middle">
-          {`${props.public}`}
+        <text className="circle-public" x="70%" y="45%" dy=".3em" textAnchor="middle">
+          {`${props.firstBar}`}
         </text>
-        <text x="65%" y="55%" className="block text-xl text-black">
-          publice
+        <text x="65%" y="55%" className="block uppercase text-base text-black">
+          {props.firstBarLabel}
         </text>
       </svg>
       <svg width="272" height="67" viewBox="0 0 272 67" fill="none" xmlns="http://www.w3.org/2000/svg" className="-mt-10 m-auto">
@@ -69,7 +72,7 @@ function CircularProgressBar(props: Props) {
       </svg>
       <p className="circle-total pt-4">TOTAL</p>
       <p className="circle-total-amount">{`${total}`}</p>
-      <p className="circle-total pb-6">Centre servicii sociale acreditate pe tot teritoriul țării</p>
+      <p className="circle-total pb-20">{props.title}</p>
     </div>
   );
 }

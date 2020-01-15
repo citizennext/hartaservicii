@@ -1,5 +1,6 @@
 import React from 'react';
 import BlogPost from '../../../BlogPost';
+
 import { graphql, StaticQuery } from 'gatsby';
 const query = graphql`
   query {
@@ -31,14 +32,14 @@ function Blog() {
       render={data => {
         const { blogs } = data.hasura;
         return (
-          <div id="section4" className="section blogposts bg-white md:mb-32 xl:max-w-griddw xl:m-auto xl:mb-40">
+          <div id="blog" className="section blogposts mb-40 bg-white md:mb-56 xl:max-w-griddw xl:m-auto xl:mb-64">
             <div className="interior mb-16">
               <div className="md:flex">
                 {blogs.map((blog: any) => (
                   <BlogPost {...blog} key={blog.id} />
                 ))}
               </div>
-              <button className="section-button my-4">Toate noutățile</button>
+              <button className="section-button my-4 md:mt-20">Toate noutățile</button>
             </div>
           </div>
         );
