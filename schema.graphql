@@ -5749,6 +5749,7 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___mergeCachingHeaders
   pluginCreator___pluginOptions___generateMatchPathRewrites
   pluginCreator___pluginOptions___cachePublic
+  pluginCreator___pluginOptions___postCssPlugins
   pluginCreator___pluginOptions___linkStyles
   pluginCreator___pluginOptions___preferCanvas
   pluginCreator___pluginOptions___maxWidth
@@ -5952,6 +5953,7 @@ enum SitePluginFieldsEnum {
   pluginOptions___mergeCachingHeaders
   pluginOptions___generateMatchPathRewrites
   pluginOptions___cachePublic
+  pluginOptions___postCssPlugins
   pluginOptions___linkStyles
   pluginOptions___preferCanvas
   pluginOptions___maxWidth
@@ -6094,6 +6096,7 @@ type SitePluginPluginOptions {
   mergeCachingHeaders: Boolean
   generateMatchPathRewrites: Boolean
   cachePublic: Boolean
+  postCssPlugins: [SitePluginPluginOptionsPostCssPlugins]
   linkStyles: Boolean
   preferCanvas: Boolean
   maxWidth: String
@@ -6123,6 +6126,7 @@ input SitePluginPluginOptionsFilterInput {
   mergeCachingHeaders: BooleanQueryOperatorInput
   generateMatchPathRewrites: BooleanQueryOperatorInput
   cachePublic: BooleanQueryOperatorInput
+  postCssPlugins: SitePluginPluginOptionsPostCssPluginsFilterListInput
   linkStyles: BooleanQueryOperatorInput
   preferCanvas: BooleanQueryOperatorInput
   maxWidth: StringQueryOperatorInput
@@ -6158,6 +6162,162 @@ type SitePluginPluginOptionsHeaders {
 
 input SitePluginPluginOptionsHeadersFilterInput {
   content_type: StringQueryOperatorInput
+}
+
+type SitePluginPluginOptionsPostCssPlugins {
+  theme: SitePluginPluginOptionsPostCssPluginsTheme
+}
+
+input SitePluginPluginOptionsPostCssPluginsFilterInput {
+  theme: SitePluginPluginOptionsPostCssPluginsThemeFilterInput
+}
+
+input SitePluginPluginOptionsPostCssPluginsFilterListInput {
+  elemMatch: SitePluginPluginOptionsPostCssPluginsFilterInput
+}
+
+type SitePluginPluginOptionsPostCssPluginsTheme {
+  colors: SitePluginPluginOptionsPostCssPluginsThemeColors
+  screens: SitePluginPluginOptionsPostCssPluginsThemeScreens
+  listStyleType: SitePluginPluginOptionsPostCssPluginsThemeListStyleType
+  extend: SitePluginPluginOptionsPostCssPluginsThemeExtend
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeColors {
+  transparent: String
+  black: String
+  white: String
+  grey: String
+  celeste: String
+  leaf: String
+  leaf2: String
+  brown: String
+  lightbrown: String
+  snow: String
+  burg: String
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput {
+  transparent: StringQueryOperatorInput
+  black: StringQueryOperatorInput
+  white: StringQueryOperatorInput
+  grey: StringQueryOperatorInput
+  celeste: StringQueryOperatorInput
+  leaf: StringQueryOperatorInput
+  leaf2: StringQueryOperatorInput
+  brown: StringQueryOperatorInput
+  lightbrown: StringQueryOperatorInput
+  snow: StringQueryOperatorInput
+  burg: StringQueryOperatorInput
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtend {
+  margin: SitePluginPluginOptionsPostCssPluginsThemeExtendMargin
+  borderWidth: SitePluginPluginOptionsPostCssPluginsThemeExtendBorderWidth
+  spacing: SitePluginPluginOptionsPostCssPluginsThemeExtendSpacing
+  maxWidth: SitePluginPluginOptionsPostCssPluginsThemeExtendMaxWidth
+  inset: SitePluginPluginOptionsPostCssPluginsThemeExtendInset
+  fontSize: SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendBorderWidth {
+  _6: String
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeExtendBorderWidthFilterInput {
+  _6: StringQueryOperatorInput
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput {
+  margin: SitePluginPluginOptionsPostCssPluginsThemeExtendMarginFilterInput
+  borderWidth: SitePluginPluginOptionsPostCssPluginsThemeExtendBorderWidthFilterInput
+  spacing: SitePluginPluginOptionsPostCssPluginsThemeExtendSpacingFilterInput
+  maxWidth: SitePluginPluginOptionsPostCssPluginsThemeExtendMaxWidthFilterInput
+  inset: SitePluginPluginOptionsPostCssPluginsThemeExtendInsetFilterInput
+  fontSize: SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize {
+  _1xl: String
+  _3xl: String
+  _3xxl: String
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput {
+  _1xl: StringQueryOperatorInput
+  _3xl: StringQueryOperatorInput
+  _3xxl: StringQueryOperatorInput
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendInset {
+  _1_4: String
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeExtendInsetFilterInput {
+  _1_4: StringQueryOperatorInput
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendMargin {
+  _36: String
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeExtendMarginFilterInput {
+  _36: StringQueryOperatorInput
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendMaxWidth {
+  screen: String
+  gridt: String
+  griddw: String
+  gridd: String
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeExtendMaxWidthFilterInput {
+  screen: StringQueryOperatorInput
+  gridt: StringQueryOperatorInput
+  griddw: StringQueryOperatorInput
+  gridd: StringQueryOperatorInput
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendSpacing {
+  s: String
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeExtendSpacingFilterInput {
+  s: StringQueryOperatorInput
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeFilterInput {
+  colors: SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput
+  screens: SitePluginPluginOptionsPostCssPluginsThemeScreensFilterInput
+  listStyleType: SitePluginPluginOptionsPostCssPluginsThemeListStyleTypeFilterInput
+  extend: SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeListStyleType {
+  none: String
+  disc: String
+  decimal: String
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeListStyleTypeFilterInput {
+  none: StringQueryOperatorInput
+  disc: StringQueryOperatorInput
+  decimal: StringQueryOperatorInput
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeScreens {
+  sm: String
+  md: String
+  lg: String
+  xl: String
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeScreensFilterInput {
+  sm: StringQueryOperatorInput
+  md: StringQueryOperatorInput
+  lg: StringQueryOperatorInput
+  xl: StringQueryOperatorInput
 }
 
 input SitePluginSortInput {
