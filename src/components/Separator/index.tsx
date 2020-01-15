@@ -3,7 +3,7 @@ import React from 'react';
 type Props = {
   color: string;
   classSeparator: string;
-  button: string;
+  bottom: string;
   top: string;
   height: string;
 };
