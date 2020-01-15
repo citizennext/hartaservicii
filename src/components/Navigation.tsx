@@ -53,7 +53,7 @@ const Navigation: React.FC<Props> = props => {
             open={state}
             toggleHandler={openDrawer}
             closeButton={<Close size={22} style={{ color: 'white' }} />}>
-            <nav>
+            <nav className={props.navClass}>
               <ul className="navigation">
                 {Object.values(nav)
                   .filter(item => item.navigation.nav)
