@@ -11,7 +11,7 @@ export default class HartaPage extends React.Component {
   render() {
     return (
       <div>
-        <Seo page="test" />
+        <Seo page="test" className="page-maps" />
         <Header />
         <Layout>
           <TestContent />

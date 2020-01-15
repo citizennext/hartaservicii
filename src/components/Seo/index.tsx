@@ -8,15 +8,17 @@ type Props = {
   postImage?: string;
   slug?: string;
   isRepeatable?: boolean;
+  bodyClassName: string;
 };
-const SEO = ({ postTitle, summary, postImage, slug, isRepeatable }: Props) => {
+
+const SEO = ({ postTitle, summary, postImage, slug, isRepeatable, bodyClassName }: Props) => {
   const title = postTitle || data.head.title;
   const description = summary || data.head.description;
   const image = `${postImage}` || data.head.image;
   const url = slug ? `${data.head.url}${slug}` : data.head.url;
 
   return (
-    <Helmet>
+    <Helmet bodyAttributes={{ class: bodyClassName }}>
       <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js?features=default,Symbol" />
       {postTitle ? <title>{`${postTitle} | ${data.head.title}`}</title> : <title>{`${data.head.title}`}</title>}
       {/* General tags */}

@@ -2989,6 +2989,7 @@ enum HASURA_order_by {
 }
 
 type HASURA_Page implements HASURA_Node {
+  additionalData: HASURA_Json
   content: HASURA_RichText
   createdAt: HASURA_DateTime!
   header: String
@@ -3013,6 +3014,7 @@ type HASURA_PageConnection {
 }
 
 input HASURA_PageCreateInput {
+  additionalData: HASURA_Json
   content: HASURA_RichTextAST
   header: String
   image: HASURA_AssetCreateOneWithoutImagePageInput
@@ -3028,6 +3030,7 @@ input HASURA_PageCreateManyWithoutImageInput {
 }
 
 input HASURA_PageCreateWithoutImageInput {
+  additionalData: HASURA_Json
   content: HASURA_RichTextAST
   header: String
   slug: String!
@@ -3061,6 +3064,8 @@ type HASURA_PageInfo {
 }
 
 enum HASURA_PageOrderByInput {
+  additionalData_ASC
+  additionalData_DESC
   content_ASC
   content_DESC
   createdAt_ASC
@@ -3082,6 +3087,7 @@ enum HASURA_PageOrderByInput {
 }
 
 type HASURA_PagePreviousValues {
+  additionalData: HASURA_Json
   content: HASURA_RichText
   createdAt: HASURA_DateTime!
   header: String
@@ -3397,6 +3403,7 @@ input HASURA_PageSubscriptionWhereInput {
 }
 
 input HASURA_PageUpdateInput {
+  additionalData: HASURA_Json
   content: HASURA_RichTextAST
   header: String
   image: HASURA_AssetUpdateOneWithoutImagePageInput
@@ -3407,6 +3414,7 @@ input HASURA_PageUpdateInput {
 }
 
 input HASURA_PageUpdateManyDataInput {
+  additionalData: HASURA_Json
   content: HASURA_RichTextAST
   header: String
   slug: String
@@ -3416,6 +3424,7 @@ input HASURA_PageUpdateManyDataInput {
 }
 
 input HASURA_PageUpdateManyMutationInput {
+  additionalData: HASURA_Json
   content: HASURA_RichTextAST
   header: String
   slug: String
@@ -3442,6 +3451,7 @@ input HASURA_PageUpdateManyWithWhereNestedInput {
 }
 
 input HASURA_PageUpdateWithoutImageDataInput {
+  additionalData: HASURA_Json
   content: HASURA_RichTextAST
   header: String
   slug: String

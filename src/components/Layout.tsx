@@ -9,13 +9,13 @@ type Props = {
 const Layout: React.FC<Props> = ({ left, right, children }) => {
   const contentColumns = () => {
     if (left && right) {
-      return '3columns';
+      return 'three-columns';
     } else if (left && !right) {
-      return '2colums-left';
+      return 'two-columns-left';
     } else if (!left && right) {
-      return '2colums-right';
+      return 'two-columns-right';
     } else {
-      return '1column';
+      return 'one-column';
     }
   };
 

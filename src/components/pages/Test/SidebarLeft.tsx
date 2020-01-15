@@ -6,7 +6,7 @@ import { jsx } from '@emotion/core';
 // @ts-ignore
 import Data from '../../../data/global';
 
-export default class SidebarRight extends React.Component {
+export default class SidebarLeft extends React.Component {
   render() {
     return <div>{Data.page.test.sidebarLeft}</div>;
   }

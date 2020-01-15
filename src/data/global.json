@@ -123,7 +123,7 @@
     "desprenoi": {
       "navigation": {
         "label": "Despre noi",
-        "url": "/",
+        "url": "/about",
         "title": "Despre noi",
         "nav": true
       }

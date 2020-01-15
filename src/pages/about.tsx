@@ -3,29 +3,34 @@ import { graphql } from 'gatsby';
 import Seo from '../components/Seo';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
-import { PageContent } from '../components/PageContent';
+import { Content } from '../components/pages/AboutUs/Content';
 import Footer from '../components/Footer';
+import { SidebarLeft } from '../components/pages/AboutUs/SidebarLeft';
+import { AfterHeader } from '../components/pages/AboutUs/AfterHeader';
 
-export default class Contact extends React.Component<{ data: any }, {}> {
+export default class AboutUs extends React.Component<{ data: any }, {}> {
   render() {
     const { hasura } = this.props.data;
     return (
-      <div>
+      <>
         <Seo
           postTitle="Despre Noi"
           isRepeatable={false}
           postImage="https://media.graphcms.com/hIcyysxST27oQvtJkvAw"
           summary={hasura.page.summary}
+          bodyClassName="page-about-us"
         />
         <Header />
-        <Layout>
-          <PageContent {...hasura.page} />
+        <AfterHeader header={hasura.page.header} />
+        <Layout left={<SidebarLeft sidebar={hasura.page.additionalData} />}>
+          <Content {...hasura.page} />
         </Layout>
         <Footer />
-      </div>
+      </>
     );
   }
 }
+
 export const pageQuery = graphql`
   query {
     hasura {
@@ -35,6 +40,7 @@ export const pageQuery = graphql`
         content {
           html
         }
+        additionalData
         header
         image {
           url
