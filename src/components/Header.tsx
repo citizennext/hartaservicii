@@ -6,11 +6,13 @@ import { DrawerProvider } from './Drawer/DrawerContext';
 import Data from '../data/global.json';
 import { Link } from 'gatsby';
 import Logo from '../assets/images/logo.svg';
+import Separator from './Separator';
 
 export default class Header extends React.Component {
   render() {
     return (
       <header>
+        <Separator color="snow" />
         <div className="interior">
           <Link to="/">
             <img src={Logo} alt="" />

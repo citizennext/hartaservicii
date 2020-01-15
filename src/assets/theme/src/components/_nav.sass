@@ -17,13 +17,30 @@ header
         height: 80px
         @apply relative
 
+        @screen md
+            @apply max-w-gridt
+            display: flex
+            justify-content: space-between
+            @apply m-auto
+
+        @screen xl
+            @apply max-w-griddw
+
     a
+        @screen xl
+            height: 70px
+            width: 170px
+            @apply bg-white
+
         img
             @apply absolute
             top: 0
             left: 0
             height: 70px
             width: 150px
+
+            @screen md
+                top: 5px
 
     .hamburger-menu
         float: right
@@ -48,17 +65,27 @@ header
     padding-left: 20px
 
     @screen md
+        @apply bg-white
+        padding-left: 0
         margin-top: 0
-        padding-top: 50px
+        padding-top: 48px
 
     li
         list-style: none
         margin-bottom: 1em
         border-left: 3px solid #fff
-        display: block
+        @apply block
 
         @screen md
+            @apply mb-0
             border-left: 3px solid #EDF7EF
+            @apply inline-block
+            margin-left: 20px
+            line-height: 1
+
+        &:first-child
+            @screen md
+                margin-left: 0
 
         a
             @apply text-white
@@ -72,6 +99,10 @@ header
 
             @screen md
                 @apply text-black
-                padding: 0 5px 0 8px
+                @apply pt-12
                 font-size: 14px
 
+                &:hover,:active
+                    @apply border-t-8
+                    @apply border-burg
+                    @apply pt-12
