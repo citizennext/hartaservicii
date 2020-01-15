@@ -1,8 +1,15 @@
 {
   "head": {
     "lang": "ro",
-    "siteUrl": "http://www.domain.com",
-    "favicon": "Lorem Ipsum Dolor"
+    "title": "Harta serviciilor sociale",
+    "description": "Bine ai venit în Harta serviciilor sociale",
+    "url": "https://www.serviciisociale.ro",
+    "image": "/src/assets/images/hero.png",
+    "logo": "/src/assets/images/logo.svg",
+    "logoSquare": "/src/assets/images/harta-icon.png",
+    "twitter": "@serviciisociale",
+    "instagram": "serviciisociale",
+    "fbAppID": "2345678"
   },
   "externalLinks": {
     "anpc": {
@@ -116,7 +123,7 @@
     "desprenoi": {
       "navigation": {
         "label": "Despre noi",
-        "url": "/",
+        "url": "/about",
         "title": "Despre noi",
         "nav": true
       }

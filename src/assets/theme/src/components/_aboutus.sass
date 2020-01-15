@@ -1,0 +1,47 @@
+.page-about-us
+    main
+        @screen md
+            @apply max-w-griddw
+            @apply m-auto
+            @apply flex
+
+        &.two-columns-left
+            padding-top: 1rem
+
+            .sidebar-left
+                @apply p-6
+                @screen md
+                    @apply p-4
+
+                & > *
+                    @apply w-full
+                    display: inherit
+                    text-align: center
+                    @screen md
+                        text-align: left
+
+                    img
+                        text-align: center
+                        display: inline
+                        @screen md
+                            text-align: left
+
+                @screen md
+                    @apply w-1/4
+
+            .main
+                @apply p-6
+                @screen md
+                    @apply p-4
+                    @apply w-3/4
+
+                & > *
+                    @apply w-full
+
+                .summary
+                    margin-bottom: 1.5rem
+
+    .btn-citizennext
+        margin: 80px 0
+        @screen md
+            margin: 138px 0
