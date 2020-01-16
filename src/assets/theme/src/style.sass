@@ -225,6 +225,8 @@ ol
 
 /* Blog */
 .blog-post
+    max-width: 370px
+
     .blog-image
         @apply hidden
         @screen md
@@ -232,6 +234,12 @@ ol
 
     &:first-child
         .blog-image
+            @apply block
+
+    &:nth-child(3)
+        @screen md
+            @apply hidden
+        @screen xl
             @apply block
 
     .excerpt
@@ -242,12 +250,13 @@ ol
         @apply text-xs
 
     .separator
-        max-width: 85%
+        max-width: 80%
         @screen md
             @apply bg-snow
+    //
+    //.blog-bottom
+    //    @apply -mb-12
 
-    .blog-bottom
-        @apply -mb-12
 
 
 /* sections */
@@ -415,10 +424,12 @@ button
         height: 38px
         width: 38px
         @apply mr-0
-        @apply mb-20
+        margin-top: -3rem
+        margin-left: 288px
 
         @screen md
             @apply mb-0
+            margin-left: 316px
 
     &.arrowonly:after
         content: ''
