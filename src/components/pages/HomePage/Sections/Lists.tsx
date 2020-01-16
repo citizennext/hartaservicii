@@ -3,7 +3,7 @@ import React from 'react';
 import Img from 'gatsby-image';
 import { StaticQuery, graphql } from 'gatsby';
 
-function Content() {
+function Lists() {
   return (
     <StaticQuery
       query={graphql`
@@ -61,4 +61,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default Lists;

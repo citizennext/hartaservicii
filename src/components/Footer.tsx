@@ -12,7 +12,7 @@ export function Footer() {
       <div className="section">
         <div className="interior md:flex md:flex-wrap md:justify-between xl:max-w-gridd xl:m-auto xl:justify-around">
           <Separator color="celeste" />
-          <div className="mt-8 md:mt-12">
+          <div className="pt-8 md:pt-0 mt-8 md:mt-12">
             <Link>
               <img alt="Harta Serviciilor Sociale Logo" src={logoLight} />
             </Link>
