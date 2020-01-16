@@ -34,7 +34,7 @@ function Blog() {
         return (
           <div id="blog" className="section blogposts mb-40 bg-white md:mb-56 xl:max-w-griddw xl:m-auto xl:mb-64">
             <div className="interior mb-16">
-              <div className="md:flex">
+              <div className="md:flex md:justify-center">
                 {blogs.map((blog: any) => (
                   <BlogPost {...blog} key={blog.id} />
                 ))}
