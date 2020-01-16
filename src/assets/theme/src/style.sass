@@ -285,21 +285,31 @@ ol
         margin-left: calc(-50vw + 50%)
 
         @screen md
-            width: 61.58vw
+            @apply w-2/3
             height: 57.03vw
+            max-height: 410px
+            @apply ml-0
 
         @screen xl
+            @apply w-3/4
+            max-height: 500px
             height: auto
+            max-width: 870px
 
         .gatsby-image-wrapper
+            @screen xl
+                max-width: 870px
+                max-height: 500px
+
             div
                 padding-bottom: 131% !important
 
                 @screen md
-                    padding-bottom: 93% !important
+                    padding-bottom: 86% !important
 
                 @screen xl
                     padding-bottom: 57.4713% !important
+                    max-height: 500px
 
 .section-list
     @apply relative
