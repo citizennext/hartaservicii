@@ -34,7 +34,7 @@ function Hero() {
               </div>
               <div className="hero-image md:w-2/3 md:-ml-0 xl:-ml-0 xl:w-3/4 xl:self-end">
                 <Img fluid={data.file.childImageSharp.fluid} alt="" />
-                <div className="search-icon">
+                <div className="search-icon hidden">
                   <input
                     id="search"
                     className="border-burg border-6 rounded-full background-white absolute -mt-24 pl-10"

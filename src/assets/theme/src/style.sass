@@ -116,20 +116,19 @@ ol
 
 #search
     font-family: KoHo
-    width: 84.8vw
-    max-width: 318px
+    width: 88vw
     height: 50px
-    left: calc(50% - 159px)
+    left: 5vw
 
     @screen md
         height: 52px
         max-width: 595px
-        left: calc(50% - 297.5px)
+        left: 0
 
     @screen xl
         height: 62px
         max-width: 770px
-        left: calc(50% - 385px)
+        left: 0
 
     &[placeholder], &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder
     text-overflow: ellipsis
@@ -147,7 +146,10 @@ ol
     @apply relative
     @apply w-screen
     @screen md
-        left: -50%
+        left: -37.5%
+
+    @screen xl
+        left: -14%
 
     &:before
         content: ''
@@ -158,18 +160,18 @@ ol
         position: absolute
         background-repeat: no-repeat
         top: -82px
-        left: 12.5%
+        left: 9.5vw
         z-index: 9
         @screen md
             background-size: 23.5px 23.5px
             height: 23.5px
             width: 23.5px
-            left: 13.5%
+            left: 2%
         @screen xl
             background-size: 27px 27px
             height: 27px
             width: 27px
-            left: 24.5%
+            left: 1%
 
 
 /* Circular Progress Bar */
