@@ -15,7 +15,7 @@ const query = graphql`
           url
           urlSharp {
             childImageSharp {
-              fluid(maxHeight: 190, maxWidth: 410) {
+              fluid(maxHeight: 190, maxWidth: 410, duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }

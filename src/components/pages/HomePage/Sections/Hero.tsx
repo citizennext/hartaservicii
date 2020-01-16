@@ -11,7 +11,11 @@ function Hero() {
         query heroQuery {
           file(relativePath: { regex: "/HSS_people_clean_2000.png/" }) {
             childImageSharp {
-              fluid(maxWidth: 870, srcSetBreakpoints: [375, 768, 870]) {
+              fluid(
+                maxWidth: 870
+                srcSetBreakpoints: [375, 768, 870]
+                duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }
+              ) {
                 ...GatsbyImageSharpFluid_tracedSVG
               }
             }
