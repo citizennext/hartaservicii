@@ -71,7 +71,7 @@ function Statistics() {
                   secondBar={childServices.aggregate.count}
                 />
                 <CircularProgressBar
-                  classCircularBar="md:w-1/2 xl:w-1/3"
+                  classCircularBar="hidden xl:block xl:w-1/3"
                   firstBar={publicSuppliers.aggregate.count}
                   secondBar={privateSuppliers.aggregate.count}
                   firstBarLabel="publice"

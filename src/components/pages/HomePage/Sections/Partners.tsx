@@ -4,7 +4,7 @@ import Pin from '../../../../assets/images/icon_pin_full.svg';
 import LogoF from '../../../../assets/images/icon_HSS_symbol.svg';
 import ArrowB from '../../../../assets/images/icon_arrowb.svg';
 
-function Content() {
+function Partners() {
   return (
     <div id="section5" className="section blogposts bg-white xl:max-w-gridd xl:m-auto xl:px-8 xl:pt-16">
       <div className="interior md:flex">
@@ -35,4 +35,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default Partners;
