@@ -63,6 +63,7 @@
     "react-helmet": "^5.2.1",
     "react-leaflet": "^2.6.1",
     "react-leaflet-markercluster": "^2.0.0-rc3",
+    "react-slick": "^0.25.2",
     "react-stickynode": "^2.1.1",
     "tailwindcss": "^1.1.4",
     "theme-ui": "^0.2.52",
