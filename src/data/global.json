@@ -160,13 +160,5 @@
         "nav": true
       }
     }
-  },
-  "locations": {
-    "loc_1": {
-      "address": "str. Miron Costin nr. 2",
-      "city": "Alba Iulia",
-      "district": "Alba",
-      "address_point": ""
-    }
   }
 }
