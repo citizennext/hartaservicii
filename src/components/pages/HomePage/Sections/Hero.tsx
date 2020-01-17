@@ -26,6 +26,7 @@ function Hero() {
         return (
           <div id="hero" className="section">
             <div className="interior md:flex md:max-w-gridt xl:max-w-griddw xl:m-auto xl:justify-between">
+              <Separator color="burg" classSeparator="hidden xl:block" />
               <div className="md:w-1/3 xl:w-1/4">
                 <h1 className="py-4 md:pt-10 xl:pt-20">{Data.page.homepage.content.title}</h1>
                 <p className="pb-4">{Data.page.homepage.content.intro}</p>
@@ -37,6 +38,7 @@ function Hero() {
                 </button>
               </div>
               <div className="hero-image md:w-2/3 md:-ml-0 xl:-ml-0 xl:w-3/4 xl:self-end">
+                <Separator color="celeste" classSeparator="xl:hidden" style={{ zIndex: 9 }} />
                 <Img fluid={data.file.childImageSharp.fluid} alt="" />
                 <div className="search-icon hidden">
                   <input

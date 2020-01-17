@@ -301,12 +301,19 @@ ol
             height: 57.03vw
             max-height: 410px
             @apply ml-0
+            @apply relative
 
         @screen xl
             @apply w-3/4
             max-height: 500px
             height: auto
             max-width: 870px
+
+        .separator
+            @screen md
+                z-index: 9
+            @screen xl
+                @apply hidden
 
         .gatsby-image-wrapper
             @screen xl

@@ -40,7 +40,11 @@ header
             width: 150px
 
             @screen md
-                top: 5px
+                top: 8px
+                height: 78px
+                padding-bottom: 2px
+                @apply border-b-6
+                @apply border-burg
 
     .hamburger-menu
         float: right
@@ -80,8 +84,11 @@ header
             @apply mb-0
             border-left: 3px solid #EDF7EF
             @apply inline-block
-            margin-left: 20px
+            margin-left: 2px
             line-height: 1
+
+        @screen xl
+            margin-left: 20px
 
         &:first-child
             @screen md
