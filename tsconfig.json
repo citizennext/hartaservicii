@@ -71,6 +71,6 @@
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules/*", "public/*"]
+  "include": ["./src/**/*", "**/*.json"],
+  "exclude": ["node_modules/*", "public/*", "gatsby-node.js"]
 }
