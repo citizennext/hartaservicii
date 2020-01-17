@@ -5402,7 +5402,7 @@ type Query {
   allSite(filter: SiteFilterInput, sort: SiteSortInput, skip: Int, limit: Int): SiteConnection!
   sitePlugin(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, resolve: StringQueryOperatorInput, name: StringQueryOperatorInput, version: StringQueryOperatorInput, pluginOptions: SitePluginPluginOptionsFilterInput, nodeAPIs: StringQueryOperatorInput, browserAPIs: StringQueryOperatorInput, ssrAPIs: StringQueryOperatorInput, pluginFilepath: StringQueryOperatorInput, packageJson: SitePluginPackageJsonFilterInput): SitePlugin
   allSitePlugin(filter: SitePluginFilterInput, sort: SitePluginSortInput, skip: Int, limit: Int): SitePluginConnection!
-  sitePage(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, path: StringQueryOperatorInput, internalComponentName: StringQueryOperatorInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, isCreatedByStatefulCreatePages: BooleanQueryOperatorInput, pluginCreator: SitePluginFilterInput, pluginCreatorId: StringQueryOperatorInput, componentPath: StringQueryOperatorInput): SitePage
+  sitePage(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, path: StringQueryOperatorInput, internalComponentName: StringQueryOperatorInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, isCreatedByStatefulCreatePages: BooleanQueryOperatorInput, context: SitePageContextFilterInput, pluginCreator: SitePluginFilterInput, pluginCreatorId: StringQueryOperatorInput, componentPath: StringQueryOperatorInput): SitePage
   allSitePage(filter: SitePageFilterInput, sort: SitePageSortInput, skip: Int, limit: Int): SitePageConnection!
   hasura: HASURA!
 }
@@ -5588,6 +5588,7 @@ type SitePage implements Node {
   component: String
   componentChunkName: String
   isCreatedByStatefulCreatePages: Boolean
+  context: SitePageContext
   pluginCreator: SitePlugin
   pluginCreatorId: String
   componentPath: String
@@ -5600,6 +5601,14 @@ type SitePageConnection {
   pageInfo: PageInfo!
   distinct(field: SitePageFieldsEnum!): [String!]!
   group(skip: Int, limit: Int, field: SitePageFieldsEnum!): [SitePageGroupConnection!]!
+}
+
+type SitePageContext {
+  slug: String
+}
+
+input SitePageContextFilterInput {
+  slug: StringQueryOperatorInput
 }
 
 type SitePageEdge {
@@ -5700,6 +5709,7 @@ enum SitePageFieldsEnum {
   component
   componentChunkName
   isCreatedByStatefulCreatePages
+  context___slug
   pluginCreator___id
   pluginCreator___parent___id
   pluginCreator___parent___parent___id
@@ -5805,6 +5815,7 @@ input SitePageFilterInput {
   component: StringQueryOperatorInput
   componentChunkName: StringQueryOperatorInput
   isCreatedByStatefulCreatePages: BooleanQueryOperatorInput
+  context: SitePageContextFilterInput
   pluginCreator: SitePluginFilterInput
   pluginCreatorId: StringQueryOperatorInput
   componentPath: StringQueryOperatorInput
