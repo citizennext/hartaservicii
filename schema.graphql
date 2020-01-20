@@ -1936,6 +1936,7 @@ type HASURA_BatchPayload {
 type HASURA_Blog implements HASURA_Node {
   content: HASURA_RichText
   createdAt: HASURA_DateTime!
+  featured: Boolean
   id: ID!
   image: HASURA_Asset
   publishedAt: HASURA_DateTime
@@ -1959,6 +1960,7 @@ type HASURA_BlogConnection {
 
 input HASURA_BlogCreateInput {
   content: HASURA_RichTextAST
+  featured: Boolean
   image: HASURA_AssetCreateOneWithoutImageBlogInput
   publishedAt: HASURA_DateTime
   slug: String!
@@ -1974,6 +1976,7 @@ input HASURA_BlogCreateManyWithoutImageInput {
 
 input HASURA_BlogCreateWithoutImageInput {
   content: HASURA_RichTextAST
+  featured: Boolean
   publishedAt: HASURA_DateTime
   slug: String!
   status: HASURA_Status
@@ -1995,6 +1998,8 @@ enum HASURA_BlogOrderByInput {
   content_DESC
   createdAt_ASC
   createdAt_DESC
+  featured_ASC
+  featured_DESC
   id_ASC
   id_DESC
   publishedAt_ASC
@@ -2014,6 +2019,7 @@ enum HASURA_BlogOrderByInput {
 type HASURA_BlogPreviousValues {
   content: HASURA_RichText
   createdAt: HASURA_DateTime!
+  featured: Boolean
   id: ID!
   publishedAt: HASURA_DateTime
   slug: String!
@@ -2055,6 +2061,10 @@ input HASURA_BlogScalarWhereInput {
 
   """All values that are not contained in given list."""
   createdAt_not_in: [HASURA_DateTime!]
+  featured: Boolean
+
+  """All values that are not equal to given value."""
+  featured_not: Boolean
   id: ID
 
   """All values containing the given string."""
@@ -2310,6 +2320,7 @@ input HASURA_BlogSubscriptionWhereInput {
 
 input HASURA_BlogUpdateInput {
   content: HASURA_RichTextAST
+  featured: Boolean
   image: HASURA_AssetUpdateOneWithoutImageBlogInput
   publishedAt: HASURA_DateTime
   slug: String
@@ -2320,6 +2331,7 @@ input HASURA_BlogUpdateInput {
 
 input HASURA_BlogUpdateManyDataInput {
   content: HASURA_RichTextAST
+  featured: Boolean
   publishedAt: HASURA_DateTime
   slug: String
   status: HASURA_Status
@@ -2329,6 +2341,7 @@ input HASURA_BlogUpdateManyDataInput {
 
 input HASURA_BlogUpdateManyMutationInput {
   content: HASURA_RichTextAST
+  featured: Boolean
   publishedAt: HASURA_DateTime
   slug: String
   status: HASURA_Status
@@ -2355,6 +2368,7 @@ input HASURA_BlogUpdateManyWithWhereNestedInput {
 
 input HASURA_BlogUpdateWithoutImageDataInput {
   content: HASURA_RichTextAST
+  featured: Boolean
   publishedAt: HASURA_DateTime
   slug: String
   status: HASURA_Status
@@ -2405,6 +2419,10 @@ input HASURA_BlogWhereInput {
 
   """All values that are not contained in given list."""
   createdAt_not_in: [HASURA_DateTime!]
+  featured: Boolean
+
+  """All values that are not equal to given value."""
+  featured_not: Boolean
   id: ID
 
   """All values containing the given string."""
