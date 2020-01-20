@@ -20,7 +20,12 @@ type Props = {
 
 export function Content({ blogs }: Props) {
   const featuredPosts = { featuredPosts: blogs };
+  const firstSlug = 'noutati';
   const windowSize = useWindowSize();
+  const dateFormat = (date: any) => {
+    return new Date(date);
+  };
+
   return (
     <div className="wrapper">
       <FeaturedPosts {...featuredPosts} />
@@ -30,20 +35,19 @@ export function Content({ blogs }: Props) {
             <div className="flex flex-wrap">
               {windowSize.width && windowSize.width >= 768 ? (
                 <div className="image">
-                  <Link to={`/blog/${item.slug}`} title={item.title}>
+                  <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
                     <Img fluid={item.image.urlSharp.childImageSharp.fluid} className="md:w-full" />
                   </Link>
                 </div>
               ) : null}
               <div className="content">
                 <h3 className="title">
-                  <Link to={`/blog/${item.slug}`} title={item.title}>
+                  <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
                     {item.title}
                   </Link>
                 </h3>
                 <span className="date">
-                  {/* @todo @St3phan, @Seco, @Cezar - it must fixing the date format */}
-                  {item.createdAt.toLocaleString('ro-RO', {
+                  {dateFormat(item.createdAt).toLocaleString('ro-RO', {
                     timeZone: 'UTC',
                     year: 'numeric',
                     month: 'short',

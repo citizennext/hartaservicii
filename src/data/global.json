@@ -123,7 +123,7 @@
     "desprenoi": {
       "navigation": {
         "label": "Despre noi",
-        "url": "/about",
+        "url": "/despre-noi",
         "title": "Despre noi",
         "nav": true
       }
@@ -131,7 +131,7 @@
     "noutati": {
       "navigation": {
         "label": "Noutăți",
-        "url": "/",
+        "url": "/noutati",
         "title": "Noutăți",
         "nav": true
       }
@@ -139,7 +139,7 @@
     "parteneri": {
       "navigation": {
         "label": "Parteneri",
-        "url": "/",
+        "url": "/parteneri",
         "title": "Parteneri",
         "nav": true
       }
@@ -147,7 +147,7 @@
     "statistici": {
       "navigation": {
         "label": "Statistici",
-        "url": "/",
+        "url": "/statistici",
         "title": "Statistici",
         "nav": true
       }
@@ -155,7 +155,7 @@
     "contact": {
       "navigation": {
         "label": "Contact",
-        "url": "/",
+        "url": "/contact",
         "title": "Contact",
         "nav": true
       }
