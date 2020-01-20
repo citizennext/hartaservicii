@@ -30,7 +30,7 @@ export function Footer() {
             </p>
           </div>
           <Navigation navClass="footer-nav hidden sm:block xl:content-end md:mt-12" nav={Data.page} />
-          <p className="border-brown border-t-2 text-center text-lightbrown py-2 md:w-full">
+          <p className="text-copyright border-brown border-t-2 text-center text-lightbrown py-2 md:w-full">
             {Data.footer.texts.copyright}
             {new Date().getFullYear()}
           </p>

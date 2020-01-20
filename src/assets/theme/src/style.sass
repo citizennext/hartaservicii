@@ -1,5 +1,6 @@
 @import "~tailwindcss/base"
 @import '~react-leaflet-markercluster/dist/styles.min.css'
+@import "lib/slick"
 @import "variables"
 @import "fonts"
 @import "typography"
@@ -249,7 +250,8 @@ ol
 
     .date
         @apply text-celeste
-        @apply text-xs
+        @apply text-base
+        @apply pb-2
 
     .separator
         max-width: 80%
@@ -292,7 +294,7 @@ ol
 
     .hero-image
         @apply w-screen
-        height: 130.4vw
+        height: 104vw
         margin-left: calc(-50vw + 50%)
 
         @screen md
@@ -300,6 +302,7 @@ ol
             height: 57.03vw
             max-height: 410px
             @apply ml-0
+            @apply relative
 
         @screen xl
             @apply w-3/4
@@ -307,13 +310,19 @@ ol
             height: auto
             max-width: 870px
 
+        .separator
+            @screen md
+                z-index: 9
+            @screen xl
+                @apply hidden
+
         .gatsby-image-wrapper
             @screen xl
                 max-width: 870px
                 max-height: 500px
 
             div
-                padding-bottom: 131% !important
+                padding-bottom: 104% !important
 
                 @screen md
                     padding-bottom: 86% !important
@@ -324,6 +333,10 @@ ol
 
 .section-list
     @apply relative
+
+.progress-bar > div
+    width: 310px
+    max-width: 84vw
 
 @import "~tailwindcss/components"
 
@@ -379,7 +392,7 @@ button
         @apply absolute
         left: calc(50% - 160px)
 
-    &:not(.small):after
+    &:not(.small):not(.slick-*):after
         content: ''
         background-image: url('../../images/icon_arroww.svg')
         background-size: 22px 22px
@@ -469,9 +482,16 @@ footer
     @apply text-snow
     @apply font-sans
 
+    .text-copyright
+        @apply text-white
+
     a
         @apply text-snow
         @apply font-semibold
+
+    li
+        a
+            text-decoration: none
 
     li:before
         @screen md

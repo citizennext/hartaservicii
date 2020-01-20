@@ -11,6 +11,7 @@
     "build:dir": "mkdirp ./public/icons/",
     "build:favicons": "node scripts/favicons",
     "build": "npm run build:dir && npm run build:favicons && gatsby build",
+    "gen:schema": "graphql-codegen",
     "test": "NODE_ENV=test ava **/*.test.js --verbose",
     "type-check": "tsc --pretty --noEmit --skipLibCheck"
   },
@@ -63,6 +64,7 @@
     "react-helmet": "^5.2.1",
     "react-leaflet": "^2.6.1",
     "react-leaflet-markercluster": "^2.0.0-rc3",
+    "react-slick": "^0.25.2",
     "react-stickynode": "^2.1.1",
     "tailwindcss": "^1.1.4",
     "theme-ui": "^0.2.52",
@@ -73,6 +75,9 @@
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+    "@graphql-codegen/cli": "^1.11.2",
+    "@graphql-codegen/typescript": "^1.11.2",
+    "@graphql-codegen/typescript-operations": "^1.11.2",
     "@types/react-helmet": "^5.0.14",
     "@types/react-stickynode": "^1.4.0",
     "@types/theme-ui": "^0.2.6",
