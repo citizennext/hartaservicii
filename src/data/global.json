@@ -153,6 +153,42 @@
       }
     },
     "contact": {
+      "content": {
+        "social_media": {
+          "facebook": {
+            "title": "Hai cu noi pe Facebook",
+            "url": "https://facebook.com"
+          }
+        },
+        "support": {
+          "social": {
+            "heading": "Scrie-ne dacă ai informații actualizate pentru centrele de servicii sociale.",
+            "text": "Nu uita să menționezi numărul de identificare al centrului.",
+            "email": "actualizare@serviciisociale.ro"
+          },
+          "technical": {
+            "heading": "Scrie-ne dacă ai probleme în accesarea sitului.",
+            "text": "Descrie problema în amânunt și eventual include și o captură de ecran relevantă.",
+            "email": "tehnic@serviciisociale.ro"
+          }
+        },
+        "form": {
+          "title": "Folosește formularul de contact:",
+          "action": "",
+          "fields": {
+            "email": {
+              "name": "email",
+              "type": "email",
+              "placeholder": "Adresa ta de email"
+            },
+            "message": {
+              "name": "message",
+              "placeholder": "Mesajul tău"
+            }
+          },
+          "button": "Trimite mesaj"
+        }
+      },
       "navigation": {
         "label": "Contact",
         "url": "/contact",

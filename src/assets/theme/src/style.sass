@@ -7,7 +7,6 @@
 @import "keyframes"
 @import "mixin"
 @import "extends"
-@import "form"
 @import "components"
 @import "custom"
 
@@ -372,6 +371,7 @@ ol
     .contact-right
         z-index: 2
 
+.button,
 button
     @apply bg-celeste
     @apply rounded-full
@@ -385,6 +385,9 @@ button
     position: relative
     @apply m-auto
     font-family: Montserrat
+    text-decoration: none
+    display: block
+
     @screen md
         max-width: 320px
 
@@ -407,20 +410,31 @@ button
     &:hover
         @apply bg-leaf
 
-    &.social:before
-        content: ''
-        background-image: url('../../images/icon_FB.svg')
-        background-size: 15px 29px
-        position: absolute
-        background-repeat: no-repeat
-        bottom: 1px
-        left: 1px
-        @apply bg-bottom
-        @apply border-white
-        @apply border-2
-        @apply rounded-full
-        @apply pt-10
-        @apply px-5
+    &.social
+        &:before
+            content: ''
+            background-image: url('../../images/icon_FB.svg')
+            background-size: 15px 29px
+            position: absolute
+            background-repeat: no-repeat
+            bottom: 1px
+            left: 1px
+            @apply bg-bottom
+            @apply border-white
+            @apply border-2
+            @apply rounded-full
+            @apply pt-10
+            @apply px-5
+        &:after
+            $size: 38px
+            content: ''
+            background: url('../../images/icon_arroww.svg') no-repeat 50% / 26px
+            position: absolute
+            top: 4px
+            right: 6px
+            z-index: 1
+            width: $size
+            height: $size
 
     &.small
         @apply text-sm

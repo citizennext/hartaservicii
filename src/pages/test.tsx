@@ -13,7 +13,7 @@ export default class TestPage extends React.Component {
   render() {
     return (
       <div>
-        <Seo page="test" className="page-test" />
+        <Seo page="test" bodyClassName="page-test" />
         <Header />
         <Layout left={<SidebarLeft />} right={<SidebarRight />}>
           <TestContent />

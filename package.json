@@ -70,7 +70,8 @@
     "theme-ui": "^0.2.52",
     "typeface-montserrat": "^0.0.75",
     "webpack": "^4.41.4",
-    "yallist": "^4.0.0"
+    "yallist": "^4.0.0",
+    "react-netlify-form": "^2.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
