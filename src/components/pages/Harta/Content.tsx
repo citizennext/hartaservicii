@@ -15,7 +15,7 @@ type Provider = {
   name: string;
 };
 
-export default class Content extends Component<{}, State> {
+export default class SimpleExample extends Component<{}, State> {
   state = {
     lat: 45.947808,
     lng: 25.091419,
