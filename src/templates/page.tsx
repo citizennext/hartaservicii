@@ -12,7 +12,13 @@ export default ({ data }: any) => {
   const { page } = data.hasura;
   return (
     <>
-      <Seo postTitle={page.title} isRepeatable={false} postImage={page.image !== null && page.image.url} summary={page.summary} />
+      <Seo
+        postTitle={page.title}
+        isRepeatable={false}
+        postImage={page.image !== null && page.image.url}
+        summary={page.summary}
+        bodyClassName={`page-${page.slug}`}
+      />
       <Header />
       <AfterHeader header={page.header} />
       <Layout left={<SidebarLeft sidebar={page.additionalData} />}>
@@ -29,6 +35,7 @@ export const pageQuery = graphql`
       page(where: { slug: $slug }) {
         title
         summary
+        slug
         content {
           html
         }
