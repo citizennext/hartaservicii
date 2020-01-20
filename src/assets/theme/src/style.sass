@@ -1,5 +1,6 @@
 @import "~tailwindcss/base"
 @import '~react-leaflet-markercluster/dist/styles.min.css'
+@import "lib/slick"
 @import "variables"
 @import "fonts"
 @import "typography"
@@ -325,6 +326,10 @@ ol
 .section-list
     @apply relative
 
+.progress-bar > div
+    width: 310px
+    max-width: 84vw
+
 @import "~tailwindcss/components"
 
 #contact
@@ -379,7 +384,7 @@ button
         @apply absolute
         left: calc(50% - 160px)
 
-    &:not(.small):after
+    &:not(.small):not(.slick-*):after
         content: ''
         background-image: url('../../images/icon_arroww.svg')
         background-size: 22px 22px
