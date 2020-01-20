@@ -9,8 +9,7 @@
     "format": "prettier --config ./.prettierrc --write src/**/*.tsx src/**/**/*.tsx",
     "start": "gatsby develop",
     "build:dir": "mkdirp ./public/icons/",
-    "build:favicons": "node scripts/favicons",
-    "build": "npm run build:dir && npm run build:favicons && gatsby build",
+    "build": "npm run build:dir && gatsby build",
     "gen:schema": "graphql-codegen",
     "test": "NODE_ENV=test ava **/*.test.js --verbose",
     "type-check": "tsc --pretty --noEmit --skipLibCheck"

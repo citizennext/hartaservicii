@@ -29,7 +29,7 @@ function Blog() {
   return (
     <StaticQuery
       query={query}
-      render={data => {
+      render={(data: { hasura: Hasura }) => {
         const { blogs } = data.hasura;
         return (
           <div id="blog" className="section blogposts mb-40 bg-white md:mb-56 xl:max-w-griddw xl:m-auto xl:mb-64">
