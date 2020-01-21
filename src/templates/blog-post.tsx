@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import Seo from '../components/Seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { AfterHeader } from '../components/pages/AboutUs/AfterHeader';
+import { AfterHeader } from '../components/AfterHeader';
 
 export default ({ data }: any) => {
   const { blog } = data.hasura;
