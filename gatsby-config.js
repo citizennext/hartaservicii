@@ -105,12 +105,5 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: 'gatsby-plugin-graphql-image',
-      options: {
-        schemaName: process.env.GATSBY_HASURA_GRAPHQL_TYPE_NAME,
-        imageFieldName: 'url',
-      },
-    },
   ],
 };
