@@ -8,9 +8,6 @@ type Props = {
   height: string;
   width: string;
 };
-{
-  /*@todo Seco -> it must be redeclare to Separator parameters*/
-}
 
 function Separator(props: Props) {
   return (

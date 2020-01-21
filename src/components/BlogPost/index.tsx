@@ -33,7 +33,7 @@ function BlogPost(props: Props) {
       <div className="blog-bottom flex items-center">
         <Separator color="burg"></Separator>
         <Link to={`/noutati/${props.slug}`}>
-          <button className="arrowonly absolute md:relative md:1/4 "></button>
+          <button className="arrowonly absolute md:relative md:1/4 " title="Read Article"></button>
         </Link>
       </div>
     </div>

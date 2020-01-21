@@ -61,7 +61,7 @@ function Lists() {
               <div className="section-list bg-snow md:w-1/2 md:ml-2 xl:ml-4 xl:mr-8">
                 <div className="sl-top">
                   <div className="list-image bg-white border-4 rounded-full border-burg -mt-20 p-2 content-center m-auto">
-                    <img src={hp_section22} />
+                    <img src={hp_section22} alt="List Icon" />
                     {/*<Img fixed={data.face2.file.childImageShart.fixed} objectFit="contain" alt="" />*/}
                   </div>
                 </div>
