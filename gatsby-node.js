@@ -1,4 +1,8 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 const path = require(`path`);
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -50,4 +54,60 @@ exports.createPages = ({ graphql, actions }) => {
       });
     });
   });
+};
+
+// download images from hasura
+exports.createResolvers = ({ actions, cache, createNodeId, createResolvers, store, reporter }) => {
+  const { createNode } = actions;
+  const imageUrlFieldName = 'url'; //graphCMS stores images there
+  const schemaName = process.env.GATSBY_HASURA_GRAPHQL_TYPE_NAME;
+
+  const state = store.getState();
+  const schema = state.schemaCustomization.thirdPartySchemas.filter(s => s._typeMap[schemaName])[0];
+
+  if (!schema) {
+    throw new Error(`SCHEMA '${schemaName} NOT FOUND'`);
+  } else {
+    console.log(`Found schema '${schemaName}', traversing for image fields with name '${imageUrlFieldName}'`);
+  }
+
+  const typeMap = schema._typeMap;
+  const resolvers = {};
+
+  for (const typeName in typeMap) {
+    const typeEntry = typeMap[typeName];
+    const typeFields = (typeEntry && typeEntry.getFields && typeEntry.getFields()) || {};
+    const typeResolver = {};
+    for (const fieldName in typeFields) {
+      const field = typeFields[fieldName];
+
+      if (fieldName === imageUrlFieldName && typeFields.mimeType) {
+        const x = Object.keys(typeFields);
+        typeResolver[`${fieldName}Sharp`] = {
+          type: 'File',
+          resolve(source) {
+            const url = source[imageUrlFieldName];
+            if (url) {
+              return createRemoteFileNode({
+                url,
+                store,
+                cache,
+                createNode,
+                createNodeId,
+                reporter,
+              });
+            }
+            return null;
+          },
+        };
+      }
+    }
+    if (Object.keys(typeResolver).length) {
+      resolvers[typeName] = typeResolver;
+    }
+  }
+
+  if (Object.keys(resolvers).length) {
+    createResolvers(resolvers);
+  }
 };
