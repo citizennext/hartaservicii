@@ -44,7 +44,7 @@ export const pageQuery = graphql`
           url
           urlSharp {
             childImageSharp {
-              fluid(maxWidth: 410) {
+              fluid(maxWidth: 370, maxHeight: 190) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
