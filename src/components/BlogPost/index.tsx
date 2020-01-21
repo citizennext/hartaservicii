@@ -16,7 +16,7 @@ type Props = {
 function BlogPost(props: Props) {
   const pubDate = new Date(props.publishedAt);
   return (
-    <div className={`${props.classBlogPost} relative blog-post md:w-1/2 md:px-2 xl:w-1/3 xl:px-4`}>
+    <div className={`${props.classBlogPost} relative blog-post md:px-2 xl:px-4`}>
       <div className="blog-image">
         <Img fluid={props.image.urlSharp.childImageSharp.fluid} className="md:w-full" />
       </div>
@@ -29,7 +29,7 @@ function BlogPost(props: Props) {
           day: 'numeric',
         })}
       </p>
-      <p className="excerpt pb-10 md:pb-0">{props.summary}</p>
+      <p className="excerpt pb-16 md:pb-0">{props.summary}</p>
       <div className="blog-bottom flex items-center">
         <Separator color="burg"></Separator>
         <Link to={`/noutati/${props.slug}`}>
