@@ -148,6 +148,7 @@
       color: black
 
 .slick-slider
+  width: 88vw
   position: relative
   display: block
   box-sizing: border-box
@@ -236,3 +237,17 @@
 
 .slick-arrow.slick-hidden
   display: none
+
+#blog
+  .slick-prev, .slick-next
+    top: 95%
+    @screen md
+      top: 98%
+
+  .slick-next:before
+    @apply bg-snow
+
+  .slick-slider
+    width: 88vw
+    @screen md
+      width: 95vw

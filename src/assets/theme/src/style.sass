@@ -64,7 +64,8 @@ a
 /* elements */
 .separator
     @apply absolute
-    @apply w-full
+    width: 100%
+    width: -webkit-fill-available
 
 .sl-top
     @apply w-full
@@ -229,6 +230,8 @@ ol
 /* Blog */
 .blog-post
     max-width: 370px
+    @screen md
+        @apply m-auto
 
     .blog-image
         @apply hidden

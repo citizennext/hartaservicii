@@ -14,8 +14,8 @@ export default class Header extends React.Component {
       <header>
         <Separator color="snow" />
         <div className="interior">
-          <Link to="/">
-            <img src={Logo} alt="" />
+          <Link to="/" title="Back to Homepage">
+            <img src={Logo} alt="Logo" />
           </Link>
           <DrawerProvider>
             <Navigation navClass="nav-header" nav={Data.page} drawer={true} />
