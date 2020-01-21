@@ -16,7 +16,7 @@ function Separator(props: Props) {
   return (
     <div
       className={`${props.classSeparator} separator bg-${props.color} h-${props.height}`}
-      style={{ marginBottom: props.bottom, marginTop: props.top, width: props.width }}></div>
+      style={{ bottom: props.bottom, top: props.top, width: props.width }}></div>
   );
 }
 
