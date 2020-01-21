@@ -2,6 +2,7 @@ import Data from '../../../../data/global.json';
 import React from 'react';
 import Img from 'gatsby-image';
 import { StaticQuery, graphql } from 'gatsby';
+import hp_section22 from '../../../../assets/images/hp_section22.png';
 
 function Lists() {
   return (
@@ -17,6 +18,25 @@ function Lists() {
           }
         }
       `}
+      //     <StaticQuery
+      // query={graphql`
+      //       query {
+      //         face1: file(relativePath: { regex: "/hp_section2.png/" }) {
+      //           childImageSharp {
+      //             fixed(width: 120, height: 120) {
+      //               ...GatsbyImageSharpFixed
+      //             }
+      //           }
+      //         }
+      //         face2: file(relativePath: { regex: "/hp_section22.png/" }) {
+      //           childImageSharp {
+      //             fixed(width: 120, height: 120) {
+      //               ...GatsbyImageSharpFixed
+      //             }
+      //           }
+      //         }
+      //       }
+      //     `}
       render={data => {
         return (
           <div id="section2" className="section ">
@@ -24,6 +44,7 @@ function Lists() {
               <div className="section-list bg-snow mb-36 md:mb-0 md:w-1/2 md:mr-2 xl:mr-4 xl:ml-8">
                 <div className="sl-top">
                   <div className="list-image bg-white border-4 rounded-full border-burg -mt-20 p-2 content-center m-auto">
+                    {/*<Img fixed={data.face1.file.childImageShart.fixed} objectFit="contain" alt="" />*/}
                     <Img fixed={data.file.childImageSharp.fixed} objectFit="contain" alt="" />
                   </div>
                 </div>
@@ -40,7 +61,8 @@ function Lists() {
               <div className="section-list bg-snow md:w-1/2 md:ml-2 xl:ml-4 xl:mr-8">
                 <div className="sl-top">
                   <div className="list-image bg-white border-4 rounded-full border-burg -mt-20 p-2 content-center m-auto">
-                    <Img fixed={data.file.childImageSharp.fixed} objectFit="contain" alt="" />
+                    <img src={hp_section22} />
+                    {/*<Img fixed={data.face2.file.childImageShart.fixed} objectFit="contain" alt="" />*/}
                   </div>
                 </div>
                 <h3 className="border-white border-b-4 text-center pt-4">{Data.page.homepage.content.section3.title}</h3>
