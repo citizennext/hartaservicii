@@ -12,8 +12,8 @@ export default class Contact extends React.Component {
           <div className="contact-left md:w-1/2 md:mr-2">
             <h3 className="wide pl-8">Hai alături de noi!</h3>
             <div className="flex justify-center xl:relative">
-              <img className="illu-logo" src={Illu} />
-              <img className="no-type" src={Notype} />
+              <img className="illu-logo" src={Illu} alt="Illu Logo" />
+              <img className="no-type" src={Notype} alt="HS Logo" />
             </div>
             <button className="social md:ml-6">Comunitate</button>
           </div>

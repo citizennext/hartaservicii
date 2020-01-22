@@ -7,7 +7,7 @@ type Props = {
 };
 function HsSlider(props: Props) {
   return (
-    <Slider style={{ width: '88vw', margin: '0 auto' }} {...props.settings}>
+    <Slider style={{ margin: '0 auto' }} {...props.settings}>
       {props.children}
     </Slider>
   );

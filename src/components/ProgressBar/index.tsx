@@ -17,7 +17,7 @@ function ProgressBar(props: Props) {
   return (
     <div className={`progress-bar ${props.classProgressBar}`}>
       <div className="relative m-auto">
-        <img className="progressbar-image absolute" src={siluette} />
+        <img className="progressbar-image absolute" src={siluette} alt="Social Worker Icon" />
         <svg width={props.sqSize} height={props.sqSize} viewBox={viewBox} className="xl:m-auto">
           <line
             className="circle-background"
