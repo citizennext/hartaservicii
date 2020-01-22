@@ -413,7 +413,7 @@ button
     &:hover
         @apply bg-leaf
 
-    &.social
+    &.social,&.social-nav
         &:before
             content: ''
             background-image: url('../../images/icon_FB.svg')
@@ -438,6 +438,16 @@ button
             z-index: 1
             width: $size
             height: $size
+
+    &.social-nav
+        position: initial
+        width: auto
+        &:after
+            display: none
+        &:before
+            right: 7.2vw
+            left: initial
+            bottom: 25.33vw
 
     &.small
         @apply text-sm
@@ -498,17 +508,6 @@ button
             @apply rounded-full
 
 @import "~tailwindcss/utilities"
-
-header
-
-    .menu_icon
-        float: right
-        margin-top: 26px
-        margin-right: 26px
-
-    // @todo Seco -> navigation show on desktop
-    //.nav-header
-    //    @apply hidden
 
 footer
     @apply bg-burg
