@@ -5,11 +5,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AfterHeader } from '../components/pages/Noutati/AfterHeader';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
 import Separator from '../components/Separator';
 
-export default ({ data }: any) => {
+const BlogPost = ({ data }: any) => {
   const { blog } = data.hasura;
   const windowurl = window.location.href;
+  const { addToast } = useToasts();
+
   return (
     <>
       <Seo postTitle={blog.title} isRepeatable={true} postImage={blog.image.url} summary={blog.summary} />
@@ -39,13 +42,28 @@ export default ({ data }: any) => {
         </div>
         <Separator color="snow" width="100px" />
         <CopyToClipboard text={windowurl}>
-          <button className="share-button">Distribuie</button>
+          <button
+            className="share-button"
+            onClick={() =>
+              addToast('Lorem Ipsum Dolor !', {
+                appearance: 'success',
+                autoDismiss: true,
+              })
+            }>
+            Distribuie
+          </button>
         </CopyToClipboard>
       </div>
       <Footer />
     </>
   );
 };
+
+export default ({ data }: any) => (
+  <ToastProvider>
+    <BlogPost data={data} />
+  </ToastProvider>
+);
 
 export const pageQuery = graphql`
   query blogPostBySlug($slug: String!) {
