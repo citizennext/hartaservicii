@@ -66,6 +66,9 @@ const Navigation: React.FC<Props> = props => {
                   ))}
               </ul>
             </nav>
+            <a href="https://www.facebook.com/hartaserviciilorsociale" title="Facebook Page">
+              <button className="social-nav"></button>
+            </a>
           </Drawer>
         </div>
       ) : (
