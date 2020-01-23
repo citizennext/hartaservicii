@@ -63,6 +63,7 @@
     "react-helmet": "^5.2.1",
     "react-leaflet": "^2.6.1",
     "react-leaflet-markercluster": "^2.0.0-rc3",
+    "react-netlify-form": "^2.1.5",
     "react-slick": "^0.25.2",
     "react-stickynode": "^2.1.1",
     "react-toast-notifications": "^2.4.0",
@@ -70,8 +71,7 @@
     "theme-ui": "^0.2.52",
     "typeface-montserrat": "^0.0.75",
     "webpack": "^4.41.4",
-    "yallist": "^4.0.0",
-    "react-netlify-form": "^2.1.5"
+    "yallist": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
@@ -79,8 +79,10 @@
     "@graphql-codegen/cli": "^1.11.2",
     "@graphql-codegen/typescript": "^1.11.2",
     "@graphql-codegen/typescript-operations": "^1.11.2",
+    "@types/react-copy-to-clipboard": "^4.3.0",
     "@types/react-helmet": "^5.0.14",
     "@types/react-stickynode": "^1.4.0",
+    "@types/react-toast-notifications": "^2.4.0",
     "@types/theme-ui": "^0.2.6",
     "@typescript-eslint/eslint-plugin": "^2.12.0",
     "@typescript-eslint/parser": "^2.12.0",

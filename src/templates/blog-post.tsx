@@ -4,7 +4,7 @@ import Seo from '../components/Seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AfterHeader } from '../components/pages/Noutati/AfterHeader';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { ToastProvider, useToasts } from 'react-toast-notifications';
 import Separator from '../components/Separator';
 
@@ -13,7 +13,9 @@ const BlogPost = ({ data, pageContext }: any) => {
   const { previous, next } = pageContext;
   const windowurl = window.location.href;
   const { addToast } = useToasts();
-
+  const dateFormat = (date: any) => {
+    return new Date(date);
+  };
   return (
     <>
       <Seo postTitle={blog.title} isRepeatable={true} postImage={blog.image.url} summary={blog.summary} />
@@ -22,7 +24,7 @@ const BlogPost = ({ data, pageContext }: any) => {
       <div className="blog-single section interior">
         <h1>{blog.title}</h1>
         <span className="date">
-          {blog.publishedAt.toLocaleString('ro-RO', {
+          {dateFormat(blog.publishedAt).toLocaleString('ro-RO', {
             timeZone: 'UTC',
             year: 'numeric',
             month: 'short',
@@ -34,14 +36,16 @@ const BlogPost = ({ data, pageContext }: any) => {
           {previous && (
             <Link to={`/noutati/${previous.slug}`}>
               <button className="prev-button"></button>
+              {previous.title}
             </Link>
           )}
           {next && (
             <Link to={`/noutati/${next.slug}`}>
+              {next.title}
               <button className="next-button"></button>
             </Link>
           )}
-          <Link>
+          <Link to="/noutati">
             <button className="read-more">Citeste si alte articole</button>
           </Link>
         </div>
@@ -51,9 +55,8 @@ const BlogPost = ({ data, pageContext }: any) => {
             className="share-button"
             onClick={() =>
               addToast('Link copiat în clipboard! ', {
-                appearance: 'success',
+                appearance: 'info',
                 autoDismiss: true,
-                placement: 'bottom-center',
               })
             }>
             Distribuie
@@ -65,11 +68,13 @@ const BlogPost = ({ data, pageContext }: any) => {
   );
 };
 
-export default ({ data, pageContext }: any) => (
-  <ToastProvider>
-    <BlogPost pageContext={pageContext} data={data} />
-  </ToastProvider>
-);
+export default ({ data, pageContext }: any) => {
+  return (
+    <ToastProvider placement="bottom-right">
+      <BlogPost pageContext={pageContext} data={data} />
+    </ToastProvider>
+  );
+};
 
 export const pageQuery = graphql`
   query blogPostBySlug($slug: String!) {
