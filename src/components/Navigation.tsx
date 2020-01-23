@@ -66,7 +66,11 @@ const Navigation: React.FC<Props> = props => {
                   ))}
               </ul>
             </nav>
-            <a href="https://www.facebook.com/hartaserviciilorsociale" title="Facebook Page">
+            <a
+              href="https://www.facebook.com/hartaserviciilorsociale"
+              title="Facebook Page"
+              target="_blank"
+              rel="noreferrer noopener">
               <button className="social-nav"></button>
             </a>
           </Drawer>
