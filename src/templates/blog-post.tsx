@@ -8,8 +8,9 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { ToastProvider, useToasts } from 'react-toast-notifications';
 import Separator from '../components/Separator';
 
-const BlogPost = ({ data }: any) => {
+const BlogPost = ({ data, pageContext }: any) => {
   const { blog } = data.hasura;
+  const { previous, next } = pageContext;
   const windowurl = window.location.href;
   const { addToast } = useToasts();
 
@@ -30,12 +31,16 @@ const BlogPost = ({ data }: any) => {
         </span>
         <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content.html }} />
         <div className="prev-next-buttons">
-          <Link>
-            <button className="prev-button"></button>
-          </Link>
-          <Link>
-            <button className="next-button"></button>
-          </Link>
+          {previous && (
+            <Link to={`/noutati/${previous.slug}`}>
+              <button className="prev-button"></button>
+            </Link>
+          )}
+          {next && (
+            <Link to={`/noutati/${next.slug}`}>
+              <button className="next-button"></button>
+            </Link>
+          )}
           <Link>
             <button className="read-more">Citeste si alte articole</button>
           </Link>
@@ -45,9 +50,10 @@ const BlogPost = ({ data }: any) => {
           <button
             className="share-button"
             onClick={() =>
-              addToast('Lorem Ipsum Dolor !', {
+              addToast('Link copiat în clipboard! ', {
                 appearance: 'success',
                 autoDismiss: true,
+                placement: 'bottom-center',
               })
             }>
             Distribuie
@@ -59,9 +65,9 @@ const BlogPost = ({ data }: any) => {
   );
 };
 
-export default ({ data }: any) => (
+export default ({ data, pageContext }: any) => (
   <ToastProvider>
-    <BlogPost data={data} />
+    <BlogPost pageContext={pageContext} data={data} />
   </ToastProvider>
 );
 
