@@ -16,30 +16,46 @@
         @apply px-0
 
     h1
-        margin-bottom: 35px
+        @apply my-8
 
     .date
         @apply border-t-6
         @apply border-snow
 
     .separator
-        margin-left: 70px
+        margin-left: 80px
+        @apply relative
 
     p
-        @apply mt-4
+        @apply my-4
         @screen xl
             max-width: 670px
 
     .prev-next-buttons
-        margin-left: 70px
         margin-top: 60px
+        max-width: 670px
         @screen xl
             padding-top: 172px
             @apply mb-4
 
+        a
+            position: relative
+            text-decoration: none
+            font-family: Montserrat
+            font-weight: 600
+            display: block
+            display: -webkit-box
+            -webkit-line-clamp: 2
+            -webkit-box-orient: vertical
+            height: 54px
+            overflow: hidden
+            text-overflow: ellipsis
+            padding-left: 80px
+
         .prev-button,.next-button
-            width: auto
-            position: absolute
+            position: relative
+            &.disabled
+                pointer-events: none
 
     .prev-button:after,.next-button:after
         content: ''
@@ -47,27 +63,33 @@
         background-position: center
         @apply bg-snow
         @apply rounded-r-full
-        height: 50px
+        height: 54px
         width: 35px
-        position: absolute
         background-repeat: no-repeat
+        position: absolute
+
+    .prev-button.disabled:after,.next-button.disabled:after
+        @apply bg-grey
+
+    .prev-button.disabled:after
+        //left: 0
 
     .prev-button:after
         transform: rotate(180deg)
-        bottom: -5px
-        right: 35px
-            //@screen xl
-            //    right: 65px
+        top: 0
+        left: 0
 
     .next-button:after
-        bottom: 20px
-        right: 0
+        bottom: 0
+        left: 36px
 
     .share-button
         width: auto
-        margin-left: 70px
+        margin-left: 80px
         margin-top: 10px
         margin-bottom: 45px
+        font-family: Montserrat
+        font-weight: 600
         @screen xl
             @apply my-4
             @apply mb-56
@@ -89,9 +111,12 @@
     .read-more
         width: auto
         @apply bg-transparent
-        max-width: 190px
+        max-width: 270px
         text-align: left
         margin: initial
+        margin-top: 10px
+        @screen md
+            max-width: 500px
 
 .page-header
     &.blog-single

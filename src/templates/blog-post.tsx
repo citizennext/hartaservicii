@@ -33,20 +33,23 @@ const BlogPost = ({ data, pageContext }: any) => {
         </span>
         <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content.html }} />
         <div className="prev-next-buttons">
-          {previous && (
-            <Link to={`/noutati/${previous.slug}`}>
-              <button className="prev-button"></button>
+          {previous ? (
+            <Link className="prev-button" to={`/noutati/${previous.slug}`}>
               {previous.title}
             </Link>
+          ) : (
+            <Link className="prev-button disabled">Nu mai sunt articole</Link>
           )}
-          {next && (
-            <Link to={`/noutati/${next.slug}`}>
+          {next ? (
+            <Link className="next-button" to={`/noutati/${next.slug}`}>
               {next.title}
-              <button className="next-button"></button>
             </Link>
+          ) : (
+            <Link className="next-button disabled">Nu mai sunt articole</Link>
           )}
-          <Link to="/noutati">
-            <button className="read-more">Citeste si alte articole</button>
+          <Separator color="snow" width="100px" top="2px" />
+          <Link className="read-more" to="/noutati">
+            Citeste si alte articole
           </Link>
         </div>
         <Separator color="snow" width="100px" />
