@@ -1517,6 +1517,7 @@ export type Hasura_Blog = Hasura_Node & {
   __typename?: 'HASURA_Blog';
   content?: Maybe<Hasura_RichText>;
   createdAt: Scalars['HASURA_DateTime'];
+  featured?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
   image?: Maybe<Hasura_Asset>;
   publishedAt?: Maybe<Scalars['HASURA_DateTime']>;
@@ -1536,6 +1537,7 @@ export type Hasura_BlogConnection = {
 
 export type Hasura_BlogCreateInput = {
   content?: Maybe<Scalars['HASURA_RichTextAST']>;
+  featured?: Maybe<Scalars['Boolean']>;
   image?: Maybe<Hasura_AssetCreateOneWithoutImageBlogInput>;
   publishedAt?: Maybe<Scalars['HASURA_DateTime']>;
   slug: Scalars['String'];
@@ -1551,6 +1553,7 @@ export type Hasura_BlogCreateManyWithoutImageInput = {
 
 export type Hasura_BlogCreateWithoutImageInput = {
   content?: Maybe<Scalars['HASURA_RichTextAST']>;
+  featured?: Maybe<Scalars['Boolean']>;
   publishedAt?: Maybe<Scalars['HASURA_DateTime']>;
   slug: Scalars['String'];
   status?: Maybe<Hasura_Status>;
@@ -1569,6 +1572,8 @@ export enum Hasura_BlogOrderByInput {
   ContentDesc = 'content_DESC',
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
+  FeaturedAsc = 'featured_ASC',
+  FeaturedDesc = 'featured_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
@@ -1589,6 +1594,7 @@ export type Hasura_BlogPreviousValues = {
   __typename?: 'HASURA_BlogPreviousValues';
   content?: Maybe<Hasura_RichText>;
   createdAt: Scalars['HASURA_DateTime'];
+  featured?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
   publishedAt?: Maybe<Scalars['HASURA_DateTime']>;
   slug: Scalars['String'];
@@ -1611,6 +1617,8 @@ export type Hasura_BlogScalarWhereInput = {
   createdAt_lte?: Maybe<Scalars['HASURA_DateTime']>;
   createdAt_not?: Maybe<Scalars['HASURA_DateTime']>;
   createdAt_not_in?: Maybe<Array<Scalars['HASURA_DateTime']>>;
+  featured?: Maybe<Scalars['Boolean']>;
+  featured_not?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['ID']>;
   id_contains?: Maybe<Scalars['ID']>;
   id_ends_with?: Maybe<Scalars['ID']>;
@@ -1710,6 +1718,7 @@ export type Hasura_BlogSubscriptionWhereInput = {
 
 export type Hasura_BlogUpdateInput = {
   content?: Maybe<Scalars['HASURA_RichTextAST']>;
+  featured?: Maybe<Scalars['Boolean']>;
   image?: Maybe<Hasura_AssetUpdateOneWithoutImageBlogInput>;
   publishedAt?: Maybe<Scalars['HASURA_DateTime']>;
   slug?: Maybe<Scalars['String']>;
@@ -1720,6 +1729,7 @@ export type Hasura_BlogUpdateInput = {
 
 export type Hasura_BlogUpdateManyDataInput = {
   content?: Maybe<Scalars['HASURA_RichTextAST']>;
+  featured?: Maybe<Scalars['Boolean']>;
   publishedAt?: Maybe<Scalars['HASURA_DateTime']>;
   slug?: Maybe<Scalars['String']>;
   status?: Maybe<Hasura_Status>;
@@ -1729,6 +1739,7 @@ export type Hasura_BlogUpdateManyDataInput = {
 
 export type Hasura_BlogUpdateManyMutationInput = {
   content?: Maybe<Scalars['HASURA_RichTextAST']>;
+  featured?: Maybe<Scalars['Boolean']>;
   publishedAt?: Maybe<Scalars['HASURA_DateTime']>;
   slug?: Maybe<Scalars['String']>;
   status?: Maybe<Hasura_Status>;
@@ -1755,6 +1766,7 @@ export type Hasura_BlogUpdateManyWithWhereNestedInput = {
 
 export type Hasura_BlogUpdateWithoutImageDataInput = {
   content?: Maybe<Scalars['HASURA_RichTextAST']>;
+  featured?: Maybe<Scalars['Boolean']>;
   publishedAt?: Maybe<Scalars['HASURA_DateTime']>;
   slug?: Maybe<Scalars['String']>;
   status?: Maybe<Hasura_Status>;
@@ -1786,6 +1798,8 @@ export type Hasura_BlogWhereInput = {
   createdAt_lte?: Maybe<Scalars['HASURA_DateTime']>;
   createdAt_not?: Maybe<Scalars['HASURA_DateTime']>;
   createdAt_not_in?: Maybe<Array<Scalars['HASURA_DateTime']>>;
+  featured?: Maybe<Scalars['Boolean']>;
+  featured_not?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['ID']>;
   id_contains?: Maybe<Scalars['ID']>;
   id_ends_with?: Maybe<Scalars['ID']>;
@@ -4262,6 +4276,7 @@ export type QuerySitePageArgs = {
   component?: Maybe<StringQueryOperatorInput>;
   componentChunkName?: Maybe<StringQueryOperatorInput>;
   isCreatedByStatefulCreatePages?: Maybe<BooleanQueryOperatorInput>;
+  context?: Maybe<SitePageContextFilterInput>;
   pluginCreator?: Maybe<SitePluginFilterInput>;
   pluginCreatorId?: Maybe<StringQueryOperatorInput>;
   componentPath?: Maybe<StringQueryOperatorInput>;
@@ -4457,6 +4472,7 @@ export type SitePage = Node & {
   component?: Maybe<Scalars['String']>;
   componentChunkName?: Maybe<Scalars['String']>;
   isCreatedByStatefulCreatePages?: Maybe<Scalars['Boolean']>;
+  context?: Maybe<SitePageContext>;
   pluginCreator?: Maybe<SitePlugin>;
   pluginCreatorId?: Maybe<Scalars['String']>;
   componentPath?: Maybe<Scalars['String']>;
@@ -4480,6 +4496,15 @@ export type SitePageConnectionGroupArgs = {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   field: SitePageFieldsEnum;
+};
+
+export type SitePageContext = {
+  __typename?: 'SitePageContext';
+  slug?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextFilterInput = {
+  slug?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -4581,6 +4606,7 @@ export enum SitePageFieldsEnum {
   Component = 'component',
   ComponentChunkName = 'componentChunkName',
   IsCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
+  ContextSlug = 'context___slug',
   PluginCreatorId = 'pluginCreator___id',
   PluginCreatorParentId = 'pluginCreator___parent___id',
   PluginCreatorParentParentId = 'pluginCreator___parent___parent___id',
@@ -4649,8 +4675,6 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsFieldName = 'pluginCreator___pluginOptions___fieldName',
   PluginCreatorPluginOptionsUrl = 'pluginCreator___pluginOptions___url',
   PluginCreatorPluginOptionsRefetchInterval = 'pluginCreator___pluginOptions___refetchInterval',
-  PluginCreatorPluginOptionsSchemaName = 'pluginCreator___pluginOptions___schemaName',
-  PluginCreatorPluginOptionsImageFieldName = 'pluginCreator___pluginOptions___imageFieldName',
   PluginCreatorPluginOptionsPathCheck = 'pluginCreator___pluginOptions___pathCheck',
   PluginCreatorNodeApIs = 'pluginCreator___nodeAPIs',
   PluginCreatorBrowserApIs = 'pluginCreator___browserAPIs',
@@ -4686,6 +4710,7 @@ export type SitePageFilterInput = {
   component?: Maybe<StringQueryOperatorInput>;
   componentChunkName?: Maybe<StringQueryOperatorInput>;
   isCreatedByStatefulCreatePages?: Maybe<BooleanQueryOperatorInput>;
+  context?: Maybe<SitePageContextFilterInput>;
   pluginCreator?: Maybe<SitePluginFilterInput>;
   pluginCreatorId?: Maybe<StringQueryOperatorInput>;
   componentPath?: Maybe<StringQueryOperatorInput>;
@@ -4867,8 +4892,6 @@ export enum SitePluginFieldsEnum {
   PluginOptionsFieldName = 'pluginOptions___fieldName',
   PluginOptionsUrl = 'pluginOptions___url',
   PluginOptionsRefetchInterval = 'pluginOptions___refetchInterval',
-  PluginOptionsSchemaName = 'pluginOptions___schemaName',
-  PluginOptionsImageFieldName = 'pluginOptions___imageFieldName',
   PluginOptionsPathCheck = 'pluginOptions___pathCheck',
   NodeApIs = 'nodeAPIs',
   BrowserApIs = 'browserAPIs',
@@ -5016,8 +5039,6 @@ export type SitePluginPluginOptions = {
   fieldName?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   refetchInterval?: Maybe<Scalars['Int']>;
-  schemaName?: Maybe<Scalars['String']>;
-  imageFieldName?: Maybe<Scalars['String']>;
   pathCheck?: Maybe<Scalars['Boolean']>;
 };
 
@@ -5046,8 +5067,6 @@ export type SitePluginPluginOptionsFilterInput = {
   fieldName?: Maybe<StringQueryOperatorInput>;
   url?: Maybe<StringQueryOperatorInput>;
   refetchInterval?: Maybe<IntQueryOperatorInput>;
-  schemaName?: Maybe<StringQueryOperatorInput>;
-  imageFieldName?: Maybe<StringQueryOperatorInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
 };
 
@@ -5111,6 +5130,7 @@ export type SitePluginPluginOptionsPostCssPluginsThemeColors = {
   lightbrown?: Maybe<Scalars['String']>;
   snow?: Maybe<Scalars['String']>;
   burg?: Maybe<Scalars['String']>;
+  error?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput = {
@@ -5125,6 +5145,7 @@ export type SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput = {
   lightbrown?: Maybe<StringQueryOperatorInput>;
   snow?: Maybe<StringQueryOperatorInput>;
   burg?: Maybe<StringQueryOperatorInput>;
+  error?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsPostCssPluginsThemeExtend = {
@@ -5467,10 +5488,17 @@ export type HeroQueryQuery = { __typename?: 'Query' } & {
   >;
 };
 
-export type FaceQueryVariables = {};
+export type Unnamed_3_QueryVariables = {};
 
-export type FaceQuery = { __typename?: 'Query' } & {
-  file: Maybe<
+export type Unnamed_3_Query = { __typename?: 'Query' } & {
+  face1: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & { fixed: Maybe<{ __typename?: 'ImageSharpFixed' } & GatsbyImageSharpFixedFragment> }
+      >;
+    }
+  >;
+  face2: Maybe<
     { __typename?: 'File' } & {
       childImageSharp: Maybe<
         { __typename?: 'ImageSharp' } & { fixed: Maybe<{ __typename?: 'ImageSharpFixed' } & GatsbyImageSharpFixedFragment> }
@@ -5479,9 +5507,9 @@ export type FaceQuery = { __typename?: 'Query' } & {
   >;
 };
 
-export type Unnamed_3_QueryVariables = {};
+export type Unnamed_4_QueryVariables = {};
 
-export type Unnamed_3_Query = { __typename?: 'Query' } & {
+export type Unnamed_4_Query = { __typename?: 'Query' } & {
   hasura: { __typename?: 'HASURA' } & {
     publicServices: { __typename?: 'HASURA_providers_aggregate' } & {
       aggregate: Maybe<{ __typename?: 'HASURA_providers_aggregate_fields' } & Pick<Hasura_Providers_Aggregate_Fields, 'count'>>;
@@ -5504,12 +5532,67 @@ export type Unnamed_3_Query = { __typename?: 'Query' } & {
   };
 };
 
-export type Unnamed_4_QueryVariables = {};
+export type Unnamed_5_QueryVariables = {};
 
-export type Unnamed_4_Query = { __typename?: 'Query' } & {
+export type Unnamed_5_Query = { __typename?: 'Query' } & {
+  hasura: { __typename?: 'HASURA' } & {
+    blogs: Array<
+      Maybe<
+        { __typename?: 'HASURA_Blog' } & Pick<Hasura_Blog, 'id' | 'title' | 'summary' | 'slug' | 'featured' | 'createdAt'> & {
+            image: Maybe<
+              { __typename?: 'HASURA_Asset' } & Pick<Hasura_Asset, 'url'> & {
+                  urlSharp: Maybe<
+                    { __typename?: 'File' } & {
+                      childImageSharp: Maybe<
+                        { __typename?: 'ImageSharp' } & {
+                          fluid: Maybe<{ __typename?: 'ImageSharpFluid' } & GatsbyImageSharpFluid_WithWebpFragment>;
+                        }
+                      >;
+                    }
+                  >;
+                }
+            >;
+          }
+      >
+    >;
+  };
+};
+
+export type BlogPostBySlugQueryVariables = {
+  slug: Scalars['String'];
+};
+
+export type BlogPostBySlugQuery = { __typename?: 'Query' } & {
+  hasura: { __typename?: 'HASURA' } & {
+    blog: Maybe<
+      { __typename?: 'HASURA_Blog' } & Pick<Hasura_Blog, 'title' | 'summary' | 'publishedAt' | 'slug'> & {
+          content: Maybe<{ __typename?: 'HASURA_RichText' } & Pick<Hasura_RichText, 'html'>>;
+          image: Maybe<
+            { __typename?: 'HASURA_Asset' } & Pick<Hasura_Asset, 'url'> & {
+                urlSharp: Maybe<
+                  { __typename?: 'File' } & {
+                    childImageSharp: Maybe<
+                      { __typename?: 'ImageSharp' } & {
+                        fluid: Maybe<{ __typename?: 'ImageSharpFluid' } & GatsbyImageSharpFluid_WithWebpFragment>;
+                      }
+                    >;
+                  }
+                >;
+              }
+          >;
+        }
+    >;
+  };
+};
+
+export type PageBySlugQueryVariables = {
+  slug: Scalars['String'];
+};
+
+export type PageBySlugQuery = { __typename?: 'Query' } & {
   hasura: { __typename?: 'HASURA' } & {
     page: Maybe<
-      { __typename?: 'HASURA_Page' } & Pick<Hasura_Page, 'title' | 'summary' | 'additionalData' | 'header'> & {
+      { __typename?: 'HASURA_Page' } & Pick<Hasura_Page, 'title' | 'summary' | 'slug' | 'additionalData' | 'header'> & {
           content: Maybe<{ __typename?: 'HASURA_RichText' } & Pick<Hasura_RichText, 'html'>>;
           image: Maybe<
             { __typename?: 'HASURA_Asset' } & Pick<Hasura_Asset, 'url'> & {

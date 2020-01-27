@@ -13,7 +13,7 @@ export function Footer() {
         <div className="interior md:flex md:flex-wrap md:justify-between xl:max-w-gridd xl:m-auto xl:justify-around">
           <Separator color="celeste" />
           <div className="pt-8 md:pt-0 mt-8 md:mt-12">
-            <Link>
+            <Link to="/">
               <img alt="Harta Serviciilor Sociale Logo" src={logoLight} />
             </Link>
             <p className="text-snow text-xl pb-32 pt-8 xl:pt-0">
@@ -29,8 +29,8 @@ export function Footer() {
               .
             </p>
           </div>
-          <Navigation navClass="footer-nav hidden sm:block xl:content-end md:mt-12" nav={Data.page} />
-          <p className="border-brown border-t-2 text-center text-lightbrown py-2 md:w-full">
+          <Navigation drawer={false} navClass="footer-nav hidden sm:block xl:content-end md:mt-12" nav={Data.page} />
+          <p className="text-copyright border-brown border-t-2 text-center text-lightbrown py-2 md:w-full">
             {Data.footer.texts.copyright}
             {new Date().getFullYear()}
           </p>

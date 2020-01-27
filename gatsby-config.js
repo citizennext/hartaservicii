@@ -42,6 +42,14 @@ module.exports = {
     'gatsby-plugin-typescript',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    // {
+    //   resolve: 'gatsby-plugin-robots-txt',
+    //   options: {
+    //     host: 'https:/hartasociala.ro',
+    //     sitemap: 'https:/hartasociala.ro/sitemap.xml',
+    //     policy: [{ userAgent: '*', allow: '/' }]
+    //   }
+    // },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -105,12 +113,5 @@ module.exports = {
         },
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-graphql-image',
-    //   options: {
-    //     schemaName: process.env.GATSBY_HASURA_GRAPHQL_TYPE_NAME,
-    //     imageFieldName: 'url',
-    //   },
-    // },
   ],
 };

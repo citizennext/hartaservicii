@@ -8,12 +8,12 @@ function Partners() {
   return (
     <div id="section5" className="section blogposts bg-white xl:max-w-gridd xl:m-auto xl:px-8 xl:pt-16">
       <div className="interior md:flex">
-        <div className="md:w-1/2 md:mr-2">
+        <div className="md:w-1/2 md:px-4">
           <h3 className="border-b-8 border-leaf pl-4 wide md:pl-0 xl:pl-24">Istoric Proiect</h3>
           <div className="flex pt-10 xl:pl-24">
-            <img style={{ width: '32px', marginRight: '36px' }} src={Pin} />
-            <img style={{ width: '26px', marginRight: '36px' }} src={ArrowB} />
-            <img style={{ width: '34px' }} src={LogoF} />
+            <img style={{ width: '32px', marginRight: '36px' }} src={Pin} alt="Pin Icon" />
+            <img style={{ width: '26px', marginRight: '36px' }} src={ArrowB} alt="Arrow Icon" />
+            <img style={{ width: '34px' }} src={LogoF} alt="Logo Icon" />
           </div>
           <p className="py-10 xl:pl-24">
             Aici povestim scurt despre cum a pornit proiectul, cine, cum când, de ce. Ce a realizat până acum și cu ce oameni. Și
@@ -21,9 +21,9 @@ function Partners() {
           </p>
           <button className="small invert xl:ml-24">detalii</button>
         </div>
-        <div className="mt-12 md:w-1/2 md:ml-2 md:mt-0">
+        <div className="mt-12 md:w-1/2 md:px-4 md:mt-0">
           <h3 className="border-b-8 border-leaf pl-4 wide md:pl-0 xl:pl-24">Parteneri</h3>
-          <img className="pt-10 xl:pl-24" src={omw} />
+          <img className="pt-10 xl:pl-24" src={omw} alt="Omv Logo" />
           <p className="py-10 xl:pl-24">
             Aici povestim de sursa datelor de la la guvern, de partenerul financiar OMV Petrom și amintim de toți ceilalți
             parteneri instituționali. Aici adăugăm și lista link-urilor utile. Suntem zgârciți cu logo-urile, însă.

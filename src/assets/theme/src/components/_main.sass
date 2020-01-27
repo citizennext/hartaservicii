@@ -24,12 +24,9 @@
         @apply bg-leaf
 
     .wrapper
-        //@screen xl
         position: relative
         width: calc(100% - 2.875rem)
         height: $height
-        @apply max-w-griddw
-        @apply m-auto
         @screen sm
             height: $height-sm
         @screen xl
@@ -45,7 +42,6 @@
             @apply bg-white
 
         & > span
-            //@screen xl
             width: 100%
             font-family: $font-primary
             font-style: normal
@@ -77,3 +73,7 @@
 //    &.two-columns-right,
 //    &.three-columns
 //        color: red
+
+.wrapper
+    @apply max-w-griddw
+    @apply m-auto

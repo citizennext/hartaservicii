@@ -8,7 +8,7 @@ type Props = {
   postImage?: string;
   slug?: string;
   isRepeatable?: boolean;
-  bodyClassName: string;
+  bodyClassName?: string;
 };
 
 const SEO = ({ postTitle, summary, postImage, slug, isRepeatable, bodyClassName }: Props) => {
@@ -18,7 +18,7 @@ const SEO = ({ postTitle, summary, postImage, slug, isRepeatable, bodyClassName 
   const url = slug ? `${data.head.url}${slug}` : data.head.url;
 
   return (
-    <Helmet bodyAttributes={{ class: bodyClassName }}>
+    <Helmet bodyAttributes={{ class: bodyClassName || '' }}>
       <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js?features=default,Symbol" />
       {postTitle ? <title>{`${postTitle} | ${data.head.title}`}</title> : <title>{`${data.head.title}`}</title>}
       {/* General tags */}
