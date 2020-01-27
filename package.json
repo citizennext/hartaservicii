@@ -74,6 +74,7 @@
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@graphql-codegen/cli": "^1.11.2",
+    "@graphql-codegen/introspection": "^1.11.2",
     "@graphql-codegen/typescript": "^1.11.2",
     "@graphql-codegen/typescript-operations": "^1.11.2",
     "@types/react-helmet": "^5.0.14",

@@ -2,8 +2,13 @@ schema: http://localhost:8000/___graphql
 documents:
   - ./src/**/*.{ts,tsx}
   - ./node_modules/gatsby-*/**/*.js
+overwrite:
+  - true
 generates:
   ./src/types/graphqlTypes.ts:
     plugins:
       - typescript
       - typescript-operations
+  ./graphql.schema.json:
+    plugins:
+      - introspection
