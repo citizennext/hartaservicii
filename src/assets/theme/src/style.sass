@@ -479,6 +479,7 @@ button
         @screen md
             @apply mb-0
             margin-left: 316px
+            margin-top: 0
 
     &.arrowonly:after
         content: ''
@@ -490,6 +491,22 @@ button
         background-repeat: no-repeat
         top: 6px
         right: 6px
+
+    &.share-button
+        @apply bg-transparent
+        &:before
+            content: ''
+            background-image: url('../../images/icon_share.svg')
+            height: 50px
+            width: 50px
+            position: absolute
+            background-repeat: no-repeat
+            background-position: 12px center
+            top: 6px
+            left: 6px
+            @apply bg-snow
+            @apply p-6
+            @apply rounded-full
 
 @import "~tailwindcss/utilities"
 

@@ -18,6 +18,7 @@ exports.createPages = ({ graphql, actions }) => {
         hasura {
           blogs(last: $limit) {
             slug
+            title
           }
           pages(last: $limit) {
             slug
@@ -32,16 +33,22 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     // Create blog post pages.
-    result.data.hasura.blogs.forEach(blog => {
+    result.data.hasura.blogs.forEach((blog, index) => {
+      const previous = index === result.data.hasura.blogs.length - 1 ? null : result.data.hasura.blogs[index + 1];
+      const next = index === 0 ? null : result.data.hasura.blogs[index - 1];
+
       createPage({
         // Path for this page — required
         path: `/noutati/${blog.slug}`,
         component: blogPostTemplate,
         context: {
           slug: blog.slug,
+          previous,
+          next,
         },
       });
     });
+
     // Create  pages.
     result.data.hasura.pages.forEach(page => {
       createPage({
