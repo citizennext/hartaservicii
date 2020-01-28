@@ -3,6 +3,8 @@ import Seo from '../components/Seo';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
+import { AfterHeader } from '../components/AfterHeader';
+import { ComingSoon } from '../components/ComingSoon';
 
 export default class HartaPage extends React.Component {
   render() {
@@ -10,7 +12,10 @@ export default class HartaPage extends React.Component {
       <div>
         <Seo bodyClassName="page-maps" />
         <Header />
-        <Layout>coming soon</Layout>
+        <AfterHeader header={'... in lucru'} />
+        <Layout left={true}>
+          <ComingSoon />
+        </Layout>
         <Footer />
       </div>
     );

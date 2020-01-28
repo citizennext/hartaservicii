@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 type Button = {
   href: string;
@@ -26,13 +26,13 @@ export function Content({ content, summary, additionalData }: Props) {
   }
 
   return (
-    <Fragment>
+    <>
       <div className="summary">{summary}</div>
       <div className="content" dangerouslySetInnerHTML={createMarkup()} />
       {/* eslint-disable-next-line @typescript-eslint/no-unused-vars */}
       <button className="btn btn-citizennext" title={button.label} onClick={event => (window.location.href = button.href)}>
         {button.label}
       </button>
-    </Fragment>
+    </>
   );
 }

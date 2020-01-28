@@ -12,11 +12,11 @@ type Images = {
 };
 
 type Props = {
-  sidebar: Images;
+  sidebar?: Images | boolean;
 };
 
 export function SidebarLeft({ sidebar }: Props) {
-  const imgProps = sidebar.images[0];
+  const imgProps = typeof sidebar !== 'boolean' ? sidebar?.images[0] : null;
   return (
     <>
       {imgProps && (
