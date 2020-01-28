@@ -35,22 +35,30 @@ const BlogPost = ({ data, pageContext }: any) => {
         <div className="prev-next-buttons">
           {previous ? (
             <Link className="prev-button" to={`/noutati/${previous.slug}`}>
+              <span>articole mai vechi</span>
               {previous.title}
             </Link>
           ) : (
-            <Link className="prev-button disabled">Nu mai sunt articole</Link>
+            <Link className="prev-button disabled">
+              <span>nu mai sunt articole</span>
+            </Link>
           )}
           {next ? (
             <Link className="next-button" to={`/noutati/${next.slug}`}>
+              <span>articole mai noi</span>
               {next.title}
             </Link>
           ) : (
-            <Link className="next-button disabled">Nu mai sunt articole</Link>
+            <Link className="next-button disabled">
+              <span>nu mai sunt articole</span>
+            </Link>
           )}
-          <Separator color="snow" width="100px" top="2px" />
-          <Link className="read-more" to="/noutati">
-            Citeste si alte articole
-          </Link>
+          <div className="read-more">
+            <Separator color="snow" width="100px" top="2px" />
+            <Link className="read-more" to="/noutati">
+              Citeste si alte articole
+            </Link>
+          </div>
         </div>
         <Separator color="snow" width="100px" />
         <CopyToClipboard text={windowurl}>
