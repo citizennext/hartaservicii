@@ -7,7 +7,6 @@
 @import "keyframes"
 @import "mixin"
 @import "extends"
-@import "form"
 @import "components"
 @import "custom"
 
@@ -64,7 +63,8 @@ a
 /* elements */
 .separator
     @apply absolute
-    @apply w-full
+    width: 100%
+    width: -webkit-fill-available
 
 .sl-top
     @apply w-full
@@ -229,6 +229,8 @@ ol
 /* Blog */
 .blog-post
     max-width: 370px
+    @screen md
+        @apply m-auto
 
     .blog-image
         @apply hidden
@@ -372,6 +374,7 @@ ol
     .contact-right
         z-index: 2
 
+.button,
 button
     @apply bg-celeste
     @apply rounded-full
@@ -385,6 +388,9 @@ button
     position: relative
     @apply m-auto
     font-family: Montserrat
+    text-decoration: none
+    display: block
+
     @screen md
         max-width: 320px
 
@@ -407,20 +413,41 @@ button
     &:hover
         @apply bg-leaf
 
-    &.social:before
-        content: ''
-        background-image: url('../../images/icon_FB.svg')
-        background-size: 15px 29px
-        position: absolute
-        background-repeat: no-repeat
-        bottom: 1px
-        left: 1px
-        @apply bg-bottom
-        @apply border-white
-        @apply border-2
-        @apply rounded-full
-        @apply pt-10
-        @apply px-5
+    &.social,&.social-nav
+        &:before
+            content: ''
+            background-image: url('../../images/icon_FB.svg')
+            background-size: 15px 29px
+            position: absolute
+            background-repeat: no-repeat
+            bottom: 1px
+            left: 1px
+            @apply bg-bottom
+            @apply border-white
+            @apply border-2
+            @apply rounded-full
+            @apply pt-10
+            @apply px-5
+        &:after
+            $size: 38px
+            content: ''
+            background: url('../../images/icon_arroww.svg') no-repeat 50% / 26px
+            position: absolute
+            top: 4px
+            right: 6px
+            z-index: 1
+            width: $size
+            height: $size
+
+    &.social-nav
+        position: initial
+        width: auto
+        &:after
+            display: none
+        &:before
+            right: 7.2vw
+            left: initial
+            bottom: 25.33vw
 
     &.small
         @apply text-sm
@@ -465,17 +492,6 @@ button
         right: 6px
 
 @import "~tailwindcss/utilities"
-
-header
-
-    .menu_icon
-        float: right
-        margin-top: 26px
-        margin-right: 26px
-
-    // @todo Seco -> navigation show on desktop
-    //.nav-header
-    //    @apply hidden
 
 footer
     @apply bg-burg

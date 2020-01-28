@@ -11,7 +11,8 @@ module.exports = {
 			brown: '#877272',
 			lightbrown: '#C4C3C3',
 			snow: '#EDF7EF',
-			burg: '#978585'
+			burg: '#978585',
+			error: '#cc0000'
 		},
 		screens: {
 			sm: '640px',

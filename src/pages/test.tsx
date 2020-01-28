@@ -1,6 +1,4 @@
-/** @jsx jsx */
 import React from 'react';
-import { jsx } from '@emotion/core';
 import Seo from '../components/Seo';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
@@ -13,7 +11,7 @@ export default class TestPage extends React.Component {
   render() {
     return (
       <div>
-        <Seo page="test" className="page-test" />
+        <Seo page="test" bodyClassName="page-test" />
         <Header />
         <Layout left={<SidebarLeft />} right={<SidebarRight />}>
           <TestContent />

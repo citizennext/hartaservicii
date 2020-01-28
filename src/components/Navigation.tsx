@@ -1,9 +1,8 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'gatsby';
 import Drawer from './Drawer/Drawer';
 import { DrawerContext } from './Drawer/DrawerContext';
 import { useWindowSize } from '../hooks/useWindowSize';
-// import Menu from '../assets/images/icon_menu_mobile.svg';
 import { Close, Menu } from './Icons';
 
 type NavItem = {
@@ -27,10 +26,6 @@ type Props = {
   drawer: boolean;
 };
 
-type classA = {
-  classApplied: string;
-};
-
 const Navigation: React.FC<Props> = props => {
   const nav = props.nav;
   // @ts-ignore
@@ -38,11 +33,10 @@ const Navigation: React.FC<Props> = props => {
   const openDrawer = () => {
     dispatch((current: boolean) => !current);
   };
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const windowSize = useWindowSize();
 
   return (
-    <Fragment>
+    <>
       {props.drawer && windowSize.width && windowSize.width < 768 ? (
         <div className="hamburger-menu">
           <Menu className="menu_icon text-brown" />
@@ -51,6 +45,7 @@ const Navigation: React.FC<Props> = props => {
             width="300px"
             placement="right"
             open={state}
+            closeButtonStyle={{ position: 'absolute', top: 50, right: 30 }}
             toggleHandler={openDrawer}
             closeButton={<Close size={22} style={{ color: 'white' }} />}>
             <nav className={props.navClass}>
@@ -66,6 +61,13 @@ const Navigation: React.FC<Props> = props => {
                   ))}
               </ul>
             </nav>
+            <a
+              href="https://www.facebook.com/hartaserviciilorsociale"
+              title="Facebook Page"
+              target="_blank"
+              rel="noreferrer noopener">
+              <button className="social-nav"></button>
+            </a>
           </Drawer>
         </div>
       ) : (
@@ -83,7 +85,7 @@ const Navigation: React.FC<Props> = props => {
           </ul>
         </nav>
       )}
-    </Fragment>
+    </>
   );
 };
 

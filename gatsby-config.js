@@ -9,8 +9,6 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-theme-ui',
-    'gatsby-theme-style-guide',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
     {
@@ -42,6 +40,14 @@ module.exports = {
     'gatsby-plugin-typescript',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    // {
+    //   resolve: 'gatsby-plugin-robots-txt',
+    //   options: {
+    //     host: 'https:/hartasociala.ro',
+    //     sitemap: 'https:/hartasociala.ro/sitemap.xml',
+    //     policy: [{ userAgent: '*', allow: '/' }]
+    //   }
+    // },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

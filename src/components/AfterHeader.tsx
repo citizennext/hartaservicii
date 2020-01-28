@@ -1,7 +1,7 @@
 import React from 'react';
 
 type Props = {
-  header: string;
+  header?: string;
 };
 
 export function AfterHeader({ header }: Props) {

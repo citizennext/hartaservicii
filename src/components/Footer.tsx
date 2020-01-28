@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
+import React from 'react';
 import Data from '../data/global.json';
 import logoLight from '../assets/images/logo_light.svg';
 import Navigation from './Navigation';
@@ -18,12 +17,20 @@ export function Footer() {
             </Link>
             <p className="text-snow text-xl pb-32 pt-8 xl:pt-0">
               este un proiect realizat de{' '}
-              <a title={Data.footer.links.asociatia.title} href={Data.footer.links.asociatia.url}>
+              <a
+                title={Data.footer.links.asociatia.title}
+                href={Data.footer.links.asociatia.url}
+                target="_blank"
+                rel="noreferrer noopener">
                 {Data.footer.links.asociatia.text}
               </a>{' '}
               cu <br className="hidden sm:block" />
-              sprijinul <a href="https://www.omvpetrom.com/ro">OMV Petrom</a> prin programul{' '}
-              <a title="Țara lui Andrei" href="https://taraluiandrei.ro/">
+              sprijinul{' '}
+              <a href="https://www.omvpetrom.com/ro" title="Omv Petrom" target="_blank" rel="noreferrer noopener">
+                OMV Petrom
+              </a>{' '}
+              prin programul{' '}
+              <a title="Țara lui Andrei" href="https://taraluiandrei.ro/" target="_blank" rel="noreferrer noopener">
                 Țara lui Andrei
               </a>
               .
