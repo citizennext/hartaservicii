@@ -39,13 +39,7 @@ const BlogPost = ({ data, pageContext }: any) => {
               {previous.title}
             </Link>
           ) : (
-<<<<<<< HEAD
-            <Link className="prev-button disabled">
-              <span>nu mai sunt articole</span>
-            </Link>
-=======
             <a className="prev-button disabled">Nu mai sunt articole</a>
->>>>>>> links not necessary
           )}
           {next ? (
             <Link className="next-button" to={`/noutati/${next.slug}`}>
@@ -53,13 +47,7 @@ const BlogPost = ({ data, pageContext }: any) => {
               {next.title}
             </Link>
           ) : (
-<<<<<<< HEAD
-            <Link className="next-button disabled">
-              <span>nu mai sunt articole</span>
-            </Link>
-=======
             <a className="next-button disabled">Nu mai sunt articole</a>
->>>>>>> links not necessary
           )}
           <div className="read-more">
             <Separator color="snow" width="100px" top="2px" />
