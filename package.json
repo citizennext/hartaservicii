@@ -43,7 +43,6 @@
     "gatsby-source-filesystem": "^2.1.46",
     "gatsby-source-graphql": "^2.1.32",
     "gatsby-transformer-sharp": "^2.3.13",
-    "graphql": "^14.6.0",
     "graphql-typed": "^0.4.0",
     "husky": "^4.2.1",
     "leaflet": "^1.6.0",
@@ -77,6 +76,7 @@
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
     "babel-eslint": "^10.0.3",
+    "babel-preset-gatsby": "^0.2.27",
     "eslint": "^6.8.0",
     "eslint-config-react-app": "^5.1.0",
     "eslint-plugin-flowtype": "4.6.0",
@@ -106,8 +106,7 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,css,md}": [
       "prettier --config ./.prettierrc --write",
-      "eslint . --ext ts --ext tsx",
-      "git add"
+      "eslint . --ext ts --ext tsx"
     ]
   }
 }

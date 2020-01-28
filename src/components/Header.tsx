@@ -1,6 +1,4 @@
-/** @jsx jsx */
 import React from 'react';
-import { jsx } from '@emotion/core';
 import Navigation from './Navigation';
 import { DrawerProvider } from './Drawer/DrawerContext';
 import Data from '../data/global.json';

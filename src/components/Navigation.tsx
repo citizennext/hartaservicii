@@ -51,6 +51,7 @@ const Navigation: React.FC<Props> = props => {
             width="300px"
             placement="right"
             open={state}
+            closeButtonStyle={{ position: 'absolute', top: 50, right: 30 }}
             toggleHandler={openDrawer}
             closeButton={<Close size={22} style={{ color: 'white' }} />}>
             <nav className={props.navClass}>
