@@ -4,14 +4,15 @@ import Seo from '../components/Seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AfterHeader } from '../components/AfterHeader';
-
-export default ({ data }: any) => {
-  const { blog } = data.hasura;
+import { Hasura } from '../types/graphqlTypes';
+export default ({ data }: { data: { hasura: Hasura } }) => {
+  const { blog } = data?.hasura;
+  if (!blog) return;
   return (
     <>
-      <Seo postTitle={blog.title} isRepeatable={true} postImage={blog.image.url} summary={blog.summary} />
+      <Seo postTitle={blog.title} isRepeatable={true} postImage={blog?.image?.url} summary={blog.summary} />
       <Header />
-      <AfterHeader header={blog.header} />
+      <AfterHeader />
       <Footer />
     </>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import RcDrawer from 'rc-drawer';
 import 'rc-drawer/assets/index.css';
-import styled from '@emotion/styled';
 interface Props {
   /** ClassName of the Drawer */
   className?: string;
@@ -30,9 +29,9 @@ const Drawer: React.FC<Props> = ({ children, width, closeButton, closeButtonStyl
         level={null}
         handler={false}
         maskStyle={{ backgroundColor: 'rgba(151, 133, 133, 0.6)', opacity: 1 }}>
-        <DrawerClose onClick={toggleHandler} style={closeButtonStyle}>
+        <div onClick={toggleHandler} style={closeButtonStyle}>
           {closeButton}
-        </DrawerClose>
+        </div>
         {children}
       </RcDrawer>
       <div style={{ height: 26 }} onClick={toggleHandler}>
@@ -41,9 +40,5 @@ const Drawer: React.FC<Props> = ({ children, width, closeButton, closeButtonStyl
     </>
   );
 };
-const DrawerClose = styled.div`
-  position: absolute;
-  top: 50px;
-  right: 30px;
-`;
+
 export default Drawer;
