@@ -8,18 +8,15 @@ import { ToastProvider, useToasts } from 'react-toast-notifications';
 import Separator from '../components/Separator';
 import { AfterHeader } from '../components/AfterHeader';
 import { Hasura } from '../types/graphqlTypes';
-
-const BlogPost = ({
-  data,
-  pageContext,
-}: {
+type BlogProps = {
   data: { hasura: Hasura };
   pageContext: { previous: { slug: string; title: string }; next: { slug: string; title: string } };
-}): JSX.Element => {
+  location: Location;
+};
+const BlogPost = ({ data, pageContext, location }: BlogProps): JSX.Element => {
   const { blog } = data?.hasura;
   if (!blog) return <div />;
   const { previous, next } = pageContext;
-  const windowurl = window.location.href;
   const { addToast } = useToasts();
   const dateFormat = (date: Date) => {
     return new Date(date);
@@ -69,7 +66,7 @@ const BlogPost = ({
           </div>
         </div>
         <Separator color="snow" width="100px" />
-        <CopyToClipboard text={windowurl}>
+        <CopyToClipboard text={location.href}>
           <button
             className="share-button"
             onClick={() =>
@@ -87,15 +84,9 @@ const BlogPost = ({
   );
 };
 
-export default ({
-  data,
-  pageContext,
-}: {
-  data: { hasura: Hasura };
-  pageContext: { previous: { slug: string; title: string }; next: { slug: string; title: string } };
-}) => (
+export default ({ data, pageContext, location }: BlogProps) => (
   <ToastProvider placement="bottom-right">
-    <BlogPost pageContext={pageContext} data={data} />
+    <BlogPost pageContext={pageContext} data={data} location={location} />
   </ToastProvider>
 );
 
