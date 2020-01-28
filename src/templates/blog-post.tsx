@@ -1,26 +1,38 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Seo from '../components/Seo';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { AfterHeader } from '../components/pages/Noutati/AfterHeader';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import { ToastProvider, useToasts } from 'react-toast-notifications';
 import Separator from '../components/Separator';
+import { AfterHeader } from '../components/AfterHeader';
+import { Hasura } from '../types/graphqlTypes';
 
-const BlogPost = ({ data, pageContext }: any) => {
-  const { blog } = data.hasura;
+const BlogPost = ({
+  data,
+  pageContext,
+}: {
+  data: { hasura: Hasura };
+  pageContext: { previous: { slug: string; title: string }; next: { slug: string; title: string } };
+}): JSX.Element => {
+  const { blog } = data?.hasura;
+  if (!blog) return <div />;
   const { previous, next } = pageContext;
   const windowurl = window.location.href;
   const { addToast } = useToasts();
-  const dateFormat = (date: any) => {
+  const dateFormat = (date: Date) => {
     return new Date(date);
   };
+  function createMarkup() {
+    return { __html: blog && !!blog.content && !!blog.content.html ? blog.content.html : '' };
+  }
+
   return (
     <>
-      <Seo postTitle={blog.title} isRepeatable={true} postImage={blog.image.url} summary={blog.summary} />
+      <Seo postTitle={blog.title} isRepeatable={true} postImage={blog?.image?.url} summary={blog.summary} />
       <Header />
-      <AfterHeader header={blog.image.urlSharp.childImageSharp.fluid} />
+      <AfterHeader image={blog?.image?.urlSharp?.childImageSharp?.fluid} className="blog-single" />
       <div className="blog-single section interior">
         <h1>{blog.title}</h1>
         <span className="date">
@@ -31,7 +43,7 @@ const BlogPost = ({ data, pageContext }: any) => {
             day: 'numeric',
           })}
         </span>
-        <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.content.html }} />
+        <div className="blog-content" dangerouslySetInnerHTML={createMarkup()} />
         <div className="prev-next-buttons">
           {previous ? (
             <Link className="prev-button" to={`/noutati/${previous.slug}`}>
@@ -75,13 +87,17 @@ const BlogPost = ({ data, pageContext }: any) => {
   );
 };
 
-export default ({ data, pageContext }: any) => {
-  return (
-    <ToastProvider placement="bottom-right">
-      <BlogPost pageContext={pageContext} data={data} />
-    </ToastProvider>
-  );
-};
+export default ({
+  data,
+  pageContext,
+}: {
+  data: { hasura: Hasura };
+  pageContext: { previous: { slug: string; title: string }; next: { slug: string; title: string } };
+}) => (
+  <ToastProvider placement="bottom-right">
+    <BlogPost pageContext={pageContext} data={data} />
+  </ToastProvider>
+);
 
 export const pageQuery = graphql`
   query blogPostBySlug($slug: String!) {

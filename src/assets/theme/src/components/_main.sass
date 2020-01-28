@@ -69,3 +69,88 @@
 .wrapper
     @apply max-w-griddw
     @apply m-auto
+
+
+main
+    @apply p-6
+
+    @screen md
+        @apply max-w-griddw
+        @apply m-auto
+        @apply flex
+        @apply p-0
+
+    &.two-columns-left
+        padding-top: 1rem
+
+        &.sidebar-left-push
+            .main
+                @screen md
+                    @apply ml-1/4
+
+        .sidebar-left
+            @apply p-6
+
+            @screen md
+                @apply p-4
+
+            & > *
+                @apply w-full
+                display: inherit
+                text-align: center
+
+                @screen md
+                    text-align: left
+
+                img
+                    text-align: center
+                    display: inline
+
+                    @screen md
+                        text-align: left
+
+            @screen md
+                @apply w-1/4
+
+        .main
+            @apply p-6
+            @screen md
+                @apply p-4
+                @apply w-3/4
+
+            & > *
+                @apply w-full
+
+            .summary
+                margin-bottom: 1.5rem
+
+    &.two-columns-right
+        padding-top: 1rem
+
+        &.sidebar-right-push
+            .main
+                @screen md
+                    @apply mr-1/4
+
+    &.three-columns
+        padding-top: 1rem
+
+        &.sidebar-left-push
+            .main
+                @screen md
+                    @apply ml-1/4
+
+        &.sidebar-right-push
+            .main
+                @screen md
+                    @apply mr-1/4
+
+    &.one-column
+        @apply p-6
+
+        @screen md
+            @apply pt-4
+
+        @screen xl
+            @apply p-0
+            @apply pt-4

@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
+import React from 'react';
 import Data from '../data/global.json';
 import logoLight from '../assets/images/logo_light.svg';
 import Navigation from './Navigation';

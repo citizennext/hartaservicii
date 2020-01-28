@@ -27,7 +27,8 @@ module.exports = {
 		},
 		extend: {
 			margin: {
-				'36': '9rem'
+				'36': '9rem',
+				'1/4': '25%'
 			},
 			borderWidth: {
 				'6': '6px'
