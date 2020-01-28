@@ -12,7 +12,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
-        <Separator color="snow" />
+        <Separator classSeparator="hidden md:block" color="snow" />
         <div className="interior">
           <Link to="/" title="Back to Homepage">
             <img src={Logo} alt="Logo" />
@@ -21,6 +21,7 @@ export default class Header extends React.Component {
             <Navigation navClass="nav-header" nav={Data.page} drawer={true} />
           </DrawerProvider>
         </div>
+        <Separator classSeparator="md:hidden" color="burg" width="88vw" />
       </header>
     );
   }
