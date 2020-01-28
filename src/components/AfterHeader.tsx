@@ -11,12 +11,12 @@ type Props = {
 export function AfterHeader({ header, image, className }: Props) {
   return (
     <div className={`page-header ${className}`}>
-      <Separator color="burg" />
+      <Separator classSeparator="blog-only" color="burg" />
       <div className="wrapper">
         <span>{header}</span>
         {image && <Img fluid={image} />}
       </div>
-      <Separator color="burg" bottom="-6" />
+      <Separator classSeparator="blog-only" color="burg" bottom="-6" />
     </div>
   );
 }
