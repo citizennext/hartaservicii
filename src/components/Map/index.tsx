@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { LatLngTuple } from 'leaflet';
 import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
+// @ts-ignore
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
 import PopUps from './PopUps';

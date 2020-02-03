@@ -2,21 +2,17 @@ import React from 'react';
 import Seo from '../components/Seo';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
-import Footer from '../components/Footer';
-import { AfterHeader } from '../components/AfterHeader';
-import { ComingSoon } from '../components/ComingSoon';
+import HartaContent from '../components/pages/Harta/Content';
 
 export default class HartaPage extends React.Component {
   render() {
     return (
       <div>
-        <Seo bodyClassName="page-maps" />
+        <Seo bodyClassName="page-harta" />
         <Header />
-        <AfterHeader header={'... in lucru'} />
-        <Layout left={true}>
-          <ComingSoon />
+        <Layout>
+          <HartaContent />
         </Layout>
-        <Footer />
       </div>
     );
   }
