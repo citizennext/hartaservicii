@@ -15,9 +15,9 @@ function ProgressBar(props: Props) {
   const viewBox = `0 0 ${sqSize} ${sqSize}`;
 
   return (
-    <div className={`${props.classProgressBar}`}>
-      <div style={{ maxWidth: '320px' }} className="relative xl:m-auto">
-        <img className="progressbar-image md:absolute" src={siluette} />
+    <div className={`progress-bar ${props.classProgressBar}`}>
+      <div className="relative m-auto">
+        <img className="progressbar-image absolute" src={siluette} alt="Social Worker Icon" />
         <svg width={props.sqSize} height={props.sqSize} viewBox={viewBox} className="xl:m-auto">
           <line
             className="circle-background"
@@ -56,9 +56,9 @@ function ProgressBar(props: Props) {
           <path d="M0.355103 4.22156H294.645" stroke="#968584" strokeWidth="7" strokeMiterlimit="10" />
         </svg>
       </div>
-      <p className="circle-total pt-4">{`${props.firstBar}`}</p>
-      <p className="circle-total-amount">{`${props.secondBar}`}</p>
-      <p className="circle-total pb-6">Centre servicii sociale</p>
+      <p className="progress-first-amount">{`${props.firstBar}`}</p>
+      <p className="progress-second-amount">{`${props.secondBar}`}</p>
+      <p className="progress-copy">Centre servicii sociale</p>
     </div>
   );
 }
@@ -68,6 +68,7 @@ ProgressBar.defaultProps = {
   firstBar: 21,
   secondBar: 538,
   strokeWidth: 42,
+  classProgressBar: '',
 };
 
 export default ProgressBar;

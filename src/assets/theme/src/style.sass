@@ -1,17 +1,13 @@
 @import "~tailwindcss/base"
 @import '~react-leaflet-markercluster/dist/styles.min.css'
+@import "lib/slick"
 @import "variables"
 @import "fonts"
 @import "typography"
 @import "keyframes"
 @import "mixin"
 @import "extends"
-@import "form"
-@import "header"
-@import "footer"
-@import "main"
-@import "nav"
-@import "map"
+@import "components"
 @import "custom"
 
 body
@@ -67,19 +63,36 @@ a
 /* elements */
 .separator
     @apply absolute
+    width: 100%
+    width: -webkit-fill-available
+
+.sl-top
     @apply w-full
+    height: 10px
+    @apply rounded-t-full
+    @apply border-t-8
+    @apply border-snow
+    margin: -0.5rem auto 60px
+    @screen md
+        width: 351px
+    @screen xl
+        width: 470px
+
+    .list-image
+        width: 143px
+        height: 143px
 
 ol
     counter-reset: li
     margin-left: 3.7em
     @screen md
-        margin-left: 0
+        @apply mx-8
 
     li
         @apply relative
         font-family: KoHo
         @screen md
-            @apply ml-8
+            @apply ml-12
 
         @screen xl
             @apply ml-24
@@ -103,38 +116,63 @@ ol
             left: -2.3em
 
 #search
-    width: 84.8vw
-    max-width: 318px
+    font-family: KoHo
+    width: 88vw
+    height: 50px
+    left: 5vw
 
     @screen md
+        height: 52px
         max-width: 595px
-        left: calc(50% - 297.5px)
+        left: 0
 
     @screen xl
+        height: 62px
         max-width: 770px
-        left: calc(50% - 385px)
+        left: 0
+
+    &[placeholder], &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder
+    text-overflow: ellipsis
+
+    &::-webkit-input-placeholder
+        @apply text-black
+    &::-moz-placeholder
+        @apply text-black
+    &:-moz-placeholder
+        @apply text-black
+    &:-ms-input-placeholder
+        @apply text-black
 
 .search-icon
     @apply relative
     @apply w-screen
     @screen md
-        left: -50%
+        left: -37.5%
+
+    @screen xl
+        left: -14%
 
     &:before
         content: ''
         background-image: url('../../images/icon_search.svg')
-        background-size: 22px 22px
-        height: 22px
-        width: 22px
+        background-size: 22.5px 22.5px
+        height: 22.5px
+        width: 22.5px
         position: absolute
         background-repeat: no-repeat
-        top: -86px
-        left: 3.5%
+        top: -82px
+        left: 9.5vw
         z-index: 9
         @screen md
-            left: 13.5%
+            background-size: 23.5px 23.5px
+            height: 23.5px
+            width: 23.5px
+            left: 2%
         @screen xl
-            left: 24.5%
+            background-size: 27px 27px
+            height: 27px
+            width: 27px
+            left: 1%
 
 
 /* Circular Progress Bar */
@@ -153,25 +191,36 @@ ol
     stroke: #CDE5C0
 
 .circle-public
-    @apply text-3xxl
+    @apply text-5xl
     @apply font-thin
     fill: #CDE5C0
 
 .circle-private
     @apply font-thin
-    @apply text-3xxl
+    @apply text-5xl
     fill: #6FBAB6
 
-.circle-total
-    @apply text-sm
+.circle-total,.progress-copy
+    @apply text-base
     @apply text-center
+    @apply m-auto
+    max-width: 220px
 
-.circle-total-amount
+.circle-total-amount,.progress-first-amount,.progress-second-amount
     @apply leading-tight
-    @apply text-3xl
+    @apply text-5xl
     @apply font-hairline
     @apply text-burg
     @apply text-center
+
+.progress-first-amount,.progress-second-amount
+    @apply inline-block
+
+.progress-first-amount
+    margin-left: 140px
+
+.progress-second-amount
+    margin-left: 28px
 
 /* Progress Bar */
 .progressbar-image
@@ -179,13 +228,23 @@ ol
 
 /* Blog */
 .blog-post
-    img
+    max-width: 370px
+    @screen md
+        @apply m-auto
+
+    .blog-image
         @apply hidden
         @screen md
             @apply block
 
     &:first-child
-        img
+        .blog-image
+            @apply block
+
+    &:nth-child(3)
+        @screen md
+            @apply hidden
+        @screen xl
             @apply block
 
     .excerpt
@@ -193,7 +252,17 @@ ol
 
     .date
         @apply text-celeste
-        @apply text-xs
+        @apply text-base
+        @apply pb-2
+
+    .separator
+        max-width: 80%
+        @screen md
+            @apply bg-snow
+    //
+    //.blog-bottom
+    //    @apply -mb-12
+
 
 
 /* sections */
@@ -202,7 +271,11 @@ ol
 
     .interior
         @apply relative
-        @apply mx-8
+        @apply mx-6
+
+        @screen md
+            @apply mx-auto
+
         @screen xl
             @apply mx-auto
 
@@ -218,17 +291,90 @@ ol
         left: auto
 
 #hero
+    @apply mb-40
     @apply bg-snow
 
-    img
+    .hero-image
+        @apply w-screen
+        height: 104vw
+        margin-left: calc(-50vw + 50%)
+
         @screen md
-            min-height: 410px
+            @apply w-2/3
+            height: 57.03vw
+            max-height: 410px
+            @apply ml-0
+            @apply relative
+
+        @screen xl
+            @apply w-3/4
+            max-height: 500px
+            height: auto
+            max-width: 870px
+
+        .separator
+            @screen md
+                z-index: 9
+            @screen xl
+                @apply hidden
+
+        .gatsby-image-wrapper
+            @screen xl
+                max-width: 870px
+                max-height: 500px
+
+            div
+                padding-bottom: 104% !important
+
+                @screen md
+                    padding-bottom: 86% !important
+
+                @screen xl
+                    padding-bottom: 57.4713% !important
+                    max-height: 500px
 
 .section-list
     @apply relative
 
-@import "tailwindcss/components"
+.progress-bar > div
+    width: 310px
+    max-width: 84vw
 
+@import "~tailwindcss/components"
+
+#contact
+    .illu-logo
+        @apply mb-4
+        height: 213px
+        z-index: 1
+
+    .no-type
+        z-index: 0
+        width: 160px
+        @apply -ml-12
+        @apply -mt-24
+
+        @screen md
+            @apply absolute
+            left: calc(50% - 152px)
+            width: 304px
+            @apply -mt-56
+            @apply ml-0
+
+        @screen xl
+            left: calc(100% - 152px)
+
+    .contact-left
+        h3
+            @screen md
+                z-index: 2
+                left: 95%
+                top: 35%
+
+    .contact-right
+        z-index: 2
+
+.button,
 button
     @apply bg-celeste
     @apply rounded-full
@@ -242,16 +388,17 @@ button
     position: relative
     @apply m-auto
     font-family: Montserrat
+    text-decoration: none
+    display: block
+
     @screen md
         max-width: 320px
 
     &.section-button
         @apply absolute
+        left: calc(50% - 160px)
 
-        @screen md
-            left: calc(50% - 160px)
-
-    &:not(.small):after
+    &:not(.small):not(.slick-*):after
         content: ''
         background-image: url('../../images/icon_arroww.svg')
         background-size: 22px 22px
@@ -266,20 +413,41 @@ button
     &:hover
         @apply bg-leaf
 
-    &.social:before
-        content: ''
-        background-image: url('../../images/icon_FB.svg')
-        background-size: 15px 29px
-        position: absolute
-        background-repeat: no-repeat
-        bottom: 1px
-        left: 1px
-        @apply bg-bottom
-        @apply border-white
-        @apply border-2
-        @apply rounded-full
-        @apply pt-10
-        @apply px-5
+    &.social,&.social-nav
+        &:before
+            content: ''
+            background-image: url('../../images/icon_FB.svg')
+            background-size: 15px 29px
+            position: absolute
+            background-repeat: no-repeat
+            bottom: 1px
+            left: 1px
+            @apply bg-bottom
+            @apply border-white
+            @apply border-2
+            @apply rounded-full
+            @apply pt-10
+            @apply px-5
+        &:after
+            $size: 38px
+            content: ''
+            background: url('../../images/icon_arroww.svg') no-repeat 50% / 26px
+            position: absolute
+            top: 4px
+            right: 6px
+            z-index: 1
+            width: $size
+            height: $size
+
+    &.social-nav
+        position: initial
+        width: auto
+        &:after
+            display: none
+        &:before
+            right: 7.2vw
+            left: initial
+            bottom: 25.33vw
 
     &.small
         @apply text-sm
@@ -304,10 +472,14 @@ button
         @apply p-4
         height: 38px
         width: 38px
-        left: 88%
-        bottom: 8%
+        @apply mr-0
+        margin-top: -3rem
+        margin-left: 288px
+
         @screen md
-            left: 0
+            @apply mb-0
+            margin-left: 316px
+            margin-top: 0
 
     &.arrowonly:after
         content: ''
@@ -320,29 +492,39 @@ button
         top: 6px
         right: 6px
 
-@import "tailwindcss/utilities"
+    &.share-button
+        @apply bg-transparent
+        &:before
+            content: ''
+            background-image: url('../../images/icon_share.svg')
+            height: 50px
+            width: 50px
+            position: absolute
+            background-repeat: no-repeat
+            background-position: 12px center
+            top: 6px
+            left: 6px
+            @apply bg-snow
+            @apply p-6
+            @apply rounded-full
 
-header
-    margin-top: 20px
-    height: 80px
-
-    .menu_icon
-        float: right
-        margin-top: 26px
-        margin-right: 26px
-
-    // @todo Seco -> navigation show on desktop
-    //.nav-header
-    //    @apply hidden
+@import "~tailwindcss/utilities"
 
 footer
     @apply bg-burg
     @apply text-snow
     @apply font-sans
 
+    .text-copyright
+        @apply text-white
+
     a
         @apply text-snow
         @apply font-semibold
+
+    li
+        a
+            text-decoration: none
 
     li:before
         @screen md

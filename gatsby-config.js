@@ -9,8 +9,6 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-theme-ui',
-    'gatsby-theme-style-guide',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
     {
@@ -42,6 +40,14 @@ module.exports = {
     'gatsby-plugin-typescript',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    // {
+    //   resolve: 'gatsby-plugin-robots-txt',
+    //   options: {
+    //     host: 'https:/hartasociala.ro',
+    //     sitemap: 'https:/hartasociala.ro/sitemap.xml',
+    //     policy: [{ userAgent: '*', allow: '/' }]
+    //   }
+    // },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -81,7 +87,7 @@ module.exports = {
       resolve: `gatsby-plugin-sass`,
       options: {
         // Configure SASS to process Tailwind
-        postCssPlugins: [require('tailwindcss')],
+        postCssPlugins: [require('tailwindcss'), require('./tailwind.config.js')],
       },
     },
     {
@@ -91,7 +97,7 @@ module.exports = {
         preferCanvas: true,
         maxWidth: '100%',
         maxHeight: 600,
-      }
+      },
     },
     {
       resolve: 'gatsby-source-graphql',
@@ -101,9 +107,9 @@ module.exports = {
         url: process.env.GATSBY_HASURA_GRAPHQL_URL,
         refetchInterval: 60,
         headers: {
-          "content-type": `application/json`
-        }
-      }
-    }
+          'content-type': `application/json`,
+        },
+      },
+    },
   ],
 };

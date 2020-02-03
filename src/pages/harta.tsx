@@ -1,20 +1,20 @@
-/** @jsx jsx */
 import React from 'react';
-import { jsx } from '@emotion/core';
 import Seo from '../components/Seo';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
-import TestContent from '../components/pages/Harta/Content';
 import Footer from '../components/Footer';
+import { AfterHeader } from '../components/AfterHeader';
+import { ComingSoon } from '../components/ComingSoon';
 
 export default class HartaPage extends React.Component {
   render() {
     return (
       <div>
-        <Seo page="test" />
+        <Seo bodyClassName="page-maps" />
         <Header />
-        <Layout>
-          <TestContent />
+        <AfterHeader header={'... in lucru'} />
+        <Layout left={true}>
+          <ComingSoon />
         </Layout>
         <Footer />
       </div>

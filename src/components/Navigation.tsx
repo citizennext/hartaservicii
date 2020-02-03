@@ -1,11 +1,9 @@
-/** @jsx jsx */
-import React, { Fragment, useContext } from 'react';
-import { jsx } from 'theme-ui';
+import React, { useContext } from 'react';
 import { Link } from 'gatsby';
 import Drawer from './Drawer/Drawer';
 import { DrawerContext } from './Drawer/DrawerContext';
 import { useWindowSize } from '../hooks/useWindowSize';
-import Menu from '../assets/images/icon_menu_mobile.svg';
+import { Close, Menu } from './Icons';
 
 type NavItem = {
   label: string;
@@ -35,16 +33,22 @@ const Navigation: React.FC<Props> = props => {
   const openDrawer = () => {
     dispatch((current: boolean) => !current);
   };
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const windowSize = useWindowSize();
 
   return (
-    <Fragment>
+    <>
       {props.drawer && windowSize.width && windowSize.width < 768 ? (
         <div className="hamburger-menu">
-          <img className="menu_icon" src={Menu} />
-          <Drawer className={props.navClass} width="300px" placement="right" open={state} toggleHandler={openDrawer}>
-            <nav>
+          <Menu className="menu_icon text-brown" />
+          <Drawer
+            className={props.navClass}
+            width="300px"
+            placement="right"
+            open={state}
+            closeButtonStyle={{ position: 'absolute', top: 50, right: 30 }}
+            toggleHandler={openDrawer}
+            closeButton={<Close size={22} style={{ color: 'white' }} />}>
+            <nav className={props.navClass}>
               <ul className="navigation">
                 {Object.values(nav)
                   .filter(item => item.navigation.nav)
@@ -57,6 +61,13 @@ const Navigation: React.FC<Props> = props => {
                   ))}
               </ul>
             </nav>
+            <a
+              href="https://www.facebook.com/hartaserviciilorsociale"
+              title="Facebook Page"
+              target="_blank"
+              rel="noreferrer noopener">
+              <button className="social-nav"></button>
+            </a>
           </Drawer>
         </div>
       ) : (
@@ -74,7 +85,7 @@ const Navigation: React.FC<Props> = props => {
           </ul>
         </nav>
       )}
-    </Fragment>
+    </>
   );
 };
 
