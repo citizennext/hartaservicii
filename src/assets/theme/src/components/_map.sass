@@ -1,24 +1,15 @@
 @import '~react-leaflet-markercluster/dist/styles.min.css'
 
-.page-harta
-    main.one-column
-        @apply w-full
-        @apply max-w-full
-        @apply m-0
-        position: fixed
-        top: 0
-        right: 0
-        bottom: 0
-        left: 0
-        padding-top: 80px
-
-        .main
-            @apply w-full
-
-    .leaflet-container
-        @apply w-full
-        height: 100%
-        display: block
+.leaflet-container
+    @apply w-full
+    @apply max-w-full
+    @apply m-0
+    position: fixed
+    top: 80px
+    right: 0
+    bottom: 0
+    left: 0
+    padding-top: 80px
 
 #map-marker-popup
     position: fixed
@@ -28,7 +19,6 @@
     width: 376px
     height: calc(100% - 127px)
     @apply bg-white
-    //background-color: white
 
     .close-map-marker-popup
         cursor: pointer
