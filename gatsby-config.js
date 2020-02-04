@@ -96,7 +96,7 @@ module.exports = {
         linkStyles: true,
         preferCanvas: true,
         maxWidth: '100%',
-        maxHeight: 600,
+        maxHeight: '100%'
       },
     },
     {

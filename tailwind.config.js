@@ -40,7 +40,8 @@ module.exports = {
 				'screen': '100vw',
 				'gridt': '717px',
 				'griddw': '1206px',
-				'gridd': '1036px'
+				'gridd': '1036px',
+				'full': '100%'
 			},
 			inset: {
 				'1/4': '25%'

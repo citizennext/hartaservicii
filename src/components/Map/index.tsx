@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { LatLngTuple } from 'leaflet';
 import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
-// @ts-ignore
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
 import PopUps from './PopUps';
@@ -81,7 +80,7 @@ export default class Providers extends Component<{}, State> {
         render={data => {
           const providers = data.hasura.providers as Provider[];
           return (
-            <div>
+            <>
               {this.state.selectedItem && this.state.active && (
                 <PopUps item={this.state.selectedItem} onClose={this.handleClose} />
               )}
@@ -103,7 +102,7 @@ export default class Providers extends Component<{}, State> {
                   ))}
                 </MarkerClusterGroup>
               </Map>
-            </div>
+            </>
           );
         }}
       />

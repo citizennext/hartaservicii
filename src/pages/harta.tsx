@@ -7,13 +7,13 @@ import HartaContent from '../components/pages/Harta/Content';
 export default class HartaPage extends React.Component {
   render() {
     return (
-      <div>
+      <>
         <Seo bodyClassName="page-harta" />
         <Header />
         <Layout>
           <HartaContent />
         </Layout>
-      </div>
+      </>
     );
   }
 }
