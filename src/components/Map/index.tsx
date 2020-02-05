@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Leaflet, { LatLngTuple } from 'leaflet';
 import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
-// @ts-ignore
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
 import PopUps from './PopUps';
@@ -42,7 +41,7 @@ export default class Providers extends Component<{}, State> {
     active: false,
   };
 
-  createMarkerClusterCustomIcon = (cluster: MarkerClusterGroup) => {
+  createMarkerClusterCustomIcon = (cluster: any) => {
     const size = cluster.getChildCount();
     return Leaflet.divIcon({
       html: `<div >
