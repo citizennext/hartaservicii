@@ -1,0 +1,11 @@
+{
+    "category": [
+        { "value": "all", "label": "All services" },
+        { "value": "first", "label": "Social Service" }
+    ],
+
+    "age": [
+        { "value": "all", "label": "All services" },
+        { "value": "first", "label": "Social Service" }
+    ]
+}

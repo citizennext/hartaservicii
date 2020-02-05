@@ -27,4 +27,12 @@ const Close = (props: any) => (
   </svg>
 );
 
-export { Menu, Close };
+const FilterMenu = (props: any) => (
+  <div className={props.className}>
+    <svg width={props.size} height={props.size} viewBox={`0 0 ${props.size} ${props.size}`} fill="none">
+      <path d="M2.28906 2L10.2891 10L2.28906 18" stroke="white" strokeWidth="4" strokeMiterlimit="10" strokeLinecap="round"/>
+    </svg>
+  </div>
+);
+
+export { Menu, Close, FilterMenu };
