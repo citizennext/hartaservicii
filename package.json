@@ -75,6 +75,7 @@
     "@graphql-codegen/typescript-operations": "^1.11.2",
     "@types/react-copy-to-clipboard": "^4.3.0",
     "@types/react-helmet": "^5.0.15",
+    "@types/react-leaflet-markercluster": "^2.0.0",
     "@types/react-stickynode": "^2.1.0",
     "@types/react-toast-notifications": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
