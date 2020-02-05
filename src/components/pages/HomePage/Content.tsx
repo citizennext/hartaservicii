@@ -1,22 +1,20 @@
-/** @jsx jsx */
 import React, { Fragment } from 'react';
-import { jsx } from '@emotion/core';
 import Hero from './Sections/Hero';
-import Section2 from './Sections/Section2';
 import Statistics from './Sections/Statistics';
-import Blog from './Sections/Blog';
-import Section5 from './Sections/Section5';
+// import Blog from './Sections/Blog';
 import Contact from './Sections/Contact';
+import Lists from './Sections/Lists';
+import Partners from './Sections/Partners';
 
 export default class Content extends React.Component {
   render() {
     return (
       <Fragment>
         <Hero />
-        <Section2 />
+        <Lists />
         <Statistics />
-        <Blog />
-        <Section5 />
+        {/* <Blog /> */}
+        <Partners />
         <Contact />
       </Fragment>
     );

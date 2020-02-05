@@ -1,0 +1,66 @@
+.leaflet-container
+    @apply w-full
+    @apply max-w-full
+    @apply m-0
+    position: fixed
+    top: 80px
+    right: 0
+    bottom: 0
+    left: 0
+    padding-top: 80px
+
+    .marker-cluster-large,
+    .marker-cluster-large div
+        background-color: transparent
+
+    .marker-cluster-medium,
+    .marker-cluster-medium div
+        background-color: transparent
+
+    .marker-cluster-small,
+    .marker-cluster-small div
+        background-color: transparent
+
+    .marker-cluster-medium
+        width: auto !important
+
+    .marker-cluster-medium > div
+        position: absolute
+        bottom: 0
+        text-align: center
+
+        .marker-cluster-label
+            display: none
+
+        &:hover
+            .marker-cluster-label
+                display: block
+                position: absolute
+                top: -30px
+                left: 0
+                right: 0
+                margin: 0
+                padding: 5px
+                background: #968585
+                border-radius: 30px
+                color: white
+
+#map-marker-popup
+    position: fixed
+    top: 127px
+    left: 0
+    z-index: 9999
+    width: 376px
+    height: calc(100% - 127px)
+    @apply bg-white
+
+    .close-map-marker-popup
+        cursor: pointer
+
+    header,
+    main,
+    footer
+        padding: 15px
+
+    section
+        width: 100%

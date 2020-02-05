@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import CircularProgressBar from '../../../CircularProgressBar';
 import ProgressBar from '../../../ProgressBar';
+import HsSlider from '../../../Slider';
 // import GradientMap from '../../../GradientMap';
 const query = graphql`
   query {
@@ -41,6 +42,31 @@ const query = graphql`
 `;
 
 function Statistics() {
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    initialSlide: 1,
+    responsive: [
+      {
+        breakpoint: 1025,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   return (
     <StaticQuery
       query={query}
@@ -56,29 +82,25 @@ function Statistics() {
         return (
           <div id="statistics" className="section circularprogressbar">
             <div className="bg-snow py-8 mb-32 xl:mb-56">
-              <div className="md:flex">
-                <CircularProgressBar
-                  classCircularBar="md:w-1/2 xl:w-1/3"
-                  firstBar={publicServices.aggregate.count}
-                  secondBar={privateServices.aggregate.count}
-                  firstBarLabel="publice"
-                  secondBarLabel="private"
-                  title="Centre servicii sociale lincențiate pe tot teritoriul țării"
-                />
-                <ProgressBar
-                  classProgressBar="hidden md:block md:w-1/2 xl:w-1/3 xl:m-auto"
-                  firstBar={homelessServices.aggregate.count}
-                  secondBar={childServices.aggregate.count}
-                />
-                <CircularProgressBar
-                  classCircularBar="md:w-1/2 xl:w-1/3"
-                  firstBar={publicSuppliers.aggregate.count}
-                  secondBar={privateSuppliers.aggregate.count}
-                  firstBarLabel="publice"
-                  secondBarLabel="private"
-                  title="Furnizori de servicii sociale acreditați pe tot teritoriul țării"
-                />
-                {/* <GradientMap classGradientMap="hidden xl:block xl:w-1/3 xl:m-auto" /> */}
+              <div className="xl:max-w-griddw xl:m-auto">
+                <HsSlider settings={settings}>
+                  <CircularProgressBar
+                    firstBar={publicServices.aggregate.count}
+                    secondBar={privateServices.aggregate.count}
+                    firstBarLabel="publice"
+                    secondBarLabel="private"
+                    title="Centre servicii sociale lincențiate pe tot teritoriul țării"
+                  />
+                  <ProgressBar firstBar={homelessServices.aggregate.count} secondBar={childServices.aggregate.count} />
+                  <CircularProgressBar
+                    firstBar={publicSuppliers.aggregate.count}
+                    secondBar={privateSuppliers.aggregate.count}
+                    firstBarLabel="publice"
+                    secondBarLabel="private"
+                    title="Furnizori de servicii sociale acreditați pe tot teritoriul țării"
+                  />
+                  {/* <GradientMap classGradientMap="hidden xl:block xl:w-1/3 xl:m-auto" /> */}
+                </HsSlider>
               </div>
               <button className="section-button my-1">Toate statisticile</button>
             </div>

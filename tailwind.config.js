@@ -12,12 +12,13 @@ module.exports = {
 			lightbrown: '#C4C3C3',
 			snow: '#EDF7EF',
 			burg: '#978585',
+			error: '#cc0000'
 		},
 		screens: {
 			sm: '640px',
 			md: '768px',
 			lg: '1024px',
-			xl: '1280px',
+			xl: '1280px'
 		},
 		listStyleType: {
 			none: 'none',
@@ -27,18 +28,20 @@ module.exports = {
 		extend: {
 			margin: {
 				'36': '9rem',
+				'1/4': '25%'
 			},
 			borderWidth: {
-				'6': '6px',
+				'6': '6px'
 			},
 			spacing: {
-				's': '6px',
+				's': '6px'
 			},
 			maxWidth: {
 				'screen': '100vw',
 				'gridt': '717px',
 				'griddw': '1206px',
-				'gridd': '1036px'
+				'gridd': '1036px',
+				'full': '100%'
 			},
 			inset: {
 				'1/4': '25%'
@@ -52,4 +55,4 @@ module.exports = {
 	},
 	variants: {},
 	plugins: []
-}
+};

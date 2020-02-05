@@ -1,6 +1,4 @@
-/** @jsx jsx */
 import React from 'react';
-import { jsx } from '@emotion/core';
 import Navigation from './Navigation';
 import { DrawerProvider } from './Drawer/DrawerContext';
 import Data from '../data/global.json';
@@ -12,15 +10,16 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
-        <Separator color="snow" />
+        <Separator classSeparator="hidden md:block" color="snow" />
         <div className="interior">
-          <Link to="/">
-            <img src={Logo} alt="" />
+          <Link to="/" title="Back to Homepage">
+            <img src={Logo} alt="Logo" />
           </Link>
           <DrawerProvider>
             <Navigation navClass="nav-header" nav={Data.page} drawer={true} />
           </DrawerProvider>
         </div>
+        <Separator classSeparator="md:hidden" color="burg" width="88vw" />
       </header>
     );
   }

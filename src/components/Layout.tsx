@@ -1,32 +1,35 @@
-/** @jsx jsx */
 import React from 'react';
-import { jsx } from '@emotion/core';
 import '../assets/theme/src/style.sass';
 
 type Props = {
-  children?: React.ReactNode;
-  left?: React.ReactNode;
-  right?: React.ReactNode;
+  left?: React.ReactNode | boolean;
+  right?: React.ReactNode | boolean;
 };
 
-const Layout: React.FC<Props> = props => {
+const Layout: React.FC<Props> = ({ left, right, children }) => {
   const contentColumns = () => {
-    if (props.left && props.right) {
-      return '3columns';
-    } else if (props.left && !props.right) {
-      return '2coluns-left';
-    } else if (!props.left && props.right) {
-      return '2coluns-right';
+    let sidebarLeftBoolean = '',
+      sidebarRightBoolean = '';
+
+    if (typeof left === 'boolean') sidebarLeftBoolean = ' sidebar-left-push';
+    if (typeof right === 'boolean') sidebarRightBoolean = ' sidebar-right-push';
+
+    if (left && right) {
+      return 'three-columns' + sidebarLeftBoolean + sidebarRightBoolean;
+    } else if (left && !right) {
+      return 'two-columns-left' + sidebarLeftBoolean;
+    } else if (!left && right) {
+      return 'two-columns-right' + sidebarRightBoolean;
     } else {
-      return '1column';
+      return 'one-column';
     }
   };
 
   return (
     <main className={contentColumns()}>
-      {props.left && <div className="sidebar-left">{props.left}</div>}
-      <div className="main">{props.children}</div>
-      {props.right && <div className="sidebar-right">{props.right}</div>}
+      {typeof left !== 'boolean' && left && <div className="sidebar-left">{left}</div>}
+      <div className="main">{children}</div>
+      {typeof right !== 'boolean' && right && <div className="sidebar-right">{right}</div>}
     </main>
   );
 };
