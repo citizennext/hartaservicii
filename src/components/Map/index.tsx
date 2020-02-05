@@ -36,19 +36,13 @@ export default class Providers extends Component<{}, State> {
     lat: 45.947808,
     lng: 25.091419,
     zoom: 7,
-    scrollWheelZoom: false,
+    scrollWheelZoom: true,
     pane: 'markerPane',
     selectedItem: undefined,
-    active: true,
+    active: false,
   };
 
-  iconMarker = new Leaflet.Icon({
-    iconUrl: require('../../assets/images/map_icon_marker.svg'),
-    iconSize: [25, 30],
-    className: 'popup-false',
-  });
-
-  createClusterCustomIcon = (cluster: any) => {
+  createMarkerClusterCustomIcon = (cluster: MarkerClusterGroup) => {
     return Leaflet.divIcon({
       html: `<div>
           <span class="marker-cluster-label">${cluster.getChildCount()}</span>
@@ -57,6 +51,17 @@ export default class Providers extends Component<{}, State> {
           </svg>
         </div>`,
       className: 'marker-cluster-medium',
+    });
+  };
+
+  createMarkerCustomIcon = () => {
+    return Leaflet.divIcon({
+      html: `<div>
+          <svg width="25" height="30" viewBox="0 0 25 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.275 0C9.01947 0 5.89727 1.29326 3.59526 3.59526C1.29326 5.89727 0 9.01947 0 12.275C0.00953215 16.0268 1.15573 19.6877 3.2875 22.775C5.65916 25.8706 8.74207 28.3489 12.275 30C15.8024 28.3456 18.8804 25.8677 21.25 22.775C23.3862 19.6891 24.5368 16.0281 24.55 12.275C24.55 9.01947 23.2567 5.89727 20.9547 3.59526C18.6527 1.29326 15.5305 0 12.275 0V0ZM12.275 17.825C11.1773 17.825 10.1043 17.4995 9.19159 16.8897C8.27889 16.2798 7.56753 15.413 7.14747 14.3989C6.7274 13.3848 6.61749 12.2688 6.83164 11.1922C7.04579 10.1157 7.57438 9.12674 8.35056 8.35056C9.12674 7.57438 10.1157 7.04579 11.1922 6.83164C12.2688 6.61749 13.3848 6.7274 14.3989 7.14747C15.413 7.56753 16.2798 8.27889 16.8897 9.19159C17.4995 10.1043 17.825 11.1773 17.825 12.275C17.8217 13.7459 17.2359 15.1557 16.1958 16.1958C15.1557 17.2359 13.7459 17.8217 12.275 17.825Z" fill="#978585"/>
+          </svg>
+        </div>`,
+      className: 'marker',
     });
   };
 
@@ -98,35 +103,38 @@ export default class Providers extends Component<{}, State> {
         query={query}
         render={data => {
           const providers = data.hasura.providers as Provider[];
-          return (
-            <>
-              {this.state.selectedItem && this.state.active && (
-                <PopUps item={this.state.selectedItem} onClose={this.handleClose} />
-              )}
-              <Map
-                center={position}
-                zoom={this.state.zoom}
-                maxZoom={20}
-                scrollWheelZoom={this.state.scrollWheelZoom}
-                className="markercluster-map">
-                <TileLayer
-                  attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createClusterCustomIcon}>
-                  {Object.values(providers).map((item, index) => (
-                    <Marker
-                      position={item.coordinates}
-                      key={`marker-${item.id}-${index}`}
-                      icon={this.iconMarker}
-                      onClick={this.handleClick(item)}>
-                      <Tooltip>{item.name}</Tooltip>
-                    </Marker>
-                  ))}
-                </MarkerClusterGroup>
-              </Map>
-            </>
-          );
+          if (typeof window !== 'undefined') {
+            return (
+              <div>
+                {this.state.selectedItem && this.state.active && (
+                  <PopUps item={this.state.selectedItem} onClose={this.handleClose} />
+                )}
+                <Map
+                  center={position}
+                  zoom={this.state.zoom}
+                  maxZoom={20}
+                  scrollWheelZoom={this.state.scrollWheelZoom}
+                  className="markercluster-map">
+                  <TileLayer
+                    attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
+                    {Object.values(providers).map((item, index) => (
+                      <Marker
+                        position={item.coordinates}
+                        key={`marker-${item.id}-${index}`}
+                        icon={this.createMarkerCustomIcon()}
+                        onClick={this.handleClick(item)}>
+                        <Tooltip>{item.name}</Tooltip>
+                      </Marker>
+                    ))}
+                  </MarkerClusterGroup>
+                </Map>
+              </div>
+            );
+          }
+          return null;
         }}
       />
     );
