@@ -59,6 +59,7 @@
     "react-leaflet-markercluster": "^2.0.0-rc3",
     "react-netlify-form": "^2.1.5",
     "react-slick": "^0.25.2",
+    "react-star-rating-component": "^1.4.1",
     "react-stickynode": "^2.1.1",
     "react-toast-notifications": "^2.4.0",
     "tailwindcss": "^1.1.4",
