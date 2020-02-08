@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { LatLngTuple } from 'leaflet';
 import iconClose from '../../assets/images/icon_Close.svg';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
+// @ts-ignore
 import StarRatingComponent from 'react-star-rating-component';
 import iconShare from '../../assets/images/icon_share.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
@@ -27,12 +28,22 @@ type Props = {
 };
 
 type State = {
-  active: boolean;
+  rating: number;
 };
 
 export default class Providers extends Component<Props, State> {
+  state = {
+    rating: 1,
+  };
+
+  onStarClick(nextValue: any) {
+    this.setState({ rating: nextValue });
+  }
+
   render() {
     const item = this.props.item;
+    const { rating } = this.state;
+
     if (!item) return null;
     return (
       <section className="map-marker-popup" id="map-marker-popup" data-id={item.id}>
@@ -55,10 +66,10 @@ export default class Providers extends Component<Props, State> {
               Evaluare utilizatori<span>4.3</span>
               <StarRatingComponent
                 name="rate" /* name of the radio input, it is required */
-                value="4.3" /* number of selected icon (`0` - none, `1` - first) */
+                value={rating} /* number of selected icon (`0` - none, `1` - first) */
                 starCount="5" /* number of icons in rating, default `5` */
                 onStarClick="none" /* on icon click handler */
-                renderStarIcon={() => <div className="rating-icon">■</div>}
+                renderStarIcon={() => <span className="rating-icon">■</span>}
                 starColor="#6FBBB7"
                 renderStarIconHalf="rate"
                 emptyStarColor="transparent"
@@ -182,10 +193,10 @@ export default class Providers extends Component<Props, State> {
             <p>Dacă cunoști situația din acest centru din experiență proprie, oferă un indicativ aici:</p>
             <StarRatingComponent
               name="ratei" /* name of the radio input, it is required */
-              value="4" /* number of selected icon (`0` - none, `1` - first) */
+              value={rating} /* number of selected icon (`0` - none, `1` - first) */
               starCount="5" /* number of icons in rating, default `5` */
-              onStarClick="none" /* on icon click handler */
-              renderStarIcon={() => <div>●</div>}
+              onStarClick={this.onStarClick.bind(this)} /* on icon click handler */
+              renderStarIcon={() => <span>●</span>}
               starColor="#6FBBB7"
               emptyStarColor="transparent"
             />
