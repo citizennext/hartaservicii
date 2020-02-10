@@ -1,11 +1,26 @@
 {
-    "category": [
-        { "value": "all", "label": "All services" },
-        { "value": "first", "label": "Social Service" }
-    ],
-
     "age": [
-        { "value": "all", "label": "All services" },
-        { "value": "first", "label": "Social Service" }
+        { "value": "all", "label": "Toate vârstele" },
+        { "value": "copii", "label": "Copii" },
+        { "value": "tineri", "label": "Tineri" }
+    ],
+    "service_type": [
+        { "value": "all", "label": "Toate categoriile de servicii" },
+        { "value": "1", "label": "Centru rezidenţial cu cazare pe perioadă nedeterminată" },
+        { "value": "2", "label": "Centru rezidenţial cu cazare pe perioadă determinată" },
+        { "value": "3", "label": "Locuinţă protejată" },
+        { "value": "4", "label": "Centru de zi" },
+        { "value": "5", "label": "Unitate de îngrijiri la domiciliu" },
+        { "value": "6", "label": "Serviciu acordat în comunitate" }
+    ],
+    "specializari": [
+        { "value": "all", "label": "Toate specializările" },
+        { "value": "dizabilitati", "label": "Centre de zi pentru persoane adulte cu dizabilitati" },
+        { "value": "copii", "label": "Social Service" }
+    ],
+    "accesibilitate": [
+        { "value": "all", "label": "Public și privat" },
+        { "value": "public", "label": "Public" },
+        { "value": "private", "label": "Privat" }
     ]
 }

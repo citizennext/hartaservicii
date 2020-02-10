@@ -4,6 +4,10 @@ import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
 import PopUps from './PopUps';
+import { DrawerProvider } from '../Drawer/DrawerContext';
+import Filter from './FilterPage/Filter';
+import FilterOptions from '../../data/filter-options.json';
+
 
 type State = {
   lat: number;
@@ -106,6 +110,7 @@ export default class Providers extends Component<{}, State> {
         query={query}
         render={data => {
           const providers = data.hasura.providers as Provider[];
+          const dataProviders = Object.values(providers);
           if (typeof window !== 'undefined') {
             return (
               <div>
@@ -123,7 +128,7 @@ export default class Providers extends Component<{}, State> {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
                   <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
-                    {Object.values(providers).map((item, index) => (
+                    {dataProviders.map((item, index) => (
                       <Marker
                         position={item.coordinates}
                         key={`marker-${item.id}-${index}`}
@@ -134,6 +139,9 @@ export default class Providers extends Component<{}, State> {
                     ))}
                   </MarkerClusterGroup>
                 </Map>
+                <DrawerProvider>
+                  <Filter filterClass="filter-options" options={Object.values(FilterOptions)} data={dataProviders} drawer={true} />
+                </DrawerProvider>
               </div>
             );
           }

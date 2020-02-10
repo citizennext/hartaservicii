@@ -1,0 +1,44 @@
+[
+    {
+      "id": "e3af37d2-ff80-4123-bd99-e25ed5ebdf57",
+      "coordinates": [
+        46.078091,
+        23.562738
+      ],
+      "address": "Str. Bogdan Petriceicu Hasdeu, nr. 15A",
+      "name": "Centru de servicii acordate in comunitate \"Sf. Meletie\" Alba Iulia-centru de zi pt persoane cu handicap",
+      "location": "Alba Iulia",
+      "capacity": "40",
+      "district": "Alba",
+      "email": null,
+      "license_by": "ANPD",
+      "license_date_5years": "2017-10-20",
+      "license_date_provisional": "2016-09-30",
+      "license_no": "LF0000004",
+      "supplier_type_private": true,
+      "age_category": "copii",
+      "service_category": "5",
+      "service_specialization_category": "copii"
+    },
+    {
+      "id": "358045f6-1472-41b8-9886-2bbb7e62a99d",
+      "coordinates": [
+        45.9391437,
+        23.4868718
+      ],
+      "address": "Str. Closca, nr. 384, Pianu de Jos",
+      "name": "Locuinta protejata nr. 5, \"Sfanta Elena\"",
+      "location": "Pianu",
+      "capacity": "10",
+      "district": "Alba",
+      "email": null,
+      "license_by": "ANPD",
+      "license_date_5years": "2017-10-31",
+      "license_date_provisional": "2017-01-04",
+      "license_no": "LF0000086",
+      "supplier_type_private": true,
+      "age_category": "tineri",
+      "service_category": "2",
+      "service_specialization_category": "dizabilitati"
+    }
+]
