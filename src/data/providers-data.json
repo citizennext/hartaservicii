@@ -15,10 +15,10 @@
       "license_date_5years": "2017-10-20",
       "license_date_provisional": "2016-09-30",
       "license_no": "LF0000004",
-      "supplier_type_private": true,
-      "age_category": "copii",
-      "service_category": "5",
-      "service_specialization_category": "copii"
+      "supplierTypePrivate": "true",
+      "ageValue": "tineri",
+      "serviceValue": "5",
+      "specializationValue": "copii"
     },
     {
       "id": "358045f6-1472-41b8-9886-2bbb7e62a99d",
@@ -36,9 +36,9 @@
       "license_date_5years": "2017-10-31",
       "license_date_provisional": "2017-01-04",
       "license_no": "LF0000086",
-      "supplier_type_private": true,
-      "age_category": "tineri",
-      "service_category": "2",
-      "service_specialization_category": "dizabilitati"
+      "supplierTypePrivate": true,
+      "ageValue": "tineri",
+      "serviceValue": "2",
+      "specializationValue": "dizabilitati"
     }
 ]

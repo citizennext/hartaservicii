@@ -23,6 +23,7 @@
     "@types/graphql": "^14.0.0",
     "@types/react": "^16.9.19",
     "@types/react-leaflet": "^2.5.0",
+    "@types/react-select": "^3.0.10",
     "dotenv": "^8.2.0",
     "gatsby": "^2.19.7",
     "gatsby-image": "^2.2.39",

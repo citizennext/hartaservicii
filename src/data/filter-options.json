@@ -1,6 +1,6 @@
 {
     "age": [
-        { "value": "all", "label": "Toate vârstele" },
+        { "value": "null", "label": "Toate vârstele" },
         { "value": "copii", "label": "Copii" },
         { "value": "tineri", "label": "Tineri" }
     ],
@@ -20,7 +20,7 @@
     ],
     "accesibilitate": [
         { "value": "all", "label": "Public și privat" },
-        { "value": "public", "label": "Public" },
-        { "value": "private", "label": "Privat" }
+        { "value": "false", "label": "Public" },
+        { "value": "true", "label": "Privat" }
     ]
 }
