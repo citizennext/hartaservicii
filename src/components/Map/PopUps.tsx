@@ -43,6 +43,9 @@ export default class Providers extends Component<Props, State> {
   render() {
     const item = this.props.item;
     const { rating } = this.state;
+    const noStars = 5;
+    const averageRateing = 4.3; // @todo Seco, St3phan - trebuie aduagata valoare medie a ratingurilor
+    const percentRateing = (averageRateing * 100) / noStars;
 
     if (!item) return null;
     return (
@@ -63,18 +66,22 @@ export default class Providers extends Component<Props, State> {
               Nr. identificare:<span>52389</span>
             </p>
             <p className="pin-eval">
-              Evaluare utilizatori<span>4.3</span>
-              <StarRatingComponent
-                name="rate" /* name of the radio input, it is required */
-                value={rating} /* number of selected icon (`0` - none, `1` - first) */
-                starCount="5" /* number of icons in rating, default `5` */
-                onStarClick="none" /* on icon click handler */
-                renderStarIcon={() => <span className="rating-icon">■</span>}
-                starColor="#6FBBB7"
-                renderStarIconHalf="rate"
-                emptyStarColor="transparent"
-                editing="true"
-              />
+              Evaluare utilizatori<span>{averageRateing}</span>
+              <div className="rating-parent">
+                <div className="rating-child" style={{ width: `${percentRateing}%` }}>
+                  <StarRatingComponent
+                    name="rate" /* name of the radio input, it is required */
+                    value={noStars} /* number of selected icon (`0` - none, `1` - first) */
+                    starCount={noStars} /* number of icons in rating, default `5` */
+                    onStarClick="none" /* on icon click handler */
+                    renderStarIcon={() => <span className="rating-icon">■</span>}
+                    starColor="#6FBBB7"
+                    renderStarIconHalf="rate"
+                    emptyStarColor="transparent"
+                    editing="true"
+                  />
+                </div>
+              </div>
             </p>
           </div>
           <div className="pin-capacity">
@@ -194,7 +201,7 @@ export default class Providers extends Component<Props, State> {
             <StarRatingComponent
               name="ratei" /* name of the radio input, it is required */
               value={rating} /* number of selected icon (`0` - none, `1` - first) */
-              starCount="5" /* number of icons in rating, default `5` */
+              starCount={noStars} /* number of icons in rating, default `5` */
               onStarClick={this.onStarClick.bind(this)} /* on icon click handler */
               renderStarIcon={() => <span>●</span>}
               starColor="#6FBBB7"
