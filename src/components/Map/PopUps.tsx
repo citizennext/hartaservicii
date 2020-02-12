@@ -66,7 +66,8 @@ export default class Providers extends Component<Props, State> {
               Nr. identificare:<span>52389</span>
             </p>
             <p className="pin-eval">
-              Evaluare utilizatori<span>{averageRateing}</span>
+              <span>Evaluare utilizatori</span>
+              <span className="average-rateing">{averageRateing}</span>
               <div className="rating-parent">
                 <div className="rating-child" style={{ width: `${percentRateing}%` }}>
                   <StarRatingComponent
@@ -74,7 +75,7 @@ export default class Providers extends Component<Props, State> {
                     value={noStars} /* number of selected icon (`0` - none, `1` - first) */
                     starCount={noStars} /* number of icons in rating, default `5` */
                     onStarClick="none" /* on icon click handler */
-                    renderStarIcon={() => <span className="rating-icon">■</span>}
+                    renderStarIcon={() => <span className="rating-icon"></span>}
                     starColor="#6FBBB7"
                     renderStarIconHalf="rate"
                     emptyStarColor="transparent"
