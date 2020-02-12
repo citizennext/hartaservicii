@@ -19,10 +19,20 @@ interface Props {
   toggleHandler?: () => void;
   open?: boolean;
 }
-const Drawer: React.FC<Props> = ({ children, width, closeButton, closeButtonStyle, drawerHandler, toggleHandler, open }) => {
+const Drawer: React.FC<Props> = ({
+  children,
+  width,
+  closeButton,
+  closeButtonStyle,
+  drawerHandler,
+  toggleHandler,
+  open,
+  className,
+}) => {
   return (
     <>
       <RcDrawer
+        className={className}
         placement="right"
         width={width || '300px'}
         open={open}

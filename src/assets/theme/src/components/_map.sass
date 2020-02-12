@@ -66,9 +66,65 @@
         width: 100%
 
 .filter-menu
-    width: 50px
+    width: 60px
     height: 50px
-    position: fixed;
-    z-index: 1;
-    right: 0;
-    background-color: #968585
+    position: absolute
+    z-index: 1
+    right: 0
+    @apply rounded-bl-full
+    @apply rounded-tl-full
+    background-color: #978585
+    z-index: 99999
+
+    &:after
+        content: ""
+        height: 100vh
+        display: block
+        top: -25px
+        right: 0
+        position: absolute
+        border-right: 9px solid #978585
+
+    svg
+        transform: rotate(180deg)
+        margin-right: 14px
+        margin-top: 17px
+
+.map-drawer
+    .drawer-content-wrapper
+        background-color: rgba(151,133,133, 0.8)
+
+        > div
+            position: relative
+            overflow: initial
+
+            .close
+                width: 60px
+                height: 50px
+                position: absolute
+                z-index: 1
+                left: -60px
+                @apply rounded-bl-full
+                @apply rounded-tl-full
+                @apply bg-burg
+
+                svg
+                    margin-left: 14px
+                    margin-top: 17px
+        
+        .select-options
+            margin-top: 104px
+            div[class*="-container"]
+                font-family: Montserrat
+                font-size: 16px
+                max-width: 270px
+                margin: 0 auto
+                background: white
+                div[class*="-control"]
+                    border: 0
+                    span[class*="-indicatorSeparator"]
+                        width: 0
+                    div[class*="-indicatorContainer"]
+                        padding: 0
+                        background: #CEE6C1
+                        color: #6FBBB7
