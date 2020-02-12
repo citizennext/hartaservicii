@@ -66,7 +66,7 @@ export default class Providers extends Component<Props, State> {
               Nr. identificare:<span>52389</span>
             </p>
             <p className="pin-eval">
-              <span>Evaluare utilizatori</span>
+              Evaluare utilizatori
               <span className="average-rateing">{averageRateing}</span>
               <div className="rating-parent">
                 <div className="rating-child" style={{ width: `${percentRateing}%` }}>
@@ -118,14 +118,14 @@ export default class Providers extends Component<Props, State> {
           <div className="pin-services">
             <p>Servicii</p>
             <ul>
-              <li>▶ Consiliere psihologică și suport emoțional</li>
-              <li>▶ Supraveghere</li>
-              <li>▶ Consiliere juridică</li>
-              <li>▶ Educare</li>
-              <li>▶ Reintegrare familială și comunitară</li>
-              <li>▶ Cazare pe perioadă determinată sau cazare pe timp de noapte</li>
-              <li>▶ Masă</li>
-              <li>▶ Menaj Curățenie</li>
+              <li>Consiliere psihologică și suport emoțional</li>
+              <li>Supraveghere</li>
+              <li>Consiliere juridică</li>
+              <li>Educare</li>
+              <li>Reintegrare familială și comunitară</li>
+              <li>Cazare pe perioadă determinată sau cazare pe timp de noapte</li>
+              <li>Masă</li>
+              <li>Menaj Curățenie</li>
             </ul>
           </div>
           <div className="pin-provider">

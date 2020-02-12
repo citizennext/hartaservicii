@@ -85,6 +85,7 @@
         @apply p-6
 
     header
+        padding-top: 21px
         height: 130px
         @apply relative
         @apply rounded-t-lg
@@ -124,11 +125,8 @@
                 width: 50%
 
             .pin-eval
-                & > span:first-of-type
-                    font-weight: 600
-                    font-size: 14px
-                    line-height: 17px
-                    @apply text-black
+                font-size: 14px
+                @apply text-black
 
                 span.average-rateing
                     @apply font-semibold
@@ -193,15 +191,18 @@
                 @apply w-1/4
 
                 span
+                    font-size: 36px
                     @apply text-celeste
                     @apply block
 
                 a > img
                     @apply rounded-full
+                    margin-top: 5px
                     padding: 7px
                     @apply bg-snow
                     height: 46px
                     width: 46px
+                    margin-left: 4px
 
             p:first-child
                 @apply w-1/2
@@ -209,6 +210,7 @@
             p:last-child
                 a > img
                     padding: 0 13px
+                    margin-left: 14px
 
         .pin-address, .pin-phone, .pin-web
             overflow: hidden
@@ -221,7 +223,7 @@
                     content: ''
                     background-size: contain
                     background-repeat: no-repeat
-                    top: 0
+                    top: 3px
                     left: -30px
                     width: 18px
                     height: 100%
@@ -270,7 +272,13 @@
             @apply relative
             margin-left: 35px
 
+            li:before
+                content: '▶'
+                margin-right: 5px
+
         .pin-provider
+            padding-top: 45px
+            padding-bottom: 45px
             @apply border-t-6
             @apply border-b-6
             @apply border-leaf
@@ -281,6 +289,9 @@
             div
                 @apply p-0
                 @apply w-full
+
+                &:nth-child(2) > p
+                    vertical-align: text-top
 
                 p:nth-child(odd)
                     font-weight: normal
@@ -294,6 +305,9 @@
                     display: inline-block
                     width: 50%
                     text-align: left
+
+                &:nth-child(1) > p,&:nth-child(3) > p,&:nth-child(7) > p
+                    padding-bottom: 20px
 
     footer
         h3, .pin-help, .pin-update, .pin-eval
