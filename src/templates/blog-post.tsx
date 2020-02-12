@@ -24,12 +24,16 @@ const BlogPost = ({ data, pageContext, location }: BlogProps): JSX.Element => {
   function createMarkup() {
     return { __html: blog && !!blog.content && !!blog.content.html ? blog.content.html : '' };
   }
-
   return (
     <>
       <Seo postTitle={blog.title} isRepeatable={true} postImage={blog?.image?.url} summary={blog.summary} />
       <Header />
-      <AfterHeader image={blog?.image?.urlSharp?.childImageSharp?.fluid} className="blog-single" />
+      <AfterHeader
+        image={blog?.image?.urlSharp?.childImageSharp?.fluid}
+        className="blog-single"
+        hasTopSeparator={false}
+        hasBottomSeparator={false}
+      />
       <div className="blog-single section interior">
         <h1>{blog.title}</h1>
         <span className="date">
@@ -83,13 +87,11 @@ const BlogPost = ({ data, pageContext, location }: BlogProps): JSX.Element => {
     </>
   );
 };
-
 export default ({ data, pageContext, location }: BlogProps) => (
   <ToastProvider placement="bottom-right">
     <BlogPost pageContext={pageContext} data={data} location={location} />
   </ToastProvider>
 );
-
 export const pageQuery = graphql`
   query blogPostBySlug($slug: String!) {
     hasura {
