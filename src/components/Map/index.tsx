@@ -7,7 +7,7 @@ import PopUps from './PopUps';
 import { DrawerProvider } from '../Drawer/DrawerContext';
 import Filter from './FilterPage/Filter';
 import FilterOptions from '../../data/filter-options.json';
-import providerData from '../../data/providers-data.json';
+//import providerData from '../../data/providers-data.json';
 
 type State = {
   lat: number;
@@ -44,7 +44,7 @@ export default class Providers extends Component<{}, State> {
     pane: 'markerPane',
     selectedItem: undefined,
     active: false,
-    filters: {ageValue: null, serviceValue: null, specialitzationValue: null, supplierTypePrivate: null}
+    filters: { ageValue: null, serviceValue: null, specialitzationValue: null, supplierTypePrivate: null },
   };
 
   createMarkerClusterCustomIcon = (cluster: any) => {
@@ -85,8 +85,8 @@ export default class Providers extends Component<{}, State> {
   };
 
   handleFilterChange = (filterProperty: any) => {
-    this.setState({filters: {...this.state.filters, ...filterProperty}})
-  }
+    this.setState({ filters: { ...this.state.filters, ...filterProperty } });
+  };
 
   render() {
     // console.log(this.state.filters)
@@ -117,24 +117,6 @@ export default class Providers extends Component<{}, State> {
         query={query}
         render={data => {
           const providers = data.hasura.providers as Provider[];
-          let dataProviders = Object.values(providerData);
-          const filters: any = this.state.filters;
-          const filterKeys = Object.keys(this.state.filters);
-          const filterIsEmpty = Object.values(filters).every(x => (x === null || x === ''));
-          console.log(filterIsEmpty)
-          const displayedData = filterIsEmpty ? dataProviders : dataProviders.filter(provider => {
-            let newProvider = null;
-
-            filterKeys.map((key) => {
-              if (filters[key] !== null) {
-                if (provider[key] == filters[key].value || filters[key].value == null) {
-                  newProvider = provider;
-                }
-              }
-            })
-            return newProvider;
-          })
-          console.log(displayedData)
           if (typeof window !== 'undefined') {
             return (
               <div>
@@ -152,7 +134,7 @@ export default class Providers extends Component<{}, State> {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
                   <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
-                    {displayedData.map((item, index) => (
+                    {Object.values(providers).map((item, index) => (
                       <Marker
                         position={item.coordinates}
                         key={`marker-${item.id}-${index}`}
@@ -164,7 +146,13 @@ export default class Providers extends Component<{}, State> {
                   </MarkerClusterGroup>
                 </Map>
                 <DrawerProvider>
-                  <Filter filterClass="filter-options" options={Object.values(FilterOptions)} data={dataProviders} drawer={true} filters={this.state.filters} onFilterChange={this.handleFilterChange}/>
+                  <Filter
+                    filterClass="filter-options"
+                    options={Object.values(FilterOptions)}
+                    drawer={true}
+                    filters={this.state.filters}
+                    onFilterChange={this.handleFilterChange}
+                  />
                 </DrawerProvider>
               </div>
             );

@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext /*useState*/ } from 'react';
 import Select from 'react-select';
 import Drawer from '../../Drawer/Drawer';
 import { DrawerContext } from '../../Drawer/DrawerContext';
 import { useWindowSize } from '../../../hooks/useWindowSize';
 import { FilterMenu } from '../../Icons';
-import providerData from '../../../data/providers-data.json';
+// import providerData from '../../../data/providers-data.json';
 
 // type OptionType = { [key: string]: any }
 // type OptionsType = Array<OptionType>
@@ -13,17 +13,17 @@ type Props = {
   filterClass?: string;
   options: any;
   drawer: boolean;
-  data: any
-  onFilterChange: any
-  filters: any
+  data: any;
+  onFilterChange: any;
+  filters: any;
 };
 
 const Filter: React.FC<Props> = props => {
   const options = [
-    { "value": null, "label": "Toate vârstele" },
-    { "value": "copii", "label": "Copii" },
-    { "value": "tineri", "label": "Tineri" }
-  ]
+    { value: null, label: 'Toate vârstele' },
+    { value: 'copii', label: 'Copii' },
+    { value: 'tineri', label: 'Tineri' },
+  ];
 
   // @ts-ignore
   const { state, dispatch } = useContext(DrawerContext);
@@ -32,34 +32,34 @@ const Filter: React.FC<Props> = props => {
   };
   const windowSize = useWindowSize();
 
-  function handleChangeAge(newValue: any, actionMeta: any) {
-    props.onFilterChange({ageValue: newValue})
+  function handleChangeAge(newValue: any /* actionMeta: any */) {
+    props.onFilterChange({ ageValue: newValue });
   }
 
-  function handleChangeService(newValue: any, actionMeta: any) {
+  /*function handleChangeService(newValue: any, actionMeta: any) {
     props.onFilterChange({serviceValue: newValue})
-  }
+  }*/
 
-  function handleChangeSpecialization(newValue: any, actionMeta: any) {
+  /*function handleChangeSpecialization(newValue: any, actionMeta: any) {
     props.onFilterChange({ageValue: newValue})
-  }
-  function handleChangeSupplierType(newValue: any, actionMeta: any) {
+  }*/
+  /*function handleChangeSupplierType(newValue: any, actionMeta: any) {
     props.onFilterChange({ageValue: newValue})
-  }
+  }*/
   // console.log(props.filters.ageValue);
   return (
     <>
       {props.drawer && windowSize.width && windowSize.width < 768 && (
         <div className="filter-menu">
-          <FilterMenu size={20}/>
+          <FilterMenu size={20} />
           <Drawer
-            className={props.filterClass}
+            className="map-drawer"
             width="300px"
             placement="right"
             open={state}
-            closeButtonStyle={{ position: 'absolute', top: 430 }}
+            closeButtonStyle={{}}
             toggleHandler={openDrawer}
-            closeButton={<FilterMenu className="open" size={20} />}>
+            closeButton={<FilterMenu className="close" size={20} />}>
             <div className="select-options">
               <Select value={props.filters.ageValue} options={options} onChange={handleChangeAge} />
               {/* <Select value={props.filters.serviceValue} options={options[1]} onChange={handleChangeService}/> */}
