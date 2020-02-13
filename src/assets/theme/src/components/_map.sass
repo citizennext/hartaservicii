@@ -113,13 +113,13 @@
                     margin-top: 17px
         
         .select-options
-            margin-top: 104px
+            margin-top: 79px
 
             div[class*="-container"]
                 font-family: Montserrat
                 font-size: 16px
                 max-width: 270px
-                margin: 0 auto
+                margin: 5px auto
                 background: white
                 div[class*="-control"]
                     border: 0
@@ -131,10 +131,11 @@
                         color: #6FBBB7
 
 .select-options
-    position: absolute
-    right: 10px
-    top: 150px
-    display: flex
+    @screen md
+        position: absolute
+        right: 10px
+        top: 150px
+        display: flex
     
     .select-container
         position: relative
@@ -212,27 +213,39 @@
                     color: #6FBBB7
 
     .pin-number
-        background-color: #EDF7EF !important
-        border: 1px solid transparent
-        @apply rounded-br-full
-        @apply rounded-tr-full
-        width: 125px
-        line-height: 48px
-        text-align: right
         font-size: 18px
         font-weight: 600
-        padding-right: 38px
+        position: relative
+        width: max-content
+        padding-left: 20px
+        margin-bottom: 10px
+
+        @screen md
+            padding-left: initial
+            padding-right: 38px
+            border: 1px solid transparent
+            @apply rounded-br-full
+            @apply rounded-tr-full
+            width: 125px
+            line-height: 48px
+            text-align: right
+            background-color: #EDF7EF !important
 
         &:before
             content: ''
-            background-image: url('../../images/map_icon_markerg.svg')
+            background-image: url('../../images/map_icon_markerw.svg')
             position: absolute
             display: block
-            height: 24px
+            height: 23px
             width: 19px
             background-size: contain
-            top: 13px
-            right: 13px
+            top: 2px
+            right: -28px
+            @screen md
+                top: 13px
+                right: 13px
+                background-image: url('../../images/map_icon_markerg.svg')
+
 
         label
             line-height: initial

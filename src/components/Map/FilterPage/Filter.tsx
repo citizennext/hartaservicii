@@ -64,8 +64,12 @@ const Filter: React.FC<Props> = props => {
             toggleHandler={openDrawer}
             closeButton={<FilterMenu className="close" size={20} />}>
             <div className="select-options">
+              <div className="pin-number">960</div>
               {/* <Select options={options} onChange={handleChangeAge} /> */}
               <Select options={options} onChange={handleChangeService} />
+              <Select />
+              <Select />
+              <Select />
               {/*<Select value={specializationValue} options={options[2]} onChange={handleChangeSpecialization}/>
               <Select value={supplierTypeValue} options={options[3]} onChange={handleChangeSupplierType}/> */}
             </div>
