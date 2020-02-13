@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import Providers from '../index';
+import Filter from './Filter';
+import FilterOptions from '../../../data/filter-options.json';
 
 type Props = {
-    service: number
 }
 
-const FilterResults: React.FC<Props> = props => {
-
+const FilterResults: React.FC<Props> = () => {
     const PROVIDERS = gql`
         query Providers($service: smallint){
             providers( 
@@ -18,17 +19,6 @@ const FilterResults: React.FC<Props> = props => {
                     ]
                 } ) 
                 {
-
-                    service {
-                        category {
-                        name
-                        }
-                    }
-                    supplier {
-                        supplier_type {
-                            private
-                        }
-                    }
                     id
                     coordinates
                     address
@@ -42,20 +32,39 @@ const FilterResults: React.FC<Props> = props => {
                     license_date_provisional
                     license_no
                 }
-            }`;
+        }`;
 
-    const service = props.service        
+    // const [filters, setFilters] = useState({ ageValue: null, service: null });
+    const [service, setService] = useState(null);
+      
     const { loading, error, data } = useQuery(PROVIDERS, {
-        variables: { service },
+        variables: { service: service },
     });
     if (loading) return(<p>Loading...</p>);
     if (error) return(<p>Error! ${error}</p>);
+
     const providers = data.providers
+
+    const handleFilterChange= (filterProperty: object) => {
+        const keyFilter = Object.keys(filterProperty)[0]
+        switch (keyFilter) {
+            case 'service': 
+                setService(Object.values(filterProperty)[0])
+                break;
+        }
+    }
     
     return ( 
-        <div>
-            <p>{providers[0].name}</p>
-        </div>
+        <>
+            <Providers providers={providers} />
+                <Filter
+                    filterClass="filter-options"
+                    options={Object.values(FilterOptions)}
+                    drawer={true}
+                    // filters={filters}
+                    onFilterChange={handleFilterChange}
+                />
+        </>
     );
 }
 

@@ -13,17 +13,20 @@ type Props = {
   filterClass?: string;
   options: any;
   drawer: boolean;
-  data: any;
   onFilterChange: any;
-  filters: any;
+  // filters: any;
 };
 
 const Filter: React.FC<Props> = props => {
   const options = [
-    { value: null, label: 'Toate vârstele' },
-    { value: 'copii', label: 'Copii' },
-    { value: 'tineri', label: 'Tineri' },
-  ];
+    { "value": null, "label": "Toate categoriile de servicii" },
+    { "value": "1", "label": "Centru rezidenţial cu cazare pe perioadă nedeterminată" },
+    { "value": "2", "label": "Centru rezidenţial cu cazare pe perioadă determinată" },
+    { "value": "3", "label": "Locuinţă protejată" },
+    { "value": "4", "label": "Centru de zi" },
+    { "value": "5", "label": "Unitate de îngrijiri la domiciliu" },
+    { "value": "6", "label": "Serviciu acordat în comunitate" }
+];
 
   // @ts-ignore
   const { state, dispatch } = useContext(DrawerContext);
@@ -32,13 +35,13 @@ const Filter: React.FC<Props> = props => {
   };
   const windowSize = useWindowSize();
 
-  function handleChangeAge(newValue: any /* actionMeta: any */) {
-    props.onFilterChange({ ageValue: newValue });
-  }
+  // function handleChangeAge(newValue: any) {
+  //   props.onFilterChange({ ageValue: newValue });
+  // }
 
-  /*function handleChangeService(newValue: any, actionMeta: any) {
-    props.onFilterChange({serviceValue: newValue})
-  }*/
+  function handleChangeService(newValue: any) {
+    props.onFilterChange({service: newValue.value})
+  }
 
   /*function handleChangeSpecialization(newValue: any, actionMeta: any) {
     props.onFilterChange({ageValue: newValue})
@@ -61,8 +64,8 @@ const Filter: React.FC<Props> = props => {
             toggleHandler={openDrawer}
             closeButton={<FilterMenu className="close" size={20} />}>
             <div className="select-options">
-              <Select value={props.filters.ageValue} options={options} onChange={handleChangeAge} />
-              {/* <Select value={props.filters.serviceValue} options={options[1]} onChange={handleChangeService}/> */}
+              {/* <Select options={options} onChange={handleChangeAge} /> */}
+              <Select options={options} onChange={handleChangeService}/>
               {/*<Select value={specializationValue} options={options[2]} onChange={handleChangeSpecialization}/>
               <Select value={supplierTypeValue} options={options[3]} onChange={handleChangeSupplierType}/> */}
             </div>

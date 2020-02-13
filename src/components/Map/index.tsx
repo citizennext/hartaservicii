@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import Leaflet, { LatLngTuple } from 'leaflet';
 import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import { graphql, StaticQuery } from 'gatsby';
 import PopUps from './PopUps';
-import { DrawerProvider } from '../Drawer/DrawerContext';
-import Filter from './FilterPage/Filter';
-import FilterOptions from '../../data/filter-options.json';
-//import providerData from '../../data/providers-data.json';
 
 type State = {
   lat: number;
@@ -19,6 +14,9 @@ type State = {
   active: boolean;
   filters: any;
 };
+type Props = {
+  providers: Provider[];
+}
 
 type Provider = {
   id: string;
@@ -35,7 +33,7 @@ type Provider = {
   license_no: string;
 };
 
-export default class Providers extends Component<{}, State> {
+export default class Providers extends Component<Props, State> {
   state = {
     lat: 45.947808,
     lng: 25.091419,
@@ -89,77 +87,37 @@ export default class Providers extends Component<{}, State> {
   };
 
   render() {
-    // console.log(this.state.filters)
+    const dataProviders = this.props.providers;
     const position: LatLngTuple = [this.state.lat, this.state.lng];
-    const query = graphql`
-      query {
-        hasura {
-          providers {
-            id
-            coordinates
-            address
-            name
-            location
-            capacity
-            district
-            email
-            license_by
-            license_date_5years
-            license_date_provisional
-            license_no
-          }
-        }
-      }
-    `;
 
     return (
-      <StaticQuery
-        query={query}
-        render={data => {
-          const providers = data.hasura.providers as Provider[];
-          if (typeof window !== 'undefined') {
-            return (
-              <div>
-                {this.state.selectedItem && this.state.active && (
-                  <PopUps item={this.state.selectedItem} onClose={this.handleClose} />
-                )}
-                <Map
-                  center={position}
-                  zoom={this.state.zoom}
-                  maxZoom={20}
-                  scrollWheelZoom={this.state.scrollWheelZoom}
-                  className="markercluster-map">
-                  <TileLayer
-                    attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
-                    {Object.values(providers).map((item, index) => (
-                      <Marker
-                        position={item.coordinates}
-                        key={`marker-${item.id}-${index}`}
-                        icon={this.createMarkerCustomIcon()}
-                        onClick={this.handleClick(item)}>
-                        <Tooltip>{item.name}</Tooltip>
-                      </Marker>
-                    ))}
-                  </MarkerClusterGroup>
-                </Map>
-                <DrawerProvider>
-                  <Filter
-                    filterClass="filter-options"
-                    options={Object.values(FilterOptions)}
-                    drawer={true}
-                    filters={this.state.filters}
-                    onFilterChange={this.handleFilterChange}
-                  />
-                </DrawerProvider>
-              </div>
-            );
-          }
-          return null;
-        }}
-      />
+      <div>
+        {this.state.selectedItem && this.state.active && (
+          <PopUps item={this.state.selectedItem} onClose={this.handleClose} />
+        )}
+        <Map
+          center={position}
+          zoom={this.state.zoom}
+          maxZoom={20}
+          scrollWheelZoom={this.state.scrollWheelZoom}
+          className="markercluster-map">
+          <TileLayer
+            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
+            {Object.values(dataProviders).map((item, index) => (
+              <Marker
+                position={item.coordinates}
+                key={`marker-${item.id}-${index}`}
+                icon={this.createMarkerCustomIcon()}
+                onClick={this.handleClick(item)}>
+                <Tooltip>{item.name}</Tooltip>
+              </Marker>
+            ))}
+          </MarkerClusterGroup>
+        </Map>
+      </div>
     );
   }
 }

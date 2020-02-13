@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import Providers from '../../Map/index';
+import FilterResults from '../../Map/FilterPage/FilterResults';
+import { DrawerProvider } from '../../Drawer/DrawerContext';
 
 export default class Harta extends Component {
   render() {
-    return <Providers />;
+    return (
+    <DrawerProvider>
+      <FilterResults />
+    </DrawerProvider>);
   }
 }
