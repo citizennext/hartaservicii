@@ -19,14 +19,14 @@ type Props = {
 
 const Filter: React.FC<Props> = props => {
   const options = [
-    { "value": null, "label": "Toate categoriile de servicii" },
-    { "value": "1", "label": "Centru rezidenţial cu cazare pe perioadă nedeterminată" },
-    { "value": "2", "label": "Centru rezidenţial cu cazare pe perioadă determinată" },
-    { "value": "3", "label": "Locuinţă protejată" },
-    { "value": "4", "label": "Centru de zi" },
-    { "value": "5", "label": "Unitate de îngrijiri la domiciliu" },
-    { "value": "6", "label": "Serviciu acordat în comunitate" }
-];
+    { value: null, label: 'Toate categoriile de servicii' },
+    { value: '1', label: 'Centru rezidenţial cu cazare pe perioadă nedeterminată' },
+    { value: '2', label: 'Centru rezidenţial cu cazare pe perioadă determinată' },
+    { value: '3', label: 'Locuinţă protejată' },
+    { value: '4', label: 'Centru de zi' },
+    { value: '5', label: 'Unitate de îngrijiri la domiciliu' },
+    { value: '6', label: 'Serviciu acordat în comunitate' },
+  ];
 
   // @ts-ignore
   const { state, dispatch } = useContext(DrawerContext);
@@ -40,7 +40,7 @@ const Filter: React.FC<Props> = props => {
   // }
 
   function handleChangeService(newValue: any) {
-    props.onFilterChange({service: newValue.value})
+    props.onFilterChange({ service: newValue.value });
   }
 
   /*function handleChangeSpecialization(newValue: any, actionMeta: any) {
@@ -52,7 +52,7 @@ const Filter: React.FC<Props> = props => {
   // console.log(props.filters.ageValue);
   return (
     <>
-      {props.drawer && windowSize.width && windowSize.width < 768 && (
+      {props.drawer && windowSize.width && windowSize.width < 768 ? (
         <div className="filter-menu">
           <FilterMenu size={20} />
           <Drawer
@@ -65,11 +65,34 @@ const Filter: React.FC<Props> = props => {
             closeButton={<FilterMenu className="close" size={20} />}>
             <div className="select-options">
               {/* <Select options={options} onChange={handleChangeAge} /> */}
-              <Select options={options} onChange={handleChangeService}/>
+              <Select options={options} onChange={handleChangeService} />
               {/*<Select value={specializationValue} options={options[2]} onChange={handleChangeSpecialization}/>
               <Select value={supplierTypeValue} options={options[3]} onChange={handleChangeSupplierType}/> */}
             </div>
           </Drawer>
+        </div>
+      ) : (
+        <div className="select-options">
+          {/* <Select options={options} onChange={handleChangeAge} /> */}
+          <div className="select-container">
+            <label>Beneficiari</label>
+            <Select options={options} onChange={handleChangeService} />
+          </div>
+          <div className="select-container">
+            <label>Tip servicii sociale</label>
+            <Select />
+          </div>
+          <div className="select-container">
+            <label>Tip specializare</label>
+            <Select />
+          </div>
+          <div className="select-container">
+            <label>Administrator</label>
+            <Select />
+          </div>
+          <div className="pin-number select-container">
+            <label>Total centre</label>960
+          </div>
         </div>
       )}
     </>
