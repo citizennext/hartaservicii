@@ -45,7 +45,7 @@ const Filter: React.FC<Props> = props => {
 
   return (
     <>
-      {props.drawer && windowSize.width && windowSize.width < 768 && (
+      {props.drawer && windowSize.width && windowSize.width < 768 ? (
         <div className="filter-menu">
           <FilterMenu size={20} />
           <Drawer
@@ -57,12 +57,36 @@ const Filter: React.FC<Props> = props => {
             toggleHandler={openDrawer}
             closeButton={<FilterMenu className="close" size={20} />}>
             <div className="select-options">
+              <div className="pin-number">960</div>
               <Select options={options.age} onChange={handleChangeAge} />
               <Select options={options.service_type} onChange={handleChangeService}/>
               <Select options={options.specializari} onChange={handleChangeSpecialization}/>
               <Select options={options.accesibilitate} onChange={handleChangeSupplierType}/>
             </div>
           </Drawer>
+        </div>
+      ) : (
+        <div className="select-options">
+          {/* <Select options={options} onChange={handleChangeAge} /> */}
+          <div className="select-container">
+            <label>Beneficiari</label>
+            <Select options={options.age} onChange={handleChangeAge} />
+          </div>
+          <div className="select-container">
+            <label>Tip servicii sociale</label>
+            <Select options={options.service_type} onChange={handleChangeService}/>
+          </div>
+          <div className="select-container">
+            <label>Tip specializare</label>
+            <Select options={options.specializari} onChange={handleChangeSpecialization}/>
+          </div>
+          <div className="select-container">
+            <label>Administrator</label>
+            <Select options={options.accesibilitate} onChange={handleChangeSupplierType}/>
+          </div>
+          <div className="pin-number select-container">
+            <label>Total centre</label>960
+          </div>
         </div>
       )}
     </>
