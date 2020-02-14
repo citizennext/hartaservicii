@@ -63,7 +63,7 @@ export default class Providers extends Component<Props, State> {
           <h3 className="pin-name">[Asociatia]</h3>
           <div className="pin-id">
             <p>
-              Nr. identificare:<span>52389</span>
+              Nr. identificare:<span>{item.id}</span>
             </p>
             <p className="pin-eval">
               Evaluare utilizatori
@@ -87,7 +87,7 @@ export default class Providers extends Component<Props, State> {
           </div>
           <div className="pin-capacity">
             <p>
-              Capacitate: <span>12</span>
+              Capacitate: <span>{item.capacity}</span>
             </p>
             <p>
               Directii
@@ -104,11 +104,11 @@ export default class Providers extends Component<Props, State> {
           </div>
           <div className="pin-address">
             <p>Adresă</p>
-            <span>Strada Carpați nr. 16, Mediaș, Sibiu</span>
+            <span>{item.address}</span>
           </div>
           <div className="pin-phone">
             <p>Telefon</p>
-            <span>+40 799 566 533</span>
+            <span>{item.phone}</span>
             <span>+40 799 522 533</span>
           </div>
           <div className="pin-web">
@@ -151,7 +151,7 @@ export default class Providers extends Component<Props, State> {
             </div>
             <div>
               <p>Dată decizie: </p>
-              <p>06.12.2015</p>
+              <p>{item.licence_date}</p>
             </div>
             <div>
               <p>Serie și număr certificat: </p>
@@ -163,15 +163,15 @@ export default class Providers extends Component<Props, State> {
             </div>
             <div>
               <p>Dată licență provizorie: </p>
-              <p>12.08.2008</p>
+              <p>{item.licence_date_provisional}</p>
             </div>
             <div>
               <p>Număr și serie licență de funcționare: </p>
-              <p>GH786 / 235984</p>
+              <p>GH786 / {item.licence_no}</p>
             </div>
             <div>
               <p>Instituția care a eliberat licența: </p>
-              <p>Judecătoria Mediaș</p>
+              <p>{item.licence_by}</p>
             </div>
           </div>
         </div>
