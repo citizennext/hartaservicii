@@ -1,2 +1,107 @@
-#search
-    margin-top: 120px
+.page-search
+    .search-input
+        border: 1px solid #CEE6C1
+        width: 88vw
+
+    .search-icon
+        top: -1.5em
+        left: -1.5em
+        @apply w-full
+        &:before
+            top: 0
+            left: 4.5vw
+
+        &:after
+            top: 0
+
+.search-input
+    font-family: KoHo
+    width: 88vw
+    height: 50px
+    left: 5vw
+    @apply border-burg
+    @apply border-6
+    @apply rounded-full
+    @apply bg-white
+    @apply -mt-24
+    @apply pl-10
+
+    @screen md
+        height: 52px
+        max-width: 595px
+        left: 0
+
+    @screen xl
+        height: 62px
+        max-width: 770px
+        left: 0
+
+    &[placeholder], &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder
+    text-overflow: ellipsis
+
+    &::-webkit-input-placeholder
+        @apply text-black
+    &::-moz-placeholder
+        @apply text-black
+    &:-moz-placeholder
+        @apply text-black
+    &:-ms-input-placeholder
+        @apply text-black
+
+.search-icon
+    height: 165px
+    width: 100vw
+    @apply bg-snow
+    @apply relative
+    @apply w-screen
+    // @screen md
+    //     left: -37.5%
+
+    // @screen xl
+    //     left: -14%
+
+    &:before
+        content: ''
+        background-image: url('../../images/icon_search.svg')
+        background-size: 22.5px 22.5px
+        height: 22.5px
+        width: 22.5px
+        position: absolute
+        background-repeat: no-repeat
+        top: -82px
+        left: 9.5vw
+        z-index: 9
+        @screen md
+            background-size: 23.5px 23.5px
+            height: 23.5px
+            width: 23.5px
+            left: 2%
+        @screen xl
+            background-size: 27px 27px
+            height: 27px
+            width: 27px
+            left: 1%
+
+    &:after
+        content: ''
+        background-image: url('../../images/icon_close4.svg')
+        background-size: 17px
+        position: absolute
+        background-repeat: no-repeat
+        background-position: center
+        top: -82px
+        right: 9.5vw
+        z-index: 9
+        @apply bg-snow
+        @apply p-4
+        @apply rounded-full
+        @screen md
+            background-size: 23.5px 23.5px
+            height: 23.5px
+            width: 23.5px
+            left: 2%
+        @screen xl
+            background-size: 27px 27px
+            height: 27px
+            width: 27px
+            left: 1%
