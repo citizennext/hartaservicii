@@ -2,16 +2,17 @@
     "age": [
         { "value": "null", "label": "Toate vârstele" },
         { "value": "copii", "label": "Copii" },
-        { "value": "tineri", "label": "Tineri" }
+        { "value": "tineri", "label": "Tineri" },
+        { "value": "adulti", "label": "Adulti" }
     ],
     "service_type": [
-        { "value": "all", "label": "Toate categoriile de servicii" },
-        { "value": "1", "label": "Centru rezidenţial cu cazare pe perioadă nedeterminată" },
-        { "value": "2", "label": "Centru rezidenţial cu cazare pe perioadă determinată" },
-        { "value": "3", "label": "Locuinţă protejată" },
-        { "value": "4", "label": "Centru de zi" },
-        { "value": "5", "label": "Unitate de îngrijiri la domiciliu" },
-        { "value": "6", "label": "Serviciu acordat în comunitate" }
+        { "value": null, "label": "Toate categoriile de servicii" },
+        { "value": 1, "label": "Centru rezidenţial cu cazare pe perioadă nedeterminată" },
+        { "value": 2, "label": "Centru rezidenţial cu cazare pe perioadă determinată" },
+        { "value": 3, "label": "Locuinţă protejată" },
+        { "value": 4, "label": "Centru de zi" },
+        { "value": 5, "label": "Unitate de îngrijiri la domiciliu" },
+        { "value": 6, "label": "Serviciu acordat în comunitate" }
     ],
     "specializari": [
         { "value": "all", "label": "Toate specializările" },
@@ -19,8 +20,8 @@
         { "value": "copii", "label": "Social Service" }
     ],
     "accesibilitate": [
-        { "value": "all", "label": "Public și privat" },
-        { "value": "false", "label": "Public" },
-        { "value": "true", "label": "Privat" }
+        { "value": null, "label": "Public și privat" },
+        { "value": false, "label": "Public" },
+        { "value": true, "label": "Privat" }
     ]
 }
