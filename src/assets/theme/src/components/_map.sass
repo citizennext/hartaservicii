@@ -76,6 +76,9 @@
     background-color: #978585
     z-index: 99999
 
+    &[data-open="true"]
+        display: none
+
     &:after
         content: ""
         height: 100vh
@@ -103,6 +106,7 @@
                 height: 50px
                 position: absolute
                 z-index: 1
+                top: 25px
                 left: -60px
                 @apply rounded-bl-full
                 @apply rounded-tl-full
@@ -252,3 +256,8 @@
             font-weight: initial
             min-width: 82px
             text-align: initial
+.map-filters 
+    display: none
+
+    &.drawer-open
+        display: block

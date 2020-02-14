@@ -1,6 +1,6 @@
 {
     "age": [
-        { "value": "null", "label": "Toate vârstele" },
+        { "value": null, "label": "Toate vârstele" },
         { "value": "copii", "label": "Copii" },
         { "value": "tineri", "label": "Tineri" },
         { "value": "adulti", "label": "Adulti" }
@@ -15,7 +15,7 @@
         { "value": 6, "label": "Serviciu acordat în comunitate" }
     ],
     "specializari": [
-        { "value": "all", "label": "Toate specializările" },
+        { "value": null, "label": "Toate specializările" },
         { "value": "dizabilitati", "label": "Centre de zi pentru persoane adulte cu dizabilitati" },
         { "value": "copii", "label": "Social Service" }
     ],

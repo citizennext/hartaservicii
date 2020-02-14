@@ -5,7 +5,7 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 import PopUps from './PopUps';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import Filter from './FilterPage/Filter';
+import Filter from './Filter';
 import FilterOptions from '../../data/filter-options.json';
 
 type State = {
@@ -158,11 +158,14 @@ export default class Providers extends Component<{}, State> {
             </Query>
           </MarkerClusterGroup>
         </Map>
+        {/*
+          * @todo Cristina, Seco, Stefan -  de adaugat filters state in select value
+          * filters={filters}
+        */}
         <Filter
           filterClass="filter-options"
           options={Object.values(FilterOptions)}
           drawer={true}
-          // filters={filters}
           onFilterChange={this.handleFilterChange}
         />
       </div>
