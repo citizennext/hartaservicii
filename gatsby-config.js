@@ -171,7 +171,7 @@ module.exports = {
         linkStyles: true,
         preferCanvas: true,
         maxWidth: '100%',
-        maxHeight: '100%'
+        maxHeight: '100%',
       },
     },
     {
@@ -180,7 +180,7 @@ module.exports = {
         typeName: process.env.GATSBY_HASURA_GRAPHQL_TYPE_NAME,
         fieldName: process.env.GATSBY_HASURA_GRAPHQL_FIELD_NAME,
         url: process.env.GATSBY_HASURA_GRAPHQL_URL,
-        refetchInterval: 60,
+        refetchInterval: 3600,
         headers: {
           'content-type': `application/json`,
         },
