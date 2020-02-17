@@ -7,6 +7,8 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Filter from './Filter';
 import FilterOptions from '../../data/filter-options.json';
+import { navigate } from 'gatsby';
+// import queryString from 'query-string';
 
 type State = {
   lat: number;
@@ -62,6 +64,13 @@ const PROVIDERS = gql`
   }`;
 
 export default class Providers extends Component<{}, State> {
+
+  componentDidMount () {
+    // const { age, service, specialization, administrator } = location.search ? queryString.parse(location.search) : { age: null, service: null, specialization: null, administrator: null}
+    // this.setState({ filters: { ...this.state.filters, ...{ category: age, service: service, specialization: specialization, supplierPrivate: administrator } } });
+    // console.log(filters)
+  }
+
   state = {
     lat: 45.947808,
     lng: 25.091419,
@@ -117,6 +126,7 @@ export default class Providers extends Component<{}, State> {
   render() {
     const position: LatLngTuple = [this.state.lat, this.state.lng];
     const filters = this.state.filters;
+    navigate(`/harta?age=${filters.category}&&service=${filters.service}&&specialization=${filters.specialization}&&administrator=${filters.supplierPrivate}`, { state: { filters: filters } })
 
     return (
       <div>
@@ -134,13 +144,13 @@ export default class Providers extends Component<{}, State> {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
-            <Query query={PROVIDERS} variables={ filters }>
+            <Query query={PROVIDERS} variables={ filters }>      
             {({ loading, error, data }: any) => {
               if (loading) return <div>Fetching</div>
               if (error) return <div>Error</div>
         
               const providers: Provider[] = data.providers
-        
+              
               return (
                 <div>
                   {Object.values(providers).map((item, index) => (
