@@ -70,9 +70,11 @@ function CircularProgressBar(props: Props) {
           strokeMiterlimit="10"
         />
       </svg>
-      <p className="circle-total pt-4">TOTAL</p>
-      <p className="circle-total-amount">{`${total}`}</p>
-      <p className="circle-total pb-20">{props.title}</p>
+      <div className="circle-total-container">
+        <p className="circle-total pt-4">TOTAL</p>
+        <span className="circle-total-amount">{`${total}`}</span>
+        <p className="circle-total pb-20">{props.title}</p>
+      </div>
     </div>
   );
 }

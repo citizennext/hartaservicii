@@ -206,21 +206,62 @@ ol
     @apply m-auto
     max-width: 220px
 
-.circle-total-amount,.progress-first-amount,.progress-second-amount, .map-min-amount, .map-max-amount
+.circle-total-container
+    text-align: center
+
+.circle-total-amount,.progress-first-amount,.progress-second-amount
     @apply leading-tight
-    @apply text-5xl
-    @apply font-hairline
+    @apply text-4xl
+    @apply font-light
     @apply text-burg
-    @apply text-center
+    @apply content-center
+    @screen lg
+        @apply text-5xl
 
 .progress-first-amount,.progress-second-amount, .map-max-amount
     @apply inline-block
 
-.progress-first-amount
-    margin-left: 140px
-
 .progress-second-amount
-    margin-left: 28px
+    margin-left: 30px
+
+.progress-amount-container
+    text-align: right
+    max-width: 280px
+    @screen lg
+        max-width: 310px
+
+/* Statistics Map */
+.map-max-amount, .map-min-amount
+    @apply leading-tight
+    @apply text-4xl
+    @apply font-light
+    @apply text-burg
+    @screen lg
+        @apply text-5xl
+
+.map-min-amount, .map-max-amount
+    @apply inline-block
+
+.map-max-amount
+    float: right
+
+.progress-statistic-map
+    max-width: 263px
+    margin: auto
+
+.svg-gradient
+    @apply mx-auto
+    @apply mt-8
+
+.svg-dynamic-map
+    @apply mx-auto
+    @apply w-full
+
+.statistics-map-title
+    @apply text-base
+    @apply text-center
+    @apply mx-auto
+    max-width: 220px
 
 .map-min-amount
     margin-left: 55px
@@ -230,7 +271,21 @@ ol
 
 /* Progress Bar */
 .progressbar-image
-    bottom: 0
+    bottom: -3px
+    height: 85%
+
+.progress-bar-images
+    position: relative
+    max-width: 310px
+    border-bottom-width: thick
+    border-bottom-color: #978585
+
+.progress-bar-images > svg
+    width: 100%
+    height: auto
+
+.progress-bar > div
+    width: 100%
 
 /* Blog */
 .blog-post

@@ -1,6 +1,6 @@
 import React from 'react';
-import { districtSocialServices } from './SocialServices';
-import { districtSvgMapping } from './DistrictMapping';
+import { districtSocialServices } from './SocialServices'
+import { districtSvgMapping } from './DistrictMapping'
 
 type Props = {
   sqSizeWidth: number;
@@ -24,13 +24,11 @@ function StatisticsMap(props: Props) {
   // Current color lightness
   const currentLightness = props.districtLightness;
 
-  const districtAmounts = Object.values(districtSocialServices).map(amount => {
-    return amount;
-  });
+  const districtAmounts = Object.values(districtSocialServices).map(amount =>{ return amount });
   const maxAmount = Math.max(...districtAmounts);
 
   function lightness(amount: number) {
-    return 100 - (amount / maxAmount) * currentLightness;
+    return 100 - amount/maxAmount*currentLightness;
   }
 
   return (

@@ -4,6 +4,7 @@ import CircularProgressBar from '../../../CircularProgressBar';
 import ProgressBar from '../../../ProgressBar';
 import HsSlider from '../../../Slider';
 import StatisticsMap from '../../../StatisticsMap';
+// import GradientMap from '../../../GradientMap';
 
 const query = graphql`
   query {
