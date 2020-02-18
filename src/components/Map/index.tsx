@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 import Filter from './Filter';
 import FilterOptions from '../../data/filter-options.json';
 import { navigate } from 'gatsby';
-// import queryString from 'query-string';
+import queryString from 'query-string';
 
 type State = {
   lat: number;
@@ -66,9 +66,8 @@ const PROVIDERS = gql`
 export default class Providers extends Component<{}, State> {
 
   componentDidMount () {
-    // const { age, service, specialization, administrator } = location.search ? queryString.parse(location.search) : { age: null, service: null, specialization: null, administrator: null}
-    // this.setState({ filters: { ...this.state.filters, ...{ category: age, service: service, specialization: specialization, supplierPrivate: administrator } } });
-    // console.log(filters)
+    const queryValues = location.search ? queryString.parse(location.search, {parseBooleans: true}) : { category: null, service: null, specialization: null, supplierPrivate: null}
+    this.setState({ filters: { ...this.state.filters, ...queryValues } });
   }
 
   state = {
@@ -120,13 +119,19 @@ export default class Providers extends Component<{}, State> {
   };
 
   handleFilterChange = (filterProperty: any) => {
-    this.setState({ filters: { ...this.state.filters, ...filterProperty } });
+    const filtersObject =  { ...this.state.filters, ...filterProperty }
+    this.setState( { filters: filtersObject });
+    for (const key in filtersObject) {
+      if ([null, undefined].includes(filtersObject[key])) {
+        delete filtersObject[key];
+      }
+    }
+    navigate(`/harta?${new URLSearchParams(filtersObject).toString()}`)
   };
 
   render() {
     const position: LatLngTuple = [this.state.lat, this.state.lng];
     const filters = this.state.filters;
-    navigate(`/harta?age=${filters.category}&&service=${filters.service}&&specialization=${filters.specialization}&&administrator=${filters.supplierPrivate}`, { state: { filters: filters } })
 
     return (
       <div>

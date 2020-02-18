@@ -35,16 +35,16 @@ const Filter: React.FC<Props> = props => {
 */
 
   function handleChangeAge(newValue: any) {
-    if (newValue.value) {
-      props.onFilterChange({category: `%${newValue.value}%` });
-    }
-    else {
-      props.onFilterChange({category: newValue.value });
-    }
+    props.onFilterChange({ category: newValue.value ? `%${newValue.value}%` : newValue.value });
   }
 
   function handleChangeService(newValue: any) {
-    props.onFilterChange({service: parseInt(newValue.value)})
+    if (newValue.value) {
+      props.onFilterChange({service: parseInt(newValue.value)})
+    }
+    else{
+      props.onFilterChange({service: newValue.value });
+    }
   }
 
   function handleChangeSpecialization(newValue: any) {
