@@ -5,6 +5,7 @@ import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
 import PopUps from './PopUps';
+import { navigateTo } from 'gatsby-link';
 
 type State = {
   lat: number;
@@ -12,7 +13,7 @@ type State = {
   zoom: number;
   scrollWheelZoom: boolean;
   pane: string;
-  selectedItem?: Provider;
+  selectedItem?: string;
   active: boolean;
 };
 
@@ -29,9 +30,16 @@ type Provider = {
   license_date_5years: string;
   license_date_provisional: string;
   license_no: string;
+  phones: string;
 };
 
 export default class Providers extends Component<{}, State> {
+  constructor(props: {}, context: any) {
+    super(props, context);
+
+    this.handleClick('691228a5-df1b-49d4-9b4f-1bc495b3c69f');
+  }
+
   state = {
     lat: 45.947808,
     lng: 25.091419,
@@ -65,9 +73,10 @@ export default class Providers extends Component<{}, State> {
     });
   };
 
-  handleClick = (item: Provider) => {
+  handleClick = (id: string) => {
     return () => {
-      this.setState({ selectedItem: item, active: true });
+      this.setState({ selectedItem: id, active: true });
+      navigateTo(`harta/?provider=${id}`);
     };
   };
 
@@ -83,16 +92,7 @@ export default class Providers extends Component<{}, State> {
           providers {
             id
             coordinates
-            address
             name
-            location
-            capacity
-            district
-            email
-            license_by
-            license_date_5years
-            license_date_provisional
-            license_no
           }
         }
       }
@@ -125,7 +125,7 @@ export default class Providers extends Component<{}, State> {
                         position={item.coordinates}
                         key={`marker-${item.id}-${index}`}
                         icon={this.createMarkerCustomIcon()}
-                        onClick={this.handleClick(item)}>
+                        onClick={this.handleClick(item.id)}>
                         <Tooltip>{item.name}</Tooltip>
                       </Marker>
                     ))}
