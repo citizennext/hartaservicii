@@ -60,7 +60,7 @@ function StatisticsMap(props: Props) {
           </linearGradient>
         </defs>
       </svg>
-      <div>
+      <div className='progress-statistic-map'>
         <span className="map-min-amount">0</span>
         <span className="map-max-amount">600</span>
       </div>
