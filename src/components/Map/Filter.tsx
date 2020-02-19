@@ -5,6 +5,7 @@ import { DrawerContext } from '../Drawer/DrawerContext';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { FilterMenu } from '../Icons';
 import options from '../../data/filter-options.json';
+import { graphql, useStaticQuery } from 'gatsby';
 
 type Props = {
   filterClass?: string;
@@ -14,11 +15,42 @@ type Props = {
   filters: any;
 };
 
-type State = {
-  open: string;
-}
+const useServices = () => {
+  const { hasura } = useStaticQuery(
+    graphql`
+      query {
+        hasura {
+          services: providers(distinct_on: service_id, where: {service: {name: {_is_null: false}}}) {
+            service {
+              name
+            }
+          }
+          categories: services(distinct_on: category_id, where: {category: {name: {_is_null: false}}}) {
+            category {
+              name
+            }
+          }
+        }
+      }
+    `
+  )
+  return hasura
+};
 
 const Filter: React.FC<Props> = props => {
+  const query = useServices();
+
+  const optionsSpecialization = Object.values(query.services).map((item: any) => {
+    return { value: item.service.name, label: item.service.name}
+  });
+  optionsSpecialization.unshift({value: null, label: "Toate specializarile"});
+
+
+  const optionsService = Object.values(query.categories).map((item: any) => {
+    return { value: item.category.name, label: item.category.name}
+  });
+  optionsService.unshift({value: null, label: "Toate categoriile de servicii"});
+
   // @ts-ignore
   const { state, dispatch } = useContext(DrawerContext);
   const openDrawer = () => {
@@ -60,8 +92,8 @@ const Filter: React.FC<Props> = props => {
             <div className="select-options">
               <div className="pin-number">960</div>
               <Select value={options.age.filter(({value}) => value === filters.category)} options={options.age} onChange={handleChangeAge} />
-              <Select options={options.service_type} onChange={handleChangeService}/>
-              <Select options={options.specializari} onChange={handleChangeSpecialization}/>
+              <Select options={optionsService} onChange={handleChangeService}/>
+              <Select options={optionsSpecialization} onChange={handleChangeSpecialization}/>
               <Select options={options.administrator} onChange={handleChangeAdministrator}/>
             </div>
           </Drawer>
@@ -74,11 +106,11 @@ const Filter: React.FC<Props> = props => {
           </div>
           <div className="select-container">
             <label>Tip servicii sociale</label>
-            <Select value={options.service_type.filter(({value}) => value === filters.service)} options={options.service_type} onChange={handleChangeService}/>
+            <Select value={optionsService.filter(({value}) => value === filters.service)} options={optionsService} onChange={handleChangeService}/>
           </div>
           <div className="select-container">
             <label>Tip specializare</label>
-            <Select value={options.specializari.filter(({value}) => value === filters.specialization)} options={options.specializari} onChange={handleChangeSpecialization}/>
+            <Select value={optionsSpecialization.filter(({value}) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>
           </div>
           <div className="select-container">
             <label>Administrator</label>
