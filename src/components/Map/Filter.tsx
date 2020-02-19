@@ -6,15 +6,12 @@ import { useWindowSize } from '../../hooks/useWindowSize';
 import { FilterMenu } from '../Icons';
 import options from '../../data/filter-options.json';
 
-/**
- * @todo Cristina, Seco, Stefan -  de adaugat filters state in select value
- * filters: any;
-*/
 type Props = {
   filterClass?: string;
   options: any;
   drawer: boolean;
   onFilterChange: any;
+  filters: any;
 };
 
 type State = {
@@ -22,42 +19,29 @@ type State = {
 }
 
 const Filter: React.FC<Props> = props => {
-  // const [open, setOpen] = useState("");
   // @ts-ignore
   const { state, dispatch } = useContext(DrawerContext);
   const openDrawer = () => {
     dispatch((current: boolean) => !current);
   };
   const windowSize = useWindowSize();
-/*
- * @todo Cristina, Seco, Stefan -  de adaugat filters state in select value
- * const filters = props.filter
-*/
+
+  const filters = props.filters
 
   function handleChangeAge(newValue: any) {
-    props.onFilterChange({ category: newValue.value ? `%${newValue.value}%` : newValue.value });
+    props.onFilterChange({ category: newValue.value });
   }
 
   function handleChangeService(newValue: any) {
-    if (newValue.value) {
-      props.onFilterChange({service: parseInt(newValue.value)})
-    }
-    else{
-      props.onFilterChange({service: newValue.value });
-    }
+    props.onFilterChange({ service: newValue.value })
   }
 
   function handleChangeSpecialization(newValue: any) {
-    if (newValue.value) {
-      props.onFilterChange({specialization: `%${newValue.value}%`})
-    }
-    else {
-      props.onFilterChange({category: newValue.value });
-    }
+    props.onFilterChange({specialization: newValue.value });
   }
 
-  function handleChangeSupplierType(newValue: any) {
-    props.onFilterChange({supplierPrivate: newValue.value})
+  function handleChangeAdministrator(newValue: any) {
+    props.onFilterChange({administrator: newValue.value})
   }
 
   return (
@@ -75,10 +59,10 @@ const Filter: React.FC<Props> = props => {
             closeButton={<FilterMenu className="close" size={20} />}>
             <div className="select-options">
               <div className="pin-number">960</div>
-              <Select options={options.age} onChange={handleChangeAge} />
+              <Select value={options.age.filter(({value}) => value === filters.category)} options={options.age} onChange={handleChangeAge} />
               <Select options={options.service_type} onChange={handleChangeService}/>
               <Select options={options.specializari} onChange={handleChangeSpecialization}/>
-              <Select options={options.accesibilitate} onChange={handleChangeSupplierType}/>
+              <Select options={options.administrator} onChange={handleChangeAdministrator}/>
             </div>
           </Drawer>
         </div>
@@ -86,19 +70,19 @@ const Filter: React.FC<Props> = props => {
         <div className="select-options">
           <div className="select-container">
             <label>Beneficiari</label>
-            <Select options={options.age} onChange={handleChangeAge} />
+            <Select value={options.age.filter(({value}) => value === filters.category)} options={options.age} onChange={handleChangeAge} />
           </div>
           <div className="select-container">
             <label>Tip servicii sociale</label>
-            <Select options={options.service_type} onChange={handleChangeService}/>
+            <Select value={options.service_type.filter(({value}) => value === filters.service)} options={options.service_type} onChange={handleChangeService}/>
           </div>
           <div className="select-container">
             <label>Tip specializare</label>
-            <Select options={options.specializari} onChange={handleChangeSpecialization}/>
+            <Select value={options.specializari.filter(({value}) => value === filters.specialization)} options={options.specializari} onChange={handleChangeSpecialization}/>
           </div>
           <div className="select-container">
             <label>Administrator</label>
-            <Select options={options.accesibilitate} onChange={handleChangeSupplierType}/>
+            <Select value={options.administrator.filter(({value}) => value === filters.administrator)} options={options.administrator} onChange={handleChangeAdministrator}/>
           </div>
           <div className="pin-number select-container">
             <label>Total centre</label>960

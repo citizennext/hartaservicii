@@ -18,7 +18,7 @@ type State = {
   pane: string;
   selectedItem?: Provider;
   active: boolean;
-  filters: any;
+  filters: object;
 };
 
 type Provider = {
@@ -37,14 +37,14 @@ type Provider = {
 };
 
 const PROVIDERS = gql`
-  query Providers($service: smallint, $supplierPrivate: Boolean, $category: String, $specialization: String){
+  query Providers($service: String, $supplierPrivate: Boolean, $category: String, $specialization: String){
       providers( 
           where: {
             _and: [
+                { service: { category: { name: { _like: $category } } } }
+                { service: { category: { name: { _like: $service } } } }
+                { service: { name: { _like: $specialization } } }
                 { supplier: { supplier_type: { private: { _eq: $supplierPrivate } } } }
-                { type_id: {  _eq: $service } }
-                { service: { category: { name: { _like: $category } } } } 
-                { service: { category: { name: { _like: $specialization } } } } 
             ]
           } ) 
           {
@@ -78,7 +78,7 @@ export default class Providers extends Component<{}, State> {
     pane: 'markerPane',
     selectedItem: undefined,
     active: false,
-    filters: { category: null, service: null, specialization: null, supplierPrivate: null },
+    filters: { category: null, service: null, specialization: null, administrator: null },
   };
 
   createMarkerClusterCustomIcon = (cluster: any) => {
@@ -120,18 +120,25 @@ export default class Providers extends Component<{}, State> {
 
   handleFilterChange = (filterProperty: any) => {
     const filtersObject =  { ...this.state.filters, ...filterProperty }
-    this.setState( { filters: filtersObject });
+    this.setState( { filters: filtersObject});
+    const queryParams: any = {};
     for (const key in filtersObject) {
-      if ([null, undefined].includes(filtersObject[key])) {
-        delete filtersObject[key];
+      if (![null, undefined].includes(filtersObject[key])) {
+        queryParams[key]= filtersObject[key];
       }
     }
-    navigate(`/harta?${new URLSearchParams(filtersObject).toString()}`)
+    navigate(`/harta?${new URLSearchParams(queryParams).toString()}`)
   };
 
   render() {
     const position: LatLngTuple = [this.state.lat, this.state.lng];
     const filters = this.state.filters;
+    const queryVariables = { 
+      category: filters.category ? `%${filters.category}%` : null,
+      service: filters.service ? `%${filters.service}%` : null,
+      specialization: filters.specialization ? `%${filters.specialization}%` : null,
+      supplierPrivate: filters.administrator,
+    }
 
     return (
       <div>
@@ -149,7 +156,7 @@ export default class Providers extends Component<{}, State> {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
-            <Query query={PROVIDERS} variables={ filters }>      
+            <Query query={PROVIDERS} variables={ queryVariables }>      
             {({ loading, error, data }: any) => {
               if (loading) return <div>Fetching</div>
               if (error) return <div>Error</div>
@@ -173,14 +180,11 @@ export default class Providers extends Component<{}, State> {
             </Query>
           </MarkerClusterGroup>
         </Map>
-        {/*
-          * @todo Cristina, Seco, Stefan -  de adaugat filters state in select value
-          * filters={filters}
-        */}
         <Filter
           filterClass="filter-options"
           options={Object.values(FilterOptions)}
           drawer={true}
+          filters={filters}
           onFilterChange={this.handleFilterChange}
         />
       </div>

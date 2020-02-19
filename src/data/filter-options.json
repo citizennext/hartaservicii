@@ -3,23 +3,21 @@
         { "value": null, "label": "Toate vârstele" },
         { "value": "copii", "label": "Copii" },
         { "value": "tineri", "label": "Tineri" },
-        { "value": "adulti", "label": "Adulti" }
+        { "value": "adulti", "label": "Adulti" },
+        { "value": "varstnici", "label": "Varstnici" }
     ],
     "service_type": [
         { "value": null, "label": "Toate categoriile de servicii" },
-        { "value": 1, "label": "Centru rezidenţial cu cazare pe perioadă nedeterminată" },
-        { "value": 2, "label": "Centru rezidenţial cu cazare pe perioadă determinată" },
-        { "value": 3, "label": "Locuinţă protejată" },
-        { "value": 4, "label": "Centru de zi" },
-        { "value": 5, "label": "Unitate de îngrijiri la domiciliu" },
-        { "value": 6, "label": "Serviciu acordat în comunitate" }
+        { "value": "Centre de zi pentru copii ( copii în familie, copii separați sau în risc de separare de părinți)", "label": "Centre de zi pentru copii ( copii în familie, copii separați sau în risc de separare de părinți)" },
+        { "value": "Centre de zi pentru persoane vârstnice", "label": "Centre de zi pentru persoane vârstnice" }
     ],
     "specializari": [
         { "value": null, "label": "Toate specializările" },
-        { "value": "dizabilitati", "label": "Centre de zi pentru persoane adulte cu dizabilitati" },
-        { "value": "copii", "label": "Social Service" }
+        { "value": "Centre de recuperare", "label": "Centre de recuperare" },
+        { "value": "Unitate de îngrijiri la domiciliu", "label": "Unitate de îngrijiri la domiciliu" },
+        { "value": "Creșe", "label": "Creșe" }
     ],
-    "accesibilitate": [
+    "administrator": [
         { "value": null, "label": "Public și privat" },
         { "value": false, "label": "Public" },
         { "value": true, "label": "Privat" }
