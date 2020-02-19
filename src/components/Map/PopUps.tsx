@@ -190,7 +190,7 @@ const Providers: React.FC<Props> = () => {
           </div>
           <div>
             <p>Dată licență provizorie: </p>
-            <p>{providers[0].licence_date_provisional ? providers[0].licence_date_provisional : '-'}</p>
+            <p>{providers[0].license_date_provisional ? providers[0].license_date_provisional : '-'}</p>
           </div>
           <div>
             <p>Număr și serie licență de funcționare: </p>
