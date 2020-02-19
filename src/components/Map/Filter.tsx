@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Select from 'react-select';
 import Drawer from '../Drawer/Drawer';
 import { DrawerContext } from '../Drawer/DrawerContext';
@@ -6,6 +6,8 @@ import { useWindowSize } from '../../hooks/useWindowSize';
 import { FilterMenu } from '../Icons';
 import options from '../../data/filter-options.json';
 import { graphql, useStaticQuery } from 'gatsby';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 type Props = {
   filterClass?: string;
@@ -20,15 +22,8 @@ const useServices = () => {
     graphql`
       query {
         hasura {
-          services: providers(distinct_on: service_id, where: {service: {name: {_is_null: false}}}) {
-            service {
-              name
-            }
-          }
-          categories: services(distinct_on: category_id, where: {category: {name: {_is_null: false}}}) {
-            category {
-              name
-            }
+          categories: categories {
+            name
           }
         }
       }
@@ -37,17 +32,19 @@ const useServices = () => {
   return hasura
 };
 
+const SERVICES = gql`
+query MyQuery($selectedCategory: String) {
+  services: services(where:{ category: { name: {_eq: $selectedCategory} } }) {
+    name 
+  }
+}
+`;
+
 const Filter: React.FC<Props> = props => {
   const query = useServices();
 
-  const optionsSpecialization = Object.values(query.services).map((item: any) => {
-    return { value: item.service.name, label: item.service.name}
-  });
-  optionsSpecialization.unshift({value: null, label: "Toate specializarile"});
-
-
   const optionsService = Object.values(query.categories).map((item: any) => {
-    return { value: item.category.name, label: item.category.name}
+    return { value: item.name, label: item.name}
   });
   optionsService.unshift({value: null, label: "Toate categoriile de servicii"});
 
@@ -57,8 +54,22 @@ const Filter: React.FC<Props> = props => {
     dispatch((current: boolean) => !current);
   };
   const windowSize = useWindowSize();
-
   const filters = props.filters
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const { loading, error, data } = useQuery(SERVICES, {
+      variables: { selectedCategory: selectedCategory },
+  });
+  if (loading) return(<p>Loading...</p>);
+  if (error) return(<p>Error! ${error}</p>);
+
+  const services = data.services
+  
+  const optionsSpecialization = Object.values(services).map((item: any) => {
+    return { value: item.name, label: item.name}
+  });
+  optionsSpecialization.unshift({value: null, label: "Toate specializarile"});
 
   function handleChangeAge(newValue: any) {
     props.onFilterChange({ category: newValue.value });
@@ -66,6 +77,7 @@ const Filter: React.FC<Props> = props => {
 
   function handleChangeService(newValue: any) {
     props.onFilterChange({ service: newValue.value })
+    setSelectedCategory(newValue.value)
   }
 
   function handleChangeSpecialization(newValue: any) {
