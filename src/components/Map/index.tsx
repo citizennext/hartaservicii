@@ -34,12 +34,6 @@ type Provider = {
 };
 
 export default class Providers extends Component<{}, State> {
-  constructor(props: {}, context: any) {
-    super(props, context);
-
-    this.handleClick('691228a5-df1b-49d4-9b4f-1bc495b3c69f');
-  }
-
   state = {
     lat: 45.947808,
     lng: 25.091419,
@@ -73,9 +67,17 @@ export default class Providers extends Component<{}, State> {
     });
   };
 
+  openPopup = () => {
+    this.setSelectedItem('*');
+  };
+
+  setSelectedItem = (id: string) => {
+    this.setState({ selectedItem: id, active: true });
+  };
+
   handleClick = (id: string) => {
     return () => {
-      this.setState({ selectedItem: id, active: true });
+      this.setSelectedItem(id);
       navigateTo(`harta/?provider=${id}`);
     };
   };
@@ -83,6 +85,10 @@ export default class Providers extends Component<{}, State> {
   handleClose = () => {
     this.setState({ active: false });
   };
+
+  componentDidMount() {
+    this.openPopup();
+  }
 
   render() {
     const position: LatLngTuple = [this.state.lat, this.state.lng];
@@ -97,7 +103,6 @@ export default class Providers extends Component<{}, State> {
         }
       }
     `;
-
     return (
       <StaticQuery
         query={query}

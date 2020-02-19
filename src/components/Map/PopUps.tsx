@@ -78,6 +78,7 @@ const Providers: React.FC<Props> = () => {
         </button>
       </header>
       <div className="main-section">
+        <pre>{providers[0].id}</pre>
         <h2>{providers[0].name}</h2>
         <h3 className="pin-name">{providers[0].supplier.name}</h3>
         <div className="pin-id">
