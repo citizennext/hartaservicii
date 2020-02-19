@@ -3,6 +3,78 @@ require('dotenv').config({
 });
 const siteConfig = require('./site-config');
 
+const providers = `query {
+        hasura {
+          providers {
+            id
+            name
+            email
+            address
+            location
+            district
+            coordinates
+            service {
+              name
+              category {
+                name
+              }
+            }
+          }
+        }
+      }`;
+const blogs = `query {
+        hasura {
+          blogs {
+            id
+            slug
+            title
+            summary
+            status
+            content {
+              html
+            }
+          }
+        }
+      }`;
+const pages = `query {
+        hasura {
+          pages {
+            id
+            slug
+            title
+            summary
+            status
+            content {
+              html
+            }
+          }
+        }
+      }`;
+
+const array = [
+  {
+    indexName: process.env.ALGOLIA_INDEX_NAME_PROVIDERS,
+    query: providers,
+    key: 'providers'
+  },
+  {
+    indexName: process.env.ALGOLIA_INDEX_NAME_BLOG,
+    query: blogs,
+    key: 'blogs'
+  },
+  {
+    indexName: process.env.ALGOLIA_INDEX_NAME_PAGES,
+    query: pages,
+    key: 'pages'
+  }
+];
+// const queries = [
+//   {
+//     query: providers,
+//     transformer: ({data}) => data.hasura.providers
+//   }
+// ];
+
 module.exports = {
   siteMetadata: {
     ...siteConfig,
@@ -111,5 +183,18 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: 'gatsby-plugin-algolia',
+      options: {
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_API_KEY,
+        queries: array.map(item => ({
+          query: item.query,
+          indexName: item.indexName,
+          transformer: ({data}) => data.hasura[item.key]
+        })),
+        chunkSize: 10000, // default: 1000
+      },
+    }
   ],
 };
