@@ -13,14 +13,14 @@ import {
 import algoliasearch from 'algoliasearch/lite';
 import withURLSync from './URLSync';
 // @ts-ignore
-import './App.css';
+// import './App.css';
 
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
 // @ts-ignore
 const App = props => (
   <InstantSearch
     searchClient={searchClient}
-    indexName={`${process.env.ALGOLIA_INDEX_NAME}`}
+    indexName={`${process.env.ALGOLIA_INDEX_NAME_PROVIDERS}`}
     searchState={props.searchState}
     createURL={props.createURL}
     onSearchStateChange={props.onSearchStateChange}>
@@ -71,13 +71,9 @@ const Facets = () => (
     <Panel name="Location" id="location">
       <RefinementListLinks attribute="location" />
     </Panel>
-    <Panel name="Location" id="district">
+    <Panel name="District" id="district">
       <RefinementListLinks attribute="district" />
     </Panel>
-
-    {/*<Panel title="Rating" id="ratings">*/}
-    {/*  <RatingMenu attribute="rating" max={5} />*/}
-    {/*</Panel>*/}
   </aside>
 );
 
@@ -90,31 +86,6 @@ const Panel = ({ name, children, id }) => (
     {children}
   </div>
 );
-
-// const Star = ({ active }) => (
-//   <span className={`star${active ? '' : '__empty'}`} />
-// );
-// const Stars = ({ rating }) => {
-//   const stars = [];
-//   for (let i = 1; i <= 5; ++i) {
-//     stars.push(i <= rating);
-//   }
-//   return (
-//     <span className="stars">
-//       {stars.map((active, idx) => (
-//         <Star key={idx} active={active} />
-//       ))}
-//     </span>
-//   );
-// };
-// const Genre = ({ name }) => <span className="badge">{name}</span>;
-// const Genres = ({ genres }) => (
-//   <p className="genre">
-//     {genres.map((genre, idx) => (
-//       <Genre name={genre} key={idx}/>
-//     ))}
-//   </p>
-// );
 
 const Hit = hit => {
   const { id, address, location, district, coordinates } = hit.hit;
