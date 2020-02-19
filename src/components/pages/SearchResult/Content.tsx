@@ -13,7 +13,7 @@ import {
 import algoliasearch from 'algoliasearch/lite';
 import withURLSync from './URLSync';
 // @ts-ignore
-// import './App.css';
+import './App.css';
 
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
 // @ts-ignore
