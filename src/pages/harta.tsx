@@ -9,7 +9,7 @@ export default class HartaPage extends React.Component {
     return (
       <>
         <Seo bodyClassName="page-harta" />
-        <Header />
+        <Header headerClassName="page-harta" />
         <Layout>
           <HartaContent />
         </Layout>
