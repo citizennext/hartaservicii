@@ -5,7 +5,10 @@ import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
 import PopUps from './PopUps';
-import { navigateTo } from 'gatsby-link';
+// @ts-ignore
+import { navigate } from 'gatsby-link';
+import { globalHistory } from '@reach/router';
+import queryString from 'query-string';
 
 type State = {
   lat: number;
@@ -68,17 +71,19 @@ export default class Providers extends Component<{}, State> {
   };
 
   openPopup = () => {
-    this.setSelectedItem('*');
+    if (globalHistory.location.search) {
+      this.setSelectedItem(queryString.parseUrl(globalHistory.location.search).query.provider);
+    }
   };
 
-  setSelectedItem = (id: string) => {
+  setSelectedItem = (id: string[] | string | null | undefined) => {
     this.setState({ selectedItem: id, active: true });
   };
 
   handleClick = (id: string) => {
     return () => {
       this.setSelectedItem(id);
-      navigateTo(`harta/?provider=${id}`);
+      navigate(`harta/?provider=${id}`);
     };
   };
 
