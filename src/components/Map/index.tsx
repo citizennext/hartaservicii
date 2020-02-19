@@ -5,7 +5,7 @@ import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
 import PopUps from './PopUps';
-import { navigateTo } from 'gatsby-link';
+import { navigate } from 'gatsby-link';
 
 type State = {
   lat: number;
@@ -78,7 +78,7 @@ export default class Providers extends Component<{}, State> {
   handleClick = (id: string) => {
     return () => {
       this.setSelectedItem(id);
-      navigateTo(`harta/?provider=${id}`);
+      navigate(`harta/?provider=${id}`);
     };
   };
 

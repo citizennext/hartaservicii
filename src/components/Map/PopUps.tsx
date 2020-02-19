@@ -40,6 +40,11 @@ const Providers: React.FC<Props> = () => {
           name
           cui_cif
           certificate_serial_no
+          decision_date
+          decision_no
+          supplier_type {
+            name
+          }
         }
         service {
           name
@@ -78,7 +83,6 @@ const Providers: React.FC<Props> = () => {
         </button>
       </header>
       <div className="main-section">
-        <pre>{providers[0].id}</pre>
         <h2>{providers[0].name}</h2>
         <h3 className="pin-name">{providers[0].supplier.name}</h3>
         <div className="pin-id">
@@ -107,13 +111,20 @@ const Providers: React.FC<Props> = () => {
         </div>
         <div className="pin-capacity">
           <p>
-            Capacitate: <span>{providers[0].capacity}</span>
+            Capacitate: <span>{providers[0].capacity ? providers[0].capacity : '-'}</span>
           </p>
           <p>
             Directii
-            <a href={'https://www.google.ro/maps/search/' + providers[0].name + '/' + providers[0].coordinates + ',16z'}>
-              <img src={iconDirections} />
-            </a>
+            {providers[0].coordinates ? (
+              <a
+                href={'https://www.google.ro/maps/search/' + providers[0].name + '/' + providers[0].coordinates + ',16z'}
+                target="_blank"
+                rel="noopener noreferrer">
+                <img src={iconDirections} />
+              </a>
+            ) : (
+              '-'
+            )}
           </p>
           <p>
             Distributie
@@ -136,7 +147,7 @@ const Providers: React.FC<Props> = () => {
         </div>
         <div className="pin-web">
           <p>Web</p>
-          <a href="#">www.facebook.com/centruldefemeiEstera </a>
+          <a href="#">- </a>
         </div>
         <div className="pin-services">
           <p>Servicii</p>
@@ -167,7 +178,7 @@ const Providers: React.FC<Props> = () => {
           </div>
           <div>
             <p>Dată decizie: </p>
-            <p>{providers[0].licence_date}</p>
+            <p>{providers[0].license_date ? providers[0].license_date : '- '}</p>
           </div>
           <div>
             <p>Serie și număr certificat: </p>
@@ -179,15 +190,15 @@ const Providers: React.FC<Props> = () => {
           </div>
           <div>
             <p>Dată licență provizorie: </p>
-            <p>{providers[0].licence_date_provisional}</p>
+            <p>{providers[0].licence_date_provisional ? providers[0].licence_date_provisional : '-'}</p>
           </div>
           <div>
             <p>Număr și serie licență de funcționare: </p>
-            <p>GH786 / {providers[0].licence_no}</p>
+            <p>{providers[0].license_no ? providers[0].license_no : '-'}</p>
           </div>
           <div>
             <p>Instituția care a eliberat licența: </p>
-            <p>{providers[0].licence_by}</p>
+            <p>{providers[0].license_by ? providers[0].license_by : '-'}</p>
           </div>
         </div>
       </div>
