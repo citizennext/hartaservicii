@@ -16,13 +16,13 @@ export function Header({ headerClassName }: Props) {
       <Separator classSeparator="hidden md:block" color="snow" />
       <div className="interior">
         <Link to="/" title="Back to Homepage">
-          <img src={Logo} alt="Logo" />
+          {headerClassName == 'page-harta' ? '' : <img src={Logo} alt="Logo" />}
         </Link>
         <DrawerProvider>
           <Navigation navClass="nav-header" nav={Data.page} drawer={true} />
         </DrawerProvider>
       </div>
-      <Separator classSeparator="md:hidden" color="burg" width="88vw" />
+      {headerClassName == 'page-harta' ? '' : <Separator classSeparator="md:hidden" color="burg" width="88vw" />}
     </header>
   );
 }
