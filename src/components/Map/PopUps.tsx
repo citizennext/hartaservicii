@@ -38,6 +38,12 @@ const Providers: React.FC<Props> = () => {
         license_no
         supplier {
           name
+          cui_cif
+          certificate_serial_no
+        }
+        service {
+          name
+          code
         }
       }
     }
@@ -134,14 +140,7 @@ const Providers: React.FC<Props> = () => {
         <div className="pin-services">
           <p>Servicii</p>
           <ul>
-            <li>Consiliere psihologică și suport emoțional</li>
-            <li>Supraveghere</li>
-            <li>Consiliere juridică</li>
-            <li>Educare</li>
-            <li>Reintegrare familială și comunitară</li>
-            <li>Cazare pe perioadă determinată sau cazare pe timp de noapte</li>
-            <li>Masă</li>
-            <li>Menaj Curățenie</li>
+            <li>{providers[0].service.name ? providers[0].service.name : '-'}</li>
           </ul>
         </div>
         <div className="pin-provider">
@@ -151,11 +150,11 @@ const Providers: React.FC<Props> = () => {
           </div>
           <div>
             <p>Nume furnizor: </p>
-            <p>Biserica Luterană Maica Luminii și Îngăduinței</p>
+            <p>{providers[0].supplier.name ? providers[0].supplier.name : '-'}</p>
           </div>
           <div>
             <p>CUI furnizor: </p>
-            <p>RO 36689963</p>
+            <p>{providers[0].supplier.cui_cif ? providers[0].supplier.cui_cif : '-'}</p>
           </div>
           <div>
             <p>Acreditat: </p>
@@ -171,7 +170,7 @@ const Providers: React.FC<Props> = () => {
           </div>
           <div>
             <p>Serie și număr certificat: </p>
-            <p>HY 236 369</p>
+            <p>{providers[0].supplier.certificate_serial_no ? providers[0].supplier.certificate_serial_no : '-'}</p>
           </div>
           <div>
             <p>Cod serviciu social: </p>
