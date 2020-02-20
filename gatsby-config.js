@@ -19,6 +19,9 @@ const providers = `query {
                 name
               }
             }
+            supplier {
+              name
+            }
           }
         }
       }`;
