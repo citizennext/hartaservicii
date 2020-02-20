@@ -1,56 +1,61 @@
 import React from 'react';
-// Update the import
 import {
   InstantSearch,
   Hits,
-  SearchBox,
   Pagination,
   Highlight,
   ClearRefinements,
   RefinementList,
   Configure,
   Stats,
+  Index,
 } from 'react-instantsearch-dom';
-// for the default version
 import algoliasearch from 'algoliasearch';
+import AutoComplete from './AutoComplete';
 
 const indexProviders: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_PROVIDERS}`;
-// const indexPages: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_PAGES}`;
-// const indexBlog: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_BLOG}`;
+const indexPages: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_PAGES}`;
+const indexBlog: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_BLOG}`;
 
 const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
-const providers = client.initIndex(indexProviders);
-// const pages = client.initIndex(indexPages);
-// const blog = client.initIndex(indexBlog);
 
-providers
-  .setSettings({
-    searchableAttributes: ['name', 'location', 'district', 'address', 'unordered(service)'],
-    customRanking: ['desc(popularity)'],
-    attributesForFaceting: ['searchable(name)', 'location', 'district', 'service'],
-  })
-  .then(() => {
-    // done
-  });
-
-// Update the App component
 export default class App extends React.Component {
-  // const client = algoliasearch('YourApplicationID', 'YourAdminAPIKey');
-  // const index = client.initIndex('your_index_name');
-
-  Hit(props: any) {
+  hitProviders(props: any) {
+    const { supplier } = props.hit;
     return (
       <>
         <div className="hit-name">
+          <strong>Name: </strong>
           <Highlight attribute="name" hit={props.hit} />
         </div>
         <div className="hit-location">
-          <Highlight attribute="location" hit={props.hit} />,
-          <Highlight attribute="district" hit={props.hit} />
+          <strong>Location / District: </strong>
+          <Highlight attribute="location" hit={props.hit} />, <Highlight attribute="district" hit={props.hit} />
         </div>
-        <div className="hit-location">
-          <Highlight attribute="location" hit={props.hit} />
+        {supplier.name && (
+          <div className="hit-supplier">
+            <strong>Supplier Name: </strong>
+            <span>{supplier.name}</span>
+          </div>
+        )}
+      </>
+    );
+  }
+
+  hitPagesBlog(props: any) {
+    const { summary } = props.hit;
+    return (
+      <>
+        <div className="hit-name">
+          <strong>Title: </strong>
+          <Highlight attribute="title" hit={props.hit} />
         </div>
+        {summary && (
+          <div className="hit-summary">
+            <strong>Summary: </strong>
+            <Highlight attribute="summary" hit={props.hit} />
+          </div>
+        )}
       </>
     );
   }
@@ -60,24 +65,38 @@ export default class App extends React.Component {
       <div className="ais-InstantSearch">
         <InstantSearch indexName={`${indexProviders}`} searchClient={client}>
           <div className="seacrh-header">
-            <SearchBox />
+            <AutoComplete />
+          </div>
+          <div className="left-panel">
+            <Index indexName={`${indexProviders}`}>
+              <div className="providers">
+                <Hits hitComponent={this.hitProviders} />
+              </div>
+              <Pagination />
+            </Index>
+            <Index indexName={`${indexPages}`}>
+              <div className="pages">
+                <Hits hitComponent={this.hitPagesBlog} />
+              </div>
+              <Pagination />
+            </Index>
+            <Index indexName={`${indexBlog}`}>
+              <div className="blog">
+                <Hits hitComponent={this.hitPagesBlog} />
+              </div>
+              <Pagination />
+            </Index>
+          </div>
+          <div className="right-panel">
             <div id="stats" className="text-right text-muted">
               <Stats />
             </div>
-          </div>
-          <div className="left-panel">
-            <div className="items">
-              <Hits hitComponent={this.Hit} />
-            </div>
-            <Pagination />
-          </div>
-          <div className="right-panel">
             <ClearRefinements />
             <div className="filter location">
               <h2>Location</h2>
               <RefinementList attribute="location" />
             </div>
-            <div className="filter location">
+            <div className="filter district">
               <h2>District</h2>
               <RefinementList attribute="district" />
             </div>
