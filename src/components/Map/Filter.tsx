@@ -15,6 +15,7 @@ type Props = {
   drawer: boolean;
   onFilterChange: any;
   filters: any;
+  totalResults: number;
 };
 
 const useServices = () => {
@@ -33,11 +34,11 @@ const useServices = () => {
 };
 
 const SERVICES = gql`
-query MyQuery($selectedCategory: String) {
-  services: services(where:{ category: { name: {_eq: $selectedCategory} } }) {
-    name 
+  query MyQuery($selectedCategory: String) {
+    services: services(where:{ category: { name: {_eq: $selectedCategory} } }) {
+      name 
+    }
   }
-}
 `;
 
 const Filter: React.FC<Props> = props => {
@@ -59,7 +60,7 @@ const Filter: React.FC<Props> = props => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const { loading, error, data } = useQuery(SERVICES, {
-      variables: { selectedCategory: selectedCategory },
+    variables: { selectedCategory: selectedCategory },
   });
   if (loading) return(<p>Loading...</p>);
   if (error) return(<p>Error! ${error}</p>);
@@ -129,7 +130,7 @@ const Filter: React.FC<Props> = props => {
             <Select value={options.administrator.filter(({value}) => value === filters.administrator)} options={options.administrator} onChange={handleChangeAdministrator}/>
           </div>
           <div className="pin-number select-container">
-            <label>Total centre</label>960
+            <label>Total centre</label>{props.totalResults}
           </div>
         </div>
       )}

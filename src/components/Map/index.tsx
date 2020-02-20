@@ -19,6 +19,7 @@ type State = {
   selectedItem?: Provider;
   active: boolean;
   filters: object;
+  totalResults: number;
 };
 
 type Provider = {
@@ -64,12 +65,6 @@ const PROVIDERS = gql`
   }`;
 
 export default class Providers extends Component<{}, State> {
-
-  componentDidMount () {
-    const queryValues = location.search ? queryString.parse(location.search, {parseBooleans: true}) : { category: null, service: null, specialization: null, supplierPrivate: null}
-    this.setState({ filters: { ...this.state.filters, ...queryValues } });
-  }
-
   state = {
     lat: 45.947808,
     lng: 25.091419,
@@ -79,7 +74,13 @@ export default class Providers extends Component<{}, State> {
     selectedItem: undefined,
     active: false,
     filters: { category: null, service: null, specialization: null, administrator: null },
+    totalResults: 0,
   };
+
+  componentDidMount () {
+    const queryValues = location.search ? queryString.parse(location.search, {parseBooleans: true}) : { category: null, service: null, specialization: null, supplierPrivate: null}
+    this.setState({ filters: { ...this.state.filters, ...queryValues } });
+  }
 
   createMarkerClusterCustomIcon = (cluster: any) => {
     const size = cluster.getChildCount();
@@ -120,7 +121,7 @@ export default class Providers extends Component<{}, State> {
 
   handleFilterChange = (filterProperty: any) => {
     const filtersObject =  { ...this.state.filters, ...filterProperty }
-    this.setState( { filters: filtersObject});
+    this.setState({ filters: filtersObject});
     const queryParams: any = {};
     for (const key in filtersObject) {
       if (![null, undefined].includes(filtersObject[key])) {
@@ -156,7 +157,7 @@ export default class Providers extends Component<{}, State> {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
-            <Query query={PROVIDERS} variables={ queryVariables }>      
+            <Query query={PROVIDERS} variables={ queryVariables } onCompleted={(provider: {[key: string]: []; }) => {this.setState({totalResults: provider.providers.length})}}>      
             {({ loading, error, data }: any) => {
               if (loading) return <div>Fetching</div>
               if (error) return <div>Error</div>
@@ -185,6 +186,7 @@ export default class Providers extends Component<{}, State> {
           options={Object.values(FilterOptions)}
           drawer={true}
           filters={filters}
+          totalResults={this.state.totalResults}
           onFilterChange={this.handleFilterChange}
         />
       </div>
