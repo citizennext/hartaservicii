@@ -10,6 +10,7 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 type FilterObject = {
+  district?: string | null;
   category?: string | null;
   service?: string | null;
   specialization?: string | null;
@@ -32,6 +33,9 @@ const useServices = () => {
         hasura {
           categories: categories {
             name
+          }
+          districts: suppliers(distinct_on: district, where: {district: {_is_null: false}}) {
+            district
           }
         }
       }
@@ -60,6 +64,12 @@ const Filter: React.FC<Props> = props => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const query = useServices();
+
+  const districts = query.districts.map((item: {[name: string]: string}) => {
+    return { value: item.district, label: item.district}
+  })
+  districts.unshift({value: null, label: "Toate judetele"});
+
   const optionsService = query.categories.map((item: {[name: string]: string}) => {
     return { value: item.name, label: item.name }
   });
@@ -77,6 +87,10 @@ const Filter: React.FC<Props> = props => {
     return { value: item.name, label: item.name}
   });
   optionsSpecialization.unshift({ value: null, label: "Toate specializarile" });
+
+  function handleChangeDistrict(newValue: any) {
+    props.onFilterChange({ district: newValue.value });
+  }
 
   function handleChangeAge(newValue: any) {
     props.onFilterChange({ category: newValue.value });
@@ -119,6 +133,10 @@ const Filter: React.FC<Props> = props => {
         </div>
       ) : (
         <div className="select-options">
+          <div className="select-container">
+            <label>Judet</label>
+            <Select value={districts.filter(({value}: any) => value === filters.district)} options={districts} onChange={handleChangeDistrict} />
+          </div>
           <div className="select-container">
             <label>Beneficiari</label>
             <Select value={options.age.filter(({value}) => value === filters.category)} options={options.age} onChange={handleChangeAge} />

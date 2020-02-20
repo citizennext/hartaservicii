@@ -11,6 +11,7 @@ import { navigate } from 'gatsby';
 import queryString from 'query-string';
 
 type FilterObject = {
+  district?: string | null;
   category?: string | null;
   service?: string | null;
   specialization?: string | null;
@@ -45,7 +46,7 @@ type Provider = {
 };
 
 const PROVIDERS = gql`
-  query Providers($service: String, $supplierPrivate: Boolean, $category: String, $specialization: String){
+  query Providers($district: String, $service: String, $supplierPrivate: Boolean, $category: String, $specialization: String){
       providers( 
           where: {
             _and: [
@@ -53,6 +54,7 @@ const PROVIDERS = gql`
                 { service: { category: { name: { _like: $service } } } }
                 { service: { name: { _like: $specialization } } }
                 { supplier: { supplier_type: { private: { _eq: $supplierPrivate } } } }
+                { district: { _like: $district } }
             ]
           } ) 
           {
@@ -80,7 +82,7 @@ export default class Providers extends Component<{}, State> {
     pane: 'markerPane',
     selectedItem: undefined,
     active: false,
-    filters: { category: null, service: null, specialization: null, administrator: null },
+    filters: { district: null, category: null, service: null, specialization: null, administrator: null },
     totalResults: 0,
   };
 
@@ -147,7 +149,8 @@ export default class Providers extends Component<{}, State> {
   render() {
     const position: LatLngTuple = [this.state.lat, this.state.lng];
     const filters = this.state.filters;
-    const queryVariables = { 
+    const queryVariables = {
+      district: filters.district ? `%${filters.district}%` : null,
       category: filters.category ? `%${filters.category}%` : null,
       service: filters.service ? `%${filters.service}%` : null,
       specialization: filters.specialization ? `%${filters.specialization}%` : null,
