@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import Separator from './Separator';
 
 type Props = {
-  header?: string;
+  header?: string | object | undefined;
   image?: any;
   className?: string;
 };
@@ -13,7 +13,7 @@ export function AfterHeader({ header, image, className }: Props) {
     <div className={`page-header ${className}`}>
       <Separator color="burg" />
       <div className="wrapper">
-        <span>{header}</span>
+        <div>{header}</div>
         {image && <Img fluid={image} />}
       </div>
       <Separator color="burg" bottom="-6" />
