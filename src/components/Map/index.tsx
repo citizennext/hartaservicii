@@ -10,6 +10,13 @@ import FilterOptions from '../../data/filter-options.json';
 import { navigate } from 'gatsby';
 import queryString from 'query-string';
 
+type FilterObject = {
+  category?: string | null;
+  service?: string | null;
+  specialization?: string | null;
+  administrator?: boolean | null;
+}
+
 type State = {
   lat: number;
   lng: number;
@@ -18,7 +25,7 @@ type State = {
   pane: string;
   selectedItem?: Provider;
   active: boolean;
-  filters: object;
+  filters: FilterObject;
   totalResults: number;
 };
 
@@ -128,7 +135,13 @@ export default class Providers extends Component<{}, State> {
         queryParams[key]= filtersObject[key];
       }
     }
-    navigate(`/harta?${new URLSearchParams(queryParams).toString()}`)
+
+    if (Object.keys(queryParams).length !== 0) {
+      navigate(`/harta?${new URLSearchParams(queryParams).toString()}`);
+    }
+    else {
+      navigate(`/harta`);
+    }
   };
 
   render() {
@@ -163,10 +176,9 @@ export default class Providers extends Component<{}, State> {
               if (error) return <div>Error</div>
         
               const providers: Provider[] = data.providers
-              
               return (
                 <div>
-                  {Object.values(providers).map((item, index) => (
+                  {providers.map((item, index) => (
                     <Marker
                       position={item.coordinates}
                       key={`marker-${item.id}-${index}`}

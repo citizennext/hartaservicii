@@ -9,12 +9,19 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
+type FilterObject = {
+  category?: string | null;
+  service?: string | null;
+  specialization?: string | null;
+  administrator?: boolean | null;
+}
+
 type Props = {
   filterClass?: string;
   options: any;
   drawer: boolean;
   onFilterChange: any;
-  filters: any;
+  filters: FilterObject;
   totalResults: number;
 };
 
@@ -42,13 +49,6 @@ const SERVICES = gql`
 `;
 
 const Filter: React.FC<Props> = props => {
-  const query = useServices();
-
-  const optionsService = Object.values(query.categories).map((item: any) => {
-    return { value: item.name, label: item.name}
-  });
-  optionsService.unshift({value: null, label: "Toate categoriile de servicii"});
-
   // @ts-ignore
   const { state, dispatch } = useContext(DrawerContext);
   const openDrawer = () => {
@@ -59,6 +59,12 @@ const Filter: React.FC<Props> = props => {
 
   const [selectedCategory, setSelectedCategory] = useState(null);
 
+  const query = useServices();
+  const optionsService = query.categories.map((item: {[name: string]: string}) => {
+    return { value: item.name, label: item.name }
+  });
+  optionsService.unshift({value: null, label: "Toate categoriile de servicii"});
+
   const { loading, error, data } = useQuery(SERVICES, {
     variables: { selectedCategory: selectedCategory },
   });
@@ -67,10 +73,10 @@ const Filter: React.FC<Props> = props => {
 
   const services = data.services
   
-  const optionsSpecialization = Object.values(services).map((item: any) => {
+  const optionsSpecialization = services.map((item: {[name: string]: string}) => {
     return { value: item.name, label: item.name}
   });
-  optionsSpecialization.unshift({value: null, label: "Toate specializarile"});
+  optionsSpecialization.unshift({ value: null, label: "Toate specializarile" });
 
   function handleChangeAge(newValue: any) {
     props.onFilterChange({ category: newValue.value });
@@ -119,11 +125,11 @@ const Filter: React.FC<Props> = props => {
           </div>
           <div className="select-container">
             <label>Tip servicii sociale</label>
-            <Select value={optionsService.filter(({value}) => value === filters.service)} options={optionsService} onChange={handleChangeService}/>
+            <Select value={optionsService.filter(({value}: any) => value === filters.service)} options={optionsService} onChange={handleChangeService}/>
           </div>
           <div className="select-container">
             <label>Tip specializare</label>
-            <Select value={optionsSpecialization.filter(({value}) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>
+            <Select value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>
           </div>
           <div className="select-container">
             <label>Administrator</label>
