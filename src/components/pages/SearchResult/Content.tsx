@@ -40,7 +40,7 @@ export default class App extends React.Component {
 
   Hit(props: any) {
     return (
-      <li className="item">
+      <>
         <div className="hit-name">
           <Highlight attribute="name" hit={props.hit} />
         </div>
@@ -51,7 +51,7 @@ export default class App extends React.Component {
         <div className="hit-location">
           <Highlight attribute="location" hit={props.hit} />
         </div>
-      </li>
+      </>
     );
   }
 
@@ -66,9 +66,9 @@ export default class App extends React.Component {
             </div>
           </div>
           <div className="left-panel">
-            <ul className="items">
+            <div className="items">
               <Hits hitComponent={this.Hit} />
-            </ul>
+            </div>
             <Pagination />
           </div>
           <div className="right-panel">
