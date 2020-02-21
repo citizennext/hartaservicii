@@ -138,8 +138,13 @@
     @screen md
         position: absolute
         right: 10px
-        top: 150px
+        top: 110px
         display: flex
+        flex-wrap: wrap
+        justify-content: flex-end
+        align-items: flex-end
+        @screen xl
+            top: 150px
     
     .select-container
         position: relative
@@ -150,8 +155,7 @@
                     border: 1px solid transparent
                     @apply rounded-bl-full
                     @apply rounded-tl-full
-                    div[class*="-placeholder"]
-                        margin-left: 39px
+
                     div[class*="-Input"]
                         div
                             input
@@ -183,29 +187,39 @@
             left: 8px
             min-width: 174px
             font-size: 10px
+            padding-left: 4px
             background-color: #C4C3C3
 
     div[class*="-container"]
         font-family: Montserrat
         font-size: 16px
         max-width: 270px
-        margin: 0 auto
         @apply bg-transparent
+        margin-bottom: 15px
+        @screen xl
+            margin: 0 auto
+
+
         div[class*="-control"]
             border: 1px solid transparent
             border-radius: 0
             @apply bg-white
 
-            div[class*="-placeholder"]
+            div[class*="-singleValue"]
                 margin-left: 10px
-            div[class*="-Input"]
-                height: 40px
-                div
-                    input
-                        min-width: 128px !important
-                        // height: 16px
-                        padding-left: 7px !important
-                        padding-top: 6px !important
+                white-space: nowrap
+                overflow: hidden
+                text-overflow: ellipsis
+                max-width: calc(100% - 20px)
+
+            input
+                min-width: 128px !important
+                margin-bottom: 0
+                padding-left: 7px !important
+                padding-top: 6px !important
+
+            >div > div:nth-of-type(2)
+                min-height: 40px
 
             div[class*="-IndicatorsContainer"]
                 padding-right: 20px
@@ -213,7 +227,7 @@
                     width: 0
                 div[class*="-indicatorContainer"]
                     padding: 0
-                    background: #CEE6C1
+                    // background: #CEE6C1
                     color: #6FBBB7
 
     .pin-number
@@ -234,6 +248,10 @@
             line-height: 48px
             text-align: right
             background-color: #EDF7EF !important
+            margin-bottom: 30px !important
+
+        @screen xl
+            margin-bottom: 0 !important
 
         &:before
             content: ''
