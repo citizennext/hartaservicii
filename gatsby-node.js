@@ -4,43 +4,17 @@
 const path = require(`path`);
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
 
-exports.createPages = ({ graphql, actions }) => {
+exports.onCreatePage = async ({ page, actions }) => {
   const { createPage } = actions;
-  const popUpTemplate = path.resolve(`src/components/Map/PopUps.tsx`);
-  // Query for markdown nodes to use in creating pages.
-  // You can query for whatever data you want to create pages for e.g.
-  // products, portfolio items, landing pages, etc.
-  // Variables can be added as the second function parameter
-  return graphql(
-    `
-      query loadContentQuery($limit: Int!) {
-        hasura {
-          providers(limit: $limit) {
-            name
-          }
-        }
-      }
-    `,
-    { limit: 3 }
-  ).then(result => {
-    if (result.errors) {
-      throw result.errors;
-    }
-
-    // Create  pages.
-    result.data.hasura.providers.forEach(provider => {
-      createPage({
-        // Path for this page — required
-        path: `serviciu/${provider.name}`,
-        component: popUpTemplate,
-        context: {
-          slug: provider.name,
-        },
-      });
-    });
-  });
+  // Only update the `/harta` page.
+  if (page.path.match(/^\/harta/)) {
+    // page.matchPath is a special key that's used for matching pages
+    // with corresponding routes only on the client.
+    page.matchPath = '/harta/*';
+    // Update the page.
+    createPage(page);
+  }
 };
-
 
 // exports.createPages = ({ graphql, actions }) => {
 //   const { createPage } = actions;
