@@ -7,6 +7,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Filter from './Filter';
 import FilterOptions from '../../data/filter-options.json';
+import ROCoordinates from '../../data/ro-coordinates.json';
 import { navigate } from 'gatsby';
 import queryString from 'query-string';
 
@@ -54,7 +55,7 @@ const PROVIDERS = gql`
                 { service: { category: { name: { _like: $service } } } }
                 { service: { name: { _like: $specialization } } }
                 { supplier: { supplier_type: { private: { _eq: $supplierPrivate } } } }
-                { district: { _like: $district } }
+                { district: { _like: $district} }
             ]
           } ) 
           {
@@ -88,6 +89,7 @@ export default class Providers extends Component<{}, State> {
 
   componentDidMount () {
     const queryValues = location.search ? queryString.parse(location.search, {parseBooleans: true}) : { category: null, service: null, specialization: null, supplierPrivate: null}
+    this.zoomOnSelectedDistrict(queryValues.district);
     this.setState({ filters: { ...this.state.filters, ...queryValues } });
   }
 
@@ -128,6 +130,22 @@ export default class Providers extends Component<{}, State> {
     this.setState({ active: false });
   };
 
+  zoomOnSelectedDistrict = (districtValue: any) => {
+    if (districtValue) {
+      const district = ROCoordinates.filter((({admin}) => admin === districtValue))[0];
+      if (district) {
+        this.setState({lat: parseFloat(district.lat)});
+        this.setState({lng: parseFloat(district.lng)});
+        this.setState({zoom: 8});
+      }
+    }
+    else {
+      this.setState({lat: 45.947808});
+      this.setState({lng: 25.091419});
+      this.setState({zoom: 7});
+    }
+  }
+
   handleFilterChange = (filterProperty: any) => {
     const filtersObject =  { ...this.state.filters, ...filterProperty }
     this.setState({ filters: filtersObject});
@@ -137,6 +155,8 @@ export default class Providers extends Component<{}, State> {
         queryParams[key]= filtersObject[key];
       }
     }
+
+    this.zoomOnSelectedDistrict(queryParams.district);
 
     if (Object.keys(queryParams).length !== 0) {
       navigate(`/harta?${new URLSearchParams(queryParams).toString()}`);

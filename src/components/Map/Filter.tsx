@@ -147,7 +147,9 @@ const Filter: React.FC<Props> = props => {
           </div>
           <div className="select-container">
             <label>Tip specializare</label>
-            <Select value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>
+            {filters.service ?
+            (<Select value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>)
+          : (<Select isDisabled={true} value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>)}
           </div>
           <div className="select-container">
             <label>Administrator</label>
