@@ -1,29 +1,21 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import iconClose from '../../assets/images/icon_Close.svg';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import queryString from 'query-string';
 // @ts-ignore
 import StarRatingComponent from 'react-star-rating-component';
 import iconShare from '../../assets/images/icon_share.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
-
-type Props = {
-  onClose: () => void;
-  provider: uuid;
-};
-
 type State = {
   rating: number;
 };
 
-const Providers: React.FC<Props> = () => {
-  const provider = queryString.parse(location.search, { ignoreQueryPrefix: true }.provider).provider;
-
-  const PROVIDERS = gql`
-    query Providers($provider: uuid) {
-      providers(where: { id: { _eq: $provider } }) {
+function PopUps(props: any) {
+  const providersQuery = gql`
+    query Provider($provider: uuid!) {
+      providers_by_pk(id: $provider) {
         id
         coordinates
         address
@@ -54,17 +46,18 @@ const Providers: React.FC<Props> = () => {
     }
   `;
 
-  const { loading, error, data } = useQuery(PROVIDERS, {
+  const provider = props.provider;
+  // console.log('TCL: PopUps -> provider', provider);
+  const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
   });
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error! ${error}</p>;
-  const providers = data.providers;
-  const averageRateing = 4.3;
-  const percentRateing = (averageRateing * 100) / noStars;
+  if (error) return <p>Error! ${error.message}</p>;
+  const providers = data.providers_by_pk;
+  const averageRating = 4.3;
   const noStars = 5;
-  const { rating } = 1;
-
+  const percentRating = (averageRating * 100) / noStars;
+  const rating = 1;
   // onStarClick(nextValue: any) {
   //   this.setState({ rating: nextValue });
   // }
@@ -73,51 +66,53 @@ const Providers: React.FC<Props> = () => {
   //   const { rating } = this.state;
 
   return (
-    <section className="map-marker-popup" id="map-marker-popup" data-id={providers[0].id}>
+    <section className="map-marker-popup" id="map-marker-popup" data-id={providers.id}>
       <header>
         <div className="popup-logo">
           <img src={hssLogo} />
         </div>
-        <button className="close-map-marker-popup" onClick="">
-          <img src={iconClose} />
-        </button>
+        <Link to="/harta">
+          <button className="close-map-marker-popup">
+            <img src={iconClose} />
+          </button>
+        </Link>
       </header>
       <div className="main-section">
-        <h2>{providers[0].name}</h2>
-        <h3 className="pin-name">{providers[0].supplier.name}</h3>
+        <h2>{providers.name}</h2>
+        <h3 className="pin-name">{providers.supplier.name}</h3>
         <div className="pin-id">
           <p>
-            Nr. identificare:<span>{providers[0].licence_no}</span>
+            Nr. identificare:<span>{providers.licence_no}</span>
           </p>
-          <p className="pin-eval">
+          <div className="pin-eval">
             Evaluare utilizatori
-            <span className="average-rateing">{averageRateing}</span>
+            <span className="average-rateing">{averageRating}</span>
             <div className="rating-parent">
-              <div className="rating-child" style={{ width: `${percentRateing}%` }}>
+              <div className="rating-child" style={{ width: `${percentRating}%` }}>
                 <StarRatingComponent
                   name="rate" /* name of the radio input, it is required */
                   value={noStars} /* number of selected icon (`0` - none, `1` - first) */
                   starCount={noStars} /* number of icons in rating, default `5` */
-                  onStarClick="none" /* on icon click handler */
+                  onStarClick={() => null} /* on icon click handler */
                   renderStarIcon={() => <span className="rating-icon"></span>}
                   starColor="#6FBBB7"
-                  renderStarIconHalf="rate"
+                  renderStarIconHalf={() => null}
                   emptyStarColor="transparent"
-                  editing="true"
+                  editing={true}
                 />
               </div>
             </div>
-          </p>
+          </div>
         </div>
         <div className="pin-capacity">
           <p>
-            Capacitate: <span>{providers[0].capacity ? providers[0].capacity : '-'}</span>
+            Capacitate: <span>{providers.capacity ? providers.capacity : '-'}</span>
           </p>
           <p>
             Directii
-            {providers[0].coordinates ? (
+            {providers.coordinates ? (
               <a
-                href={'https://www.google.ro/maps/search/' + providers[0].name + '/' + providers[0].coordinates + ',16z'}
+                href={'https://www.google.ro/maps/search/' + providers.coordinates + ',16z'}
                 target="_blank"
                 rel="noopener noreferrer">
                 <img src={iconDirections} />
@@ -136,14 +131,13 @@ const Providers: React.FC<Props> = () => {
         <div className="pin-address">
           <p>Adresă</p>
           <span>
-            {providers[0].address ? providers[0].address : '-'}, {providers[0].location ? providers[0].location : '-'},{' '}
-            {providers[0].district}
+            {providers.address ? providers.address : '-'}, {providers.location ? providers.location : '-'}, {providers.district}
           </span>
         </div>
         <div className="pin-phone">
           <p>Telefon</p>
-          <span>{providers[0].phone ? providers[0].phone : '-'}</span>
-          <span>{providers[0].phone ? providers[0].phone : '-'}</span>
+          <span>{providers.phone ? providers.phone : '-'}</span>
+          <span>{providers.phone ? providers.phone : '-'}</span>
         </div>
         <div className="pin-web">
           <p>Web</p>
@@ -152,7 +146,7 @@ const Providers: React.FC<Props> = () => {
         <div className="pin-services">
           <p>Servicii</p>
           <ul>
-            <li>{providers[0].service.name ? providers[0].service.name : '-'}</li>
+            <li>{providers.service.name ? providers.service.name : '-'}</li>
           </ul>
         </div>
         <div className="pin-provider">
@@ -162,11 +156,11 @@ const Providers: React.FC<Props> = () => {
           </div>
           <div>
             <p>Nume furnizor: </p>
-            <p>{providers[0].supplier.name ? providers[0].supplier.name : '-'}</p>
+            <p>{providers.supplier.name ? providers.supplier.name : '-'}</p>
           </div>
           <div>
             <p>CUI furnizor: </p>
-            <p>{providers[0].supplier.cui_cif ? providers[0].supplier.cui_cif : '-'}</p>
+            <p>{providers.supplier.cui_cif ? providers.supplier.cui_cif : '-'}</p>
           </div>
           <div>
             <p>Acreditat: </p>
@@ -178,11 +172,11 @@ const Providers: React.FC<Props> = () => {
           </div>
           <div>
             <p>Dată decizie: </p>
-            <p>{providers[0].license_date ? providers[0].license_date : '- '}</p>
+            <p>{providers.license_date ? providers.license_date : '- '}</p>
           </div>
           <div>
             <p>Serie și număr certificat: </p>
-            <p>{providers[0].supplier.certificate_serial_no ? providers[0].supplier.certificate_serial_no : '-'}</p>
+            <p>{providers.supplier.certificate_serial_no ? providers.supplier.certificate_serial_no : '-'}</p>
           </div>
           <div>
             <p>Cod serviciu social: </p>
@@ -190,15 +184,15 @@ const Providers: React.FC<Props> = () => {
           </div>
           <div>
             <p>Dată licență provizorie: </p>
-            <p>{providers[0].license_date_provisional ? providers[0].license_date_provisional : '-'}</p>
+            <p>{providers.license_date_provisional ? providers.license_date_provisional : '-'}</p>
           </div>
           <div>
             <p>Număr și serie licență de funcționare: </p>
-            <p>{providers[0].license_no ? providers[0].license_no : '-'}</p>
+            <p>{providers.license_no ? providers.license_no : '-'}</p>
           </div>
           <div>
             <p>Instituția care a eliberat licența: </p>
-            <p>{providers[0].license_by ? providers[0].license_by : '-'}</p>
+            <p>{providers.license_by ? providers.license_by : '-'}</p>
           </div>
         </div>
       </div>
@@ -230,7 +224,7 @@ const Providers: React.FC<Props> = () => {
             name="ratei" /* name of the radio input, it is required */
             value={rating} /* number of selected icon (`0` - none, `1` - first) */
             starCount={noStars} /* number of icons in rating, default `5` */
-            onStarClick="none" /* on icon click handler */
+            onStarClick={() => null} /* on icon click handler */
             renderStarIcon={() => <span>●</span>}
             starColor="#6FBBB7"
             emptyStarColor="transparent"
@@ -239,6 +233,6 @@ const Providers: React.FC<Props> = () => {
       </footer>
     </section>
   );
-};
+}
 
-export default Providers;
+export default PopUps;

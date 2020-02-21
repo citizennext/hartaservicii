@@ -4,11 +4,11 @@ import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
 // @ts-ignore
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
-import PopUps from './PopUps';
+
 // @ts-ignore
 import { navigate } from 'gatsby-link';
-import { globalHistory } from '@reach/router';
-import queryString from 'query-string';
+// @ts-ignore
+import getSlug from 'speakingurl';
 
 type State = {
   lat: number;
@@ -23,20 +23,11 @@ type State = {
 type Provider = {
   id: string;
   coordinates: LatLngTuple;
-  address: string;
   name: string;
-  location: string;
-  capacity: number;
-  district: string;
-  email: string;
-  license_by: string;
-  license_date_5years: string;
-  license_date_provisional: string;
-  license_no: string;
-  phones: string;
+  slug: string;
 };
 
-export default class Providers extends Component<{}, State> {
+export default class Harta extends Component<any, State> {
   state = {
     lat: 45.947808,
     lng: 25.091419,
@@ -71,24 +62,13 @@ export default class Providers extends Component<{}, State> {
   };
 
   openPopup = () => {
-    if (globalHistory.location.search) {
-      this.setSelectedItem(queryString.parseUrl(globalHistory.location.search).query.provider);
+    if (this.props.provider) {
+      // this.setState({ selectedItem: this.props.provider, active: true });
     }
   };
 
-  setSelectedItem = (id: string[] | string | null | undefined) => {
-    this.setState({ selectedItem: id, active: true });
-  };
-
-  handleClick = (id: string) => {
-    return () => {
-      this.setSelectedItem(id);
-      navigate(`harta/?provider=${id}`);
-    };
-  };
-
-  handleClose = () => {
-    this.setState({ active: false });
+  handleClick = (item: Provider) => {
+    navigate(`/harta/serviciu/${item.slug}`, { state: { providerId: item.id } });
   };
 
   componentDidMount() {
@@ -96,6 +76,8 @@ export default class Providers extends Component<{}, State> {
   }
 
   render() {
+    // console.log(this.props);
+
     const position: LatLngTuple = [this.state.lat, this.state.lng];
     const query = graphql`
       query {
@@ -112,13 +94,16 @@ export default class Providers extends Component<{}, State> {
       <StaticQuery
         query={query}
         render={data => {
-          const providers = data.hasura.providers as Provider[];
+          const providers: Provider[] = data.hasura.providers.map((item: Provider) => {
+            return {
+              ...item,
+              slug: `${getSlug(item.name)}--${item.id.substring(0, 3)}`,
+            };
+          });
           if (typeof window !== 'undefined') {
             return (
               <div>
-                {this.state.selectedItem && this.state.active && (
-                  <PopUps item={this.state.selectedItem} onClose={this.handleClose} />
-                )}
+                {/* {this.state.selectedItem && this.state.active && <PopUps item={this.state.selectedItem} />} */}
                 <Map
                   center={position}
                   zoom={this.state.zoom}
@@ -130,12 +115,12 @@ export default class Providers extends Component<{}, State> {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
                   <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
-                    {Object.values(providers).map((item, index) => (
+                    {providers.map(item => (
                       <Marker
                         position={item.coordinates}
-                        key={`marker-${item.id}-${index}`}
+                        key={`marker-${item.id}`}
                         icon={this.createMarkerCustomIcon()}
-                        onClick={this.handleClick(item.id)}>
+                        onClick={() => this.handleClick(item)}>
                         <Tooltip>{item.name}</Tooltip>
                       </Marker>
                     ))}
