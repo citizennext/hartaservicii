@@ -15,8 +15,12 @@
         .pages,
         .blog
             display: inline-block
+            width: 100%
 
             ul
+                display: inline-block
+                width: 100%
+
                 li
                     float: left
                     width: 100%
@@ -162,3 +166,7 @@
         ul.react-autosuggest__suggestions-list
             li
                 border-bottom: 1px solid lightgrey
+
+        .react-autosuggest__suggestion
+            &.react-autosuggest__suggestion--highlighted
+                background-color: lightgreen

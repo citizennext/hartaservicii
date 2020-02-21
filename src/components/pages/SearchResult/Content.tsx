@@ -2,6 +2,7 @@ import React from 'react';
 import {
   InstantSearch,
   Hits,
+  SearchBox,
   Pagination,
   Highlight,
   ClearRefinements,
@@ -18,10 +19,42 @@ const indexPages: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_PAGES}`
 const indexBlog: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_BLOG}`;
 
 const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
+const providers = client.initIndex(indexProviders);
+const pages = client.initIndex(indexPages);
+const blog = client.initIndex(indexBlog);
 
+providers
+  .setSettings({
+    searchableAttributes: ['name', 'location', 'district', 'address', 'supplier.name', 'service.name'],
+    customRanking: ['asc(name)'],
+    attributesForFaceting: ['name', 'location', 'district', 'service.name'],
+  })
+  .then(() => {
+    // console.log('--- then why ---');
+  });
+
+pages
+  .setSettings({
+    searchableAttributes: ['title', 'summary'],
+    customRanking: ['asc(name)'],
+  })
+  .then(() => {
+    // console.log('--- then why ---');
+  });
+
+blog
+  .setSettings({
+    searchableAttributes: ['title', 'summary'],
+    customRanking: ['asc(name)'],
+  })
+  .then(() => {
+    // console.log('--- then why ---');
+  });
+
+// Update the App component
 export default class App extends React.Component {
   hitProviders(props: any) {
-    const { supplier } = props.hit;
+    const { supplier, service } = props.hit;
     return (
       <>
         <div className="hit-name">
@@ -36,6 +69,12 @@ export default class App extends React.Component {
           <div className="hit-supplier">
             <strong>Supplier Name: </strong>
             <span>{supplier.name}</span>
+          </div>
+        )}
+        {service.name && (
+          <div className="hit-supplier">
+            <strong>Service Name: </strong>
+            <span>{service.name}</span>
           </div>
         )}
       </>
@@ -65,6 +104,7 @@ export default class App extends React.Component {
       <div className="ais-InstantSearch">
         <InstantSearch indexName={`${indexProviders}`} searchClient={client}>
           <div className="seacrh-header">
+            <SearchBox />
             <AutoComplete />
           </div>
           <div className="left-panel">
@@ -99,6 +139,10 @@ export default class App extends React.Component {
             <div className="filter district">
               <h2>District</h2>
               <RefinementList attribute="district" />
+            </div>
+            <div className="filter service">
+              <h2>Service</h2>
+              <RefinementList attribute="service.name" />
             </div>
             <Configure hitsPerPage={10} />
           </div>
