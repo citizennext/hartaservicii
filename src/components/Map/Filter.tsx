@@ -129,7 +129,8 @@ const Filter: React.FC<Props> = props => {
             toggleHandler={openDrawer}
             closeButton={<FilterMenu className="close" size={20} />}>
             <div className="select-options">
-              <div className="pin-number">960</div>
+              <div className="pin-number">{props.totalResults}</div>
+              <Select value={districts.filter(({value}: any) => value === filters.district)} options={districts} onChange={handleChangeDistrict} />
               <Select value={options.age.filter(({value}) => value === filters.category)} options={options.age} onChange={handleChangeAge} />
               <Select value={optionsService.filter(({value}: any) => value === filters.service)} options={optionsService} onChange={handleChangeService}/>
               <Select isDisabled={isDisabled} value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>)
