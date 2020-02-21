@@ -59,7 +59,8 @@ const Filter: React.FC<Props> = props => {
     dispatch((current: boolean) => !current);
   };
   const windowSize = useWindowSize();
-  const filters = props.filters
+  const filters = props.filters;
+  const isDisabled = filters.service == null ? true : false;
 
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -97,7 +98,12 @@ const Filter: React.FC<Props> = props => {
   }
 
   function handleChangeService(newValue: any) {
-    props.onFilterChange({ service: newValue.value })
+    if (newValue.value == null){
+      props.onFilterChange({ service: newValue.value, specialization: null })
+    }
+    else {
+      props.onFilterChange({ service: newValue.value })
+    }
     setSelectedCategory(newValue.value)
   }
 
@@ -125,8 +131,8 @@ const Filter: React.FC<Props> = props => {
             <div className="select-options">
               <div className="pin-number">960</div>
               <Select value={options.age.filter(({value}) => value === filters.category)} options={options.age} onChange={handleChangeAge} />
-              <Select options={optionsService} onChange={handleChangeService}/>
-              <Select options={optionsSpecialization} onChange={handleChangeSpecialization}/>
+              <Select value={optionsService.filter(({value}: any) => value === filters.service)} options={optionsService} onChange={handleChangeService}/>
+              <Select isDisabled={isDisabled} value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>)
               <Select options={options.administrator} onChange={handleChangeAdministrator}/>
             </div>
           </Drawer>
@@ -147,9 +153,7 @@ const Filter: React.FC<Props> = props => {
           </div>
           <div className="select-container">
             <label>Tip specializare</label>
-            {filters.service ?
-            (<Select value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>)
-          : (<Select isDisabled={true} value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>)}
+            <Select isDisabled={isDisabled} value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>)
           </div>
           <div className="select-container">
             <label>Administrator</label>

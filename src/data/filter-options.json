@@ -2,9 +2,9 @@
     "age": [
         { "value": null, "label": "Toate vârstele" },
         { "value": "copii", "label": "Copii" },
-        { "value": "tineri", "label": "Tineri" },
-        { "value": "adulti", "label": "Adulti" },
-        { "value": "varstnici", "label": "Varstnici" }
+        { "value": "tiner", "label": "Tineri" },
+        { "value": "adult", "label": "Adulti" },
+        { "value": "varstnic", "label": "Varstnici" }
     ],
     "administrator": [
         { "value": null, "label": "Public și privat" },
