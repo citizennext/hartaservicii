@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import iconClose from '../../assets/images/icon_Close.svg';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 // @ts-ignore
 import StarRatingComponent from 'react-star-rating-component';
 import iconShare from '../../assets/images/icon_share.svg';
@@ -13,6 +13,15 @@ type State = {
 };
 
 function PopUps(props: any) {
+  const ratingMutation = gql`
+    mutation MyMutation($provider: uuid!, $rating: Int!) {
+      insert_provider_rating(objects: { provider_id: $provider, rating: $rating }) {
+        returning {
+          id
+        }
+      }
+    }
+  `;
   const providersQuery = gql`
     query Provider($provider: uuid!) {
       providers_by_pk(id: $provider) {
@@ -28,6 +37,13 @@ function PopUps(props: any) {
         license_date_5years
         license_date_provisional
         license_no
+        rating_aggregate {
+          aggregate {
+            avg {
+              rating
+            }
+          }
+        }
         supplier {
           name
           cui_cif
@@ -46,24 +62,21 @@ function PopUps(props: any) {
     }
   `;
 
+  const [rating, setRating] = useState<number>(1);
   const provider = props.providerId;
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
   });
+  const [addRating] = useMutation(ratingMutation);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! ${error.message}</p>;
   const providers = data.providers_by_pk;
-  const averageRating = 4.3;
-  const noStars = 5;
-  const percentRating = (averageRating * 100) / noStars;
-  const rating = 1;
-  // onStarClick(nextValue: any) {
-  //   this.setState({ rating: nextValue });
-  // }
-
-  // render() {
-  //   const { rating } = this.state;
-
+  const averageRating = providers.rating_aggregate.aggregate.avg.rating / 10;
+  const percentageRating = (providers.rating_aggregate.aggregate.avg.rating * 100) / 50;
+  const saveRating = (value: number) => {
+    setRating(value * 10);
+    addRating({ variables: { provider: props.providerId, rating: value * 10 } });
+  };
   return (
     <section className="map-marker-popup" id="map-marker-popup" data-id={providers.id}>
       <header>
@@ -81,23 +94,24 @@ function PopUps(props: any) {
         <h3 className="pin-name">{providers.supplier.name}</h3>
         <div className="pin-id">
           <p>
-            Nr. identificare:<span>{providers.licence_no}</span>
+            Nr. licență:<span>{providers.license_no}</span>
           </p>
           <div className="pin-eval">
             Evaluare utilizatori
+            <br />
             <span className="average-rateing">{averageRating}</span>
             <div className="rating-parent">
-              <div className="rating-child" style={{ width: `${percentRating}%` }}>
+              <div className="rating-child" style={{ width: `${percentageRating}%` }}>
                 <StarRatingComponent
                   name="rate" /* name of the radio input, it is required */
-                  value={noStars} /* number of selected icon (`0` - none, `1` - first) */
-                  starCount={noStars} /* number of icons in rating, default `5` */
-                  onStarClick={() => null} /* on icon click handler */
+                  value={1} /* number of selected icon (`0` - none, `1` - first) */
+                  starCount={5} /* number of icons in rating, default `5` */
+                  /* onStarClick={(v: any) => setRating(v)} on icon click handler */
                   renderStarIcon={() => <span className="rating-icon"></span>}
                   starColor="#6FBBB7"
                   renderStarIconHalf={() => null}
                   emptyStarColor="transparent"
-                  editing={true}
+                  editing={false}
                 />
               </div>
             </div>
@@ -222,8 +236,10 @@ function PopUps(props: any) {
           <StarRatingComponent
             name="ratei" /* name of the radio input, it is required */
             value={rating} /* number of selected icon (`0` - none, `1` - first) */
-            starCount={noStars} /* number of icons in rating, default `5` */
-            onStarClick={() => null} /* on icon click handler */
+            starCount={5} /* number of icons in rating, default `5` */
+            onStarClick={(value: number) => saveRating(value)} /* on icon click handler */
+            onStarHover={(value: number) => setRating(value)} /* on icon hover handler */
+            // onStarHoverOut={() => setRating(1)}
             renderStarIcon={() => <span>●</span>}
             starColor="#6FBBB7"
             emptyStarColor="transparent"
