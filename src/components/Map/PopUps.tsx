@@ -46,8 +46,7 @@ function PopUps(props: any) {
     }
   `;
 
-  const provider = props.provider;
-  // console.log('TCL: PopUps -> provider', provider);
+  const provider = props.providerId;
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
   });

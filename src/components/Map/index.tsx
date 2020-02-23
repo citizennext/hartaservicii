@@ -6,8 +6,7 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
 
 // @ts-ignore
-import { navigate } from 'gatsby-link';
-// @ts-ignore
+import { navigate } from '@reach/router';
 import getSlug from 'speakingurl';
 
 type State = {
@@ -68,7 +67,9 @@ export default class Harta extends Component<any, State> {
   };
 
   handleClick = (item: Provider) => {
-    navigate(`/harta/serviciu/${item.slug}`, { state: { providerId: item.id } });
+    navigate(`/harta/serviciu/${item.slug}`, {
+      state: { providerId: item.id, oldLocation: JSON.parse(JSON.stringify(this.props.location)) },
+    });
   };
 
   componentDidMount() {
@@ -103,7 +104,6 @@ export default class Harta extends Component<any, State> {
           if (typeof window !== 'undefined') {
             return (
               <div>
-                {/* {this.state.selectedItem && this.state.active && <PopUps item={this.state.selectedItem} />} */}
                 <Map
                   center={position}
                   zoom={this.state.zoom}

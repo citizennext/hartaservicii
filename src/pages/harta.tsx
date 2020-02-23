@@ -11,27 +11,28 @@ function HartaPage() {
   return (
     <Location>
       {({ location, navigate }) => {
-        const providerId = location.state && location.state.providerId;
-        // console.log('TCL: HartaPage -> providerId', providerId);
+        const { oldLocation, providerId } = location?.state || {};
         return (
           <>
             <Seo bodyClassName="page-harta" />
             <Header headerClassName="page-harta" />
             <Layout>
-              {providerId && (
-                <Dialog
-                  aria-label="detalii serviciu"
-                  isOpen={providerId != null}
-                  onDismiss={() => {
-                    navigate('/harta');
-                  }}>
-                  <PopUps path="harta/serviciu/:provider" provider={providerId} />
-                </Dialog>
-              )}
-              <Router location={location}>
-                <Harta path="harta/?judet=:judet&a=:b&bjkll" />
-                <Provider path="harta/serviciu/:provider" />
+              <Router location={oldLocation ? oldLocation : location} basepath="/harta">
+                <Harta path="/" />
+                <Provider path="serviciu/:provider" />
               </Router>
+
+              <Dialog
+                aria-label="detalii serviciu"
+                isOpen={!!oldLocation}
+                onDismiss={() => {
+                  navigate(oldLocation.pathname);
+                }}>
+                <Router location={location} basepath="/harta">
+                  <Harta path="/" />
+                  <PopUps path="serviciu/:provider" providerId={providerId} />
+                </Router>
+              </Dialog>
             </Layout>
           </>
         );
