@@ -4,7 +4,6 @@ import iconClose from '../../assets/images/icon_Close.svg';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-// @ts-ignore
 import StarRatingComponent from 'react-star-rating-component';
 import iconShare from '../../assets/images/icon_share.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';

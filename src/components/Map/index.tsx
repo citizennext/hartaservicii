@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import Leaflet, { LatLngTuple } from 'leaflet';
 import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
-// @ts-ignore
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
-
-// @ts-ignore
 import { navigate } from '@reach/router';
 import getSlug from 'speakingurl';
 
@@ -37,7 +34,7 @@ export default class Harta extends Component<any, State> {
     active: false,
   };
 
-  createMarkerClusterCustomIcon = (cluster: MarkerClusterGroup) => {
+  createMarkerClusterCustomIcon = (cluster: any) => {
     return Leaflet.divIcon({
       html: `<div>
           <span class="marker-cluster-label">${cluster.getChildCount()}</span>
@@ -60,25 +57,13 @@ export default class Harta extends Component<any, State> {
     });
   };
 
-  openPopup = () => {
-    if (this.props.provider) {
-      // this.setState({ selectedItem: this.props.provider, active: true });
-    }
-  };
-
   handleClick = (item: Provider) => {
     navigate(`/harta/serviciu/${item.slug}`, {
       state: { providerId: item.id, oldLocation: JSON.parse(JSON.stringify(this.props.location)) },
     });
   };
 
-  componentDidMount() {
-    this.openPopup();
-  }
-
   render() {
-    // console.log(this.props);
-
     const position: LatLngTuple = [this.state.lat, this.state.lng];
     const query = graphql`
       query {
