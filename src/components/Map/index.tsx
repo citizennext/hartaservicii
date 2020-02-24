@@ -59,7 +59,7 @@ export default class Harta extends Component<any, State> {
 
   handleClick = (item: Provider) => {
     navigate(`/harta/serviciu/${item.slug}`, {
-      state: { providerId: item.id, oldLocation: JSON.parse(JSON.stringify(this.props.location)) },
+      state: { oldLocation: JSON.parse(JSON.stringify(this.props.location)) },
     });
   };
 
@@ -83,7 +83,7 @@ export default class Harta extends Component<any, State> {
           const providers: Provider[] = data.hasura.providers.map((item: Provider) => {
             return {
               ...item,
-              slug: `${getSlug(item.name)}--${item.id.substring(0, 3)}`,
+              slug: `${getSlug(item.name)}/${item.id}`,
             };
           });
           if (typeof window !== 'undefined') {

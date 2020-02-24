@@ -7,9 +7,6 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import StarRatingComponent from 'react-star-rating-component';
 import iconShare from '../../assets/images/icon_share.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
-type State = {
-  rating: number;
-};
 
 function PopUps(props: any) {
   const ratingMutation = gql`
@@ -62,7 +59,7 @@ function PopUps(props: any) {
   `;
 
   const [rating, setRating] = useState<number>(1);
-  const provider = props.providerId;
+  const provider = props.id;
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
   });

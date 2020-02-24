@@ -11,7 +11,7 @@ function HartaPage() {
   return (
     <Location>
       {({ location, navigate }) => {
-        const { oldLocation, providerId } = location?.state || {};
+        const { oldLocation } = location?.state || {};
         return (
           <>
             <Seo bodyClassName="page-harta" />
@@ -19,7 +19,7 @@ function HartaPage() {
             <Layout>
               <Router location={oldLocation ? oldLocation : location} basepath="/harta">
                 <Harta path="/" />
-                <Provider path="serviciu/:provider" />
+                <Provider path="serviciu/:provider/:id" />
               </Router>
 
               <Dialog
@@ -30,7 +30,7 @@ function HartaPage() {
                 }}>
                 <Router location={location} basepath="/harta">
                   <Harta path="/" />
-                  <PopUps path="serviciu/:provider" providerId={providerId} />
+                  <PopUps path="serviciu/:provider/:id" />
                 </Router>
               </Dialog>
             </Layout>
