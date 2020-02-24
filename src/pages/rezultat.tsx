@@ -11,7 +11,7 @@ export default class SearchResultPage extends React.Component {
   render() {
     return (
       <div>
-        <Seo isRepeatable={false} postTitle="Bine ai venit!" bodyClassName="page-contact" />
+        <Seo isRepeatable={false} postTitle="Bine ai venit!" bodyClassName="page-search-reesult" />
         <Header />
         <Layout>
           <Content />
