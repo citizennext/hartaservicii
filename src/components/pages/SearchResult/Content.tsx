@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import {
   InstantSearch,
   Hits,
@@ -24,20 +25,13 @@ export default class App extends React.Component {
     const { supplier } = props.hit;
     return (
       <>
-        <div className="hit-name">
-          <strong>Name: </strong>
-          <Highlight attribute="name" hit={props.hit} />
-        </div>
-        <div className="hit-location">
-          <strong>Location / District: </strong>
-          <Highlight attribute="location" hit={props.hit} />, <Highlight attribute="district" hit={props.hit} />
-        </div>
-        {supplier.name && (
-          <div className="hit-supplier">
-            <strong>Supplier Name: </strong>
-            <span>{supplier.name}</span>
+        <Link to="/harta/">
+          <div className="hit-name">
+            <Highlight attribute="name" hit={props.hit} />
           </div>
-        )}
+          {supplier.name && <div className="hit-summary">{supplier.name}</div>}
+          <button className="small invert">Detalii</button>
+        </Link>
       </>
     );
   }
@@ -47,15 +41,14 @@ export default class App extends React.Component {
     return (
       <>
         <div className="hit-name">
-          <strong>Title: </strong>
           <Highlight attribute="title" hit={props.hit} />
         </div>
         {summary && (
           <div className="hit-summary">
-            <strong>Summary: </strong>
             <Highlight attribute="summary" hit={props.hit} />
           </div>
         )}
+        <button className="small invert">Detalii</button>
       </>
     );
   }
