@@ -9,6 +9,10 @@
         height: 50px
         padding-left: 12vw
 
+        @screen md
+            width: 94vw
+            padding-left: 7vw
+
     .react-autosuggest__container
         position: relative
 
@@ -51,12 +55,10 @@
                 background-size: 23.5px 23.5px
                 height: 23.5px
                 width: 23.5px
-                left: 2%
             @screen xl
                 background-size: 27px 27px
                 height: 27px
                 width: 27px
-                left: 1%
 
     &[placeholder], &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder
     text-overflow: ellipsis
@@ -169,7 +171,11 @@
         float: right
         width: 30%
         padding: 10px
-        border: 1px solid darkslategrey
+        border-left: 1px solid
+        @apply border-lightbrown
+
+        @screen md
+            @apply block
 
         #stats
             text-align: center

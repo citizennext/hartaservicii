@@ -90,7 +90,7 @@ export default class App extends React.Component {
               <RefinementList attribute="location" />
             </div>
             <div className="filter district">
-              <h2>District</h2>
+              <h2>Județ</h2>
               <RefinementList attribute="district" />
             </div>
             <Configure hitsPerPage={10} />
