@@ -1,22 +1,35 @@
 .page-search-reesult
 
-    .react-autosuggest__input
+    .react-autosuggest__input,.ais-SearchBox-form
         border: 1px solid #CEE6C1
         @apply bg-white
         width: 88vw
         @apply rounded-full
         font-family: KoHo
         height: 50px
-        padding-left: 12vw
+        padding-left: 9vw
+        position: relative
+        margin: 26px 1.3em 1.3em
 
         @screen md
             width: 94vw
             padding-left: 7vw
 
+        input:not([type="checkbos"]), input:not([type="radio"])
+            border: 0
+            @apply bg-transparent
+            line-height: 32px
+
+        .ais-SearchBox-submit
+            display: none
+
     .react-autosuggest__container
         position: relative
         width: 94vw
         padding-left: 1.3em
+
+    .ais-SearchBox-form
+        position: relative
 
         &:before
             content: ''
@@ -27,7 +40,7 @@
             position: absolute
             background-repeat: no-repeat
             top: 12px
-            left: 10vw
+            left: 4vw
             z-index: 9
             @screen md
                 background-size: 23.5px 23.5px
@@ -39,6 +52,15 @@
                 height: 27px
                 width: 27px
                 left: 1%
+
+    .ais-SearchBox-reset
+        width: 0
+        position: absolute
+        top: 0
+        right: 0
+
+        svg
+            display: none
 
         &:after
             content: ''
@@ -77,16 +99,34 @@
     .react-tabs__tab-list
         display: flex
         @apply bg-snow
-        margin-left: -1.3em
-        margin-right: -1.3em
+        margin: 0 -1.3em 45px
         max-width: 100vw
         overflow: scroll
+        position: relative
+
+        &:before
+            content: ''
+            height: 6px
+            width: 915px //todo - SECO 
+            @apply bg-leaf
+            display: block
+            margin-top: 64px
+            position: absolute
+            z-index: 0
 
     .react-tabs__tab
         min-width: 270px
         height: 70px
         margin-left: 26px
         @apply bg-snow
+        z-index: 1
+
+        &:after
+            content: ''
+            display: block
+            @apply bg-white
+            height: 40px
+            margin-top: -20px
 
         .stats-count
             @apply bg-leaf
@@ -97,6 +137,10 @@
             display: inline-block
             padding: 6px 6px 6px 16px
             vertical-align: top
+            text-align: right
+            font-size: 18px
+            @apply font-semibold
+            font-family: 'Montserrat'
 
         .tab-title
             display: inline-block
@@ -106,7 +150,22 @@
             @apply bg-white
             @apply rounded-r-full
             vertical-align: top
+            font-family: 'Montserrat'
+            font-size: 16px
 
+            &.providers:before
+                background-repeat: no-repeat
+                background-size: 24px 24px
+                background-position: 7px 0
+                width: 38px
+                height: 24px
+                margin-bottom: -6px
+                display: inline-block
+                content: ''
+                background-image: url('../../images/icon_all.svg')
+
+        &:last-of-type
+            margin-right: 26px
 
     .ais-Highlight-highlighted
         @apply bg-snow
@@ -126,6 +185,7 @@
         @apply bg-snow
         width: 100vw
         margin: -1.3em
+        padding-bottom: 26px
 
     .left-panel
         
