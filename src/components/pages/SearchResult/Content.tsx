@@ -25,12 +25,12 @@ export default class App extends React.Component {
     const { supplier } = props.hit;
     return (
       <>
-        <Link to="/harta/">
-          <div className="hit-name">
-            <Highlight attribute="name" hit={props.hit} />
-          </div>
-          {supplier.name && <div className="hit-summary">{supplier.name}</div>}
-          <button className="small invert">Detalii</button>
+        <div className="hit-name">
+          <Highlight attribute="name" hit={props.hit} />
+        </div>
+        {supplier.name && <div className="hit-summary">{supplier.name}</div>}
+        <Link to="/harta" className="button small invert">
+          Detalii
         </Link>
       </>
     );
@@ -48,7 +48,9 @@ export default class App extends React.Component {
             <Highlight attribute="summary" hit={props.hit} />
           </div>
         )}
-        <button className="small invert">Detalii</button>
+        <Link to="/harta" className="button small invert">
+          Detalii
+        </Link>
       </>
     );
   }
