@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+// @ts-ignore
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import {
   ClearRefinements,
@@ -14,7 +15,6 @@ import {
   Stats,
 } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
-import AutoComplete from './AutoComplete';
 
 const indexProviders: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_PROVIDERS}`;
 const indexPages: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_PAGES}`;
@@ -140,8 +140,13 @@ export default class App extends React.Component {
       <div className="ais-InstantSearch">
         <InstantSearch indexName={`${indexProviders}`} searchClient={client}>
           <div className="seacrh-header">
-            <SearchBox />
-            <AutoComplete />
+            <SearchBox
+              submit={undefined}
+              onSubmit={undefined}
+              translations={{
+                placeholder: 'Cauta aici...',
+              }}
+            />
           </div>
 
           <div className="search-result-wrapper">
