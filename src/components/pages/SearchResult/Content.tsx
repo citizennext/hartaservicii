@@ -152,7 +152,7 @@ export default class App extends React.Component {
               <TabList>
                 <Tab>
                   <span className="stats-count">328</span>
-                  <span className="tab-title">Providers</span>
+                  <span className="tab-title providers">Providers</span>
                 </Tab>
                 <Tab>
                   <span className="stats-count">12</span>
