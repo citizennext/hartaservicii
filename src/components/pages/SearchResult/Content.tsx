@@ -32,7 +32,7 @@ providers
     attributesForFaceting: ['name', 'location', 'district', 'service.name'],
   })
   .then(() => {
-    // console.log('--- then why ---');
+    // -
   });
 
 pages
@@ -41,7 +41,7 @@ pages
     customRanking: ['asc(name)'],
   })
   .then(() => {
-    // console.log('--- then why ---');
+    // -
   });
 
 blog
@@ -50,7 +50,7 @@ blog
     customRanking: ['asc(name)'],
   })
   .then(() => {
-    // console.log('--- then why ---');
+    // -
   });
 
 // Update the App component
@@ -141,8 +141,6 @@ export default class App extends React.Component {
         <InstantSearch indexName={`${indexProviders}`} searchClient={client}>
           <div className="seacrh-header">
             <SearchBox
-              submit={undefined}
-              onSubmit={undefined}
               translations={{
                 placeholder: 'Cauta aici...',
               }}
