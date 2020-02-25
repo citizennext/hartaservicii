@@ -14,6 +14,17 @@
             z-index: -1
             @apply bg-snow
 
+        &:after
+            content: ''
+            height: 6px
+            width: 100vw
+            background-color: #CEE6C1
+            display: block
+            top: 257px
+            left: 0
+            position: absolute
+            z-index: 0
+
         .seacrh-header
             display: inline-block
             margin-bottom: 30px
@@ -130,29 +141,22 @@
             overflow: scroll
             position: relative
 
-            &:before
-                content: ''
-                height: 6px
-                width: 915px //todo - SECO 
-                @apply bg-leaf
-                display: block
-                margin-top: 64px
-                position: absolute
-                z-index: 0
-
         .react-tabs__tab
             min-width: 270px
-            height: 70px
             margin-left: 26px
-            @apply bg-snow
             z-index: 1
 
             &:after
                 content: ''
-                display: block
-                @apply bg-white
+                @apply bg-transparent
                 height: 40px
                 margin-top: -20px
+                z-index: 0
+
+            &.react-tabs__tab--selected:after
+                @apply bg-white
+                display: block
+                z-index: 1
 
             .stats-count
                 @apply bg-leaf
@@ -179,15 +183,35 @@
                 font-family: 'Montserrat'
                 font-size: 16px
 
-                &.providers:before
+                &.tab-icon-articles:before,&.tab-icon-pages:before,&.tab-icon-providers:before
+                    background-repeat: no-repeat
+                    display: inline-block
+                    content: ''
+
+                &.tab-icon-articles:before
+                    background-size: 24px 24px
+                    background-position: 7px 0
+                    width: 38px
+                    height: 24px
+                    margin-bottom: -6px
+                    background-image: url('../../images/icon_all.svg')
+
+                &.tab-icon-pages:before
                     background-repeat: no-repeat
                     background-size: 24px 24px
                     background-position: 7px 0
                     width: 38px
                     height: 24px
                     margin-bottom: -6px
-                    display: inline-block
-                    content: ''
+                    background-image: url('../../images/icon_all.svg')
+
+                &.tab-icon-providers:before
+                    background-repeat: no-repeat
+                    background-size: 24px 24px
+                    background-position: 7px 0
+                    width: 38px
+                    height: 24px
+                    margin-bottom: -6px
                     background-image: url('../../images/icon_all.svg')
 
             &:last-of-type
