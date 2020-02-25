@@ -15,6 +15,8 @@
 
     .react-autosuggest__container
         position: relative
+        width: 94vw
+        padding-left: 1.3em
 
         &:before
             content: ''
@@ -25,7 +27,7 @@
             position: absolute
             background-repeat: no-repeat
             top: 12px
-            left: 12px
+            left: 10vw
             z-index: 9
             @screen md
                 background-size: 23.5px 23.5px
@@ -46,7 +48,7 @@
             background-repeat: no-repeat
             background-position: center
             top: 7px
-            right: 4px
+            right: 1.2vw
             z-index: 9
             @apply bg-snow
             padding: 18px
@@ -72,6 +74,36 @@
     &:-ms-input-placeholder
         @apply text-black
 
+    .react-tabs__tab-list
+        display: flex
+        @apply bg-snow
+        margin-left: -1.3em
+        margin-right: -1.3em
+        max-width: 100vw
+        overflow: scroll
+
+    .react-tabs__tab
+        min-width: 270px
+        height: 70px
+        margin-left: 26px
+        @apply bg-snow
+
+        .stats-count
+            @apply bg-leaf
+            @apply rounded-l-full
+            min-height: 50px
+            width: 70px
+            display: inline-block
+            padding: 6px 6px 6px 16px
+
+        .tab-title
+            display: inline-block
+            min-height: 50px
+            min-width: 200px
+            @apply bg-white
+            @apply rounded-r-full
+
+
     .ais-Highlight-highlighted
         @apply bg-snow
 
@@ -86,8 +118,10 @@
 
     .seacrh-header
         display: inline-block
-        width: 100%
         margin-bottom: 30px
+        @apply bg-snow
+        width: 100vw
+        margin: -1.3em
 
     .left-panel
         
