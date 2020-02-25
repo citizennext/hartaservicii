@@ -96,21 +96,6 @@ export default class App extends React.Component {
           <div className="seacrh-header">
             <SearchBox />
             <AutoComplete />
-            <div className="tabs-panel">
-              <div className="filter location">
-                <h2>Location</h2>
-                <RefinementList attribute="location" />
-              </div>
-              <div className="filter district">
-                <h2>Județ</h2>
-                <RefinementList attribute="district" />
-              </div>
-              <div className="filter service">
-                <h2>Service</h2>
-                <RefinementList attribute="service.name" />
-              </div>
-              <Configure hitsPerPage={10} />
-            </div>
           </div>
 
           <div className="search-result-wrapper">
