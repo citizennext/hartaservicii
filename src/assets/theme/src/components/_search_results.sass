@@ -1,5 +1,30 @@
 .page-search-reesult
 
+    .ais-InstantSearch
+        margin-top: -1rem
+        padding-top: 2rem
+        &:before
+            content: ''
+            display: block
+            position: absolute
+            left: 0
+            top: 0
+            height: 263px
+            width: 100vw
+            z-index: -1
+            @apply bg-snow
+
+        .seacrh-header
+            display: inline-block
+            margin-bottom: 30px
+            @apply bg-snow
+            width: 100vw
+            margin: -1.3em
+            padding-bottom: 26px
+
+            @screen xl
+                width: 100%
+
     .react-autosuggest__input,.ais-SearchBox-form
         border: 1px solid #CEE6C1
         @apply bg-white
@@ -14,6 +39,11 @@
         @screen md
             width: 94vw
             padding-left: 7vw
+
+        @screen xl
+            margin: 26px auto
+            width: 770px
+            padding-left: 26px
 
         input:not([type="checkbos"]), input:not([type="radio"])
             border: 0
@@ -75,14 +105,9 @@
             @apply bg-snow
             padding: 18px
             @apply rounded-full
+
             @screen md
-                background-size: 23.5px 23.5px
-                height: 23.5px
-                width: 23.5px
-            @screen xl
-                background-size: 27px 27px
-                height: 27px
-                width: 27px
+                right: 6px
 
     &[placeholder], &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder
     text-overflow: ellipsis
@@ -96,76 +121,77 @@
     &:-ms-input-placeholder
         @apply text-black
 
-    .react-tabs__tab-list
-        display: flex
-        @apply bg-snow
-        margin: 0 -1.3em 45px
-        max-width: 100vw
-        overflow: scroll
-        position: relative
+    .search-result-wrapper
+        .react-tabs__tab-list
+            display: flex
+            @apply bg-snow
+            margin: 0 -1.3em 45px
+            max-width: 100vw
+            overflow: scroll
+            position: relative
 
-        &:before
-            content: ''
-            height: 6px
-            width: 915px //todo - SECO 
-            @apply bg-leaf
-            display: block
-            margin-top: 64px
-            position: absolute
-            z-index: 0
-
-    .react-tabs__tab
-        min-width: 270px
-        height: 70px
-        margin-left: 26px
-        @apply bg-snow
-        z-index: 1
-
-        &:after
-            content: ''
-            display: block
-            @apply bg-white
-            height: 40px
-            margin-top: -20px
-
-        .stats-count
-            @apply bg-leaf
-            @apply rounded-l-full
-            min-height: 50px
-            line-height: 38px
-            width: 70px
-            display: inline-block
-            padding: 6px 6px 6px 16px
-            vertical-align: top
-            text-align: right
-            font-size: 18px
-            @apply font-semibold
-            font-family: 'Montserrat'
-
-        .tab-title
-            display: inline-block
-            min-height: 50px
-            line-height: 50px
-            min-width: 200px
-            @apply bg-white
-            @apply rounded-r-full
-            vertical-align: top
-            font-family: 'Montserrat'
-            font-size: 16px
-
-            &.providers:before
-                background-repeat: no-repeat
-                background-size: 24px 24px
-                background-position: 7px 0
-                width: 38px
-                height: 24px
-                margin-bottom: -6px
-                display: inline-block
+            &:before
                 content: ''
-                background-image: url('../../images/icon_all.svg')
+                height: 6px
+                width: 915px //todo - SECO 
+                @apply bg-leaf
+                display: block
+                margin-top: 64px
+                position: absolute
+                z-index: 0
 
-        &:last-of-type
-            margin-right: 26px
+        .react-tabs__tab
+            min-width: 270px
+            height: 70px
+            margin-left: 26px
+            @apply bg-snow
+            z-index: 1
+
+            &:after
+                content: ''
+                display: block
+                @apply bg-white
+                height: 40px
+                margin-top: -20px
+
+            .stats-count
+                @apply bg-leaf
+                @apply rounded-l-full
+                min-height: 50px
+                line-height: 38px
+                width: 70px
+                display: inline-block
+                padding: 6px 6px 6px 16px
+                vertical-align: top
+                text-align: right
+                font-size: 18px
+                @apply font-semibold
+                font-family: 'Montserrat'
+
+            .tab-title
+                display: inline-block
+                min-height: 50px
+                line-height: 50px
+                min-width: 200px
+                @apply bg-white
+                @apply rounded-r-full
+                vertical-align: top
+                font-family: 'Montserrat'
+                font-size: 16px
+
+                &.providers:before
+                    background-repeat: no-repeat
+                    background-size: 24px 24px
+                    background-position: 7px 0
+                    width: 38px
+                    height: 24px
+                    margin-bottom: -6px
+                    display: inline-block
+                    content: ''
+                    background-image: url('../../images/icon_all.svg')
+
+            &:last-of-type
+                margin-right: 26px
 
     .ais-Highlight-highlighted
         @apply bg-snow
@@ -178,14 +204,6 @@
         font-family: 'Koho'
         font-size: 14px
         margin: 15px 0
-
-    .seacrh-header
-        display: inline-block
-        margin-bottom: 30px
-        @apply bg-snow
-        width: 100vw
-        margin: -1.3em
-        padding-bottom: 26px
 
     .left-panel
         
@@ -218,6 +236,9 @@
                     .small
                         margin: 0
                         @apply bg-snow
+
+                        @screen md
+                            width: 170px
 
                     &:first-of-type
                         margin-top: 0
