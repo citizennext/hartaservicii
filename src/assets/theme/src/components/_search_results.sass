@@ -1,6 +1,88 @@
 .page-search-reesult
+
+    .react-autosuggest__input
+        border: 1px solid #CEE6C1
+        @apply bg-white
+        width: 88vw
+        @apply rounded-full
+        font-family: KoHo
+        height: 50px
+        padding-left: 12vw
+
+        @screen md
+            width: 94vw
+            padding-left: 7vw
+
+    .react-autosuggest__container
+        position: relative
+
+        &:before
+            content: ''
+            background-image: url('../../images/icon_search.svg')
+            background-size: 22.5px 22.5px
+            height: 22.5px
+            width: 22.5px
+            position: absolute
+            background-repeat: no-repeat
+            top: 12px
+            left: 12px
+            z-index: 9
+            @screen md
+                background-size: 23.5px 23.5px
+                height: 23.5px
+                width: 23.5px
+                left: 2%
+            @screen xl
+                background-size: 27px 27px
+                height: 27px
+                width: 27px
+                left: 1%
+
+        &:after
+            content: ''
+            background-image: url('../../images/icon_close4.svg')
+            background-size: 17px
+            position: absolute
+            background-repeat: no-repeat
+            background-position: center
+            top: 7px
+            right: 4px
+            z-index: 9
+            @apply bg-snow
+            padding: 18px
+            @apply rounded-full
+            @screen md
+                background-size: 23.5px 23.5px
+                height: 23.5px
+                width: 23.5px
+            @screen xl
+                background-size: 27px 27px
+                height: 27px
+                width: 27px
+
+    &[placeholder], &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder
+    text-overflow: ellipsis
+
+    &::-webkit-input-placeholder
+        @apply text-black
+    &::-moz-placeholder
+        @apply text-black
+    &:-moz-placeholder
+        @apply text-black
+    &:-ms-input-placeholder
+        @apply text-black
+
     .ais-Highlight-highlighted
-        @apply text-celeste
+        @apply bg-snow
+
+    .hit-name
+        @apply font-semibold
+        font-family: 'Montserrat'
+
+    .hit-summary
+        font-family: 'Koho'
+        font-size: 14px
+        margin: 15px 0
 
     .seacrh-header
         display: inline-block
@@ -8,8 +90,10 @@
         margin-bottom: 30px
 
     .left-panel
-        float: left
-        width: 65%
+        
+        @screen md
+            float: left
+            width: 65%
 
         .providers,
         .pages,
@@ -25,46 +109,47 @@
                     float: left
                     width: 100%
                     margin: 10px 0
-                    padding: 30px 10px 10px 10px
+                    padding: 0 10px 10px 60px
                     position: relative
+                    border-bottom: 1px solid
+                    @apply border-leaf
+
+                    a
+                        text-decoration: none
+
+                    .small
+                        margin: 0
+                        @apply bg-snow
 
                     &:first-of-type
                         margin-top: 0
 
-                    &:after
+                    &:before
                         position: absolute
+                        content: ''
+                        background-repeat: no-repeat
+                        background-size: contain
                         top: 0
-                        right: 5px
-                        font-size: 20px
-                        font-weight: bold
-                        text-transform: uppercase
+                        left: 0
 
         .providers
             ul
                 li
-                    border: 1px solid deeppink
 
-                    &:after
-                        content: 'provider'
-                        color: deeppink
+                    &:before
+                        background-image: url('../../images/icon_pin_full.svg')
+                        height: 50px
+                        width: 41px
 
-        .pages
+
+        .pages, .blog
             ul
                 li
-                    border: 1px solid darkgreen
 
-                    &:after
-                        content: 'page'
-                        color: darkgreen
-
-        .blog
-            ul
-                li
-                    border: 1px solid dodgerblue
-
-                    &:after
-                        content: 'blog post'
-                        color: dodgerblue
+                    &:before
+                        background-image: url('../../images/icon_news.svg')
+                        height: 40px
+                        width: 50px
 
         .ais-Pagination
             clear: left
@@ -86,10 +171,15 @@
                         margin-right: 0
 
     .right-panel
+        @apply hidden
         float: right
         width: 30%
         padding: 10px
-        border: 1px solid darkslategrey
+        border-left: 1px solid
+        @apply border-lightbrown
+
+        @screen md
+            @apply block
 
         #stats
             text-align: center

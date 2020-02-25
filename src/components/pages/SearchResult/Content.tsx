@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'gatsby';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {
   InstantSearch,
   Hits,
@@ -54,29 +56,16 @@ blog
 // Update the App component
 export default class App extends React.Component {
   hitProviders(props: any) {
-    const { supplier, service } = props.hit;
+    const { supplier } = props.hit;
     return (
       <>
-        <div className="hit-name">
-          <strong>Name: </strong>
-          <Highlight attribute="name" hit={props.hit} />
-        </div>
-        <div className="hit-location">
-          <strong>Location / District: </strong>
-          <Highlight attribute="location" hit={props.hit} />, <Highlight attribute="district" hit={props.hit} />
-        </div>
-        {supplier.name && (
-          <div className="hit-supplier">
-            <strong>Supplier Name: </strong>
-            <span>{supplier.name}</span>
+        <Link to="/harta/">
+          <div className="hit-name">
+            <Highlight attribute="name" hit={props.hit} />
           </div>
-        )}
-        {service.name && (
-          <div className="hit-supplier">
-            <strong>Service Name: </strong>
-            <span>{service.name}</span>
-          </div>
-        )}
+          {supplier.name && <div className="hit-summary">{supplier.name}</div>}
+          <button className="small invert">Detalii</button>
+        </Link>
       </>
     );
   }
@@ -86,15 +75,14 @@ export default class App extends React.Component {
     return (
       <>
         <div className="hit-name">
-          <strong>Title: </strong>
           <Highlight attribute="title" hit={props.hit} />
         </div>
         {summary && (
           <div className="hit-summary">
-            <strong>Summary: </strong>
             <Highlight attribute="summary" hit={props.hit} />
           </div>
         )}
+        <button className="small invert">Detalii</button>
       </>
     );
   }
@@ -106,45 +94,161 @@ export default class App extends React.Component {
           <div className="seacrh-header">
             <SearchBox />
             <AutoComplete />
+            <div className="tabs-panel">
+              <div className="filter location">
+                <h2>Location</h2>
+                <RefinementList attribute="location" />
+              </div>
+              <div className="filter district">
+                <h2>Județ</h2>
+                <RefinementList attribute="district" />
+              </div>
+              <div className="filter service">
+                <h2>Service</h2>
+                <RefinementList attribute="service.name" />
+              </div>
+              <Configure hitsPerPage={10} />
+            </div>
           </div>
-          <div className="left-panel">
-            <Index indexName={`${indexProviders}`}>
-              <div className="providers">
-                <Hits hitComponent={this.hitProviders} />
-              </div>
-              <Pagination />
-            </Index>
-            <Index indexName={`${indexPages}`}>
-              <div className="pages">
-                <Hits hitComponent={this.hitPagesBlog} />
-              </div>
-              <Pagination />
-            </Index>
-            <Index indexName={`${indexBlog}`}>
-              <div className="blog">
-                <Hits hitComponent={this.hitPagesBlog} />
-              </div>
-              <Pagination />
-            </Index>
-          </div>
-          <div className="right-panel">
-            <div id="stats" className="text-right text-muted">
-              <Stats />
-            </div>
-            <ClearRefinements />
-            <div className="filter location">
-              <h2>Location</h2>
-              <RefinementList attribute="location" />
-            </div>
-            <div className="filter district">
-              <h2>District</h2>
-              <RefinementList attribute="district" />
-            </div>
-            <div className="filter service">
-              <h2>Service</h2>
-              <RefinementList attribute="service.name" />
-            </div>
-            <Configure hitsPerPage={10} />
+
+          <div className="search-result-wrapper">
+            <Tabs>
+              <TabList>
+                <Tab>Toate Rezultatele</Tab>
+                <Tab>Providers</Tab>
+                <Tab>Articole (Blog)</Tab>
+                <Tab>Pagini</Tab>
+              </TabList>
+
+              <TabPanel>
+                <div className="left-panel">
+                  <Index indexName={`${indexProviders}`}>
+                    <div className="providers">
+                      <Hits hitComponent={this.hitProviders} />
+                    </div>
+                    <Pagination />
+                  </Index>
+                  <Index indexName={`${indexPages}`}>
+                    <div className="pages">
+                      <Hits hitComponent={this.hitPagesBlog} />
+                    </div>
+                    <Pagination />
+                  </Index>
+                  <Index indexName={`${indexBlog}`}>
+                    <div className="blog">
+                      <Hits hitComponent={this.hitPagesBlog} />
+                    </div>
+                    <Pagination />
+                  </Index>
+                </div>
+                <div className="right-panel">
+                  <div id="stats" className="text-right text-muted">
+                    <Stats />
+                  </div>
+                  <ClearRefinements />
+                  <div className="filter location">
+                    <h2>Location</h2>
+                    <RefinementList attribute="location" />
+                  </div>
+                  <div className="filter district">
+                    <h2>Județ</h2>
+                    <RefinementList attribute="district" />
+                  </div>
+                  <div className="filter service">
+                    <h2>Service</h2>
+                    <RefinementList attribute="service.name" />
+                  </div>
+                  <Configure hitsPerPage={10} />
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <div className="left-panel">
+                  <Index indexName={`${indexProviders}`}>
+                    <div className="providers">
+                      <Hits hitComponent={this.hitProviders} />
+                    </div>
+                    <Pagination />
+                  </Index>
+                </div>
+                <div className="right-panel">
+                  <div id="stats" className="text-right text-muted">
+                    <Stats />
+                  </div>
+                  <ClearRefinements />
+                  <div className="filter location">
+                    <h2>Location</h2>
+                    <RefinementList attribute="location" />
+                  </div>
+                  <div className="filter district">
+                    <h2>Județ</h2>
+                    <RefinementList attribute="district" />
+                  </div>
+                  <div className="filter service">
+                    <h2>Service</h2>
+                    <RefinementList attribute="service.name" />
+                  </div>
+                  <Configure hitsPerPage={10} />
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <div className="left-panel">
+                  <Index indexName={`${indexBlog}`}>
+                    <div className="blog">
+                      <Hits hitComponent={this.hitPagesBlog} />
+                    </div>
+                    <Pagination />
+                  </Index>
+                </div>
+                <div className="right-panel">
+                  <div id="stats" className="text-right text-muted">
+                    <Stats />
+                  </div>
+                  <ClearRefinements />
+                  <div className="filter location">
+                    <h2>Location</h2>
+                    <RefinementList attribute="location" />
+                  </div>
+                  <div className="filter district">
+                    <h2>Județ</h2>
+                    <RefinementList attribute="district" />
+                  </div>
+                  <div className="filter service">
+                    <h2>Service</h2>
+                    <RefinementList attribute="service.name" />
+                  </div>
+                  <Configure hitsPerPage={10} />
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <div className="left-panel">
+                  <Index indexName={`${indexPages}`}>
+                    <div className="pages">
+                      <Hits hitComponent={this.hitPagesBlog} />
+                    </div>
+                    <Pagination />
+                  </Index>
+                </div>
+                <div className="right-panel">
+                  <div id="stats" className="text-right text-muted">
+                    <Stats />
+                  </div>
+                  <ClearRefinements />
+                  <div className="filter location">
+                    <h2>Location</h2>
+                    <RefinementList attribute="location" />
+                  </div>
+                  <div className="filter district">
+                    <h2>Județ</h2>
+                    <RefinementList attribute="district" />
+                  </div>
+                  <div className="filter service">
+                    <h2>Service</h2>
+                    <RefinementList attribute="service.name" />
+                  </div>
+                  <Configure hitsPerPage={10} />
+                </div>
+              </TabPanel>
+            </Tabs>
           </div>
         </InstantSearch>
       </div>
