@@ -101,10 +101,22 @@ export default class App extends React.Component {
           <div className="search-result-wrapper">
             <Tabs>
               <TabList>
-                <Tab>Toate Rezultatele</Tab>
-                <Tab>Providers</Tab>
-                <Tab>Articole (Blog)</Tab>
-                <Tab>Pagini</Tab>
+                <Tab>
+                  <span className="stats-count">328</span>
+                  <span className="tab-title">Toate Rezultatele</span>
+                </Tab>
+                <Tab>
+                  <span className="stats-count">328</span>
+                  <span className="tab-title">Providers</span>
+                </Tab>
+                <Tab>
+                  <span className="stats-count">328</span>
+                  <span className="tab-title">Articole (Blog)</span>
+                </Tab>
+                <Tab>
+                  <span className="stats-count">328</span>
+                  <span className="tab-title">Pagini</span>
+                </Tab>
               </TabList>
 
               <TabPanel>
