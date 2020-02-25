@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import {
-  InstantSearch,
-  Hits,
-  SearchBox,
-  Pagination,
-  Highlight,
   ClearRefinements,
-  RefinementList,
   Configure,
-  Stats,
+  Highlight,
+  Hits,
   Index,
+  InstantSearch,
+  Pagination,
+  RefinementList,
+  SearchBox,
+  Stats,
 } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
 import AutoComplete from './AutoComplete';
@@ -89,6 +89,52 @@ export default class App extends React.Component {
     );
   }
 
+  getFilters() {
+    return (
+      <div className="right-panel">
+        <div id="stats" className="text-right text-muted">
+          <Stats />
+        </div>
+        <ClearRefinements />
+        <div className="filter location">
+          <h2>
+            <span className="count-filter">121</span>
+            <span className="title-filter">Location</span>
+          </h2>
+          <RefinementList attribute="location" />
+        </div>
+        <div className="filter district">
+          <h2>
+            <span className="count-filter">121</span>
+            <span className="title-filter">Județ</span>
+          </h2>
+          <RefinementList attribute="district" />
+        </div>
+        <div className="filter service">
+          <h2>
+            <span className="count-filter">121</span>
+            <span className="title-filter">Service</span>
+          </h2>
+          <RefinementList attribute="service.name" />
+        </div>
+        <Configure hitsPerPage={10} />
+      </div>
+    );
+  }
+
+  getContentResult(index: string | undefined, hit: any, className: string) {
+    return (
+      <div className="left-panel">
+        <Index indexName={index}>
+          <div className={className}>
+            <Hits hitComponent={hit} />
+          </div>
+          <Pagination />
+        </Index>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="ais-InstantSearch">
@@ -103,149 +149,28 @@ export default class App extends React.Component {
               <TabList>
                 <Tab>
                   <span className="stats-count">328</span>
-                  <span className="tab-title">Toate Rezultatele</span>
-                </Tab>
-                <Tab>
-                  <span className="stats-count">328</span>
                   <span className="tab-title">Providers</span>
                 </Tab>
                 <Tab>
-                  <span className="stats-count">328</span>
+                  <span className="stats-count">12</span>
                   <span className="tab-title">Articole (Blog)</span>
                 </Tab>
                 <Tab>
-                  <span className="stats-count">328</span>
+                  <span className="stats-count">37</span>
                   <span className="tab-title">Pagini</span>
                 </Tab>
               </TabList>
-
               <TabPanel>
-                <div className="left-panel">
-                  <Index indexName={`${indexProviders}`}>
-                    <div className="providers">
-                      <Hits hitComponent={this.hitProviders} />
-                    </div>
-                    <Pagination />
-                  </Index>
-                  <Index indexName={`${indexPages}`}>
-                    <div className="pages">
-                      <Hits hitComponent={this.hitPagesBlog} />
-                    </div>
-                    <Pagination />
-                  </Index>
-                  <Index indexName={`${indexBlog}`}>
-                    <div className="blog">
-                      <Hits hitComponent={this.hitPagesBlog} />
-                    </div>
-                    <Pagination />
-                  </Index>
-                </div>
-                <div className="right-panel">
-                  <div id="stats" className="text-right text-muted">
-                    <Stats />
-                  </div>
-                  <ClearRefinements />
-                  <div className="filter location">
-                    <h2>Location</h2>
-                    <RefinementList attribute="location" />
-                  </div>
-                  <div className="filter district">
-                    <h2>Județ</h2>
-                    <RefinementList attribute="district" />
-                  </div>
-                  <div className="filter service">
-                    <h2>Service</h2>
-                    <RefinementList attribute="service.name" />
-                  </div>
-                  <Configure hitsPerPage={10} />
-                </div>
+                {this.getContentResult(indexProviders, this.hitProviders, 'providers')}
+                {this.getFilters()}
               </TabPanel>
               <TabPanel>
-                <div className="left-panel">
-                  <Index indexName={`${indexProviders}`}>
-                    <div className="providers">
-                      <Hits hitComponent={this.hitProviders} />
-                    </div>
-                    <Pagination />
-                  </Index>
-                </div>
-                <div className="right-panel">
-                  <div id="stats" className="text-right text-muted">
-                    <Stats />
-                  </div>
-                  <ClearRefinements />
-                  <div className="filter location">
-                    <h2>Location</h2>
-                    <RefinementList attribute="location" />
-                  </div>
-                  <div className="filter district">
-                    <h2>Județ</h2>
-                    <RefinementList attribute="district" />
-                  </div>
-                  <div className="filter service">
-                    <h2>Service</h2>
-                    <RefinementList attribute="service.name" />
-                  </div>
-                  <Configure hitsPerPage={10} />
-                </div>
+                {this.getContentResult(indexBlog, this.hitPagesBlog, 'blog')}
+                {this.getFilters()}
               </TabPanel>
               <TabPanel>
-                <div className="left-panel">
-                  <Index indexName={`${indexBlog}`}>
-                    <div className="blog">
-                      <Hits hitComponent={this.hitPagesBlog} />
-                    </div>
-                    <Pagination />
-                  </Index>
-                </div>
-                <div className="right-panel">
-                  <div id="stats" className="text-right text-muted">
-                    <Stats />
-                  </div>
-                  <ClearRefinements />
-                  <div className="filter location">
-                    <h2>Location</h2>
-                    <RefinementList attribute="location" />
-                  </div>
-                  <div className="filter district">
-                    <h2>Județ</h2>
-                    <RefinementList attribute="district" />
-                  </div>
-                  <div className="filter service">
-                    <h2>Service</h2>
-                    <RefinementList attribute="service.name" />
-                  </div>
-                  <Configure hitsPerPage={10} />
-                </div>
-              </TabPanel>
-              <TabPanel>
-                <div className="left-panel">
-                  <Index indexName={`${indexPages}`}>
-                    <div className="pages">
-                      <Hits hitComponent={this.hitPagesBlog} />
-                    </div>
-                    <Pagination />
-                  </Index>
-                </div>
-                <div className="right-panel">
-                  <div id="stats" className="text-right text-muted">
-                    <Stats />
-                  </div>
-                  <ClearRefinements />
-                  <div className="filter location">
-                    <h2>Location</h2>
-                    <RefinementList attribute="location" />
-                  </div>
-                  <div className="filter district">
-                    <h2>Județ</h2>
-                    <RefinementList attribute="district" />
-                  </div>
-                  <div className="filter service">
-                    <h2>Service</h2>
-                    <RefinementList attribute="service.name" />
-                  </div>
-                  <Configure hitsPerPage={10} />
-                </div>
+                {this.getContentResult(indexPages, this.hitPagesBlog, 'pages')}
+                {this.getFilters()}
               </TabPanel>
             </Tabs>
           </div>
