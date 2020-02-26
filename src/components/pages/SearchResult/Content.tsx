@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
-// @ts-ignore
-// import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import getSlug from 'speakingurl';
+
 import {
   ClearRefinements,
   Configure,
@@ -97,7 +97,15 @@ function Hit(props: any) {
         {typeFy === 'servicii' && props.hit.supplier.name}
         {typeFy !== 'servicii' && props.hit.summary}
       </div>
-      <Link to="/harta" className="button small invert">
+      <Link
+        to={
+          typeFy === 'servicii'
+            ? `/harta/serviciu/${getSlug(props.hit.name)}/${props.hit.id}`
+            : typeFy === 'noutăți'
+            ? `/noutati/${props.hit.slug}`
+            : `/${props.hit.slug}`
+        }
+        className="button small invert">
         Detalii
       </Link>
     </div>
