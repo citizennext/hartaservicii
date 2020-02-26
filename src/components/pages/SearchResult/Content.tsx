@@ -13,6 +13,7 @@ import {
   RefinementList,
   SearchBox,
   Stats,
+  Panel,
 } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
 
@@ -33,40 +34,6 @@ common
 
 // Update the App component
 export default class App extends React.Component {
-  hitProviders(props: any) {
-    const { supplier } = props.hit;
-    return (
-      <>
-        <div className="hit-name">
-          <Highlight attribute="name" hit={props.hit} />
-        </div>
-        {supplier.name && <div className="hit-summary">{supplier.name}</div>}
-        <Link to="/harta" className="button small invert">
-          Detalii
-        </Link>
-      </>
-    );
-  }
-
-  hitPagesBlog(props: any) {
-    const { summary } = props.hit;
-    return (
-      <>
-        <div className="hit-name">
-          <Highlight attribute="title" hit={props.hit} />
-        </div>
-        {summary && (
-          <div className="hit-summary">
-            <Highlight attribute="summary" hit={props.hit} />
-          </div>
-        )}
-        <Link to="/harta" className="button small invert">
-          Detalii
-        </Link>
-      </>
-    );
-  }
-
   getFilters() {
     return (
       <div className="right-panel">
@@ -75,25 +42,19 @@ export default class App extends React.Component {
         </div>
         <ClearRefinements />
         <div className="filter location">
-          <h2>
-            <span className="count-filter">121</span>
-            <span className="title-filter">Location</span>
-          </h2>
-          <RefinementList attribute="location" />
+          <Panel header="Location">
+            <RefinementList attribute="location" />
+          </Panel>
         </div>
         <div className="filter district">
-          <h2>
-            <span className="count-filter">121</span>
-            <span className="title-filter">Județ</span>
-          </h2>
-          <RefinementList attribute="district" />
+          <Panel header="Județ">
+            <RefinementList attribute="district" />
+          </Panel>
         </div>
         <div className="filter service">
-          <h2>
-            <span className="count-filter">121</span>
-            <span className="title-filter">Service</span>
-          </h2>
-          <RefinementList attribute="service.name" />
+          <Panel header="Service">
+            <RefinementList attribute="service.name" />
+          </Panel>
         </div>
         <Configure hitsPerPage={10} />
       </div>
