@@ -1,23 +1,43 @@
 import React from 'react';
+import { Router, Location } from '@reach/router';
+import { Dialog } from '@reach/dialog';
 import Seo from '../components/Seo';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
-import Footer from '../components/Footer';
-import { AfterHeader } from '../components/AfterHeader';
-import { ComingSoon } from '../components/ComingSoon';
+import Harta from '../components/Map';
+import Provider from '../components/Map/Provider';
+import PopUps from '../components/Map/PopUps';
+function HartaPage() {
+  return (
+    <Location>
+      {({ location, navigate }) => {
+        const { oldLocation } = location?.state || {};
+        return (
+          <>
+            <Seo bodyClassName="page-harta" />
+            <Header headerClassName="page-harta" />
+            <Layout>
+              <Router location={oldLocation ? oldLocation : location} basepath="/harta">
+                <Harta path="/" />
+                <Provider path="serviciu/:provider/:id" />
+              </Router>
 
-export default class HartaPage extends React.Component {
-  render() {
-    return (
-      <div>
-        <Seo bodyClassName="page-maps" />
-        <Header />
-        <AfterHeader header={'... in lucru'} />
-        <Layout left={true}>
-          <ComingSoon />
-        </Layout>
-        <Footer />
-      </div>
-    );
-  }
+              <Dialog
+                aria-label="detalii serviciu"
+                isOpen={!!oldLocation}
+                onDismiss={() => {
+                  navigate(oldLocation.pathname);
+                }}>
+                <Router location={location} basepath="/harta">
+                  <Harta path="/" />
+                  <PopUps path="serviciu/:provider/:id" />
+                </Router>
+              </Dialog>
+            </Layout>
+          </>
+        );
+      }}
+    </Location>
+  );
 }
+export default HartaPage;

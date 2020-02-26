@@ -1,8 +1,20 @@
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
+// require('dotenv').config({
+//   path: `.env.${process.env.NODE_ENV}`,
+// });
 const path = require(`path`);
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
+
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions;
+  // Only update the `/harta` page.
+  if (page.path.match(/^\/harta/)) {
+    // page.matchPath is a special key that's used for matching pages
+    // with corresponding routes only on the client.
+    page.matchPath = '/harta/*';
+    // Update the page.
+    createPage(page);
+  }
+};
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
