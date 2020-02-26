@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Leaflet, { LatLngTuple } from 'leaflet';
-import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
+import { Map, Marker, TileLayer, Tooltip, ZoomControl } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
 import { navigate } from '@reach/router';
@@ -98,6 +98,7 @@ export default class Harta extends Component<any, State> {
                   center={position}
                   zoom={this.state.zoom}
                   maxZoom={20}
+                  zoomControl={false}
                   scrollWheelZoom={this.state.scrollWheelZoom}
                   className="markercluster-map">
                   <TileLayer
@@ -115,6 +116,7 @@ export default class Harta extends Component<any, State> {
                       </Marker>
                     ))}
                   </MarkerClusterGroup>
+                  <ZoomControl position="bottomright" />
                 </Map>
               </div>
             );
