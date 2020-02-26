@@ -15,7 +15,7 @@ function HartaPage() {
         return (
           <>
             <Seo bodyClassName="page-harta" />
-            <Header headerClassName="page-harta" />
+            <Header mapHeader={true} />
             <Layout>
               <Router location={oldLocation ? oldLocation : location} basepath="/harta">
                 <Harta path="/" />

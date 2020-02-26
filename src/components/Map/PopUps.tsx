@@ -157,7 +157,7 @@ function PopUps(props: any) {
           <a href="#">- </a>
         </div>
         <div className="pin-services">
-          <p>Servicii</p>
+          <p>Tipul serviciului</p>
           <ul>
             <li>{providers.service.name ? providers.service.name : '-'}</li>
           </ul>

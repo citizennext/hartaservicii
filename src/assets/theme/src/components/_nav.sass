@@ -59,8 +59,37 @@ header
             right: 26px
             cursor: pointer
 
-header.page-harta
+.page-harta header
     @apply bg-transparent
+    @screen md
+        @apply bg-white
+
+    .hamburger-menu
+        width: 72px
+        height: 100px
+        @apply bg-white
+
+        & > div
+            width: 72px
+            height: 100px !important
+            top: 0
+            right: 0
+
+        & > svg
+            width: 26px
+
+    .menu_icon
+        margin-top: 59px
+        margin-right: 34px
+
+    .interior
+        height: 100px
+
+        .mobile-map-logo
+            top: 39px
+            left: 34px
+            height: 48px
+            width: 33px
 
 .drawer
     .drawer-content
