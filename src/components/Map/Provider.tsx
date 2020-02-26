@@ -70,8 +70,8 @@ function Provider(props: any) {
   const averageRating = providers.rating_aggregate.aggregate.avg.rating / 10;
   const percentageRating = (providers.rating_aggregate.aggregate.avg.rating * 100) / 50;
   const saveRating = (value: number) => {
-    setRating(value * 10);
-    addRating({ variables: { provider: props.providerId, rating: value * 10 } });
+    setRating(value);
+    addRating({ variables: { provider: props.id, rating: value * 10 } });
   };
   return (
     <section className="map-marker-popup" id="map-marker-popup" data-id={providers.id}>
