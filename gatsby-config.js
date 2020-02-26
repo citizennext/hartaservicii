@@ -3,73 +3,41 @@ require('dotenv').config({
 });
 const siteConfig = require('./site-config');
 
-const providers = `query {
-        hasura {
-          providers {
-            id
-            name
-            email
-            address
-            location
-            district
-            coordinates
-            service {
-              name
-              category {
-                name
-              }
-            }
-            supplier {
-              name
-            }
-          }
-        }
-      }`;
-const blogs = `query {
-        hasura {
-          blogs {
-            id
-            slug
-            title
-            summary
-            status
-            content {
-              html
-            }
-          }
-        }
-      }`;
-const pages = `query {
-        hasura {
-          pages {
-            id
-            slug
-            title
-            summary
-            status
-            content {
-              html
-            }
-          }
-        }
-      }`;
-
+const common = `query {
+  hasura {
+    pages {
+      slug
+      title
+      summary
+      content {
+        text
+      }
+    }
+    blogs {
+      slug
+      title
+      summary
+      content {
+        text
+      }
+    }
+    providers {
+      id
+      name
+      location
+      district
+      supplier {
+        name
+      }
+    }
+  }
+}`;
 const array = [
   {
-    indexName: process.env.ALGOLIA_INDEX_NAME_PROVIDERS,
-    query: providers,
-    key: 'providers'
+    indexName: process.env.ALGOLIA_INDEX_NAME_COMMON,
+    query: common,
+    key: 'common',
   },
-  {
-    indexName: process.env.ALGOLIA_INDEX_NAME_BLOG,
-    query: blogs,
-    key: 'blogs'
-  },
-  {
-    indexName: process.env.ALGOLIA_INDEX_NAME_PAGES,
-    query: pages,
-    key: 'pages'
-  }
 ];
 // const queries = [
 //   {
@@ -194,10 +162,10 @@ module.exports = {
         queries: array.map(item => ({
           query: item.query,
           indexName: item.indexName,
-          transformer: ({data}) => data.hasura[item.key]
+          transformer: ({ data }) => [...data.hasura.blogs, ...data.hasura.pages, ...data.hasura.providers],
         })),
         chunkSize: 10000, // default: 1000
       },
-    }
+    },
   ],
 };
