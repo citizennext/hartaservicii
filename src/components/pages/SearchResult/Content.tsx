@@ -57,6 +57,7 @@ export default class App extends React.Component {
   getContentResult() {
     return (
       <div className="search-result-wrapper">
+        <Menu attribute="type" />
         <div className="left-panel">
           <Hits hitComponent={Hit} />
           <Pagination />
@@ -77,7 +78,6 @@ export default class App extends React.Component {
                 placeholder: 'Cauta aici...',
               }}
             />
-            <Menu attribute="type" />
           </div>
           {this.getContentResult()}
         </InstantSearch>
