@@ -7,7 +7,7 @@ import {
   Configure,
   Highlight,
   Hits,
-  Index,
+  Menu,
   InstantSearch,
   Pagination,
   RefinementList,
@@ -100,16 +100,14 @@ export default class App extends React.Component {
     );
   }
 
-  getContentResult(index: string | undefined, hit: any, className: string) {
+  getContentResult() {
     return (
       <div className="left-panel">
-        <Index indexName={index}>
-          <RefinementList attribute="type" />
-          <div className={className}>
-            <Hits hitComponent={Hit} />
-          </div>
-          <Pagination />
-        </Index>
+        <Menu attribute="type" />
+        <div className="st3phan">
+          <Hits hitComponent={Hit} />
+        </div>
+        <Pagination />
       </div>
     );
   }
@@ -127,10 +125,8 @@ export default class App extends React.Component {
           </div>
 
           <div className="search-result-wrapper">
-            <div>
-              <RefinementList attribute="type" />
-              <Hits hitComponent={Hit} />
-            </div>
+            {this.getContentResult()}
+            {this.getFilters()}
           </div>
         </InstantSearch>
       </div>
