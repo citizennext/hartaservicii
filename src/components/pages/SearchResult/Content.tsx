@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 // @ts-ignore
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+// import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import {
   ClearRefinements,
   Configure,
@@ -16,38 +16,16 @@ import {
 } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
 
-const indexProviders: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_PROVIDERS}`;
-const indexPages: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_PAGES}`;
-const indexBlog: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_BLOG}`;
+const indexCommon: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_COMMON}`;
 
 const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
-const providers = client.initIndex(indexProviders);
-const pages = client.initIndex(indexPages);
-const blog = client.initIndex(indexBlog);
+const common = client.initIndex(indexCommon);
 
-providers
+common
   .setSettings({
     searchableAttributes: ['name', 'location', 'district', 'address', 'supplier.name', 'service.name'],
     customRanking: ['asc(name)'],
-    attributesForFaceting: ['name', 'location', 'district', 'service.name'],
-  })
-  .then(() => {
-    // -
-  });
-
-pages
-  .setSettings({
-    searchableAttributes: ['title', 'summary'],
-    customRanking: ['asc(name)'],
-  })
-  .then(() => {
-    // -
-  });
-
-blog
-  .setSettings({
-    searchableAttributes: ['title', 'summary'],
-    customRanking: ['asc(name)'],
+    attributesForFaceting: ['name', 'location', 'district', 'type'],
   })
   .then(() => {
     // -
@@ -126,8 +104,9 @@ export default class App extends React.Component {
     return (
       <div className="left-panel">
         <Index indexName={index}>
+          <RefinementList attribute="type" />
           <div className={className}>
-            <Hits hitComponent={hit} />
+            <Hits hitComponent={Hit} />
           </div>
           <Pagination />
         </Index>
@@ -138,8 +117,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="ais-InstantSearch">
-        <InstantSearch indexName={`${indexProviders}`} searchClient={client}>
-          <div className="seacrh-header">
+        <InstantSearch indexName="Common" searchClient={client}>
+          <div className="search-header">
             <SearchBox
               translations={{
                 placeholder: 'Cauta aici...',
@@ -148,37 +127,26 @@ export default class App extends React.Component {
           </div>
 
           <div className="search-result-wrapper">
-            <Tabs>
-              <TabList>
-                <Tab>
-                  <span className="stats-count">328</span>
-                  <span className="tab-title tab-icon-providers">Providers</span>
-                </Tab>
-                <Tab>
-                  <span className="stats-count">12</span>
-                  <span className="tab-title tab-icon-articles">Articole (Blog)</span>
-                </Tab>
-                <Tab>
-                  <span className="stats-count">37</span>
-                  <span className="tab-title tab-icon-pages">Pagini</span>
-                </Tab>
-              </TabList>
-              <TabPanel>
-                {this.getContentResult(indexProviders, this.hitProviders, 'providers')}
-                {this.getFilters()}
-              </TabPanel>
-              <TabPanel>
-                {this.getContentResult(indexBlog, this.hitPagesBlog, 'blog')}
-                {this.getFilters()}
-              </TabPanel>
-              <TabPanel>
-                {this.getContentResult(indexPages, this.hitPagesBlog, 'pages')}
-                {this.getFilters()}
-              </TabPanel>
-            </Tabs>
+            <div>
+              <RefinementList attribute="type" />
+              <Hits hitComponent={Hit} />
+            </div>
           </div>
         </InstantSearch>
       </div>
     );
   }
+}
+function Hit(props: any) {
+  return (
+    <>
+      <div className="hit-name">
+        <Highlight attribute="name" hit={props.hit} />
+      </div>
+      {props.name && <div className="hit-summary">{props.name}</div>}
+      <Link to="/harta" className="button small invert">
+        Detalii
+      </Link>
+    </>
+  );
 }
