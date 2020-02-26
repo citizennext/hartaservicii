@@ -133,7 +133,7 @@
         @apply text-black
 
     .search-result-wrapper
-        .react-tabs__tab-list
+        .ais-RefinementList-list
             display: flex
             @apply bg-snow
             margin: 0 -1.3em 45px
@@ -141,11 +141,18 @@
             overflow: scroll
             position: relative
 
-        .react-tabs__tab
+        .ais-RefinementList-item
             min-width: 270px
             margin-left: 26px
             z-index: 1
             cursor: pointer
+
+            .ais-RefinementList-label
+                display: flex
+                flex-direction: row-reverse
+
+                input
+                    display: none
 
             &:after
                 content: ''
@@ -154,12 +161,12 @@
                 margin-top: -20px
                 z-index: 0
 
-            &.react-tabs__tab--selected:after
+            &.ais-RefinementList-item--selected:after
                 @apply bg-white
                 display: block
                 z-index: 1
 
-            .stats-count
+            .ais-RefinementList-count
                 @apply bg-leaf
                 @apply rounded-l-full
                 min-height: 50px
@@ -173,7 +180,7 @@
                 @apply font-semibold
                 font-family: 'Montserrat'
 
-            .tab-title
+            .ais-RefinementList-labelText
                 display: inline-block
                 min-height: 50px
                 line-height: 50px
