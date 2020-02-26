@@ -226,6 +226,50 @@
             &:last-of-type
                 margin-right: 26px
 
+        .ais-RefinementList-item
+
+            .ais-RefinementList-label
+                display: flex
+                flex-direction: row-reverse
+                margin-bottom: 8px
+
+                input
+                    display: none
+
+                .ais-RefinementList-labelText
+                    display: inline-block
+                    min-height: 50px
+                    line-height: 50px
+                    min-width: 200px
+                    @apply bg-snow
+                    @apply rounded-r-full
+                    font-family: 'Montserrat'
+                    font-size: 16px
+                    padding-left: 30px
+
+                .ais-RefinementList-count
+                    display: inline-block
+                    min-height: 50px
+                    line-height: 50px
+                    min-width: 70px
+                    @apply bg-white
+                    border: 1px solid
+                    @apply border-snow
+                    @apply rounded-l-full
+                    font-family: 'Montserrat'
+                    font-size: 18px
+                    @apply font-semibold
+                    text-align: right
+                    padding-right: 6px
+
+            &.ais-RefinementList-item--selected
+
+                .ais-RefinementList-count
+                    @apply bg-snow
+                    padding-left: 50px
+                    margin-left: -10px
+                    @apply rounded-none
+
     .ais-Highlight-highlighted
         @apply bg-snow
 
@@ -352,36 +396,6 @@
             .ais-RefinementList
                 display: inline-block
                 margin-bottom: 20px
-
-                ul
-                    li
-                        display: block
-                        width: 100%
-                        clear: left
-                        bordr-bottom: 1px solid grey
-
-                        label
-                            display: block
-                            width: 100%
-                            padding: 3px 0
-
-                            input
-                                float: left
-                                width: auto
-                                margin: 3px 10px 0 0
-
-                            span
-                                float: left
-                                line-height: 1
-
-                                &.ais-RefinementList-count
-                                    margin: 0 0 0 10px
-
-                                    &:before
-                                        content: '('
-
-                                    &:after
-                                        content: ')'
 
     .react-autosuggest__container
         .react-autosuggest__input
