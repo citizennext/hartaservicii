@@ -72,7 +72,8 @@
     "tailwindcss": "^1.1.4",
     "typeface-montserrat": "^0.0.75",
     "webpack": "^4.41.5",
-    "yallist": "^4.0.0"
+    "yallist": "^4.0.0",
+    "react-notifications": "^1.5.0-beta.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
