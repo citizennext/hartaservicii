@@ -7,8 +7,8 @@ import {
   Configure,
   Highlight,
   Hits,
-  Menu,
   InstantSearch,
+  Menu,
   Pagination,
   RefinementList,
   SearchBox,
@@ -104,9 +104,7 @@ export default class App extends React.Component {
     return (
       <div className="left-panel">
         <Menu attribute="type" />
-        <div className="st3phan">
-          <Hits hitComponent={Hit} />
-        </div>
+        <Hits hitComponent={Hit} />
         <Pagination />
       </div>
     );
