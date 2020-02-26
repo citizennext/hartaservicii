@@ -88,7 +88,7 @@ export default class App extends React.Component {
 function Hit(props: any) {
   const typeFy = props.hit.type.toLowerCase();
   return (
-    <div className={typeFy}>
+    <div className={`card-${typeFy}`}>
       <div className="hit-name">
         {typeFy === 'servicii' && props.hit.name}
         {typeFy !== 'servicii' && props.hit.title}

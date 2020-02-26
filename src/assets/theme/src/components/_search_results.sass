@@ -9,7 +9,7 @@
             position: absolute
             left: 0
             top: 0
-            height: 263px
+            height: 284px
             width: 100vw
             z-index: -1
             @apply bg-snow
@@ -20,7 +20,7 @@
             width: 100vw
             background-color: #CEE6C1
             display: block
-            top: 257px
+            top: 278px
             left: 0
             position: absolute
             z-index: 0
@@ -252,6 +252,7 @@
                     min-height: 50px
                     line-height: 50px
                     min-width: 70px
+                    max-width: 70px
                     @apply bg-white
                     border: 1px solid
                     @apply border-snow
@@ -268,6 +269,7 @@
                     @apply bg-snow
                     padding-left: 50px
                     margin-left: -10px
+                    max-width: 80px
                     @apply rounded-none
 
     .ais-Highlight-highlighted
@@ -288,64 +290,50 @@
             float: left
             width: 65%
 
-        .providers,
-        .pages,
-        .blog
-            display: inline-block
+        .card-servicii,
+        .card-noutăți,
+        .card-pagini
+            float: left
             width: 100%
+            margin: 10px 0
+            padding: 0 10px 10px 60px
+            position: relative
+            border-bottom: 1px solid
+            @apply border-leaf
 
-            ul
-                display: inline-block
-                width: 100%
+            a
+                text-decoration: none
 
-                li
-                    float: left
-                    width: 100%
-                    margin: 10px 0
-                    padding: 0 10px 10px 60px
-                    position: relative
-                    border-bottom: 1px solid
-                    @apply border-leaf
+            .small
+                margin: 0
+                @apply bg-snow
 
-                    a
-                        text-decoration: none
+                @screen md
+                    width: 170px
 
-                    .small
-                        margin: 0
-                        @apply bg-snow
+            &:first-of-type
+                margin-top: 0
 
-                        @screen md
-                            width: 170px
+            &:before
+                position: absolute
+                content: ''
+                background-repeat: no-repeat
+                background-size: contain
+                top: 0
+                left: 0
 
-                    &:first-of-type
-                        margin-top: 0
-
-                    &:before
-                        position: absolute
-                        content: ''
-                        background-repeat: no-repeat
-                        background-size: contain
-                        top: 0
-                        left: 0
-
-        .providers
-            ul
-                li
-
-                    &:before
-                        background-image: url('../../images/icon_pin_full.svg')
-                        height: 50px
-                        width: 41px
+        .card-servicii
+            &:before
+                background-image: url('../../images/icon_pin_full.svg')
+                height: 50px
+                width: 41px
 
 
-        .pages, .blog
-            ul
-                li
-
-                    &:before
-                        background-image: url('../../images/icon_news.svg')
-                        height: 40px
-                        width: 50px
+        .card-noutăți, .card-pagini
+            &:before
+                background-image: url('../../images/icon_news.svg')
+                height: 40px
+                width: 50px
 
         .ais-Pagination
             clear: left
@@ -355,10 +343,17 @@
             ul
                 li
                     float: left
-                    padding: 5px 10px
-                    margin: 0 10px
-                    border: 1px solid dimgrey
+                    padding: 10px
+                    margin: 0
                     line-height: 1
+
+                    .ais-Pagination-link
+                        font-family: 'Montserrat'
+                        text-decoration: none
+                        @apply font-semibold
+
+                    .ais-Pagination-link--selected
+                        @apply text-celeste
 
                     &:first-of-type
                         margin-left: 0
