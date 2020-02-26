@@ -2,49 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 const siteConfig = require('./site-config');
-
-const common = `query {
-  hasura {
-    pages {
-      slug
-      title
-      summary
-      content {
-        text
-      }
-    }
-    blogs {
-      slug
-      title
-      summary
-      content {
-        text
-      }
-    }
-    providers {
-      id
-      name
-      location
-      district
-      supplier {
-        name
-      }
-    }
-  }
-}`;
-const array = [
-  {
-    indexName: process.env.ALGOLIA_INDEX_NAME_COMMON,
-    query: common,
-    key: 'common',
-  },
-];
-// const queries = [
-//   {
-//     query: providers,
-//     transformer: ({data}) => data.hasura.providers
-//   }
-// ];
+const queries = require('./src/utils/algolia.js');
 
 module.exports = {
   siteMetadata: {
@@ -159,11 +117,7 @@ module.exports = {
       options: {
         appId: process.env.ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_API_KEY,
-        queries: array.map(item => ({
-          query: item.query,
-          indexName: item.indexName,
-          transformer: ({ data }) => [...data.hasura.blogs, ...data.hasura.pages, ...data.hasura.providers],
-        })),
+        queries: queries,
         chunkSize: 10000, // default: 1000
       },
     },
