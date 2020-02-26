@@ -8,7 +8,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import iconShare from '../../assets/images/icon_share.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
 
-function PopUps(props: any) {
+function Provider(props: any) {
   const ratingMutation = gql`
     mutation MyMutation($provider: uuid!, $rating: Int!) {
       insert_provider_rating(objects: { provider_id: $provider, rating: $rating }) {
@@ -246,4 +246,4 @@ function PopUps(props: any) {
   );
 }
 
-export default PopUps;
+export default Provider;

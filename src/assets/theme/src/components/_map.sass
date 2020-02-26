@@ -3,7 +3,7 @@
     @apply max-w-full
     @apply m-0
     position: fixed
-    top: 80px
+    top: 0
     right: 0
     bottom: 0
     left: 0
@@ -47,20 +47,326 @@
 
 #map-marker-popup
     position: fixed
-    top: 127px
+    top: 94.5vw
     left: 0
     z-index: 9999
-    width: 376px
-    height: calc(100% - 127px)
-    @apply bg-white
+    width: 375px
+    height: calc(100vh - 94.5vw)
+    overflow: scroll
+    @apply bg-transparent
+
+    @screen md
+        height: calc(100vh - 115px)
+        top: 115px
+
+    @screen xl
+        height: calc(100vh - 115px)
+        top: 115px
 
     .close-map-marker-popup
+        @apply bg-snow
+        @apply rounded-full
+        @apply absolute
         cursor: pointer
+        padding: 11px
+        width: auto
+        top: 20px
+        right: 20px
 
     header,
-    main,
+    .main-section > div,
+    .main-section h2,
+    .main-section h3,
+    .main-section > p,
+    footer h3,
+    footer p,
+    footer ul,
+    footer .dv-star-rating
+        @apply p-6
+
+    header
+        padding-top: 21px
+        height: 130px
+        @apply relative
+        @apply rounded-t-lg
+        @apply bg-celeste
+        @apply border-b-6
+        @apply border-leaf
+
+        .popup-logo img
+            height: 88px
+
+    .main-section
+        @apply bg-white
+
+        h2, .pin-name, .pin-id, .pin-capacity, .pin-web
+            @apply border-b
+            @apply border-snow
+
+        h3
+            font-size: 16px
+            font-weight: normal
+
+        p
+            @apply font-semibold
+            font-family: Montserrat
+            font-size: 14px
+
+            span
+                font-size: 22px
+                @apply font-normal
+                @apply text-celeste
+                @apply block
+
+        .pin-id
+            @apply flex
+
+            p
+                width: 50%
+
+            .pin-eval
+                font-size: 14px
+                @apply text-black
+
+                span.average-rateing
+                    @apply font-semibold
+                    @apply inline-block
+
+                .rating-parent
+                    display: inline-block
+                    overflow: hidden
+                    line-height: 0
+                    position: relative
+                    border-radius: 10px
+                    margin-left: 20px
+
+                    &:before
+                        content: ''
+                        border: 2px solid #6FBBB7
+                        line-height: 0
+                        position: absolute
+                        width: 100%
+                        height: 100%
+                        border-radius: 10px
+                        @apply bg-snow
+
+                    .rating-child
+                        display: inline-block
+                        overflow-x: hidden
+                        line-height: 0
+
+                .dv-star-rating
+                    display: inline-flex !important
+                    line-height: 0
+
+                    label
+                        line-height: 0
+                        position: relative
+
+                        &:after
+                            content: ''
+                            width: 2px
+                            height: 100%
+                            position: absolute
+                            top: 0
+                            right: 0
+                            @apply bg-snow
+
+                        &:last-of-type
+                            &:after
+                                display: none
+
+                    .rating-icon
+                        line-height: 0
+                        display: inline-block
+                        color: inherit
+                        width: 18px
+                        height: 18px
+                        @apply bg-celeste
+
+        .pin-capacity
+            @apply flex
+
+            p
+                @apply w-1/4
+
+                span
+                    font-size: 36px
+                    @apply text-celeste
+                    @apply block
+
+                a > img
+                    @apply rounded-full
+                    margin-top: 5px
+                    padding: 7px
+                    @apply bg-snow
+                    height: 46px
+                    width: 46px
+                    margin-left: 4px
+
+            p:first-child
+                @apply w-1/2
+
+            p:last-child
+                a > img
+                    padding: 0 13px
+                    margin-left: 14px
+
+        .pin-address, .pin-phone, .pin-web
+            overflow: hidden
+            p
+                @apply relative
+                margin-left: 35px
+
+                &:before
+                    @apply absolute
+                    content: ''
+                    background-size: contain
+                    background-repeat: no-repeat
+                    top: 3px
+                    left: -30px
+                    width: 18px
+                    height: 100%
+
+            span, a
+                display: block
+                margin-left: 35px
+                width: 280px
+                text-overflow: ellipsis
+                overflow: hidden
+
+        .pin-address
+            p
+                &:before
+                    background-image: url('../../images/icon_location.svg')
+
+        .pin-phone
+            p
+                &:before
+                    background-image: url('../../images/icon_phone.svg')
+
+            span
+                display: block
+
+        .pin-web
+            p
+                &:before
+                    background-image: url('../../images/icon_link.svg')
+
+        .pin-services > p
+            @apply relative
+            margin-left: 35px
+
+            &:before
+                @apply absolute
+                content: ''
+                background-image: url('../../images/icon_servicii.svg')
+                background-size: contain
+                background-repeat: no-repeat
+                top: 0
+                left: -30px
+                width: 18px
+                height: 100%
+
+        .pin-services > ul
+            @apply relative
+            margin-left: 35px
+
+            li:before
+                content: '▶'
+                margin-right: 5px
+
+        .pin-provider
+            padding-top: 45px
+            padding-bottom: 45px
+            @apply border-t-6
+            @apply border-b-6
+            @apply border-leaf
+            @apply bg-snow
+            @apply flex
+            flex-wrap: wrap
+
+            div
+                @apply p-0
+                @apply w-full
+
+                &:nth-child(2) > p
+                    vertical-align: text-top
+
+                p:nth-child(odd)
+                    font-weight: normal
+                    display: inline-block
+                    width: 50%
+                    text-align: right
+
+                p:nth-child(even)
+                    @apply pl-2
+                    @apply font-semibold
+                    display: inline-block
+                    width: 50%
+                    text-align: left
+
+                &:nth-child(1) > p,&:nth-child(3) > p,&:nth-child(7) > p
+                    padding-bottom: 20px
+
     footer
-        padding: 15px
+        h3, .pin-help, .pin-update, .pin-eval
+            @apply border-b
+            @apply border-brown
+
+        h3
+            @apply text-white
+            font-size: 22px
+            @apply font-semibold
+
+        .pin-help p:first-child, .pin-update p:first-child, .pin-eval p:first-child
+            font-family: Montserrat
+            @apply font-semibold
+            @apply pb-0
+
+        li:before
+            content: '▶'
+            margin-right: 5px
+
+        .pin-update
+            button
+                @apply mb-6
+
+        .dv-star-rating
+            @apply mb-10
+
+            label
+                padding-right: 9px
+
+                span
+                    @apply relative
+                    @apply rounded-full
+                    border: 4px solid #FFFFFF
+                    padding: 0 3px
+                    line-height: 19px
+                    font-size: 20.5px
+
+                &:first-of-type,
+                &:last-of-type
+                    span
+                        &:after
+                            content: ''
+                            bottom: -48px
+                            left: -20%
+                            @apply absolute
+                            @apply text-white
+                            text-align: center
+                            font-family: 'Koho'
+                            font-size: 14px
+
+                &:first-of-type
+                    span
+                        &:after
+                            content: 'Foarte bine'
+                &:last-of-type
+                    span
+                        &:after
+                            content: 'Foarte rău'
 
     section
         width: 100%
