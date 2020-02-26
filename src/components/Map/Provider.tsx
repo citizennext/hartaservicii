@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
-import iconClose from '../../assets/images/icon_Close.svg';
+import { X as Close } from 'react-feather';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -81,7 +81,7 @@ function Provider(props: any) {
         </div>
         <Link to="/harta">
           <button className="close-map-marker-popup">
-            <img src={iconClose} />
+            <Close className="text-celeste" size={30} />
           </button>
         </Link>
       </header>
