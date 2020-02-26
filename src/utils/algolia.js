@@ -39,6 +39,7 @@ const prepareData = data => [
   ...addType(data.blogs, 'Noutăți'),
   ...addType(data.pages, 'Pagini'),
   ...addType(data.providers, 'Servicii'),
+  ...addType(data.providers, '*'),
 ];
 
 const queries = [

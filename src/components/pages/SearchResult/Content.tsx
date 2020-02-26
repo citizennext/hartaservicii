@@ -5,7 +5,6 @@ import { Link } from 'gatsby';
 import {
   ClearRefinements,
   Configure,
-  Highlight,
   Hits,
   InstantSearch,
   Menu,
@@ -51,22 +50,19 @@ export default class App extends React.Component {
             <RefinementList attribute="district" />
           </Panel>
         </div>
-        <div className="filter service">
-          <Panel header="Service">
-            <RefinementList attribute="service.name" />
-          </Panel>
-        </div>
-        <Configure hitsPerPage={10} />
       </div>
     );
   }
 
   getContentResult() {
     return (
-      <div className="left-panel">
-        <Menu attribute="type" />
-        <Hits hitComponent={Hit} />
-        <Pagination />
+      <div className="search-result-wrapper">
+        <div className="left-panel">
+          <Hits hitComponent={Hit} />
+          <Pagination />
+          <Configure hitsPerPage={10} />
+        </div>
+        {this.getFilters()}
       </div>
     );
   }
@@ -81,27 +77,29 @@ export default class App extends React.Component {
                 placeholder: 'Cauta aici...',
               }}
             />
+            <Menu attribute="type" />
           </div>
-
-          <div className="search-result-wrapper">
-            {this.getContentResult()}
-            {this.getFilters()}
-          </div>
+          {this.getContentResult()}
         </InstantSearch>
       </div>
     );
   }
 }
 function Hit(props: any) {
+  const typeFy = props.hit.type.toLowerCase();
   return (
-    <>
+    <div className={typeFy}>
       <div className="hit-name">
-        <Highlight attribute="name" hit={props.hit} />
+        {typeFy === 'servicii' && props.hit.name}
+        {typeFy !== 'servicii' && props.hit.title}
       </div>
-      {props.name && <div className="hit-summary">{props.name}</div>}
+      <div className="hit-summary">
+        {typeFy === 'servicii' && props.hit.supplier.name}
+        {typeFy !== 'servicii' && props.hit.summary}
+      </div>
       <Link to="/harta" className="button small invert">
         Detalii
       </Link>
-    </>
+    </div>
   );
 }
