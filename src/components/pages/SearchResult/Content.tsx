@@ -28,63 +28,49 @@ common
     attributesForFaceting: ['name', 'location', 'district', 'type'],
   })
   .then(() => {
-    // -
+    //
   });
 
-// Update the App component
-export default class App extends React.Component {
-  getFilters() {
-    return (
-      <div className="right-panel">
-        <div id="stats" className="text-right text-muted">
-          <Stats />
+export function InstaSearchPage() {
+  return (
+    <div className="ais-InstantSearch">
+      <InstantSearch indexName="Common" searchClient={client}>
+        <div className="search-header">
+          <SearchBox
+            translations={{
+              placeholder: 'Cauta aici...',
+            }}
+          />
         </div>
-        <ClearRefinements />
-        <div className="filter location">
-          <Panel header="Location">
-            <RefinementList attribute="location" />
-          </Panel>
-        </div>
-        <div className="filter district">
-          <Panel header="Județ">
-            <RefinementList attribute="district" />
-          </Panel>
-        </div>
-      </div>
-    );
-  }
-
-  getContentResult() {
-    return (
-      <div className="search-result-wrapper">
-        <Menu attribute="type" />
-        <div className="left-panel">
-          <Hits hitComponent={Hit} />
-          <Pagination />
-          <Configure hitsPerPage={10} />
-        </div>
-        {this.getFilters()}
-      </div>
-    );
-  }
-
-  render() {
-    return (
-      <div className="ais-InstantSearch">
-        <InstantSearch indexName="Common" searchClient={client}>
-          <div className="search-header">
-            <SearchBox
-              translations={{
-                placeholder: 'Cauta aici...',
-              }}
-            />
+        <div className="search-result-wrapper">
+          <Menu attribute="type" />
+          <div className="left-panel">
+            <Hits hitComponent={Hit} />
+            <Pagination />
+            <Configure hitsPerPage={10} />
           </div>
-          {this.getContentResult()}
-        </InstantSearch>
-      </div>
-    );
-  }
+          <div className="right-panel">
+            <div id="stats" className="text-right text-muted">
+              <Stats />
+            </div>
+            <ClearRefinements />
+            <div className="filter location">
+              <Panel header="Oraș">
+                <RefinementList attribute="location" />
+              </Panel>
+            </div>
+            <div className="filter district">
+              <Panel header="Județ">
+                <RefinementList attribute="district" />
+              </Panel>
+            </div>
+          </div>
+        </div>
+      </InstantSearch>
+    </div>
+  );
 }
+
 function Hit(props: any) {
   const typeFy = props.hit.type.toLowerCase();
   return (
