@@ -68,7 +68,7 @@ function PopUps(props: any) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! ${error.message}</p>;
   const providers = data.providers_by_pk;
-  const averageRating = providers.rating_aggregate.aggregate.avg.rating / 10;
+  const averageRating = (providers.rating_aggregate.aggregate.avg.rating / 10).toFixed(1);
   const percentageRating = (providers.rating_aggregate.aggregate.avg.rating * 100) / 50;
   const saveRating = (value: number) => {
     setRating(value);
