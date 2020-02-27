@@ -1,67 +1,33 @@
-/*
- * @author Stefan Iurasog <si@codesicle.com>
- */
-
-import React, { Component } from 'react';
-import { connectAutoComplete, Highlight } from 'react-instantsearch-dom';
-import AutoSuggest from 'react-autosuggest';
-import { navigate } from '@reach/router';
-
-class Autocomplete extends Component {
-  // @ts-ignore
-  state = { value: this.props.currentRefinement };
-
-  onChange = (event: any, { newValue }: any) => {
-    this.setState({ value: newValue });
+import React, { useState } from 'react';
+import { connectAutoComplete, Configure } from 'react-instantsearch-dom';
+import { navigate, Link } from '@reach/router';
+const CustomAutocomplete = ({ hits, currentRefinement, refine }: any) => {
+  const [searchedTerm, setSearchedTerm] = useState(currentRefinement);
+  const handleChange = (e: any) => {
+    setSearchedTerm(e.currentTarget.value);
+    refine(e.currentTarget.value);
   };
-
-  onSuggestionSelected = (event: any, { method }: any) => {
-    if (method === 'click' || method === 'enter') {
-      navigate('/rezultat');
-    }
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    navigate('/rezultat', { state: { searchValue: searchedTerm } });
   };
+  return (
+    <>
+      <Configure hitsPerPage={4} />
+      <ul>
+        <li>
+          <form onSubmit={e => handleSubmit(e)}>
+            <input type="search" value={currentRefinement} onChange={e => handleChange(e)} />
+          </form>
+        </li>
+        {hits.map((hit: any, index: number) => (
+          <Link to={`#`} state={searchedTerm} key={index}>
+            <li key={hit.objectID}>{hit.name}</li>
+          </Link>
+        ))}
+      </ul>
+    </>
+  );
+};
 
-  onSuggestionsFetchRequested = ({ value }: any) => {
-    // @ts-ignore
-    this.props.refine(value);
-  };
-
-  onSuggestionsClearRequested = () => {
-    // @ts-ignore
-    this.props.refine();
-  };
-
-  getSuggestionValue(hit: any) {
-    return hit.name;
-  }
-
-  renderSuggestion(hit: any) {
-    return <Highlight attribute="name" hit={hit} tagName="mark" />;
-  }
-
-  render() {
-    const { hits }: any = this.props;
-    const { value } = this.state;
-
-    const inputProps = {
-      placeholder: 'Caută...',
-      onChange: this.onChange,
-      value,
-    };
-
-    return (
-      <AutoSuggest
-        suggestions={hits}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps}
-        onSuggestionSelected={this.onSuggestionSelected}
-      />
-    );
-  }
-}
-
-// @ts-ignore
-export default connectAutoComplete(Autocomplete);
+export const AutoComplete = connectAutoComplete(CustomAutocomplete);
