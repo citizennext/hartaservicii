@@ -7,6 +7,17 @@
 	max-width: 88vw
 	left: 50%
 	transform: translateX(-50%)
+	@screen md
+		width: 600px
+		max-width: 88vw
+		bottom: 10px
+		left: -23.3vw
+		transform: translateX(0)
+	@screen xl
+		bottom: 85px
+		width: 770px
+		max-width: 88vw
+		left: -12.5%
 
 	.react-autosuggest__container
 		
@@ -20,6 +31,13 @@
 			font-family: 'Koho'
 			@apply text-black
 			padding-left: 40px
+			box-shadow: 0px 0px 60px rgba(151, 133, 133, 0.6)
+			@screen md
+				width: 600px
+				max-width: 88vw
+			@screen xl
+				width: 770px
+				max-width: 88vw
 
 		&:before
 	        content: ''
@@ -41,4 +59,3 @@
 	            background-size: 27px 27px
 	            height: 27px
 	            width: 27px
-	            left: 1%
