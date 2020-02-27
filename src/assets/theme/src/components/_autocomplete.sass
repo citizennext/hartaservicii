@@ -40,22 +40,31 @@
 				max-width: 88vw
 
 		&:before
-	        content: ''
-	        background-image: url('../../images/icon_search.svg')
-	        background-size: 22.5px 22.5px
-	        height: 22.5px
-	        width: 22.5px
-	        position: absolute
-	        background-repeat: no-repeat
-	        bottom: 36px
-	        left: 4.5vw
-	        z-index: 9
-	        @screen md
-	            background-size: 23.5px 23.5px
-	            height: 23.5px
-	            width: 23.5px
-	            left: 2%
-	        @screen xl
-	            background-size: 27px 27px
-	            height: 27px
-	            width: 27px
+			content: ''
+			background-image: url('../../images/icon_search.svg')
+			background-size: 22.5px 22.5px
+			height: 22.5px
+			width: 22.5px
+			position: absolute
+			background-repeat: no-repeat
+			bottom: 36px
+			left: 4.5vw
+			z-index: 9
+			@screen md
+				background-size: 23.5px 23.5px
+				height: 23.5px
+				width: 23.5px
+				left: 2%
+			@screen xl
+				background-size: 27px 27px
+				height: 27px
+				width: 27px
+
+		.react-autosuggest__suggestions-container--open
+			background-color: white
+			position: absolute
+			top: 58px
+
+			.react-autosuggest__suggestion
+				padding: 20px
+				border-bottom: 1px solid black
