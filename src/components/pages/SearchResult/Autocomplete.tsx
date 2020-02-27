@@ -44,7 +44,7 @@ class Autocomplete extends Component {
     const { value } = this.state;
 
     const inputProps = {
-      placeholder: 'Search for a product...',
+      placeholder: 'Caută...',
       onChange: this.onChange,
       value,
     };

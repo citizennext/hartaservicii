@@ -1,11 +1,44 @@
 // @todo Seco - refactoring
 .autocomplete-search
-    position: fixed
-    top: 0
-    left: 25%
-    z-index: 999999
-    width: 50%
-    height: 100%
-    background-color: white
-    padding: 20px
-    box-shadow: 0 0 100px black
+	position: absolute
+	bottom: 51px
+	z-index: 9
+	width: 330px
+	max-width: 88vw
+	left: 50%
+	transform: translateX(-50%)
+
+	.react-autosuggest__container
+		
+		.react-autosuggest__input
+			max-width: 88vw
+			width: 330px
+			border: 6px solid #978585
+			@apply rounded-full
+			@apply bg-white
+			font-size: 18px
+			font-family: 'Koho'
+			@apply text-black
+			padding-left: 40px
+
+		&:before
+	        content: ''
+	        background-image: url('../../images/icon_search.svg')
+	        background-size: 22.5px 22.5px
+	        height: 22.5px
+	        width: 22.5px
+	        position: absolute
+	        background-repeat: no-repeat
+	        bottom: 36px
+	        left: 4.5vw
+	        z-index: 9
+	        @screen md
+	            background-size: 23.5px 23.5px
+	            height: 23.5px
+	            width: 23.5px
+	            left: 2%
+	        @screen xl
+	            background-size: 27px 27px
+	            height: 27px
+	            width: 27px
+	            left: 1%
