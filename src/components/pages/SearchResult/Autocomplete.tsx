@@ -20,11 +20,13 @@ const CustomAutocomplete = ({ hits, currentRefinement, refine }: any) => {
             <input type="search" value={currentRefinement} onChange={e => handleChange(e)} />
           </form>
         </li>
-        {hits.map((hit: any, index: number) => (
-          <Link to={`#`} state={searchedTerm} key={index}>
-            <li key={hit.objectID}>{hit.name}</li>
-          </Link>
-        ))}
+        <div className="react-autosuggest__suggestions-container--open">
+          {hits.map((hit: any, index: number) => (
+            <Link to={`#`} state={searchedTerm} key={index}>
+              <li key={hit.objectID}>{hit.name}</li>
+            </Link>
+          ))}
+        </div>
       </ul>
     </>
   );
