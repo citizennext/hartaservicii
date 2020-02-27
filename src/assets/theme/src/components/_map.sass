@@ -53,7 +53,8 @@
     width: 375px
     max-width: 100vh;
     height: calc(100vh - 94.5vw)
-    overflow: scroll
+    overflow-y: scroll
+    overflow-x: hidden
     @apply bg-transparent
 
     @screen md
@@ -97,6 +98,11 @@
         .popup-logo img
             height: 88px
 
+        .close-map-marker-popup img
+            top: 12px
+            height: 18px
+            border: 0
+
     .main-section
         @apply bg-white
 
@@ -132,6 +138,8 @@
                 span.average-rateing
                     @apply font-semibold
                     @apply inline-block
+                    font-size: 22px
+                    @apply text-celeste
 
                 .rating-parent
                     display: inline-block
@@ -199,10 +207,10 @@
                 a > img
                     @apply rounded-full
                     margin-top: 5px
-                    padding: 7px
+                    padding: 10px
                     @apply bg-snow
-                    height: 46px
-                    width: 46px
+                    height: 50px
+                    width: 50px
                     margin-left: 4px
 
             p:first-child

@@ -135,9 +135,7 @@ function PopUps(props: any) {
           <p>
             Distributie
             <CopyToClipboard text={location.href}>
-              <button className="share-button" onClick={() => NotificationManager.success('Link copiat în clipboard!')}>
-                Distribuie
-              </button>
+              <button className="share-button" onClick={() => NotificationManager.success('Link copiat în clipboard!')}></button>
             </CopyToClipboard>
           </p>
         </div>
