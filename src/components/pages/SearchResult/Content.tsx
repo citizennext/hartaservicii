@@ -26,12 +26,13 @@ common.setSettings({
   attributesForFaceting: ['name', 'location', 'district', 'type'],
 });
 
-export function InstaSearchPage() {
+export function InstaSearchPage(props: any) {
   return (
     <div className="ais-InstantSearch">
       <InstantSearch indexName={`${indexCommon}`} searchClient={client}>
         <div className="search-header">
           <SearchBox
+            defaultRefinement={props?.location?.state?.searchValue || ''}
             translations={{
               placeholder: 'Cauta aici...',
             }}
