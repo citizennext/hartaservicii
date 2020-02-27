@@ -17,7 +17,6 @@ import {
 import algoliasearch from 'algoliasearch';
 
 const indexCommon: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_COMMON}`;
-
 const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
 const common = client.initIndex(indexCommon);
 
@@ -34,7 +33,7 @@ common
 export function InstaSearchPage() {
   return (
     <div className="ais-InstantSearch">
-      <InstantSearch indexName="Common" searchClient={client}>
+      <InstantSearch indexName={`${indexCommon}`} searchClient={client}>
         <div className="search-header">
           <SearchBox
             translations={{
