@@ -5,7 +5,8 @@ import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import StarRatingComponent from 'react-star-rating-component';
-import iconShare from '../../assets/images/icon_share.svg';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import iconDirections from '../../assets/images/icon_directions.svg';
 
 function PopUps(props: any) {
@@ -67,7 +68,7 @@ function PopUps(props: any) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! ${error.message}</p>;
   const providers = data.providers_by_pk;
-  const averageRating = providers.rating_aggregate.aggregate.avg.rating / 10;
+  const averageRating = (providers.rating_aggregate.aggregate.avg.rating / 10).toFixed(1);
   const percentageRating = (providers.rating_aggregate.aggregate.avg.rating * 100) / 50;
   const saveRating = (value: number) => {
     setRating(value);
@@ -75,6 +76,7 @@ function PopUps(props: any) {
   };
   return (
     <section className="map-marker-popup" id="map-marker-popup" data-id={providers.id}>
+      <NotificationContainer />
       <header>
         <div className="popup-logo">
           <img src={hssLogo} />
@@ -132,9 +134,9 @@ function PopUps(props: any) {
           </p>
           <p>
             Distributie
-            <a href="#">
-              <img src={iconShare} />
-            </a>{' '}
+            <CopyToClipboard text={location.href}>
+              <button className="share-button" onClick={() => NotificationManager.success('Link copiat în clipboard!')}></button>
+            </CopyToClipboard>
           </p>
         </div>
         <div className="pin-address">
