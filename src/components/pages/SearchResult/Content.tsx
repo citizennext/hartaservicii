@@ -2,18 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import getSlug from 'speakingurl';
 
-import {
-  ClearRefinements,
-  Configure,
-  Hits,
-  InstantSearch,
-  Menu,
-  Pagination,
-  RefinementList,
-  SearchBox,
-  Stats,
-  Panel,
-} from 'react-instantsearch-dom';
+import { Configure, Hits, InstantSearch, Menu, Pagination, RefinementList, SearchBox, Panel } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
 
 const indexCommon: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_COMMON}`;
@@ -45,10 +34,6 @@ export function InstaSearchPage() {
             <Configure hitsPerPage={10} />
           </div>
           <div className="right-panel">
-            <div id="stats" className="text-right text-muted">
-              <Stats />
-            </div>
-            <ClearRefinements />
             <div className="filter location">
               <Panel header="Oraș">
                 <RefinementList attribute="location" />

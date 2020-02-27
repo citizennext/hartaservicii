@@ -48,10 +48,11 @@
         margin: 26px 1.3em 1.3em
 
         @screen md
-            width: 94vw
+            width: 88vwvw
             padding-left: 7vw
 
         @screen xl
+            width: 94vw
             margin: 26px auto
             width: 770px
             padding-left: 26px
@@ -288,7 +289,13 @@
         
         @screen md
             float: left
-            width: 65%
+            width: 57vw
+            max-width: 884px
+            margin-top: 75px
+
+        @screen xl
+            width: 73vw
+
 
         .card-servicii,
         .card-noutăți,
@@ -300,6 +307,12 @@
             position: relative
             border-bottom: 1px solid
             @apply border-leaf
+
+            @screen md
+                max-width: 470px
+
+            @screen xl
+                max-width: 670px
 
             a
                 text-decoration: none
@@ -338,13 +351,19 @@
         .ais-Pagination
             clear: left
             display: inline-block
-            margin-bottom: 50px
+            margin: 50px 0
+            width: 366px
+            margin-left: 50vw
+            transform: translateX(-50%)
+
+            &:before
+                content: 'Pagini cu rezultate:'
 
             ul
                 li
                     float: left
                     padding: 10px
-                    margin: 0
+                    margin: 0 auto
                     line-height: 1
 
                     .ais-Pagination-link
@@ -363,14 +382,22 @@
 
     .right-panel
         @apply hidden
-        float: right
-        width: 30%
-        padding: 10px
-        border-left: 1px solid
-        @apply border-lightbrown
-
+        
         @screen md
+            float: left
+            width: 30%
+            padding: 0 10px
+            border-left: 1px solid
+            @apply border-lightbrown
             @apply block
+            width: 24vw
+            max-width: 300px
+            margin-top: 75px
+
+        @screen xl
+            max-width: 316px
+            width: 26vw
+            float: right
 
         #stats
             text-align: center
