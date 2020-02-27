@@ -9,15 +9,14 @@ import {
   InstantSearch,
   Menu,
   Pagination,
+  Panel,
   RefinementList,
   SearchBox,
   Stats,
-  Panel,
 } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
 
 const indexCommon: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_COMMON}`;
-
 const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
 const common = client.initIndex(indexCommon);
 
@@ -43,7 +42,20 @@ export function InstaSearchPage() {
           />
         </div>
         <div className="search-result-wrapper">
+          {/*@todo St3phan, Cezar - Start*/}
           <Menu attribute="type" />
+          <Menu
+            attribute="type"
+            transformItems={(items: any) =>
+              items.map((item: any) => ({
+                ...item,
+                label: item.label,
+                className: item.label,
+              }))
+            }
+          />
+          <Menu attribute="type" transformItems={(items: any) => TabsA(items)} />
+          {/*@todo St3phan, Cezar - End*/}
           <div className="left-panel">
             <Hits hitComponent={Hit} />
             <Pagination />
@@ -96,4 +108,39 @@ function Hit(props: any) {
       </Link>
     </div>
   );
+}
+
+{
+  /*@todo St3phan, Cezar - Start*/
+}
+function TabsA(items: any) {
+  // eslint-disable-next-line no-console
+  console.log(items);
+  return (
+    <ul>
+      {items.map((item: any) => (
+        <li key={item.value} data-class="DataTestA">
+          <a href="#">
+            {item.label} ({item.count})
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function TabsB(items: any) {
+  // eslint-disable-next-line no-console
+  console.log(items);
+  return items.map((item: any) => (
+    <li key={item.value} data-class="DataTestA">
+      <a href="#">
+        {item.label} ({item.count})
+      </a>
+    </li>
+  ));
+}
+{
+  /*@todo St3phan, Cezar - End*/
 }
