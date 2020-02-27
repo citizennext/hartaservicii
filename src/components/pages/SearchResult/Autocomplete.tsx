@@ -1,13 +1,21 @@
+/*
+ * @author Stefan Iurasog <si@codesicle.com>
+ */
+
 import React, { Component } from 'react';
 import { Highlight, connectAutoComplete } from 'react-instantsearch-dom';
 import AutoSuggest from 'react-autosuggest';
+import { navigate } from '@reach/router';
 
 class Autocomplete extends Component {
   // @ts-ignore
   state = { value: this.props.currentRefinement };
 
-  onChange = (event: any, { newValue }: any) => {
-    this.setState({ value: newValue });
+  onChange = (event: any, { newValue, method }: any) => {
+    this.setState({ value: newValue, st3phan: 'test' });
+    if (method === 'click' || method === 'enter') {
+      navigate('/rezultat');
+    }
   };
 
   onSuggestionsFetchRequested = ({ value }: any) => {
