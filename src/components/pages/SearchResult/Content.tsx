@@ -20,15 +20,11 @@ const indexCommon: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_COMMON
 const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
 const common = client.initIndex(indexCommon);
 
-common
-  .setSettings({
-    searchableAttributes: ['name', 'location', 'district', 'address', 'supplier.name', 'service.name'],
-    customRanking: ['asc(name)'],
-    attributesForFaceting: ['name', 'location', 'district', 'type'],
-  })
-  .then(() => {
-    //
-  });
+common.setSettings({
+  searchableAttributes: ['name', 'location', 'district', 'address', 'supplier.name', 'service.name'],
+  customRanking: ['asc(name)'],
+  attributesForFaceting: ['name', 'location', 'district', 'type'],
+});
 
 export function InstaSearchPage() {
   return (
