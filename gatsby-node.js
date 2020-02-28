@@ -1,6 +1,6 @@
-// require('dotenv').config({
-//   path: `.env.${process.env.NODE_ENV}`,
-// });
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 const path = require(`path`);
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
 

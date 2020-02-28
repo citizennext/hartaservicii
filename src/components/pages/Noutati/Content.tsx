@@ -33,13 +33,15 @@ export function Content({ blogs }: Props) {
         {blogs.map((item, index) => (
           <li className="blog-post-item" key={`${item.id}-${index}`}>
             <div className="flex flex-wrap">
-              {windowSize.width && windowSize.width >= 768 ? (
-                <div className="image">
-                  <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
-                    <Img fluid={item.image.urlSharp.childImageSharp.fluid} className="md:w-full" />
-                  </Link>
-                </div>
-              ) : null}
+              {windowSize.width && windowSize.width >= 768
+                ? item.image && (
+                    <div className="image">
+                      <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
+                        <Img fluid={item.image.urlSharp.childImageSharp.fluid} className="md:w-full" />
+                      </Link>
+                    </div>
+                  )
+                : null}
               <div className="content">
                 <h3 className="title">
                   <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
