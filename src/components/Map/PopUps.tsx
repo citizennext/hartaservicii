@@ -49,6 +49,7 @@ function PopUps(props: any) {
           decision_no
           supplier_type {
             name
+            private
           }
         }
         service {
@@ -92,10 +93,10 @@ function PopUps(props: any) {
         <h3 className="pin-name">{providers.supplier.name}</h3>
         <div className="pin-id">
           <p>
-            Nr. licență:<span>{providers.license_no}</span>
+            Nr. licență<span>{providers.license_no}</span>
           </p>
           <div className="pin-eval">
-            Evaluare utilizatori
+            <strong>Evaluare utilizatori</strong>
             <br />
             <span className="average-rateing">{averageRating}</span>
             <div className="rating-parent">
@@ -117,15 +118,12 @@ function PopUps(props: any) {
         </div>
         <div className="pin-capacity">
           <p>
-            Capacitate: <span>{providers.capacity ? providers.capacity : '-'}</span>
+            Capacitate <span>{providers.capacity ? providers.capacity : '-'}</span>
           </p>
           <p>
             Directii
             {providers.coordinates ? (
-              <a
-                href={'https://www.google.ro/maps/search/' + providers.coordinates + ',16z'}
-                target="_blank"
-                rel="noopener noreferrer">
+              <a href={'https://www.google.ro/maps/search/' + providers.coordinates} target="_blank" rel="noopener noreferrer">
                 <img src={iconDirections} />
               </a>
             ) : (
@@ -148,22 +146,33 @@ function PopUps(props: any) {
         <div className="pin-phone">
           <p>Telefon</p>
           <span>{providers.phone ? providers.phone : '-'}</span>
-          <span>{providers.phone ? providers.phone : '-'}</span>
         </div>
         <div className="pin-web">
           <p>Web</p>
-          <a href="#">- </a>
+          <span>-</span>
         </div>
         <div className="pin-services">
-          <p>Servicii</p>
-          <ul>
-            <li>{providers.service.name ? providers.service.name : '-'}</li>
-          </ul>
+          <p>Tip / cod serviciu </p>
+          <span>
+            {providers.service.name} ({providers.service.code})
+          </span>
+        </div>
+        <div>
+          <p>Dată licență </p>
+          <span>{providers.license_date_5years ? providers.license_date_5years : providers.license_date_provisional}</span>
+        </div>
+        <div>
+          <p>Instituția care a eliberat licența </p>
+          <span>{providers.license_by ? providers.license_by : '-'}</span>
         </div>
         <div className="pin-provider">
           <div>
             <p>Administrator: </p>
-            <p>Privat</p>
+            <p>{providers.supplier.supplier_type.private ? 'Privat' : 'Public'}</p>
+          </div>
+          <div>
+            <p>Tip furnizor: </p>
+            <p>{providers.supplier.supplier_type.name}</p>
           </div>
           <div>
             <p>Nume furnizor: </p>
@@ -174,36 +183,16 @@ function PopUps(props: any) {
             <p>{providers.supplier.cui_cif ? providers.supplier.cui_cif : '-'}</p>
           </div>
           <div>
-            <p>Acreditat: </p>
-            <p>Da</p>
-          </div>
-          <div>
             <p>Număr decizie: </p>
-            <p>TOJ 5669213</p>
+            <p>{providers.supplier.decision_no ? providers.supplier.decision_no : '-e'}</p>
           </div>
           <div>
             <p>Dată decizie: </p>
-            <p>{providers.license_date ? providers.license_date : '- '}</p>
+            <p>{providers.supplier.decision_date ? providers.supplier.decision_date : '-'}</p>
           </div>
           <div>
             <p>Serie și număr certificat: </p>
             <p>{providers.supplier.certificate_serial_no ? providers.supplier.certificate_serial_no : '-'}</p>
-          </div>
-          <div>
-            <p>Cod serviciu social: </p>
-            <p>GH 5698133</p>
-          </div>
-          <div>
-            <p>Dată licență provizorie: </p>
-            <p>{providers.license_date_provisional ? providers.license_date_provisional : '-'}</p>
-          </div>
-          <div>
-            <p>Număr și serie licență de funcționare: </p>
-            <p>{providers.license_no ? providers.license_no : '-'}</p>
-          </div>
-          <div>
-            <p>Instituția care a eliberat licența: </p>
-            <p>{providers.license_by ? providers.license_by : '-'}</p>
           </div>
         </div>
       </div>
