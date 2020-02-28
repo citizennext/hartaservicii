@@ -379,7 +379,7 @@
 
 .markercluster-map-single
 	@apply w-full
-	@apply max-w-full
+	@apply max-w-screen
 	@apply m-0
 	height: 60vh
 	position: fixed
@@ -391,24 +391,28 @@
 		height: 71vh
 
 .popup-overlay
+	z-index: 0
+	@apply bg-celeste
+	width: 100vw
 	position: absolute
 	left: 0 
 	top: 70vh
-	width: 100%
-	z-index: 0
-	@apply bg-celeste
+	@screen md
+
+
 
 .map-marker-popup-single
 	margin: 0 auto
-	position: relative
 	z-index: 9999
 	width: 100vw
 	max-width: 375px
+	position: relative
 	@apply bg-transparent
-	display: flex
-	flex-wrap: wrap
-	overflow-y: none
+	
 	@screen md
+		display: flex
+		flex-wrap: wrap
+		overflow-y: none
 		width: 94vw
 		max-width: 717px
 	@screen xl
@@ -436,17 +440,17 @@
 	footer ul,
 	footer .dv-star-rating
 		@apply p-6
+		@screen xl
+			@apply p-12
 
 	header
 		padding-top: 21px
 		height: 100px
-		@apply relative
 		@apply rounded-t-lg
 		@apply bg-celeste
 		@apply border-b-6
 		@apply border-leaf
-		@apply absolute
-		top: -100px
+		margin-top: -100px
 
 		.popup-logo img
 			height: 55px
@@ -460,9 +464,10 @@
 		@apply bg-white
 		width: 100vw
 		max-width: 375px
-		@screen md
+		@screen xl
 			flex: 1
 			width: 50%
+			max-width: initial
 
 		h2, .pin-name, .pin-id, .pin-capacity, .pin-web
 			@apply border-b
@@ -643,20 +648,32 @@
 				content: '▶'
 				margin-right: 5px
 
+		.pin-services > div
+            display: block
+            margin-top: 20px
+            div
+                width: 50%
+                display: inline-block
+
 	.pin-provider
-		flex: 1
-		width: 50%
 		padding-top: 45px
 		padding-bottom: 45px
 		@apply bg-snow
-		@apply flex
-		flex-wrap: wrap
+		@screen md
+			@apply flex
+			flex-wrap: wrap
+			flex: 1
+			width: 50%
 
 		div
 			@apply p-0
 			@apply w-full
+			@screen md
+				@apply px-6
+			@screen xl
+				@apply px-12
 
-			&:nth-child(2) > p
+			&:nth-child(2) > p,&:nth-child(3) > p
 				vertical-align: text-top
 
 			p:nth-child(odd)
@@ -677,9 +694,15 @@
 
 	footer
 		width: 100%
+		@screen xl
+			display: flex
+			flex-wrap: wrap
+
 		h3, .pin-help, .pin-update, .pin-eval
 			@apply border-b
 			@apply border-brown
+			@screen xl
+				@apply border-none
 
 		h3
 			@apply text-white
@@ -690,6 +713,14 @@
 			font-family: Montserrat
 			@apply font-semibold
 			@apply pb-0
+
+		div:first-child,.pin-help,.pin-update,.pin-eval
+			@screen xl
+				width: 50%
+				display: inline-block
+				align-self: stretch
+				@apply border-b
+				@apply border-brown
 
 		li:before
 			content: '▶'
