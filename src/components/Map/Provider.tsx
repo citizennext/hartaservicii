@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import iconClose from '../../assets/images/icon_Close.svg';
+import iconClose from '../../assets/images/icon_arrowg.svg';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import StarRatingComponent from 'react-star-rating-component';
 import iconShare from '../../assets/images/icon_share.svg';
@@ -89,17 +89,16 @@ function Provider(props: any) {
         />
         <Marker position={providers.coordinates} icon={createMarkerCustomIcon()} />
       </Map>
-      <section className="map-marker-popup map-marker-popup-single" id="map-marker-popup" data-id={providers.id}>
+      <section className="map-marker-popup-single" id="map-marker-popup" data-id={providers.id}>
         <header>
           <div className="popup-logo">
             <img src={hssLogo} />
           </div>
-          <div className="pin-address">
-            <p>Adresă</p>
-            <span>
-              {providers.address ? providers.address : '-'}, {providers.location ? providers.location : '-'}, {providers.district}
-            </span>
-          </div>
+          <Link to="/harta">
+            <button className="close-map-marker-popup">
+              <img src={iconClose} />
+            </button>
+          </Link>
         </header>
         <div className="main-section">
           <h2>{providers.name}</h2>
@@ -153,6 +152,12 @@ function Provider(props: any) {
               </a>{' '}
             </p>
           </div>
+          <div className="pin-address">
+            <p>Adresă</p>
+            <span>
+              {providers.address ? providers.address : '-'}, {providers.location ? providers.location : '-'}, {providers.district}
+            </span>
+          </div>
           <div className="pin-phone">
             <p>Telefon</p>
             <span>{providers.phone ? providers.phone : '-'}</span>
@@ -168,59 +173,54 @@ function Provider(props: any) {
               <li>{providers.service.name ? providers.service.name : '-'}</li>
             </ul>
           </div>
-          <div className="pin-provider">
-            <div>
-              <p>Administrator: </p>
-              <p>Privat</p>
-            </div>
-            <div>
-              <p>Nume furnizor: </p>
-              <p>{providers.supplier.name ? providers.supplier.name : '-'}</p>
-            </div>
-            <div>
-              <p>CUI furnizor: </p>
-              <p>{providers.supplier.cui_cif ? providers.supplier.cui_cif : '-'}</p>
-            </div>
-            <div>
-              <p>Acreditat: </p>
-              <p>Da</p>
-            </div>
-            <div>
-              <p>Număr decizie: </p>
-              <p>TOJ 5669213</p>
-            </div>
-            <div>
-              <p>Dată decizie: </p>
-              <p>{providers.license_date ? providers.license_date : '- '}</p>
-            </div>
-            <div>
-              <p>Serie și număr certificat: </p>
-              <p>{providers.supplier.certificate_serial_no ? providers.supplier.certificate_serial_no : '-'}</p>
-            </div>
-            <div>
-              <p>Cod serviciu social: </p>
-              <p>GH 5698133</p>
-            </div>
-            <div>
-              <p>Dată licență provizorie: </p>
-              <p>{providers.license_date_provisional ? providers.license_date_provisional : '-'}</p>
-            </div>
-            <div>
-              <p>Număr și serie licență de funcționare: </p>
-              <p>{providers.license_no ? providers.license_no : '-'}</p>
-            </div>
-            <div>
-              <p>Instituția care a eliberat licența: </p>
-              <p>{providers.license_by ? providers.license_by : '-'}</p>
-            </div>
+        </div>
+        <div className="pin-provider">
+          <div>
+            <p>Administrator: </p>
+            <p>Privat</p>
+          </div>
+          <div>
+            <p>Nume furnizor: </p>
+            <p>{providers.supplier.name ? providers.supplier.name : '-'}</p>
+          </div>
+          <div>
+            <p>CUI furnizor: </p>
+            <p>{providers.supplier.cui_cif ? providers.supplier.cui_cif : '-'}</p>
+          </div>
+          <div>
+            <p>Acreditat: </p>
+            <p>Da</p>
+          </div>
+          <div>
+            <p>Număr decizie: </p>
+            <p>TOJ 5669213</p>
+          </div>
+          <div>
+            <p>Dată decizie: </p>
+            <p>{providers.license_date ? providers.license_date : '- '}</p>
+          </div>
+          <div>
+            <p>Serie și număr certificat: </p>
+            <p>{providers.supplier.certificate_serial_no ? providers.supplier.certificate_serial_no : '-'}</p>
+          </div>
+          <div>
+            <p>Cod serviciu social: </p>
+            <p>GH 5698133</p>
+          </div>
+          <div>
+            <p>Dată licență provizorie: </p>
+            <p>{providers.license_date_provisional ? providers.license_date_provisional : '-'}</p>
+          </div>
+          <div>
+            <p>Număr și serie licență de funcționare: </p>
+            <p>{providers.license_no ? providers.license_no : '-'}</p>
+          </div>
+          <div>
+            <p>Instituția care a eliberat licența: </p>
+            <p>{providers.license_by ? providers.license_by : '-'}</p>
           </div>
         </div>
         <footer>
-          <Link to="/harta">
-            <button className="close-map-marker-popup">
-              <img src={iconClose} />
-            </button>
-          </Link>
           <div>
             <h3>Ce nevoie are centrul, cum poti sa ajuti?</h3>
           </div>
