@@ -156,14 +156,16 @@ function PopUps(props: any) {
           <span>
             {providers.service.name} ({providers.service.code})
           </span>
-        </div>
-        <div>
-          <p>Dată licență </p>
-          <span>{providers.license_date_5years ? providers.license_date_5years : providers.license_date_provisional}</span>
-        </div>
-        <div>
-          <p>Instituția care a eliberat licența </p>
-          <span>{providers.license_by ? providers.license_by : '-'}</span>
+          <div className="pin-license">
+            <div>
+              <p>Dată licență </p>
+              <span>{providers.license_date_5years ? providers.license_date_5years : providers.license_date_provisional}</span>
+            </div>
+            <div>
+              <p>Instituția care a eliberat licența </p>
+              <span>{providers.license_by ? providers.license_by : '-'}</span>
+            </div>
+          </div>
         </div>
         <div className="pin-provider">
           <div>

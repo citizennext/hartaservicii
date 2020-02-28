@@ -286,6 +286,13 @@
                 content: '▶'
                 margin-right: 5px
 
+        .pin-services > div
+            display: block
+            margin-top: 20px
+            div
+                width: 50%
+                display: inline-block
+
         .pin-provider
             padding-top: 45px
             padding-bottom: 45px
@@ -300,8 +307,9 @@
                 @apply p-0
                 @apply w-full
 
-                &:nth-child(2) > p
+                &:nth-child(2) > p,&:nth-child(3) > p
                     vertical-align: text-top
+                    display: table-cell
 
                 p:nth-child(odd)
                     font-weight: normal
