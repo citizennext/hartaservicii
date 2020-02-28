@@ -19,7 +19,7 @@
 		max-width: 88vw
 		left: -12.5%
 		
-	input
+	.react-autosuggest__input
 		max-width: 88vw
 		width: 330px
 		border: 6px solid #978585
@@ -30,6 +30,9 @@
 		@apply text-black
 		padding-left: 40px
 		box-shadow: 0px 0px 60px rgba(151, 133, 133, 0.6)
+		white-space: nowrap
+		overflow: hidden
+		text-overflow: ellipsis
 		@screen md
 			width: 600px
 			max-width: 88vw
@@ -37,7 +40,7 @@
 			width: 770px
 			max-width: 88vw
 
-	form:before
+	&:before
 		content: ''
 		background-image: url('../../images/icon_search.svg')
 		background-size: 22.5px 22.5px
@@ -62,7 +65,12 @@
 		background-color: white
 		position: absolute
 		top: 58px
+		border: 1px solid
+		@apply border-burg
+		border-radius: 4px
+		box-shadow: 0px 0px 60px rgba(151, 133, 133, 0.6)
 
-		a
-			padding: 20px
-			border-bottom: 1px solid black
+		li
+			padding: 10px 10px 5px
+			border-bottom: 1px solid
+			@apply border-burg
