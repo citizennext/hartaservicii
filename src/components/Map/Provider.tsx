@@ -89,17 +89,17 @@ function Provider(props: any) {
         />
         <Marker position={providers.coordinates} icon={createMarkerCustomIcon()} />
       </Map>
-      <section className="map-marker-popup" id="map-marker-popup" data-id={providers.id}>
-        <pre>TESTARE NEW POPUP</pre>
+      <section className="map-marker-popup map-marker-popup-single" id="map-marker-popup" data-id={providers.id}>
         <header>
           <div className="popup-logo">
             <img src={hssLogo} />
           </div>
-          <Link to="/harta">
-            <button className="close-map-marker-popup">
-              <img src={iconClose} />
-            </button>
-          </Link>
+          <div className="pin-address">
+            <p>Adresă</p>
+            <span>
+              {providers.address ? providers.address : '-'}, {providers.location ? providers.location : '-'}, {providers.district}
+            </span>
+          </div>
         </header>
         <div className="main-section">
           <h2>{providers.name}</h2>
@@ -152,12 +152,6 @@ function Provider(props: any) {
                 <img src={iconShare} />
               </a>{' '}
             </p>
-          </div>
-          <div className="pin-address">
-            <p>Adresă</p>
-            <span>
-              {providers.address ? providers.address : '-'}, {providers.location ? providers.location : '-'}, {providers.district}
-            </span>
           </div>
           <div className="pin-phone">
             <p>Telefon</p>
@@ -222,6 +216,11 @@ function Provider(props: any) {
           </div>
         </div>
         <footer>
+          <Link to="/harta">
+            <button className="close-map-marker-popup">
+              <img src={iconClose} />
+            </button>
+          </Link>
           <div>
             <h3>Ce nevoie are centrul, cum poti sa ajuti?</h3>
           </div>

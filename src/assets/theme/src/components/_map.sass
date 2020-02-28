@@ -45,7 +45,7 @@
                 border-radius: 30px
                 color: white
 
-#map-marker-popup
+.map-marker-popup
     position: fixed
     top: 94.5vw
     left: 0
@@ -375,6 +375,25 @@
                     span
                         &:after
                             content: 'Foarte rău'
+
+    &.map-marker-popup-single
+        @screen md
+            width: 50vw
+            height: 40vh
+            left: 50%
+            transform: translateX(-50%)
+            top: 50vh
+            display: flex
+            flex-direction: row
+
+            // &:after
+            //     content: ''
+            //     @apply bg-celeste
+            //     @apply absolute
+            //     left: 0
+            //     width: 100vw
+            //     height: 40vh
+            //     z-index: 9998
 
     section
         width: 100%
