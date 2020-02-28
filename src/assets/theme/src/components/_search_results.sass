@@ -1,0 +1,453 @@
+.page-search-reesult
+
+    .ais-InstantSearch
+        margin-top: -1rem
+        padding-top: 2rem
+        &:before
+            content: ''
+            display: block
+            position: absolute
+            left: 0
+            top: 0
+            height: 284px
+            width: 100vw
+            z-index: -1
+            @apply bg-snow
+
+        &:after
+            content: ''
+            height: 6px
+            width: 100vw
+            background-color: #CEE6C1
+            display: block
+            top: 284px
+            left: 0
+            position: absolute
+            z-index: 0
+
+        .seacrh-header
+            display: inline-block
+            margin-bottom: 30px
+            @apply bg-snow
+            width: 100vw
+            margin: -1.3em
+            padding-bottom: 26px
+
+            @screen xl
+                width: 100%
+
+    .react-autosuggest__input,.ais-SearchBox-form
+        border: 1px solid #CEE6C1
+        @apply bg-white
+        width: 88vw
+        @apply rounded-full
+        font-family: KoHo
+        height: 50px
+        padding-left: 9vw
+        position: relative
+        margin: 26px auto
+
+        @screen md
+            width: 88vw
+            padding-left: 7vw
+
+        @screen xl
+            width: 94vw
+            margin: 26px auto
+            width: 770px
+            padding-left: 26px
+
+        input:not([type="checkbos"]), input:not([type="radio"])
+            border: 0
+            @apply bg-transparent
+            line-height: 32px
+
+        .ais-SearchBox-submit
+            display: none
+
+    .react-autosuggest__container
+        position: relative
+        width: 94vw
+        padding-left: 1.3em
+
+    .ais-SearchBox-form
+        position: relative
+
+        &:before
+            content: ''
+            background-image: url('../../images/icon_search.svg')
+            background-size: 22.5px 22.5px
+            height: 22.5px
+            width: 22.5px
+            position: absolute
+            background-repeat: no-repeat
+            top: 12px
+            left: 4vw
+            z-index: 9
+            @screen md
+                background-size: 23.5px 23.5px
+                height: 23.5px
+                width: 23.5px
+                left: 2%
+            @screen xl
+                background-size: 27px 27px
+                height: 27px
+                width: 27px
+                left: 1%
+
+    .ais-SearchBox-reset
+        width: 0
+        position: absolute
+        top: 0
+        right: 0
+
+        svg
+            display: none
+
+        &:after
+            content: ''
+            background-image: url('../../images/icon_close4.svg')
+            background-size: 17px
+            position: absolute
+            background-repeat: no-repeat
+            background-position: center
+            top: 7px
+            right: 1.2vw
+            z-index: 9
+            @apply bg-snow
+            padding: 18px
+            @apply rounded-full
+
+            @screen md
+                right: 6px
+
+    &[placeholder], &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder
+    text-overflow: ellipsis
+
+    &::-webkit-input-placeholder
+        @apply text-black
+    &::-moz-placeholder
+        @apply text-black
+    &:-moz-placeholder
+        @apply text-black
+    &:-ms-input-placeholder
+        @apply text-black
+
+    .search-result-wrapper
+        .ais-Menu-list
+            display: flex
+            @apply bg-snow
+            margin: 0 -1.3em 45px
+            max-width: 100vw
+            overflow: scroll
+            position: relative
+            @screen md
+
+        .ais-Menu-item
+            min-width: 270px
+            margin-left: 26px
+            z-index: 1
+            cursor: pointer
+
+            .ais-Menu-link
+                display: flex
+                flex-direction: row-reverse
+                text-decoration: none
+
+                input
+                    display: none
+
+            &:after
+                content: ''
+                @apply bg-transparent
+                height: 40px
+                margin-top: -20px
+                z-index: 0
+
+            &.ais-Menu-item--selected:after
+                @apply bg-white
+                display: block
+                z-index: 1
+
+            .ais-Menu-count
+                @apply bg-leaf
+                @apply rounded-l-full
+                min-height: 50px
+                line-height: 38px
+                width: 70px
+                display: inline-block
+                padding: 6px 6px 6px 16px
+                vertical-align: top
+                text-align: right
+                font-size: 18px
+                @apply font-semibold
+                font-family: 'Montserrat'
+
+            .ais-Menu-label
+                display: inline-block
+                min-height: 50px
+                line-height: 50px
+                min-width: 200px
+                @apply bg-white
+                @apply rounded-r-full
+                vertical-align: top
+                font-family: 'Montserrat'
+                font-size: 16px
+
+                &.tab-icon-articles:before,&.tab-icon-pages:before,&.tab-icon-providers:before
+                    background-repeat: no-repeat
+                    display: inline-block
+                    content: ''
+
+                &.tab-icon-articles:before
+                    background-size: 24px 24px
+                    background-position: 7px 0
+                    width: 38px
+                    height: 24px
+                    margin-bottom: -6px
+                    background-image: url('../../images/icon_all.svg')
+
+                &.tab-icon-pages:before
+                    background-repeat: no-repeat
+                    background-size: 24px 24px
+                    background-position: 7px 0
+                    width: 38px
+                    height: 24px
+                    margin-bottom: -6px
+                    background-image: url('../../images/icon_all.svg')
+
+                &.tab-icon-providers:before
+                    background-repeat: no-repeat
+                    background-size: 24px 24px
+                    background-position: 7px 0
+                    width: 38px
+                    height: 24px
+                    margin-bottom: -6px
+                    background-image: url('../../images/icon_all.svg')
+
+            &:last-of-type
+                margin-right: 26px
+
+        .ais-RefinementList-item
+
+            .ais-RefinementList-label
+                display: flex
+                flex-direction: row-reverse
+                margin-bottom: 8px
+
+                input
+                    display: none
+
+                .ais-RefinementList-labelText
+                    display: inline-block
+                    min-height: 50px
+                    line-height: 50px
+                    min-width: 200px
+                    @apply bg-snow
+                    @apply rounded-r-full
+                    font-family: 'Montserrat'
+                    font-size: 16px
+                    padding-left: 30px
+
+                .ais-RefinementList-count
+                    display: inline-block
+                    min-height: 50px
+                    line-height: 50px
+                    min-width: 70px
+                    max-width: 70px
+                    @apply bg-white
+                    border: 1px solid
+                    @apply border-snow
+                    @apply rounded-l-full
+                    font-family: 'Montserrat'
+                    font-size: 18px
+                    @apply font-semibold
+                    text-align: right
+                    padding-right: 6px
+
+            &.ais-RefinementList-item--selected
+
+                .ais-RefinementList-count
+                    @apply bg-snow
+                    padding-left: 50px
+                    margin-left: -10px
+                    max-width: 80px
+                    @apply rounded-none
+
+    .ais-Highlight-highlighted
+        @apply bg-snow
+
+    .hit-name
+        @apply font-semibold
+        font-family: 'Montserrat'
+
+    .hit-summary
+        font-family: 'Koho'
+        font-size: 14px
+        margin: 15px 0
+
+    .left-panel
+        
+        @screen md
+            float: left
+            width: 57vw
+            max-width: 884px
+            margin-top: 75px
+
+        @screen xl
+            width: 73vw
+
+
+        .card-servicii,
+        .card-noutăți,
+        .card-pagini
+            float: left
+            width: 100%
+            margin: 10px 0
+            padding: 0 10px 10px 60px
+            position: relative
+            border-bottom: 1px solid
+            @apply border-leaf
+
+            @screen md
+                max-width: 470px
+
+            @screen xl
+                max-width: 670px
+
+            a
+                text-decoration: none
+
+            .small
+                margin: 0
+                @apply bg-snow
+
+                @screen md
+                    width: 170px
+
+            &:first-of-type
+                margin-top: 0
+
+            &:before
+                position: absolute
+                content: ''
+                background-repeat: no-repeat
+                background-size: contain
+                top: 0
+                left: 0
+
+        .card-servicii
+            &:before
+                background-image: url('../../images/icon_pin_full.svg')
+                height: 50px
+                width: 41px
+
+
+        .card-noutăți, .card-pagini
+            &:before
+                background-image: url('../../images/icon_news.svg')
+                height: 40px
+                width: 50px
+
+        .ais-Pagination
+            clear: left
+            display: inline-block
+            margin: 50px auto
+            width: 366px
+            @screen md
+                margin: 50px 0
+                margin-left: 50vw
+                transform: translateX(-50%)
+
+            &:before
+                content: 'Pagini cu rezultate:'
+
+            ul
+                li
+                    float: left
+                    padding: 10px
+                    margin: 0 auto
+                    line-height: 1
+
+                    .ais-Pagination-link
+                        font-family: 'Montserrat'
+                        text-decoration: none
+                        @apply font-semibold
+
+                    .ais-Pagination-link--selected
+                        @apply text-celeste
+
+                    &:first-of-type
+                        margin-left: 0
+
+                    &:last-of-type
+                        margin-right: 0
+
+    .right-panel
+        @apply hidden
+        
+        @screen md
+            float: left
+            width: 30%
+            padding: 0 10px
+            border-left: 1px solid
+            @apply border-lightbrown
+            @apply block
+            width: 24vw
+            max-width: 300px
+            margin-top: 75px
+
+        @screen xl
+            max-width: 316px
+            width: 26vw
+            float: right
+
+        #stats
+            text-align: center
+
+        .ais-ClearRefinements
+            display: inline-block
+            margin: 30px 0
+
+        .filter
+            h2
+                float: left
+                width: 100%
+                clear: left
+                padding-bottom: 10px
+                margin-bottom: 10px
+                border-bottom: 1px solid darkred
+
+            .ais-RefinementList
+                display: inline-block
+                margin-bottom: 20px
+
+    .react-autosuggest__container
+        .react-autosuggest__input
+            margin: 0
+
+            &.react-autosuggest__input--focused,
+            &.react-autosuggest__input--open
+                border-radius: 0.25rem 0.25rem 0 0
+
+        .react-autosuggest__suggestions-container
+            display: none
+            border: 1px solid yellowgreen
+            border-top: unset
+            padding: 10px
+
+            &.react-autosuggest__suggestions-container--open
+                display: block
+
+        .react-autosuggest__section-title
+            font-weight: bold
+            text-transform: uppercase
+            border-bottom: 1px solid dimgrey
+
+        ul.react-autosuggest__suggestions-list
+            li
+                border-bottom: 1px solid lightgrey
+
+        .react-autosuggest__suggestion
+            &.react-autosuggest__suggestion--highlighted
+                background-color: lightgreen

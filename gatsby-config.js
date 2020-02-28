@@ -2,6 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 const siteConfig = require('./site-config');
+const queries = require('./src/utils/algolia.js');
 
 module.exports = {
   siteMetadata: {
@@ -109,6 +110,15 @@ module.exports = {
         headers: {
           'content-type': `application/json`,
         },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-algolia',
+      options: {
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_API_KEY,
+        queries: queries,
+        chunkSize: 10000, // default: 1000
       },
     },
   ],
