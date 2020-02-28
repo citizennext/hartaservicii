@@ -51,6 +51,7 @@
 	left: 0
 	z-index: 9999
 	width: 375px
+	max-width: 100vw
 	height: calc(100vh - 94.5vw)
 	overflow-y: scroll
 	overflow-x: hidden
@@ -376,29 +377,43 @@
 						&:after
 							content: 'Foarte rău'
 
-.map-marker-popup-single
-	position: relative
-	top: 60vh
+.markercluster-map-single
+	@apply w-full
+	@apply max-w-full
+	@apply m-0
+	height: 60vh
+	position: fixed
+	top: 0
+	right: 0
 	left: 0
+	padding-top: 80px
+	@screen md
+		height: 71vh
+
+.popup-overlay
+	position: absolute
+	left: 0 
+	top: 70vh
+	width: 100%
+	z-index: 0
+	@apply bg-celeste
+
+.map-marker-popup-single
+	margin: 0 auto
+	position: relative
 	z-index: 9999
-	width: 86vw
-	max-width: 1206px
+	width: 100vw
+	max-width: 375px
 	@apply bg-transparent
 	display: flex
 	flex-wrap: wrap
-
-	&:before
-		content: ""
-		display: block
-		position: absolute
-		left: -8vw
-		top: 0
-		height: 100%
-		width: 100vw
-		z-index: -1
-		opacity: .7
-		box-sizing: border-box
-		@apply bg-celeste
+	overflow-y: none
+	@screen md
+		width: 94vw
+		max-width: 717px
+	@screen xl
+		width: 86vw
+		max-width: 1206px
 
 	.close-map-marker-popup
 		@apply bg-snow
@@ -443,8 +458,11 @@
 
 	.main-section
 		@apply bg-white
-		width: 50%
-		flex: 1
+		width: 100vw
+		max-width: 375px
+		@screen md
+			flex: 1
+			width: 50%
 
 		h2, .pin-name, .pin-id, .pin-capacity, .pin-web
 			@apply border-b
