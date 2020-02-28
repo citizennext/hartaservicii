@@ -1,10 +1,14 @@
 import React from 'react';
 import algoliasearch from 'algoliasearch';
 import { InstantSearch } from 'react-instantsearch-dom';
-import Autocomplete from './Autocomplete1';
+import Autocomplete from './Autocomplete';
 
 const indexCommon: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_COMMON}`;
-const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
+const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`, {
+  headers: {
+    'Access-Control-Allow-Origin': 'https://beta.serviciisociale.ro',
+  },
+});
 const common = client.initIndex(indexCommon);
 
 common.setSettings({

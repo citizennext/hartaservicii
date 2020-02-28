@@ -6,7 +6,11 @@ import { Configure, Hits, InstantSearch, Menu, Pagination, RefinementList, Searc
 import algoliasearch from 'algoliasearch';
 
 const indexCommon: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_COMMON}`;
-const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
+const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`, {
+  headers: {
+    'Access-Control-Allow-Origin': 'https://beta.serviciisociale.ro',
+  },
+});
 const common = client.initIndex(indexCommon);
 
 common.setSettings({
