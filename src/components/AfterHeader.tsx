@@ -15,7 +15,7 @@ export function AfterHeader({ header, image, className, hasTopSeparator, hasBott
     <div className={`page-header ${className}`}>
       {hasTopSeparator && <Separator color="burg" />}
       <div className="wrapper">
-        <div>{header}</div>
+        <span>{header}</span>
         {image && <Img fluid={image} />}
       </div>
       {hasBottomSeparator && <Separator color="burg" bottom="-6" />}
