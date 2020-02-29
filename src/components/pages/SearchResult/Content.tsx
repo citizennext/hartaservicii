@@ -5,7 +5,7 @@ import getSlug from 'speakingurl';
 import { Configure, Hits, InstantSearch, Menu, Pagination, RefinementList, SearchBox, Panel } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
 
-const indexCommon = process.env.ALGOLIA_INDEX_NAME_COMMON;
+const indexCommon = process.env.GATSBY_ALGOLIA_INDEX_NAME_COMMON;
 // @ts-ignore
 const client = algoliasearch(process.env.GATSBY_ALGOLIA_APP_ID, process.env.GATSBY_ALGOLIA_SEARCH_KEY);
 const common = client.initIndex(indexCommon);
