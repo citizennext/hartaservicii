@@ -10,11 +10,16 @@ const indexCommon = process.env.GATSBY_ALGOLIA_INDEX_NAME_COMMON;
 const client = algoliasearch(process.env.GATSBY_ALGOLIA_APP_ID, process.env.GATSBY_ALGOLIA_SEARCH_KEY);
 const common = client.initIndex(indexCommon);
 
-common.setSettings({
-  searchableAttributes: ['name', 'location', 'district', 'address', 'supplier.name', 'service.name'],
-  customRanking: ['asc(name)'],
-  attributesForFaceting: ['name', 'location', 'district', 'type'],
-});
+common
+  .setSettings({
+    searchableAttributes: ['name', 'location', 'district', 'supplier.name', 'title', 'summary', 'content'],
+    customRanking: ['asc(name)'],
+    attributesForFaceting: ['location', 'district', 'type'],
+    attributesToHighlight: ['name', 'title', 'supplier.name'],
+  })
+  .then(() => {
+    // done
+  });
 
 export function InstaSearchPage(props: any) {
   return (
