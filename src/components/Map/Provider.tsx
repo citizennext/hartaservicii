@@ -3,13 +3,13 @@ import { Link } from 'gatsby';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import Leaflet, { LatLngTuple } from 'leaflet';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import { NotificationManager } from 'react-notifications';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import StarRatingComponent from 'react-star-rating-component';
 import iconDirections from '../../assets/images/icon_directions.svg';
 import iconClose from '../../assets/images/icon_arrowg.svg';
-import Leaflet, { LatLngTuple } from 'leaflet';
-import CopyToClipboard from 'react-copy-to-clipboard';
-import { NotificationManager } from 'react-notifications';
 import { useWindowSize } from '../../hooks/useWindowSize';
 
 function Provider(props: any) {
@@ -125,7 +125,6 @@ function Provider(props: any) {
                       name="rate" /* name of the radio input, it is required */
                       value={1} /* number of selected icon (`0` - none, `1` - first) */
                       starCount={5} /* number of icons in rating, default `5` */
-                      /* onStarClick={(v: any) => setRating(v)} on icon click handler */
                       renderStarIcon={() => <span className="rating-icon"></span>}
                       starColor="#6FBBB7"
                       renderStarIconHalf={() => null}
@@ -256,7 +255,6 @@ function Provider(props: any) {
                 starCount={5} /* number of icons in rating, default `5` */
                 onStarClick={(value: number) => saveRating(value)} /* on icon click handler */
                 onStarHover={(value: number) => setRating(value)} /* on icon hover handler */
-                // onStarHoverOut={() => setRating(1)}
                 renderStarIcon={() => <span>●</span>}
                 starColor="#6FBBB7"
                 emptyStarColor="transparent"
