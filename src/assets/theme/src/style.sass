@@ -493,6 +493,10 @@ button
 
     &.share-button
         @apply bg-transparent
+        width: 50px
+        height: 50px
+        margin: 0
+
         &:before
             content: ''
             background-image: url('../../images/icon_share.svg')
@@ -504,7 +508,7 @@ button
             top: 6px
             left: 6px
             @apply bg-snow
-            @apply p-6
+            //@apply p-6
             @apply rounded-full
 
 @import "~tailwindcss/utilities"

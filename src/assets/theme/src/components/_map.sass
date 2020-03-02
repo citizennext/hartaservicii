@@ -1,389 +1,780 @@
 .leaflet-container
-    @apply w-full
-    @apply max-w-full
-    @apply m-0
-    position: fixed
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    padding-top: 80px
+	@apply w-full
+	@apply max-w-full
+	@apply m-0
+	position: fixed
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+	padding-top: 80px
 
-    .marker-cluster-large,
-    .marker-cluster-large div
-        background-color: transparent
+	.marker-cluster-large,
+	.marker-cluster-large div
+		background-color: transparent
 
-    .marker-cluster-medium,
-    .marker-cluster-medium div
-        background-color: transparent
+	.marker-cluster-medium,
+	.marker-cluster-medium div
+		background-color: transparent
 
-    .marker-cluster-small,
-    .marker-cluster-small div
-        background-color: transparent
+	.marker-cluster-small,
+	.marker-cluster-small div
+		background-color: transparent
 
-    .marker-cluster-medium
-        width: auto !important
+	.marker-cluster-medium
+		width: auto !important
 
-    .marker-cluster-medium > div
-        position: absolute
-        bottom: 0
-        text-align: center
+	.marker-cluster-medium > div
+		position: absolute
+		bottom: 0
+		text-align: center
 
-        .marker-cluster-label
-            display: none
+		.marker-cluster-label
+			display: none
 
-        &:hover
-            .marker-cluster-label
-                display: block
-                position: absolute
-                top: -30px
-                left: 0
-                right: 0
-                margin: 0
-                padding: 5px
-                background: #968585
-                border-radius: 30px
-                color: white
+		&:hover
+			.marker-cluster-label
+				display: block
+				position: absolute
+				top: -30px
+				left: 0
+				right: 0
+				margin: 0
+				padding: 5px
+				background: #968585
+				border-radius: 30px
+				color: white
 
-#map-marker-popup
-    position: fixed
-    top: 94.5vw
-    left: 0
-    z-index: 9999
-    width: 375px
-    height: calc(100vh - 94.5vw)
-    overflow-y: scroll
-    overflow-x: hidden
-    @apply bg-transparent
+.map-marker-popup
+	position: fixed
+	top: 94.5vw
+	left: 0
+	z-index: 9999
+	width: 375px
+	max-width: 100vw
+	height: calc(100vh - 94.5vw)
+	overflow-y: scroll
+	overflow-x: hidden
+	@apply bg-transparent
 
-    @screen md
-        height: calc(100vh - 115px)
-        top: 115px
+	@screen md
+		height: calc(100vh - 115px)
+		top: 115px
 
-    @screen xl
-        height: calc(100vh - 115px)
-        top: 115px
+	@screen xl
+		height: calc(100vh - 115px)
+		top: 115px
 
-    .close-map-marker-popup
-        @apply bg-snow
-        @apply rounded-full
-        @apply absolute
-        cursor: pointer
-        padding: 20px
-        width: auto
-        top: 20px
-        right: 20px
+	.close-map-marker-popup
+		@apply bg-snow
+		@apply rounded-full
+		@apply absolute
+		cursor: pointer
+		padding: 20px
+		width: auto
+		top: 20px
+		right: 20px
 
-    header,
-    .main-section > div,
-    .main-section h2,
-    .main-section h3,
-    .main-section > p,
-    footer h3,
-    footer p,
-    footer ul,
-    footer .dv-star-rating
-        @apply p-6
+	header,
+	.main-section > div,
+	.main-section h2,
+	.main-section h3,
+	.main-section > p,
+	footer h3,
+	footer p,
+	footer ul,
+	footer .dv-star-rating
+		@apply p-6
 
-    header
-        padding-top: 21px
-        height: 130px
-        @apply relative
-        @apply rounded-t-lg
-        @apply bg-celeste
-        @apply border-b-6
-        @apply border-leaf
+	header
+		padding-top: 21px
+		height: 130px
+		@apply relative
+		@apply rounded-t-lg
+		@apply bg-celeste
+		@apply border-b-6
+		@apply border-leaf
 
-        .popup-logo img
-            height: 88px
+		.popup-logo img
+			height: 88px
 
-        .close-map-marker-popup img
-            top: 12px
-            height: 18px
-            border: 0
+		.close-map-marker-popup img
+			top: 12px
+			height: 18px
+			border: 0
 
-    .main-section
-        @apply bg-white
+	.main-section
+		@apply bg-white
 
-        h2, .pin-name, .pin-id, .pin-capacity, .pin-web
-            @apply border-b
-            @apply border-snow
+		h2, .pin-name, .pin-id, .pin-capacity, .pin-web
+			@apply border-b
+			@apply border-snow
 
-        h3
-            font-size: 16px
-            font-weight: normal
+		h3
+			font-size: 16px
+			font-weight: normal
 
-        p
-            @apply font-semibold
-            font-family: Montserrat
-            font-size: 14px
+		p
+			@apply font-semibold
+			font-family: Montserrat
+			font-size: 14px
 
-            span
-                font-size: 22px
-                @apply font-normal
-                @apply text-celeste
-                @apply block
+			span
+				font-size: 22px
+				@apply font-normal
+				@apply text-celeste
+				@apply block
 
-        .pin-id
-            @apply flex
+		.pin-id
+			@apply flex
 
-            p
-                width: 50%
+			p
+				width: 50%
 
-            .pin-eval
-                font-size: 14px
-                @apply text-black
+			.pin-eval
+				font-size: 14px
+				@apply text-black
 
-                span.average-rateing
-                    @apply font-semibold
-                    @apply inline-block
-                    font-size: 22px
-                    @apply text-celeste
+				span.average-rateing
+					@apply font-semibold
+					@apply inline-block
+					font-size: 22px
+					@apply text-celeste
 
-                .rating-parent
-                    display: inline-block
-                    overflow: hidden
-                    line-height: 0
-                    position: relative
-                    border-radius: 10px
-                    margin-left: 20px
+				.rating-parent
+					display: inline-block
+					overflow: hidden
+					line-height: 0
+					position: relative
+					border-radius: 10px
+					margin-left: 20px
 
-                    &:before
-                        content: ''
-                        border: 2px solid #6FBBB7
-                        line-height: 0
-                        position: absolute
-                        width: 100%
-                        height: 100%
-                        border-radius: 10px
-                        @apply bg-snow
+					&:before
+						content: ''
+						border: 2px solid #6FBBB7
+						line-height: 0
+						position: absolute
+						width: 100%
+						height: 100%
+						border-radius: 10px
+						@apply bg-snow
 
-                    .rating-child
-                        display: inline-block
-                        overflow-x: hidden
-                        line-height: 0
+					.rating-child
+						display: inline-block
+						overflow-x: hidden
+						line-height: 0
 
-                .dv-star-rating
-                    display: inline-flex !important
-                    line-height: 0
+				.dv-star-rating
+					display: inline-flex !important
+					line-height: 0
 
-                    label
-                        line-height: 0
-                        position: relative
+					label
+						line-height: 0
+						position: relative
 
-                        &:after
-                            content: ''
-                            width: 2px
-                            height: 100%
-                            position: absolute
-                            top: 0
-                            right: 0
-                            @apply bg-snow
+						&:after
+							content: ''
+							width: 2px
+							height: 100%
+							position: absolute
+							top: 0
+							right: 0
+							@apply bg-snow
 
-                        &:last-of-type
-                            &:after
-                                display: none
+						&:last-of-type
+							&:after
+								display: none
 
-                    .rating-icon
-                        line-height: 0
-                        display: inline-block
-                        color: inherit
-                        width: 18px
-                        height: 18px
-                        @apply bg-celeste
+					.rating-icon
+						line-height: 0
+						display: inline-block
+						color: inherit
+						width: 18px
+						height: 18px
+						@apply bg-celeste
 
-        .pin-capacity
-            @apply flex
+		.pin-capacity
+			@apply flex
 
-            p
-                @apply w-1/4
+			p
+				@apply w-1/4
 
-                span
-                    font-size: 36px
-                    @apply text-celeste
-                    @apply block
+				span
+					font-size: 36px
+					@apply text-celeste
+					@apply block
 
-                a > img
-                    @apply rounded-full
-                    margin-top: 5px
-                    padding: 10px
-                    @apply bg-snow
-                    height: 50px
-                    width: 50px
-                    margin-left: 4px
+				a > img
+					@apply rounded-full
+					@apply bg-snow
+					margin-top: 5px
+					padding: 10px
+					height: 50px
+					width: 50px
+					margin-left: 4px
 
-            p:first-child
-                @apply w-1/2
+			p:first-child
+				@apply w-1/2
 
-            p:last-child
-                a > img
-                    padding: 0 13px
-                    margin-left: 14px
+			p:last-child
+				a > img
+					padding: 0 13px
+					margin-left: 14px
 
-        .pin-address, .pin-phone, .pin-web
-            overflow: hidden
-            padding-bottom: 0; 
-            p
-                @apply relative
-                margin-left: 35px
+		.pin-address, .pin-phone, .pin-web
+			overflow: hidden
+			p
+				@apply relative
+				margin-left: 35px
 
-                &:before
-                    @apply absolute
-                    content: ''
-                    background-size: contain
-                    background-repeat: no-repeat
-                    top: 3px
-                    left: -30px
-                    width: 18px
-                    height: 100%
+				&:before
+					@apply absolute
+					content: ''
+					background-size: contain
+					background-repeat: no-repeat
+					top: 3px
+					left: -30px
+					width: 18px
+					height: 100%
 
-            span, a
-                display: block
-                margin-left: 35px
-                width: 280px
-                text-overflow: ellipsis
-                overflow: hidden
+			span, a
+				display: block
+				margin-left: 35px
+				width: 280px
+				text-overflow: ellipsis
+				overflow: hidden
 
-        .pin-address
-            p
-                &:before
-                    background-image: url('../../images/icon_location.svg')
+		.pin-address
+			p
+				&:before
+					background-image: url('../../images/icon_location.svg')
 
-        .pin-phone
-            p
-                &:before
-                    background-image: url('../../images/icon_phone.svg')
+		.pin-phone
+			p
+				&:before
+					background-image: url('../../images/icon_phone.svg')
 
-            span
-                display: block
+			span
+				display: block
 
-        .pin-web
-            p
-                &:before
-                    background-image: url('../../images/icon_link.svg')
+		.pin-web
+			p
+				&:before
+					background-image: url('../../images/icon_link.svg')
 
-        .pin-services > p
-            @apply relative
-            margin-left: 35px
+		.pin-services > p
+			@apply relative
+			margin-left: 35px
 
-            &:before
-                @apply absolute
-                content: ''
-                background-image: url('../../images/icon_servicii.svg')
-                background-size: contain
-                background-repeat: no-repeat
-                top: 0
-                left: -30px
-                width: 18px
-                height: 100%
+			&:before
+				@apply absolute
+				content: ''
+				background-image: url('../../images/icon_servicii.svg')
+				background-size: contain
+				background-repeat: no-repeat
+				top: 0
+				left: -30px
+				width: 18px
+				height: 100%
 
-        .pin-services > ul
-            @apply relative
-            margin-left: 35px
+		.pin-services > ul
+			@apply relative
+			margin-left: 35px
 
-            li:before
-                content: '▶'
-                margin-right: 5px
+			li:before
+				content: '▶'
+				margin-right: 5px
 
-        .pin-services > div
+		.pin-provider
+			padding-top: 45px
+			padding-bottom: 45px
+			@apply border-t-6
+			@apply border-b-6
+			@apply border-leaf
+			@apply bg-snow
+			@apply flex
+			flex-wrap: wrap
+
+			div
+				@apply p-0
+				@apply w-full
+
+				&:nth-child(2) > p
+					vertical-align: text-top
+
+				p:nth-child(odd)
+					font-weight: normal
+					display: inline-block
+					width: 50%
+					text-align: right
+
+				p:nth-child(even)
+					@apply pl-2
+					@apply font-semibold
+					display: inline-block
+					width: 50%
+					text-align: left
+
+				&:nth-child(1) > p,&:nth-child(3) > p,&:nth-child(7) > p
+					padding-bottom: 20px
+
+	footer
+		h3, .pin-help, .pin-update, .pin-eval
+			@apply border-b
+			@apply border-brown
+
+		h3
+			@apply text-white
+			font-size: 22px
+			@apply font-semibold
+
+		.pin-help p:first-child, .pin-update p:first-child, .pin-eval p:first-child
+			font-family: Montserrat
+			@apply font-semibold
+			@apply pb-0
+
+		li:before
+			content: '▶'
+			margin-right: 5px
+
+		.pin-update
+			button
+				@apply mb-6
+
+		.dv-star-rating
+			@apply mb-10
+
+			label
+				padding-right: 9px
+
+				span
+					@apply relative
+					@apply rounded-full
+					border: 4px solid #FFFFFF
+					padding: 0 3px
+					line-height: 19px
+					font-size: 20.5px
+
+				&:first-of-type,
+				&:last-of-type
+					span
+						&:after
+							content: ''
+							bottom: -48px
+							left: -20%
+							@apply absolute
+							@apply text-white
+							text-align: center
+							font-family: 'Koho'
+							font-size: 14px
+
+				&:first-of-type
+					span
+						&:after
+							content: 'Foarte bine'
+				&:last-of-type
+					span
+						&:after
+							content: 'Foarte rău'
+
+.markercluster-map-single
+	@apply w-full
+	@apply max-w-screen
+	@apply m-0
+	height: 40vh
+	position: fixed
+	top: 0
+	right: 0
+	left: 0
+	padding-top: 80px
+	@screen md
+		height: 70vh
+
+.popup-overlay
+	@apply bg-celeste
+	width: 100vw
+	height: 65vh
+	position: fixed
+	top: 35vh
+	left: 0
+	z-index: 0
+	overflow: scroll
+	border-top-left-radius: 0.5rem
+	border-top-right-radius: 0.5rem
+
+	@screen md
+		top: 60vh
+		position: absolute
+		height: auto
+		overflow: unset
+		border-top-left-radius: unset
+		border-top-right-radius: unset
+
+.map-marker-popup-single
+	margin: 0 auto
+	z-index: 9999
+	width: 100vw
+	max-width: 375px
+	position: relative
+	@apply bg-transparent
+	
+	@screen md
+		display: flex
+		flex-wrap: wrap
+		overflow-y: none
+		width: 94vw
+		max-width: 717px
+
+	@screen xl
+		width: 86vw
+		max-width: 1206px
+
+	.close-map-marker-popup
+		@apply bg-snow
+		@apply rounded-full
+		@apply absolute
+		cursor: pointer
+		padding: 20px
+		width: auto
+		top: 20px
+		right: 20px
+		transform: rotate(180deg)
+
+	header,
+	.main-section > div,
+	.main-section h2,
+	.main-section h3,
+	.main-section > p,
+	footer h3,
+	footer p,
+	footer ul,
+	footer .dv-star-rating
+		@apply p-6
+		@screen xl
+			@apply p-12
+
+	header
+		height: 100px
+		padding-top: 21px
+		@apply rounded-t-lg
+		@apply bg-celeste
+		@apply border-b-6
+		@apply border-leaf
+
+		@screen md
+			margin-top: -100px
+			position: absolute
+
+		.popup-logo img
+			height: 55px
+
+		.close-map-marker-popup img
+			top: 12px
+			height: 18px
+			border: 0
+
+	.main-section
+		@apply bg-white
+		width: 100vw
+		max-width: 375px
+		@screen xl
+			flex: 1
+			width: 50%
+			max-width: initial
+
+		h2, .pin-name, .pin-id, .pin-capacity, .pin-web
+			@apply border-b
+			@apply border-snow
+
+		h3
+			font-size: 16px
+			font-weight: normal
+
+		p
+			@apply font-semibold
+			font-family: Montserrat
+			font-size: 14px
+
+			span
+				font-size: 22px
+				@apply font-normal
+				@apply text-celeste
+				@apply block
+
+		.pin-id
+			@apply flex
+
+			p
+				width: 50%
+
+			.pin-eval
+				font-size: 14px
+				@apply text-black
+
+				span.average-rateing
+					@apply font-semibold
+					@apply inline-block
+					font-size: 22px
+					@apply text-celeste
+
+				.rating-parent
+					display: inline-block
+					overflow: hidden
+					line-height: 0
+					position: relative
+					border-radius: 10px
+					margin-left: 20px
+
+					&:before
+						content: ''
+						border: 2px solid #6FBBB7
+						line-height: 0
+						position: absolute
+						width: 100%
+						height: 100%
+						border-radius: 10px
+						@apply bg-snow
+
+					.rating-child
+						display: inline-block
+						overflow-x: hidden
+						line-height: 0
+
+				.dv-star-rating
+					display: inline-flex !important
+					line-height: 0
+
+					label
+						line-height: 0
+						position: relative
+
+						&:after
+							content: ''
+							width: 2px
+							height: 100%
+							position: absolute
+							top: 0
+							right: 0
+							@apply bg-snow
+
+						&:last-of-type
+							&:after
+								display: none
+
+					.rating-icon
+						line-height: 0
+						display: inline-block
+						color: inherit
+						width: 18px
+						height: 18px
+						@apply bg-celeste
+
+		.pin-capacity
+			@apply flex
+
+			p
+				@apply w-1/4
+
+				span
+					font-size: 36px
+					@apply text-celeste
+					@apply block
+
+				a > img
+					@apply rounded-full
+					margin-top: 5px
+					padding: 10px
+					@apply bg-snow
+					height: 50px
+					width: 50px
+					margin-left: 4px
+
+			p:first-child
+				@apply w-1/2
+
+			p:last-child
+				a > img
+					padding: 0 13px
+					margin-left: 14px
+
+		.pin-address, .pin-phone, .pin-web
+			overflow: hidden
+			p
+				@apply relative
+				margin-left: 35px
+
+				&:before
+					@apply absolute
+					content: ''
+					background-size: contain
+					background-repeat: no-repeat
+					top: 3px
+					left: -30px
+					width: 18px
+					height: 100%
+
+			span, a
+				display: block
+				margin-left: 35px
+				width: 280px
+				text-overflow: ellipsis
+				overflow: hidden
+
+		.pin-address
+			p
+				&:before
+					background-image: url('../../images/icon_location.svg')
+
+		.pin-phone
+			p
+				&:before
+					background-image: url('../../images/icon_phone.svg')
+
+			span
+				display: block
+
+		.pin-web
+			p
+				&:before
+					background-image: url('../../images/icon_link.svg')
+
+		.pin-services > p
+			@apply relative
+			margin-left: 35px
+
+			&:before
+				@apply absolute
+				content: ''
+				background-image: url('../../images/icon_servicii.svg')
+				background-size: contain
+				background-repeat: no-repeat
+				top: 0
+				left: -30px
+				width: 18px
+				height: 100%
+
+		.pin-services > ul
+			@apply relative
+			margin-left: 35px
+
+			li:before
+				content: '▶'
+				margin-right: 5px
+
+		.pin-services > div
             display: block
             margin-top: 20px
             div
                 width: 50%
                 display: inline-block
 
-        .pin-provider
-            padding-top: 45px
-            padding-bottom: 45px
-            @apply border-t-6
-            @apply border-b-6
-            @apply border-leaf
-            @apply bg-snow
-            @apply flex
-            flex-wrap: wrap
+	.pin-provider
+		padding-top: 45px
+		padding-bottom: 45px
+		@apply bg-snow
+		@screen md
+			@apply flex
+			flex-wrap: wrap
+			flex: 1
+			width: 50%
 
-            div
-                @apply p-0
-                @apply w-full
+		div
+			@apply p-0
+			@apply w-full
+			@screen md
+				@apply px-6
+			@screen xl
+				@apply px-12
 
-                &:nth-child(2) > p,&:nth-child(3) > p
-                    vertical-align: text-top
-                    display: table-cell
+			&:nth-child(2) > p,&:nth-child(3) > p
+				vertical-align: text-top
 
-                p:nth-child(odd)
-                    font-weight: normal
-                    display: inline-block
-                    width: 50%
-                    text-align: right
+			p:nth-child(odd)
+				font-weight: normal
+				display: inline-block
+				width: 50%
+				text-align: right
 
-                p:nth-child(even)
-                    @apply pl-2
-                    @apply font-semibold
-                    display: inline-block
-                    width: 50%
-                    text-align: left
+			p:nth-child(even)
+				@apply pl-2
+				@apply font-semibold
+				display: inline-block
+				width: 50%
+				text-align: left
 
-                &:nth-child(1) > p,&:nth-child(3) > p,&:nth-child(7) > p
-                    padding-bottom: 20px
+			&:nth-child(1) > p,&:nth-child(3) > p,&:nth-child(7) > p
+				padding-bottom: 20px
 
-    footer
-        h3, .pin-help, .pin-update, .pin-eval
-            @apply border-b
-            @apply border-brown
+	footer
+		width: 100%
+		@screen xl
+			display: flex
+			flex-wrap: wrap
 
-        h3
-            @apply text-white
-            font-size: 22px
-            @apply font-semibold
+		h3, .pin-help, .pin-update, .pin-eval
+			@apply border-b
+			@apply border-brown
+			@screen xl
+				@apply border-none
 
-        .pin-help p:first-child, .pin-update p:first-child, .pin-eval p:first-child
-            font-family: Montserrat
-            @apply font-semibold
-            @apply pb-0
+		h3
+			@apply text-white
+			font-size: 22px
+			@apply font-semibold
 
-        li:before
-            content: '▶'
-            margin-right: 5px
+		.pin-help p:first-child, .pin-update p:first-child, .pin-eval p:first-child
+			font-family: Montserrat
+			@apply font-semibold
+			@apply pb-0
 
-        .pin-update
-            button
-                @apply mb-6
+		div:first-child,.pin-help,.pin-update,.pin-eval
+			@screen xl
+				width: 50%
+				display: inline-block
+				align-self: stretch
+				@apply border-b
+				@apply border-brown
 
-        .dv-star-rating
-            @apply mb-10
+		li:before
+			content: '▶'
+			margin-right: 5px
 
-            label
-                padding-right: 9px
+		.pin-update
+			button
+				@apply mb-6
 
-                span
-                    @apply relative
-                    @apply rounded-full
-                    border: 4px solid #FFFFFF
-                    padding: 0 3px
-                    line-height: 19px
-                    font-size: 20.5px
+		.dv-star-rating
+			@apply mb-10
 
-                &:first-of-type,
-                &:last-of-type
-                    span
-                        &:after
-                            content: ''
-                            bottom: -48px
-                            left: -20%
-                            @apply absolute
-                            @apply text-white
-                            text-align: center
-                            font-family: 'Koho'
-                            font-size: 14px
+			label
+				padding-right: 9px
 
-                &:first-of-type
-                    span
-                        &:after
-                            content: 'Foarte bine'
-                &:last-of-type
-                    span
-                        &:after
-                            content: 'Foarte rău'
+				span
+					@apply relative
+					@apply rounded-full
+					border: 4px solid #FFFFFF
+					padding: 0 3px
+					line-height: 19px
+					font-size: 20.5px
 
-    section
-        width: 100%
+				&:first-of-type,
+				&:last-of-type
+					span
+						&:after
+							content: ''
+							bottom: -48px
+							left: -20%
+							@apply absolute
+							@apply text-white
+							text-align: center
+							font-family: 'Koho'
+							font-size: 14px
+
+				&:first-of-type
+					span
+						&:after
+							content: 'Foarte bine'
+				&:last-of-type
+					span
+						&:after
+							content: 'Foarte rău'
