@@ -206,9 +206,9 @@
 
 				a > img
 					@apply rounded-full
+					@apply bg-snow
 					margin-top: 5px
 					padding: 10px
-					@apply bg-snow
 					height: 50px
 					width: 50px
 					margin-left: 4px
@@ -381,25 +381,32 @@
 	@apply w-full
 	@apply max-w-screen
 	@apply m-0
-	height: 60vh
+	height: 40vh
 	position: fixed
 	top: 0
 	right: 0
 	left: 0
 	padding-top: 80px
 	@screen md
-		height: 71vh
+		height: 70vh
 
 .popup-overlay
-	z-index: 0
 	@apply bg-celeste
 	width: 100vw
-	position: absolute
-	left: 0 
-	top: 70vh
+	height: 100%
+	position: fixed
+	top: 35vh
+	left: 0
+	z-index: 0
+	overflow: scroll
+	border-top-left-radius: 0.5rem
+	border-top-right-radius: 0.5rem
+
 	@screen md
-
-
+		top: 60vh
+		position: absolute
+		height: auto
+		overflow: unset
 
 .map-marker-popup-single
 	margin: 0 auto
@@ -415,6 +422,7 @@
 		overflow-y: none
 		width: 94vw
 		max-width: 717px
+
 	@screen xl
 		width: 86vw
 		max-width: 1206px
@@ -444,13 +452,15 @@
 			@apply p-12
 
 	header
-		padding-top: 21px
 		height: 100px
+		padding-top: 21px
 		@apply rounded-t-lg
 		@apply bg-celeste
 		@apply border-b-6
 		@apply border-leaf
-		margin-top: -100px
+
+		@screen md
+			margin-top: -100px
 
 		.popup-logo img
 			height: 55px

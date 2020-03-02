@@ -10,6 +10,7 @@ import iconClose from '../../assets/images/icon_arrowg.svg';
 import Leaflet, { LatLngTuple } from 'leaflet';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { NotificationManager } from 'react-notifications';
+import { useWindowSize } from '../../hooks/useWindowSize';
 
 function Provider(props: any) {
   const ratingMutation = gql`
@@ -61,7 +62,7 @@ function Provider(props: any) {
       }
     }
   `;
-
+  const windowSize = useWindowSize();
   const [rating, setRating] = useState<number>(1);
   const provider = props.id;
   const { loading, error, data } = useQuery(providersQuery, {
@@ -77,12 +78,18 @@ function Provider(props: any) {
     setRating(value);
     addRating({ variables: { provider: props.id, rating: value * 10 } });
   };
-
+  // @ts-ignore
+  const zoomControl: boolean = windowSize.width >= 768;
   const position: LatLngTuple = providers.coordinates;
 
   return (
     <>
-      <Map center={position} zoom={17} scrollWheelZoom={false} className="markercluster-map-single markercluster-map">
+      <Map
+        center={position}
+        zoom={17}
+        scrollWheelZoom={false}
+        zoomControl={zoomControl}
+        className="markercluster-map-single markercluster-map">
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
