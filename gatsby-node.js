@@ -1,8 +1,21 @@
 // require('dotenv').config({
 //   path: `.env.${process.env.NODE_ENV}`,
 // });
-// const path = require(`path`);
-// const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
+
+const path = require(`path`);
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
+
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions;
+  // Only update the `/harta` page.
+  if (page.path.match(/^\/harta/)) {
+    // page.matchPath is a special key that's used for matching pages
+    // with corresponding routes only on the client.
+    page.matchPath = '/harta/*';
+    // Update the page.
+    createPage(page);
+  }
+};
 
 // exports.createPages = ({ graphql, actions }) => {
 //   const { createPage } = actions;
@@ -31,12 +44,12 @@
 //     if (result.errors) {
 //       throw result.errors;
 //     }
-
+//
 //     // Create blog post pages.
 //     result.data.hasura.blogs.forEach((blog, index) => {
 //       const previous = index === result.data.hasura.blogs.length - 1 ? null : result.data.hasura.blogs[index + 1];
 //       const next = index === 0 ? null : result.data.hasura.blogs[index - 1];
-
+//
 //       createPage({
 //         // Path for this page — required
 //         path: `/noutati/${blog.slug}`,
@@ -48,7 +61,7 @@
 //         },
 //       });
 //     });
-
+//
 //     // Create  pages.
 //     result.data.hasura.pages.forEach(page => {
 //       createPage({
@@ -62,32 +75,32 @@
 //     });
 //   });
 // };
-
-// download images from hasura
+//
+// // download images from hasura
 // exports.createResolvers = ({ actions, cache, createNodeId, createResolvers, store, reporter }) => {
 //   const { createNode } = actions;
 //   const imageUrlFieldName = 'url'; //graphCMS stores images there
 //   const schemaName = process.env.GATSBY_HASURA_GRAPHQL_TYPE_NAME;
-
+//
 //   const state = store.getState();
 //   const schema = state.schemaCustomization.thirdPartySchemas.filter(s => s._typeMap[schemaName])[0];
-
+//
 //   if (!schema) {
 //     throw new Error(`SCHEMA '${schemaName} NOT FOUND'`);
 //   } else {
 //     console.log(`Found schema '${schemaName}', traversing for image fields with name '${imageUrlFieldName}'`);
 //   }
-
+//
 //   const typeMap = schema._typeMap;
 //   const resolvers = {};
-
+//
 //   for (const typeName in typeMap) {
 //     const typeEntry = typeMap[typeName];
 //     const typeFields = (typeEntry && typeEntry.getFields && typeEntry.getFields()) || {};
 //     const typeResolver = {};
 //     for (const fieldName in typeFields) {
 //       const field = typeFields[fieldName];
-
+//
 //       if (fieldName === imageUrlFieldName && typeFields.mimeType) {
 //         const x = Object.keys(typeFields);
 //         typeResolver[`${fieldName}Sharp`] = {
@@ -113,7 +126,7 @@
 //       resolvers[typeName] = typeResolver;
 //     }
 //   }
-
+//
 //   if (Object.keys(resolvers).length) {
 //     createResolvers(resolvers);
 //   }

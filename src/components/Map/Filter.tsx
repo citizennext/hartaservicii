@@ -15,7 +15,7 @@ type FilterObject = {
   service?: string | null;
   specialization?: string | null;
   administrator?: boolean | null;
-}
+};
 
 type Props = {
   filterClass?: string;
@@ -34,20 +34,20 @@ const useServices = () => {
           categories: categories {
             name
           }
-          districts: suppliers(distinct_on: district, where: {district: {_is_null: false}}) {
+          districts: suppliers(distinct_on: district, where: { district: { _is_null: false } }) {
             district
           }
         }
       }
     `
-  )
-  return hasura
+  );
+  return hasura;
 };
 
 const SERVICES = gql`
   query MyQuery($selectedCategory: String) {
-    services: services(where:{ category: { name: {_eq: $selectedCategory} } }) {
-      name 
+    services: services(where: { category: { name: { _eq: $selectedCategory } } }) {
+      name
     }
   }
 `;
@@ -66,28 +66,28 @@ const Filter: React.FC<Props> = props => {
 
   const query = useServices();
 
-  const districts = query.districts.map((item: {[name: string]: string}) => {
-    return { value: item.district, label: item.district}
-  })
-  districts.unshift({value: null, label: "Toate judetele"});
-
-  const optionsService = query.categories.map((item: {[name: string]: string}) => {
-    return { value: item.name, label: item.name }
+  const districts = query.districts.map((item: { [name: string]: string }) => {
+    return { value: item.district, label: item.district };
   });
-  optionsService.unshift({value: null, label: "Toate categoriile de servicii"});
+  districts.unshift({ value: null, label: 'Toate judetele' });
+
+  const optionsService = query.categories.map((item: { [name: string]: string }) => {
+    return { value: item.name, label: item.name };
+  });
+  optionsService.unshift({ value: null, label: 'Toate categoriile de servicii' });
 
   const { loading, error, data } = useQuery(SERVICES, {
     variables: { selectedCategory: selectedCategory },
   });
-  if (loading) return(<p>Loading...</p>);
-  if (error) return(<p>Error! ${error}</p>);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error! ${error}</p>;
 
-  const services = data.services
-  
-  const optionsSpecialization = services.map((item: {[name: string]: string}) => {
-    return { value: item.name, label: item.name}
+  const services = data.services;
+
+  const optionsSpecialization = services.map((item: { [name: string]: string }) => {
+    return { value: item.name, label: item.name };
   });
-  optionsSpecialization.unshift({ value: null, label: "Toate specializarile" });
+  optionsSpecialization.unshift({ value: null, label: 'Toate specializarile' });
 
   function handleChangeDistrict(newValue: any) {
     props.onFilterChange({ district: newValue.value });
@@ -98,21 +98,20 @@ const Filter: React.FC<Props> = props => {
   }
 
   function handleChangeService(newValue: any) {
-    if (newValue.value == null){
-      props.onFilterChange({ service: newValue.value, specialization: null })
+    if (newValue.value == null) {
+      props.onFilterChange({ service: newValue.value, specialization: null });
+    } else {
+      props.onFilterChange({ service: newValue.value });
     }
-    else {
-      props.onFilterChange({ service: newValue.value })
-    }
-    setSelectedCategory(newValue.value)
+    setSelectedCategory(newValue.value);
   }
 
   function handleChangeSpecialization(newValue: any) {
-    props.onFilterChange({specialization: newValue.value });
+    props.onFilterChange({ specialization: newValue.value });
   }
 
   function handleChangeAdministrator(newValue: any) {
-    props.onFilterChange({administrator: newValue.value})
+    props.onFilterChange({ administrator: newValue.value });
   }
 
   return (
@@ -130,11 +129,29 @@ const Filter: React.FC<Props> = props => {
             closeButton={<FilterMenu className="close" size={20} />}>
             <div className="select-options">
               <div className="pin-number">{props.totalResults}</div>
-              <Select value={districts.filter(({value}: any) => value === filters.district)} options={districts} onChange={handleChangeDistrict} />
-              <Select value={options.age.filter(({value}) => value === filters.category)} options={options.age} onChange={handleChangeAge} />
-              <Select value={optionsService.filter(({value}: any) => value === filters.service)} options={optionsService} onChange={handleChangeService}/>
-              <Select isDisabled={isDisabled} value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>)
-              <Select options={options.administrator} onChange={handleChangeAdministrator}/>
+              <Select
+                value={districts.filter(({ value }: any) => value === filters.district)}
+                options={districts}
+                onChange={handleChangeDistrict}
+              />
+              <Select
+                value={options.age.filter(({ value }) => value === filters.category)}
+                options={options.age}
+                onChange={handleChangeAge}
+              />
+              <Select
+                value={optionsService.filter(({ value }: any) => value === filters.service)}
+                options={optionsService}
+                onChange={handleChangeService}
+              />
+              <Select
+                isDisabled={isDisabled}
+                value={optionsSpecialization.filter(({ value }: any) => value === filters.specialization)}
+                options={optionsSpecialization}
+                onChange={handleChangeSpecialization}
+              />
+              )
+              <Select options={options.administrator} onChange={handleChangeAdministrator} />
             </div>
           </Drawer>
         </div>
@@ -142,26 +159,48 @@ const Filter: React.FC<Props> = props => {
         <div className="select-options">
           <div className="select-container">
             <label>Judet</label>
-            <Select value={districts.filter(({value}: any) => value === filters.district)} options={districts} onChange={handleChangeDistrict} />
+            <Select
+              value={districts.filter(({ value }: any) => value === filters.district)}
+              options={districts}
+              onChange={handleChangeDistrict}
+            />
           </div>
           <div className="select-container">
             <label>Beneficiari</label>
-            <Select value={options.age.filter(({value}) => value === filters.category)} options={options.age} onChange={handleChangeAge} />
+            <Select
+              value={options.age.filter(({ value }) => value === filters.category)}
+              options={options.age}
+              onChange={handleChangeAge}
+            />
           </div>
           <div className="select-container">
             <label>Tip servicii sociale</label>
-            <Select value={optionsService.filter(({value}: any) => value === filters.service)} options={optionsService} onChange={handleChangeService}/>
+            <Select
+              value={optionsService.filter(({ value }: any) => value === filters.service)}
+              options={optionsService}
+              onChange={handleChangeService}
+            />
           </div>
           <div className="select-container">
             <label>Tip specializare</label>
-            <Select isDisabled={isDisabled} value={optionsSpecialization.filter(({value}: any) => value === filters.specialization)} options={optionsSpecialization} onChange={handleChangeSpecialization}/>
+            <Select
+              isDisabled={isDisabled}
+              value={optionsSpecialization.filter(({ value }: any) => value === filters.specialization)}
+              options={optionsSpecialization}
+              onChange={handleChangeSpecialization}
+            />
           </div>
           <div className="select-container">
             <label>Administrator</label>
-            <Select value={options.administrator.filter(({value}) => value === filters.administrator)} options={options.administrator} onChange={handleChangeAdministrator}/>
+            <Select
+              value={options.administrator.filter(({ value }) => value === filters.administrator)}
+              options={options.administrator}
+              onChange={handleChangeAdministrator}
+            />
           </div>
           <div className="pin-number select-container">
-            <label>Total centre</label>{props.totalResults}
+            <label>Total centre</label>
+            {props.totalResults}
           </div>
         </div>
       )}

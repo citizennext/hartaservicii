@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Leaflet, { LatLngTuple } from 'leaflet';
 import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import PopUps from './PopUps';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import { navigate } from '@reach/router';
+import getSlug from 'speakingurl';
 import Filter from './Filter';
+import gql from 'graphql-tag';
+import queryString from 'query-string';
+import { Query } from 'react-apollo';
 import FilterOptions from '../../data/filter-options.json';
 import ROCoordinates from '../../data/ro-coordinates.json';
-import { navigate } from 'gatsby';
-import queryString from 'query-string';
 
 type FilterObject = {
   district?: string | null;
@@ -17,7 +17,7 @@ type FilterObject = {
   service?: string | null;
   specialization?: string | null;
   administrator?: boolean | null;
-}
+};
 
 type State = {
   lat: number;
@@ -36,6 +36,7 @@ type Provider = {
   coordinates: LatLngTuple;
   address: string;
   name: string;
+  slug: string;
   location: string;
   capacity: number;
   district: string;
@@ -47,34 +48,27 @@ type Provider = {
 };
 
 const PROVIDERS = gql`
-  query Providers($district: String, $service: String, $supplierPrivate: Boolean, $category: String, $specialization: String){
-      providers( 
-          where: {
-            _and: [
-                { service: { category: { name: { _like: $category } } } }
-                { service: { category: { name: { _like: $service } } } }
-                { service: { name: { _like: $specialization } } }
-                { supplier: { supplier_type: { private: { _eq: $supplierPrivate } } } }
-                { district: { _like: $district} }
-            ]
-          } ) 
-          {
-            id
-            coordinates
-            address
-            name
-            location
-            capacity
-            district
-            email
-            license_by
-            license_date_5years
-            license_date_provisional
-            license_no
-          }
-  }`;
+  query Providers($district: String, $service: String, $supplierPrivate: Boolean, $category: String, $specialization: String) {
+    providers(
+      where: {
+        _and: [
+          { service: { category: { name: { _like: $category } } } }
+          { service: { category: { name: { _like: $service } } } }
+          { service: { name: { _like: $specialization } } }
+          { supplier: { supplier_type: { private: { _eq: $supplierPrivate } } } }
+          { district: { _like: $district } }
+        ]
+      }
+    ) {
+      id
+      coordinates
+      address
+      name
+    }
+  }
+`;
 
-export default class Providers extends Component<{}, State> {
+export default class Harta extends Component<any, State> {
   state = {
     lat: 45.947808,
     lng: 25.091419,
@@ -87,14 +81,51 @@ export default class Providers extends Component<{}, State> {
     totalResults: 0,
   };
 
-  componentDidMount () {
-    const queryValues = location.search ? queryString.parse(location.search, {parseBooleans: true}) : { category: null, service: null, specialization: null, supplierPrivate: null}
+  componentDidMount() {
+    const queryValues = location.search
+      ? queryString.parse(location.search, { parseBooleans: true })
+      : { category: null, service: null, specialization: null, supplierPrivate: null };
     this.zoomOnSelectedDistrict(queryValues.district);
     this.setState({ filters: { ...this.state.filters, ...queryValues } });
   }
 
+  zoomOnSelectedDistrict = (districtValue: any) => {
+    if (districtValue) {
+      const district = ROCoordinates.filter(({ admin }) => admin === districtValue)[0];
+      if (district) {
+        this.setState({ lat: parseFloat(district.lat) });
+        this.setState({ lng: parseFloat(district.lng) });
+        this.setState({ zoom: 8 });
+      }
+    } else {
+      this.setState({ lat: 45.947808 });
+      this.setState({ lng: 25.091419 });
+      this.setState({ zoom: 7 });
+    }
+  };
+
+  handleFilterChange = (filterProperty: any) => {
+    const filtersObject = { ...this.state.filters, ...filterProperty };
+    this.setState({ filters: filtersObject });
+    const queryParams: any = {};
+    for (const key in filtersObject) {
+      if (![null, undefined].includes(filtersObject[key])) {
+        queryParams[key] = filtersObject[key];
+      }
+    }
+
+    this.zoomOnSelectedDistrict(queryParams.district);
+
+    if (Object.keys(queryParams).length !== 0) {
+      navigate(`/harta?${new URLSearchParams(queryParams).toString()}`);
+    } else {
+      navigate(`/harta`);
+    }
+  };
+
   createMarkerClusterCustomIcon = (cluster: any) => {
     const size = cluster.getChildCount();
+
     return Leaflet.divIcon({
       html: `<div >
           <span class="marker-cluster-label">${size}</span>
@@ -121,49 +152,9 @@ export default class Providers extends Component<{}, State> {
   };
 
   handleClick = (item: Provider) => {
-    return () => {
-      this.setState({ selectedItem: item, active: true });
-    };
-  };
-
-  handleClose = () => {
-    this.setState({ active: false });
-  };
-
-  zoomOnSelectedDistrict = (districtValue: any) => {
-    if (districtValue) {
-      const district = ROCoordinates.filter((({admin}) => admin === districtValue))[0];
-      if (district) {
-        this.setState({lat: parseFloat(district.lat)});
-        this.setState({lng: parseFloat(district.lng)});
-        this.setState({zoom: 8});
-      }
-    }
-    else {
-      this.setState({lat: 45.947808});
-      this.setState({lng: 25.091419});
-      this.setState({zoom: 7});
-    }
-  }
-
-  handleFilterChange = (filterProperty: any) => {
-    const filtersObject =  { ...this.state.filters, ...filterProperty }
-    this.setState({ filters: filtersObject});
-    const queryParams: any = {};
-    for (const key in filtersObject) {
-      if (![null, undefined].includes(filtersObject[key])) {
-        queryParams[key]= filtersObject[key];
-      }
-    }
-
-    this.zoomOnSelectedDistrict(queryParams.district);
-
-    if (Object.keys(queryParams).length !== 0) {
-      navigate(`/harta?${new URLSearchParams(queryParams).toString()}`);
-    }
-    else {
-      navigate(`/harta`);
-    }
+    navigate(`/harta/serviciu/${item.slug}`, {
+      state: { oldLocation: JSON.parse(JSON.stringify(this.props.location)) },
+    });
   };
 
   render() {
@@ -175,13 +166,9 @@ export default class Providers extends Component<{}, State> {
       service: filters.service ? `%${filters.service}%` : null,
       specialization: filters.specialization ? `%${filters.specialization}%` : null,
       supplierPrivate: filters.administrator,
-    }
-
+    };
     return (
-      <div>
-        {this.state.selectedItem && this.state.active && (
-          <PopUps item={this.state.selectedItem} onClose={this.handleClose} />
-        )}
+      <>
         <Map
           center={position}
           zoom={this.state.zoom}
@@ -193,26 +180,36 @@ export default class Providers extends Component<{}, State> {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
-            <Query query={PROVIDERS} variables={ queryVariables } onCompleted={(provider: {[key: string]: []; }) => {this.setState({totalResults: provider.providers.length})}}>      
-            {({ loading, error, data }: any) => {
-              if (loading) return <div>Fetching</div>
-              if (error) return <div>Error</div>
-        
-              const providers: Provider[] = data.providers
-              return (
-                <div>
-                  {providers.map((item, index) => (
-                    <Marker
-                      position={item.coordinates}
-                      key={`marker-${item.id}-${index}`}
-                      icon={this.createMarkerCustomIcon()}
-                      onClick={this.handleClick(item)}>
-                      <Tooltip>{item.name}</Tooltip>
-                    </Marker>
-                  ))}
-                </div>
-              )
-            }}
+            <Query
+              query={PROVIDERS}
+              variables={queryVariables}
+              onCompleted={(provider: { [key: string]: [] }) => {
+                this.setState({ totalResults: provider.providers.length });
+              }}>
+              {({ loading, error, data }: any) => {
+                if (loading) return <div>Fetching</div>;
+                if (error) return <div>Error</div>;
+
+                const providers: Provider[] = data.providers.map((item: Provider) => {
+                  return {
+                    ...item,
+                    slug: `${getSlug(item.name)}/${item.id}`,
+                  };
+                });
+                return (
+                  <>
+                    {providers.map((item, index) => (
+                      <Marker
+                        position={item.coordinates}
+                        key={`marker-${item.id}-${index}`}
+                        icon={this.createMarkerCustomIcon()}
+                        onClick={() => this.handleClick(item)}>
+                        <Tooltip>{item.name}</Tooltip>
+                      </Marker>
+                    ))}
+                  </>
+                );
+              }}
             </Query>
           </MarkerClusterGroup>
         </Map>
@@ -224,7 +221,7 @@ export default class Providers extends Component<{}, State> {
           totalResults={this.state.totalResults}
           onFilterChange={this.handleFilterChange}
         />
-      </div>
+      </>
     );
   }
 }
