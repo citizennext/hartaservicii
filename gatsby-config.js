@@ -106,7 +106,7 @@ module.exports = {
         typeName: process.env.GATSBY_HASURA_GRAPHQL_TYPE_NAME,
         fieldName: process.env.GATSBY_HASURA_GRAPHQL_FIELD_NAME,
         url: process.env.GATSBY_HASURA_GRAPHQL_URL,
-        refetchInterval: 3600,
+        refetchInterval: 6000,
         headers: {
           'content-type': `application/json`,
         },

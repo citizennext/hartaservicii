@@ -3,7 +3,8 @@ import Leaflet, { LatLngTuple } from 'leaflet';
 import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { graphql, StaticQuery } from 'gatsby';
-import PopUps from './PopUps';
+import { navigate } from '@reach/router';
+import getSlug from 'speakingurl';
 
 type State = {
   lat: number;
@@ -11,26 +12,18 @@ type State = {
   zoom: number;
   scrollWheelZoom: boolean;
   pane: string;
-  selectedItem?: Provider;
+  selectedItem?: string;
   active: boolean;
 };
 
 type Provider = {
   id: string;
   coordinates: LatLngTuple;
-  address: string;
   name: string;
-  location: string;
-  capacity: number;
-  district: string;
-  email: string;
-  license_by: string;
-  license_date_5years: string;
-  license_date_provisional: string;
-  license_no: string;
+  slug: string;
 };
 
-export default class Providers extends Component<{}, State> {
+export default class Harta extends Component<any, State> {
   state = {
     lat: 45.947808,
     lng: 25.091419,
@@ -43,6 +36,7 @@ export default class Providers extends Component<{}, State> {
 
   createMarkerClusterCustomIcon = (cluster: any) => {
     const size = cluster.getChildCount();
+
     return Leaflet.divIcon({
       html: `<div >
           <span class="marker-cluster-label">${size}</span>
@@ -69,13 +63,9 @@ export default class Providers extends Component<{}, State> {
   };
 
   handleClick = (item: Provider) => {
-    return () => {
-      this.setState({ selectedItem: item, active: true });
-    };
-  };
-
-  handleClose = () => {
-    this.setState({ active: false });
+    navigate(`/harta/serviciu/${item.slug}`, {
+      state: { oldLocation: JSON.parse(JSON.stringify(this.props.location)) },
+    });
   };
 
   render() {
@@ -86,32 +76,24 @@ export default class Providers extends Component<{}, State> {
           providers {
             id
             coordinates
-            address
             name
-            location
-            capacity
-            district
-            email
-            license_by
-            license_date_5years
-            license_date_provisional
-            license_no
           }
         }
       }
     `;
-
     return (
       <StaticQuery
         query={query}
         render={data => {
-          const providers = data.hasura.providers as Provider[];
+          const providers: Provider[] = data.hasura.providers.map((item: Provider) => {
+            return {
+              ...item,
+              slug: `${getSlug(item.name)}/${item.id}`,
+            };
+          });
           if (typeof window !== 'undefined') {
             return (
               <div>
-                {this.state.selectedItem && this.state.active && (
-                  <PopUps item={this.state.selectedItem} onClose={this.handleClose} />
-                )}
                 <Map
                   center={position}
                   zoom={this.state.zoom}
@@ -123,12 +105,12 @@ export default class Providers extends Component<{}, State> {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
                   <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
-                    {Object.values(providers).map((item, index) => (
+                    {providers.map(item => (
                       <Marker
                         position={item.coordinates}
-                        key={`marker-${item.id}-${index}`}
+                        key={`marker-${item.id}`}
                         icon={this.createMarkerCustomIcon()}
-                        onClick={this.handleClick(item)}>
+                        onClick={() => this.handleClick(item)}>
                         <Tooltip>{item.name}</Tooltip>
                       </Marker>
                     ))}
