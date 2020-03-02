@@ -28,10 +28,9 @@ export function InstaSearchPage(props: any) {
           />
         </div>
         <div className="search-result-wrapper">
-          <Menu attribute="type" />
+          <Menu attribute="type" defaultRefinement="Servicii" />
           <div className="left-panel">
             <Hits hitComponent={Hit} />
-            <Pagination />
             <Configure hitsPerPage={10} />
           </div>
           <div className="right-panel">
@@ -46,6 +45,7 @@ export function InstaSearchPage(props: any) {
               </Panel>
             </div>
           </div>
+          <Pagination />
         </div>
       </InstantSearch>
     </div>

@@ -135,39 +135,38 @@
 
     .search-result-wrapper
         .ais-Menu-list
-            display: flex
             @apply bg-snow
+            display: flex
             margin: 0 -1.3em 45px
             max-width: 100vw
-            overflow: scroll
+            height: 76px
+            overflow-x: scroll
+            overflow-y: unset
             position: relative
-            @screen md
 
         .ais-Menu-item
             min-width: 270px
             margin-left: 26px
             z-index: 1
             cursor: pointer
+            position: relative
 
             .ais-Menu-link
                 display: flex
                 flex-direction: row-reverse
                 text-decoration: none
+                position: relative
 
-                input
-                    display: none
-
-            &:after
-                content: ''
+            &.ais-Menu-item--selected:before
                 @apply bg-transparent
-                height: 40px
-                margin-top: -20px
-                z-index: 0
-
-            &.ais-Menu-item--selected:after
                 @apply bg-white
+                content: ''
+                width: 100%
+                height: 60px
                 display: block
-                z-index: 1
+                position: absolute
+                z-index: 0
+                bottom: 0
 
             .ais-Menu-count
                 @apply bg-leaf
@@ -349,40 +348,6 @@
                 height: 40px
                 width: 50px
 
-        .ais-Pagination
-            clear: left
-            display: inline-block
-            margin: 50px auto
-            width: 366px
-            @screen md
-                margin: 50px 0
-                margin-left: 50vw
-                transform: translateX(-50%)
-
-            &:before
-                content: 'Pagini cu rezultate:'
-
-            ul
-                li
-                    float: left
-                    padding: 10px
-                    margin: 0 auto
-                    line-height: 1
-
-                    .ais-Pagination-link
-                        font-family: 'Montserrat'
-                        text-decoration: none
-                        @apply font-semibold
-
-                    .ais-Pagination-link--selected
-                        @apply text-celeste
-
-                    &:first-of-type
-                        margin-left: 0
-
-                    &:last-of-type
-                        margin-right: 0
-
     .right-panel
         @apply hidden
         
@@ -422,32 +387,117 @@
                 display: inline-block
                 margin-bottom: 20px
 
-    .react-autosuggest__container
-        .react-autosuggest__input
+    .ais-Pagination
+        clear: left
+        display: inline-block
+        width: 100%
+        height: 80px
+        text-align: center
+        position: relative
+
+        @screen md
+            margin: 50px 0
+
+        &:before
+            content: 'Pagini cu rezultate:'
+            display: block
+            width: 100%
+
+        ul
             margin: 0
+            position: absolute
+            top: 30px
 
-            &.react-autosuggest__input--focused,
-            &.react-autosuggest__input--open
-                border-radius: 0.25rem 0.25rem 0 0
+            @screen sm
+                top: 50px
+                left: 50%
+                transform: translateX(-50%)
 
-        .react-autosuggest__suggestions-container
-            display: none
-            border: 1px solid yellowgreen
-            border-top: unset
-            padding: 10px
-
-            &.react-autosuggest__suggestions-container--open
-                display: block
-
-        .react-autosuggest__section-title
-            font-weight: bold
-            text-transform: uppercase
-            border-bottom: 1px solid dimgrey
-
-        ul.react-autosuggest__suggestions-list
             li
-                border-bottom: 1px solid lightgrey
+                float: left
+                padding: 0 10px
+                margin: 0 auto
+                line-height: 1
 
-        .react-autosuggest__suggestion
-            &.react-autosuggest__suggestion--highlighted
-                background-color: lightgreen
+                .ais-Pagination-link
+                    font-family: 'Montserrat'
+                    text-decoration: none
+                    height: 50px
+                    line-height: 50px
+                    @apply font-semibold
+
+                .ais-Pagination-link--selected
+                    @apply text-celeste
+
+                &:first-of-type
+                    margin-left: 0
+
+                &:last-of-type
+                    margin-right: 0
+
+            .ais-Pagination-item--previousPage
+                margin: 10px 0 0 -20px
+
+                @screen sm
+                    margin: 0
+
+                a,
+                span
+                    transform: rotate(180deg)
+                    margin: 0
+
+                    @screen sm
+                        margin: 0 100px 0 0
+
+
+            .ais-Pagination-item--nextPage
+                margin: 10px -20px 0 0
+
+                @screen sm
+                    margin: 0
+
+                a,
+                span
+                    margin: 0
+
+                    @screen sm
+                        margin: 0 0 0 100px
+
+            .ais-Pagination-item--previousPage,
+            .ais-Pagination-item--nextPage
+                padding: 0
+
+                a,
+                span
+                    @apply bg-snow
+                    display: block
+                    width: 30px
+                    height: 30px
+                    border-radius: 25px
+                    text-indent: 100%
+                    overflow: hidden
+                    background-image: url('../../images/icon_arrow.svg')
+                    background-repeat: no-repeat
+                    background-position: center
+                    background-size: 60%
+
+                    @screen sm
+                        width: 50px
+                        height: 50px
+
+                    &:hover
+                        @apply bg-celeste
+                        background-image: url('../../images/icon_arroww.svg')
+
+
+            .ais-Pagination-item--disabled
+                opacity: .5
+
+            .ais-Pagination-item--firstPage,
+            .ais-Pagination-item--lastPage
+                display: none
+
+.react-autosuggest__container
+    .react-autosuggest__suggestion
+        &.react-autosuggest__suggestion--highlighted
+            background-color: lightgreen
