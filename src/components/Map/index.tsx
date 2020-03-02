@@ -37,14 +37,6 @@ type Provider = {
   address: string;
   name: string;
   slug: string;
-  location: string;
-  capacity: number;
-  district: string;
-  email: string;
-  license_by: string;
-  license_date_5years: string;
-  license_date_provisional: string;
-  license_no: string;
 };
 
 const PROVIDERS = gql`
