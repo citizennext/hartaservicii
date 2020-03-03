@@ -1,6 +1,6 @@
 import React from 'react';
-import { districtSocialServices } from './SocialServices'
-import { districtSvgMapping } from './DistrictMapping'
+import { districtSocialServices } from './SocialServices';
+import { districtSvgMapping } from './DistrictMapping';
 
 type Props = {
   sqSizeWidth: number;
@@ -24,11 +24,13 @@ function StatisticsMap(props: Props) {
   // Current color lightness
   const currentLightness = props.districtLightness;
 
-  const districtAmounts = Object.values(districtSocialServices).map(amount =>{ return amount });
+  const districtAmounts = Object.values(districtSocialServices).map(amount => {
+    return amount;
+  });
   const maxAmount = Math.max(...districtAmounts);
 
   function lightness(amount: number) {
-    return 100 - amount/maxAmount*currentLightness;
+    return 100 - (amount / maxAmount) * currentLightness;
   }
 
   return (
@@ -50,17 +52,17 @@ function StatisticsMap(props: Props) {
       </svg>
 
       <svg className="svg-gradient" width="263" height="32" viewBox="0 0 263 32">
-        <path d="M262.68 1.91992H0.589844V30.2499H262.68V1.91992Z" fill="url(#paint0_linear)"/>
-        <path d="M262.68 30.25H0.600098" stroke="#968584" strokeWidth="3" strokeMiterlimit="10"/>
-        <path d="M262.68 1.91992H0.600098" stroke="#968584" strokeWidth="3" strokeMiterlimit="10"/>
+        <path d="M262.68 1.91992H0.589844V30.2499H262.68V1.91992Z" fill="url(#paint0_linear)" />
+        <path d="M262.68 30.25H0.600098" stroke="#968584" strokeWidth="3" strokeMiterlimit="10" />
+        <path d="M262.68 1.91992H0.600098" stroke="#968584" strokeWidth="3" strokeMiterlimit="10" />
         <defs>
           <linearGradient id="paint0_linear" x1="0.589844" y1="16.0799" x2="262.68" y2="16.0799" gradientUnits="userSpaceOnUse">
-            <stop stopColor="white"/>
-            <stop offset="1" stopColor="#6FBAB6"/>
+            <stop stopColor="white" />
+            <stop offset="1" stopColor="#6FBAB6" />
           </linearGradient>
         </defs>
       </svg>
-      <div className='progress-statistic-map'>
+      <div className="progress-statistic-map">
         <span className="map-min-amount">0</span>
         <span className="map-max-amount">600</span>
       </div>
