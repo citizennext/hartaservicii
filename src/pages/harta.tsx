@@ -30,7 +30,12 @@ function HartaPage() {
                 }}>
                 <Router location={location} basepath="/harta">
                   <Harta path="/" />
-                  <PopUps path="serviciu/:provider/:id" />
+                  <PopUps
+                    path="serviciu/:provider/:id"
+                    onDismiss={() => {
+                      navigate(-1);
+                    }}
+                  />
                 </Router>
               </Dialog>
             </Layout>
