@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
 import Drawer from '../Drawer/Drawer';
-import { DrawerContext } from '../Drawer/DrawerContext';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { FilterMenu } from '../Icons';
 import options from '../../data/filter-options.json';
@@ -53,10 +52,9 @@ const SERVICES = gql`
 `;
 
 const Filter: React.FC<Props> = props => {
-  // @ts-ignore
-  const { state, dispatch } = useContext(DrawerContext);
+  const [isOpen, setIsOpen] = useState(false);
   const openDrawer = () => {
-    dispatch((current: boolean) => !current);
+    setIsOpen((current: boolean) => !current);
   };
   const windowSize = useWindowSize();
   const filters = props.filters;
@@ -117,13 +115,13 @@ const Filter: React.FC<Props> = props => {
   return (
     <>
       {props.drawer && windowSize.width && windowSize.width < 768 ? (
-        <div className="filter-menu" data-open={state}>
+        <div className="filter-menu">
           <FilterMenu size={20} />
           <Drawer
             className="map-drawer map-filters"
             width="300px"
             placement="right"
-            open={state}
+            open={isOpen}
             closeButtonStyle={{}}
             toggleHandler={openDrawer}
             closeButton={<FilterMenu className="close" size={20} />}>

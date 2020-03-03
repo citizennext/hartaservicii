@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import Drawer from './Drawer/Drawer';
-import { DrawerContext } from './Drawer/DrawerContext';
+
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Close, Menu } from './Icons';
 
@@ -28,10 +28,10 @@ type Props = {
 
 const Navigation: React.FC<Props> = props => {
   const nav = props.nav;
-  // @ts-ignore
-  const { state, dispatch } = useContext(DrawerContext);
+
+  const [isOpen, setIsOpen] = useState(false);
   const openDrawer = () => {
-    dispatch((current: boolean) => !current);
+    setIsOpen((current: boolean) => !current);
   };
   const windowSize = useWindowSize();
 
@@ -44,7 +44,7 @@ const Navigation: React.FC<Props> = props => {
             className={props.navClass}
             width="300px"
             placement="right"
-            open={state}
+            open={isOpen}
             closeButtonStyle={{ position: 'absolute', top: 50, right: 30 }}
             toggleHandler={openDrawer}
             closeButton={<Close size={22} style={{ color: 'white' }} />}>
