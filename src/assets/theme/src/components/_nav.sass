@@ -6,7 +6,7 @@ header
 
     @apply sticky
     @apply bg-white
-    z-index: 99999
+    z-index: 9999
     top: 0
     width: 100%
     height: 80px
@@ -62,30 +62,35 @@ header.page-harta
     @apply bg-transparent
     z-index: 99999
 
-    .hamburger-menu
-        @apply bg-white
-        width: 68px
-        height: 83px
-        position: relative
-
-        .menu_icon
-            width: 24px
-            height: 21.6px
-            position: relative
-            z-index: 0
-            top: 22px
-            right: 5px
-
-        & > div
-            width: 100%
-            height: 100% !important
-            position: absolute
-            top: 0
-            right: 0
-            z-index: 1
-
     @screen md
         @apply bg-white
+
+    .hamburger-menu
+        width: 72px
+        height: 100px
+        @apply bg-white
+
+        & > div
+            width: 72px
+            height: 100px !important
+            top: 0
+            right: 0
+
+        & > svg
+            width: 26px
+
+    .menu_icon
+        margin-top: 59px
+        margin-right: 34px    
+
+    .interior
+        height: 100px
+
+        .mobile-map-logo
+            top: 39px
+            left: 34px
+            height: 48px
+            width: 33px
 
 .drawer
     .drawer-content

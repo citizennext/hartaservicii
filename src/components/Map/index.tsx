@@ -165,6 +165,7 @@ export default class Harta extends Component<any, State> {
           center={position}
           zoom={this.state.zoom}
           maxZoom={20}
+          zoomControl={false}
           scrollWheelZoom={this.state.scrollWheelZoom}
           className="markercluster-map">
           <TileLayer
