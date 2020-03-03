@@ -115,11 +115,11 @@ const Filter: React.FC<Props> = props => {
   return (
     <>
       {props.drawer && windowSize.width && windowSize.width < 768 ? (
-        <div className="filter-menu">
-          <FilterMenu size={20} />
+        <div className="filter-menu" data-open={isOpen}>
+          <FilterMenu size={20} className="filter-menu-icon" />
           <Drawer
             className="map-drawer map-filters"
-            width="300px"
+            width={windowSize.width < 375 ? '260px' : '300px'}
             placement="right"
             open={isOpen}
             closeButtonStyle={{}}
@@ -148,7 +148,6 @@ const Filter: React.FC<Props> = props => {
                 options={optionsSpecialization}
                 onChange={handleChangeSpecialization}
               />
-              )
               <Select options={options.administrator} onChange={handleChangeAdministrator} />
             </div>
           </Drawer>
