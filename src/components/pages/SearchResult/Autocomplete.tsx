@@ -44,7 +44,10 @@ class Autocomplete extends Component {
       </>
     );
   }
-
+  handleSubmit = (e: any) => {
+    e.preventDefault();
+    navigate('/cautare', { state: { searchValue: this.state.value } });
+  };
   render() {
     const { hits }: any = this.props;
     const { value } = this.state;
@@ -55,7 +58,7 @@ class Autocomplete extends Component {
       value,
     };
     return (
-      <>
+      <form onSubmit={this.handleSubmit}>
         <AutoSuggest
           suggestions={hits}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -66,10 +69,12 @@ class Autocomplete extends Component {
           onSuggestionSelected={this.onSuggestionSelected}
         />
         <PoweredBy
-        // Optional parameters
-        // translations={object}
+          // Optional parameters
+          translations={{
+            searchBy: 'Search by',
+          }}
         />
-      </>
+      </form>
     );
   }
 }

@@ -36,7 +36,11 @@ export function InstaSearchPage(props: any) {
               placeholder: 'Cauta aici...',
             }}
           />
-          <PoweredBy />
+          <PoweredBy
+            translations={{
+              searchBy: 'Search cu',
+            }}
+          />
         </div>
         <div className="search-result-wrapper">
           <Menu attribute="type" defaultRefinement="Servicii" />
