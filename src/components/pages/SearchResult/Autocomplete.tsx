@@ -44,16 +44,19 @@ class Autocomplete extends Component {
     const typeFy = hit.type.toLowerCase();
     return (
       <>
-        {typeFy === 'servicii' && <Highlight attribute="name" hit={hit} />}
-        {typeFy !== 'servicii' && <Highlight attribute="title" hit={hit} />}
+        {typeFy === 'servicii' && <Highlight attribute="name" hit={hit} className="hit-location-title" />}
+        {typeFy !== 'servicii' && <Highlight attribute="title" hit={hit} className="hit-page-title" />}
         <br />
         {typeFy === 'servicii' && (
-          <span className="hit-location">
-            Furnizor: <Highlight attribute="supplier.name" hit={hit} /> | Locație: {hit.location}, {hit.district}
+          <span className="hit-location-summary">
+            Furnizor: <Highlight attribute="supplier.name" hit={hit} /> <br />
+            <span className="hit-location">
+              Locație: {hit.location}, {hit.district}
+            </span>
           </span>
         )}
         {typeFy !== 'servicii' && (
-          <span className="hit-location">
+          <span className="hit-page-summary">
             <Highlight attribute="summary" hit={hit} />
           </span>
         )}
