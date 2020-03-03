@@ -11,6 +11,7 @@ import {
   RefinementList,
   SearchBox,
   Panel,
+  Highlight,
   PoweredBy,
 } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
@@ -20,9 +21,8 @@ const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALG
 const common = client.initIndex(indexCommon);
 
 common.setSettings({
-  searchableAttributes: ['name', 'location', 'district', 'address', 'supplier.name', 'service.name'],
-  customRanking: ['asc(name)'],
-  attributesForFaceting: ['name', 'location', 'district', 'type'],
+  searchableAttributes: ['name', 'location', 'district', 'supplier.name', 'title', 'summary', 'content.text'],
+  attributesForFaceting: ['location', 'district', 'type'],
 });
 
 export function InstaSearchPage(props: any) {
@@ -72,8 +72,8 @@ function Hit(props: any) {
   return (
     <div className={`card-${typeFy}`}>
       <div className="hit-name">
-        {typeFy === 'servicii' && props.hit.name}
-        {typeFy !== 'servicii' && props.hit.title}
+        {typeFy === 'servicii' && <Highlight attribute="name" hit={props.hit} />}
+        {typeFy !== 'servicii' && <Highlight attribute="title" hit={props.hit} />}
       </div>
       <div className="hit-summary">
         {typeFy === 'servicii' && props.hit.supplier.name}

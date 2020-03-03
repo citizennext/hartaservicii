@@ -8,7 +8,7 @@ const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALG
 const common = client.initIndex(indexCommon);
 
 common.setSettings({
-  searchableAttributes: ['name', 'location', 'district', 'address', 'supplier.name', 'service.name'],
+  searchableAttributes: ['name', 'location', 'district', 'supplier.name', 'title', 'summary', 'content.text'],
 });
 
 export function AutocompleteSearch() {
