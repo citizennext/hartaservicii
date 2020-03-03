@@ -1,6 +1,6 @@
 import React from 'react';
 import algoliasearch from 'algoliasearch';
-import { InstantSearch } from 'react-instantsearch-dom';
+import { InstantSearch, Configure } from 'react-instantsearch-dom';
 import Autocomplete from './Autocomplete';
 
 const indexCommon: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_COMMON}`;
@@ -14,6 +14,7 @@ common.setSettings({
 export function AutocompleteSearch() {
   return (
     <InstantSearch indexName={`${indexCommon}`} searchClient={client}>
+      <Configure hitsPerPage={6} />
       <Autocomplete />
     </InstantSearch>
   );
