@@ -13,7 +13,7 @@ class Autocomplete extends Component {
 
   onSuggestionSelected = (event: any, { suggestionValue, method }: any) => {
     if (method === 'click' || method === 'enter') {
-      navigate('/rezultat', { state: { searchValue: suggestionValue } });
+      navigate('/cautare', { state: { searchValue: suggestionValue } });
     }
   };
 
