@@ -1,0 +1,14 @@
+{
+  "age": [
+    { "value": null, "label": "Toate vârstele" },
+    { "value": "copii", "label": "Copii" },
+    { "value": "tiner", "label": "Tineri" },
+    { "value": "adult", "label": "Adulti" },
+    { "value": "vârstnic", "label": "Vârstnici" }
+  ],
+  "administrator": [
+    { "value": null, "label": "Public și privat" },
+    { "value": false, "label": "Public" },
+    { "value": true, "label": "Privat" }
+  ]
+}

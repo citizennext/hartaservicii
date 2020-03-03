@@ -3,6 +3,7 @@ import React from 'react';
 import Separator from '../../../Separator';
 import Img from 'gatsby-image';
 import { StaticQuery, graphql } from 'gatsby';
+import { AutocompleteSearch } from '../../SearchResult/AutocompleteSearch';
 
 function Hero() {
   return (
@@ -31,21 +32,17 @@ function Hero() {
                 <h1 className="py-4 md:pt-10 xl:pt-20">{Data.page.homepage.content.title}</h1>
                 <p className="pb-4">{Data.page.homepage.content.intro}</p>
                 <button
-                  className="small mb-4"
+                  className="small mb-4 ml-0"
                   formAction={Data.page.homepage.links.intro.url}
                   title={Data.page.homepage.links.intro.title}>
                   {Data.page.homepage.links.intro.label}
                 </button>
               </div>
               <div className="hero-image md:w-2/3 md:-ml-0 xl:-ml-0 xl:w-3/4 xl:self-end">
-                <Separator color="celeste" classSeparator="xl:hidden" style={{ zIndex: 9 }} />
+                <Separator color="celeste" classSeparator="xl:hidden" css={{ zIndex: 9 }} />
                 <Img fluid={data.file.childImageSharp.fluid} alt="" />
-                <div className="search-icon hidden">
-                  <input
-                    id="search"
-                    className="border-burg border-6 rounded-full background-white absolute -mt-24 pl-10"
-                    placeholder="Caută serviciu, zonă sau tipologie beneficiar"
-                  />
+                <div className="autocomplete-search">
+                  <AutocompleteSearch />
                 </div>
               </div>
               <Separator color="celeste" bottom="-6px" />

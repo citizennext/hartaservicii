@@ -1,6 +1,5 @@
 @import "~tailwindcss/base"
-@import '~react-leaflet-markercluster/dist/styles.min.css'
-@import "lib/slick"
+@import "lib/lib"
 @import "variables"
 @import "fonts"
 @import "typography"
@@ -453,7 +452,7 @@ button
         @apply absolute
         left: calc(50% - 160px)
 
-    &:not(.small):not(.slick-*):after
+    &.button:after
         content: ''
         background-image: url('../../images/icon_arroww.svg')
         background-size: 22px 22px
@@ -513,10 +512,18 @@ button
         @apply bg-white
         @apply uppercase
         @apply w-5/12
+        min-width: 170px
+        min-height: 28px
         @apply py-1
 
+        &:hover
+            @apply bg-celeste
+
     &.small.invert
-        @apply bg-leaf
+        @apply bg-snow
+
+        &:hover
+            @apply bg-celeste
 
     &.small:before
         content: '▶'
@@ -549,6 +556,10 @@ button
 
     &.share-button
         @apply bg-transparent
+        width: 50px
+        height: 50px
+        margin: 0
+
         &:before
             content: ''
             background-image: url('../../images/icon_share.svg')
@@ -560,7 +571,7 @@ button
             top: 6px
             left: 6px
             @apply bg-snow
-            @apply p-6
+            //@apply p-6
             @apply rounded-full
 
 @import "~tailwindcss/utilities"
@@ -587,6 +598,3 @@ footer
 
         @screen xl
             content: '| '
-
-.leaflet-container
-    height: 640px

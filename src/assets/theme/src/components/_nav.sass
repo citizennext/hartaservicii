@@ -1,4 +1,3 @@
-// @todo Seco -> it must be stylized
 header
     .menu_icon
         float: right
@@ -7,7 +6,7 @@ header
 
     @apply sticky
     @apply bg-white
-    z-index: 10
+    z-index: 9999
     top: 0
     width: 100%
     height: 80px
@@ -59,57 +58,104 @@ header
             right: 26px
             cursor: pointer
 
-.drawer
-    .drawer-content
-         @apply bg-burg
-         width: 300px
-
-.nav-header .navigation
-    margin-top: 123px
-    padding-left: 20px
+header.page-harta
+    @apply bg-transparent
+    z-index: 99999
 
     @screen md
         @apply bg-white
-        padding-left: 0
-        margin-top: 0
-        padding-top: 48px
 
-    li
-        list-style: none
-        margin-bottom: 1em
-        border-left: 3px solid #fff
-        @apply block
+    .hamburger-menu
+        width: 72px
+        height: 100px
+        @apply bg-white
+
+        & > div
+            width: 72px
+            height: 100px !important
+            top: 0
+            right: 0
+
+        & > svg
+            width: 26px
+
+    .menu_icon
+        margin-top: 59px
+        margin-right: 34px    
+
+    .interior
+        height: 100px
+
+        .mobile-map-logo
+            top: 39px
+            left: 34px
+            height: 48px
+            width: 33px
+
+.drawer
+    .drawer-content
+        @apply bg-burg
+        width: 300px
+
+    &.map-filters
+        .drawer-content
+            background: transparent none
+            width: 260px
+            padding: 0 20px
+
+            @screen xs
+                width: 300px
+                padding: 0
+
+.nav-header
+    z-index: 99999
+
+    .navigation
+        margin-top: 123px
+        padding-left: 20px
 
         @screen md
-            @apply mb-0
-            border-left: 3px solid #EDF7EF
-            @apply inline-block
-            margin-left: 2px
-            line-height: 1
+            @apply bg-white
+            padding-left: 0
+            margin-top: 0
+            padding-top: 48px
 
-        @screen xl
-            margin-left: 20px
-
-        &:first-child
-            @screen md
-                margin-left: 0
-
-        a
-            @apply text-white
-            font-weight: 600
-            font-size: 22px
-            font-family: Montserrat
-            line-height: 1
-            padding: 0 0.5em 0 0.5em
-            -webkit-text-decoration: none
-            text-decoration: none
+        li
+            list-style: none
+            margin-bottom: 1em
+            border-left: 3px solid #fff
+            @apply block
 
             @screen md
-                @apply text-black
-                @apply pt-12
-                font-size: 14px
+                @apply mb-0
+                border-left: 3px solid #EDF7EF
+                @apply inline-block
+                margin-left: 2px
+                line-height: 1
 
-                &:hover,:active
-                    @apply border-t-8
-                    @apply border-burg
+            @screen xl
+                margin-left: 20px
+
+            &:first-child
+                @screen md
+                    margin-left: 0
+
+            a
+                @apply text-white
+                font-weight: 600
+                font-size: 22px
+                font-family: Montserrat
+                line-height: 1
+                padding: 0 0.5em 0 0.5em
+                -webkit-text-decoration: none
+                text-decoration: none
+
+                @screen md
+                    @apply text-black
                     @apply pt-12
+                    font-size: 14px
+
+                    &:hover,:active
+                        @apply border-t-8
+                        @apply border-burg
+                        @apply pt-12

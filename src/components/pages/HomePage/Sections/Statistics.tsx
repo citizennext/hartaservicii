@@ -107,7 +107,7 @@ function Statistics() {
                   {/* <GradientMap classGradientMap="hidden xl:block xl:w-1/3 xl:m-auto" /> */}
                 </HsSlider>
               </div>
-              <button className="section-button my-1">Toate statisticile</button>
+              <button className="button section-button my-1">Toate statisticile</button>
             </div>
           </div>
         );

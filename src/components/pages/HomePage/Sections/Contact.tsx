@@ -1,6 +1,7 @@
 import React from 'react';
 import Illu from '../../../../assets/images/illu_partner.svg';
 import Notype from '../../../../assets/images/logo_notype.svg';
+import { Link } from 'gatsby';
 
 export default class Contact extends React.Component {
   render() {
@@ -23,7 +24,9 @@ export default class Contact extends React.Component {
               Aici scriem ce avem nevoie de la public, de la vizitatori.Să promoveze proiectul pe social media, să se partenerize
               cu noi instituțional - avem nevoie și de alți parteneri financiari ?
             </p>
-            <button>Contact</button>
+            <Link to="/contact" className="button">
+              Contact
+            </Link>
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ module.exports = {
 			error: '#cc0000'
 		},
 		screens: {
+			xs: '375px',
 			sm: '640px',
 			md: '768px',
 			lg: '1024px',
@@ -40,7 +41,8 @@ module.exports = {
 				'screen': '100vw',
 				'gridt': '717px',
 				'griddw': '1206px',
-				'gridd': '1036px'
+				'gridd': '1036px',
+				'full': '100%'
 			},
 			inset: {
 				'1/4': '25%'
