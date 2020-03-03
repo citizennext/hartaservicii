@@ -662,11 +662,11 @@
 				margin-right: 5px
 
 		.pin-services > div
-            display: block
-            margin-top: 20px
-            div
-                width: 50%
-                display: inline-block
+			display: block
+			margin-top: 20px
+			div
+				width: 50%
+				display: inline-block
 
 	.pin-provider
 		padding-top: 45px
@@ -695,13 +695,20 @@
 				display: inline-block
 				width: 50%
 				text-align: right
+				
+				@screen xl
+					width: 40%
+					text-align: left
 
 			p:nth-child(even)
 				@apply pl-2
 				@apply font-semibold
 				display: inline-block
 				width: 50%
-				text-align: left
+				
+				@screen xl
+					width: 60%
+					text-align: left
 
 			&:nth-child(1) > p,&:nth-child(3) > p,&:nth-child(7) > p
 				padding-bottom: 20px
