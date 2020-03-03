@@ -2,7 +2,17 @@ import React from 'react';
 import { Link } from 'gatsby';
 import getSlug from 'speakingurl';
 
-import { Configure, Hits, InstantSearch, Menu, Pagination, RefinementList, SearchBox, Panel } from 'react-instantsearch-dom';
+import {
+  Configure,
+  Hits,
+  InstantSearch,
+  Menu,
+  Pagination,
+  RefinementList,
+  SearchBox,
+  Panel,
+  PoweredBy,
+} from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
 
 const indexCommon: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_COMMON}`;
@@ -26,6 +36,7 @@ export function InstaSearchPage(props: any) {
               placeholder: 'Cauta aici...',
             }}
           />
+          <PoweredBy />
         </div>
         <div className="search-result-wrapper">
           <Menu attribute="type" defaultRefinement="Servicii" />

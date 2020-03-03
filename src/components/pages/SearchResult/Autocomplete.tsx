@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connectAutoComplete, Highlight } from 'react-instantsearch-dom';
+import { connectAutoComplete, Highlight, PoweredBy } from 'react-instantsearch-dom';
 import AutoSuggest from 'react-autosuggest';
 import { navigate } from '@reach/router';
 
@@ -13,7 +13,7 @@ class Autocomplete extends Component {
 
   onSuggestionSelected = (event: any, { suggestionValue, method }: any) => {
     if (method === 'click' || method === 'enter') {
-      navigate('/rezultat', { state: { searchValue: suggestionValue } });
+      navigate('/cautare', { state: { searchValue: suggestionValue } });
     }
   };
 
@@ -32,7 +32,17 @@ class Autocomplete extends Component {
   }
 
   renderSuggestion(hit: any) {
-    return <Highlight attribute="name" hit={hit} tagName="mark" />;
+    return (
+      <>
+        <Highlight attribute="name" hit={hit} tagName="mark" />
+        <br />
+        {hit.location && (
+          <span className="hit-location">
+            Locație: {hit.location}, {hit.district}
+          </span>
+        )}
+      </>
+    );
   }
 
   render() {
@@ -45,15 +55,21 @@ class Autocomplete extends Component {
       value,
     };
     return (
-      <AutoSuggest
-        suggestions={hits}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps}
-        onSuggestionSelected={this.onSuggestionSelected}
-      />
+      <>
+        <AutoSuggest
+          suggestions={hits}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          inputProps={inputProps}
+          onSuggestionSelected={this.onSuggestionSelected}
+        />
+        <PoweredBy
+        // Optional parameters
+        // translations={object}
+        />
+      </>
     );
   }
 }

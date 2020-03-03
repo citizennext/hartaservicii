@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connectAutoComplete, Configure } from 'react-instantsearch-dom';
+import { connectAutoComplete, Configure, PoweredBy } from 'react-instantsearch-dom';
 import { navigate, Link } from '@reach/router';
 const CustomAutocomplete = ({ hits, currentRefinement, refine }: any) => {
   const [searchedTerm, setSearchedTerm] = useState(currentRefinement);
@@ -18,6 +18,10 @@ const CustomAutocomplete = ({ hits, currentRefinement, refine }: any) => {
         <li>
           <form onSubmit={e => handleSubmit(e)}>
             <input type="search" value={currentRefinement} onChange={e => handleChange(e)} />
+            <PoweredBy
+            // Optional parameters
+            // translations={object}
+            />
           </form>
         </li>
         <div className="react-autosuggest__suggestions-container--open">
