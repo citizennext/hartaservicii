@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import StarRatingComponent from 'react-star-rating-component';
 import CopyToClipboard from 'react-copy-to-clipboard';
+// @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import iconClose from '../../assets/images/icon_Close.svg';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
@@ -82,11 +82,9 @@ function PopUps(props: any) {
         <div className="popup-logo">
           <img src={hssLogo} />
         </div>
-        <Link to="/harta">
-          <button className="close-map-marker-popup">
-            <img src={iconClose} />
-          </button>
-        </Link>
+        <button className="close-map-marker-popup" onClick={props.onDismiss}>
+          <img src={iconClose} />
+        </button>
       </header>
       <div className="main-section">
         <h2>{providers.name}</h2>

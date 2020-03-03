@@ -41,7 +41,9 @@ function Lists() {
                     <li>{Data.page.homepage.content.section2.list2}</li>
                     <li>{Data.page.homepage.content.section2.list3}</li>
                   </ol>
-                  <button className="section-button -mt-2 md:-mt-6 xl:mt-0">{Data.page.homepage.links.section2.label}</button>
+                  <button className="button section-button -mt-2 md:-mt-6 xl:mt-0">
+                    {Data.page.homepage.links.section2.label}
+                  </button>
                 </div>
               </div>
               <div className="section-list bg-snow md:w-1/2 md:ml-2 xl:ml-4 xl:mr-8">
@@ -57,7 +59,7 @@ function Lists() {
                     <li>{Data.page.homepage.content.section3.list2}</li>
                     <li>{Data.page.homepage.content.section3.list3}</li>
                   </ol>
-                  <button className="section-button -mt-2 md:-mt-6">{Data.page.homepage.links.section2.label}</button>
+                  <button className="button section-button -mt-2 md:-mt-6">{Data.page.homepage.links.section2.label}</button>
                 </div>
               </div>
             </div>

@@ -29,6 +29,7 @@
 		font-family: 'Koho'
 		@apply text-black
 		padding-left: 40px
+		padding-right: 86px
 		box-shadow: 0px 0px 60px rgba(151, 133, 133, 0.6)
 		white-space: nowrap
 		overflow: hidden
@@ -61,7 +62,29 @@
 			height: 27px
 			width: 27px
 
+	.ais-PoweredBy
+		filter: grayscale(100%) invert(62%) sepia(16%) saturate(270%) hue-rotate(314deg) brightness(85%) contrast(80%)
+		position: absolute
+		top: 2px
+		right: 16px
+
+		.ais-PoweredBy-text
+			font-size: 12px
+			margin-bottom: -6px
+
+		.ais-PoweredBy-link
+			svg
+				width: 58px
+				margin-top: -7px
+
+		&.active
+			filter: initial
+
+
+
+
 	.react-autosuggest__suggestions-container--open
+		width: 100%
 		background-color: white
 		position: absolute
 		top: 58px
@@ -74,3 +97,18 @@
 			padding: 10px 10px 5px
 			border-bottom: 1px solid
 			@apply border-burg
+
+			.hit-location-title,.hit-page-title
+				font-size: 20px
+				font-family: 'Koho'
+
+			.hit-location-summary,.hit-page-summary
+				font-size: 16px
+				font-family: 'Montserrat'
+
+				.hit-location
+					font-size: 14px
+
+			.ais-Highlight-highlighted
+        		@apply bg-leaf
+        		@apply italic

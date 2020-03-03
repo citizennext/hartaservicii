@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { connectAutoComplete, Highlight } from 'react-instantsearch-dom';
+import { connectAutoComplete, Highlight, PoweredBy } from 'react-instantsearch-dom';
 import AutoSuggest from 'react-autosuggest';
 import { navigate } from '@reach/router';
-
+import getSlug from 'speakingurl';
 class Autocomplete extends Component {
   // @ts-ignore
   state = { value: this.props.currentRefinement };
@@ -11,9 +11,17 @@ class Autocomplete extends Component {
     this.setState({ value: newValue });
   };
 
-  onSuggestionSelected = (event: any, { suggestionValue, method }: any) => {
+  onSuggestionSelected = (event: any, { suggestion, suggestionValue, method }: any) => {
+    event.preventDefault();
+    const typeFy = suggestion.type.toLowerCase();
+    const slug =
+      typeFy === 'servicii'
+        ? `/harta/serviciu/${getSlug(suggestion.name)}/${suggestion.id}`
+        : typeFy === 'noutăți'
+        ? `/noutati/${suggestion.slug}`
+        : `/${suggestion.slug}`;
     if (method === 'click' || method === 'enter') {
-      navigate('/rezultat', { state: { searchValue: suggestionValue } });
+      navigate(slug, { state: { searchValue: suggestionValue } });
     }
   };
 
@@ -28,13 +36,33 @@ class Autocomplete extends Component {
   };
 
   getSuggestionValue(hit: any) {
-    return hit.name;
+    const typeFy = hit.type.toLowerCase();
+    return typeFy === 'servicii' ? hit.name : hit.title;
   }
 
   renderSuggestion(hit: any) {
-    return <Highlight attribute="name" hit={hit} tagName="mark" />;
+    const typeFy = hit.type.toLowerCase();
+    return (
+      <>
+        {typeFy === 'servicii' && <Highlight attribute="name" hit={hit} className="hit-location-title" />}
+        {typeFy !== 'servicii' && <Highlight attribute="title" hit={hit} className="hit-page-title" />}
+        <br />
+        {typeFy === 'servicii' && (
+          <span className="hit-location-summary">
+            Furnizor: <Highlight attribute="supplier.name" hit={hit} /> <br />
+            <span className="hit-location">
+              Locație: {hit.location}, {hit.district}
+            </span>
+          </span>
+        )}
+        {typeFy !== 'servicii' && (
+          <span className="hit-page-summary">
+            <Highlight attribute="summary" hit={hit} />
+          </span>
+        )}
+      </>
+    );
   }
-
   render() {
     const { hits }: any = this.props;
     const { value } = this.state;
@@ -45,15 +73,23 @@ class Autocomplete extends Component {
       value,
     };
     return (
-      <AutoSuggest
-        suggestions={hits}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps}
-        onSuggestionSelected={this.onSuggestionSelected}
-      />
+      <>
+        <AutoSuggest
+          suggestions={hits}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          inputProps={inputProps}
+          onSuggestionSelected={this.onSuggestionSelected}
+        />
+        <PoweredBy
+          // Optional parameters
+          translations={{
+            searchBy: 'Search by',
+          }}
+        />
+      </>
     );
   }
 }

@@ -15,7 +15,7 @@ function HartaPage() {
         return (
           <>
             <Seo bodyClassName="page-harta" />
-            <Header headerClassName="page-harta" />
+            <Header mapHeader />
             <Layout>
               <Router location={oldLocation ? oldLocation : location} basepath="/harta">
                 <Harta path="/" />
@@ -30,7 +30,12 @@ function HartaPage() {
                 }}>
                 <Router location={location} basepath="/harta">
                   <Harta path="/" />
-                  <PopUps path="serviciu/:provider/:id" />
+                  <PopUps
+                    path="serviciu/:provider/:id"
+                    onDismiss={() => {
+                      navigate(-1);
+                    }}
+                  />
                 </Router>
               </Dialog>
             </Layout>

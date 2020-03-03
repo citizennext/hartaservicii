@@ -95,6 +95,28 @@
                 width: 27px
                 left: 1%
 
+    .ais-PoweredBy
+        position: absolute
+        top: 120px
+        right: 34px
+
+        @screen md
+            top: 112px
+            right: 72px
+
+        @screen xl
+            right: 370px
+
+        .ais-PoweredBy-text
+            font-size: 14px
+
+        .ais-PoweredBy-link
+            display: inline-block
+            margin-top: -12px
+            svg
+                width: 70px
+                margin-bottom: -8px
+
     .ais-SearchBox-reset
         width: 0
         position: absolute
@@ -500,4 +522,4 @@
 .react-autosuggest__container
     .react-autosuggest__suggestion
         &.react-autosuggest__suggestion--highlighted
-            background-color: lightgreen
+            @apply bg-snow

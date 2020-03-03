@@ -397,7 +397,7 @@ button
         @apply absolute
         left: calc(50% - 160px)
 
-    &:not(.small):not(.slick-*):after
+    &.button:after
         content: ''
         background-image: url('../../images/icon_arroww.svg')
         background-size: 22px 22px
@@ -457,10 +457,18 @@ button
         @apply bg-white
         @apply uppercase
         @apply w-5/12
+        min-width: 170px
+        min-height: 28px
         @apply py-1
 
+        &:hover
+            @apply bg-celeste
+
     &.small.invert
-        @apply bg-leaf
+        @apply bg-snow
+
+        &:hover
+            @apply bg-celeste
 
     &.small:before
         content: '▶'

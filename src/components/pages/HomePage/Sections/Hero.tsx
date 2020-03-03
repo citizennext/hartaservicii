@@ -32,7 +32,7 @@ function Hero() {
                 <h1 className="py-4 md:pt-10 xl:pt-20">{Data.page.homepage.content.title}</h1>
                 <p className="pb-4">{Data.page.homepage.content.intro}</p>
                 <button
-                  className="small mb-4"
+                  className="small mb-4 ml-0"
                   formAction={Data.page.homepage.links.intro.url}
                   title={Data.page.homepage.links.intro.title}>
                   {Data.page.homepage.links.intro.label}
