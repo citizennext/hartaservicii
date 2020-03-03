@@ -793,19 +793,37 @@
 	&[data-open="true"]
 		display: none
 
-	&:after
+	&:before
 		content: ""
-		height: 100vh
+		width: 9px
+		height: calc(100% - 83px)
 		display: block
-		top: -25px
+		top: 83px
 		right: 0
-		position: absolute
-		border-right: 9px solid #978585
+		position: fixed
+		@apply bg-burg
+
 
 	svg
 		transform: rotate(180deg)
 		margin-right: 14px
 		margin-top: 17px
+
+	.filter-menu-icon
+		position: absolute
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+
+		& + div
+			position: absolute
+			top: 0
+			right: 0
+			bottom: 0
+			left: 0
+			height: 100% !important
+			cursor: pointer
 
 .map-drawer
 	.drawer-content-wrapper
@@ -822,6 +840,7 @@
 				z-index: 1
 				top: 25px
 				left: -60px
+				cursor: pointer
 				@apply rounded-bl-full
 				@apply rounded-tl-full
 				@apply bg-burg
