@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connectAutoComplete, Highlight } from 'react-instantsearch-dom';
+import { connectAutoComplete, Highlight, PoweredBy } from 'react-instantsearch-dom';
 import AutoSuggest from 'react-autosuggest';
 import { navigate } from '@reach/router';
 
@@ -55,15 +55,21 @@ class Autocomplete extends Component {
       value,
     };
     return (
-      <AutoSuggest
-        suggestions={hits}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps}
-        onSuggestionSelected={this.onSuggestionSelected}
-      />
+      <>
+        <AutoSuggest
+          suggestions={hits}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          inputProps={inputProps}
+          onSuggestionSelected={this.onSuggestionSelected}
+        />
+        <PoweredBy
+        // Optional parameters
+        // translations={object}
+        />
+      </>
     );
   }
 }
