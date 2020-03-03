@@ -36,7 +36,11 @@ class Autocomplete extends Component {
       <>
         <Highlight attribute="name" hit={hit} tagName="mark" />
         <br />
-        Locație: {hit.location}, {hit.district}
+        {hit.location && (
+          <span>
+            Locație: {hit.location}, {hit.district}
+          </span>
+        )}
       </>
     );
   }
