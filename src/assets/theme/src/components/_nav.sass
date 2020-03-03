@@ -107,52 +107,55 @@ header.page-harta
                 width: 300px
                 padding: 0
 
-.nav-header .navigation
-    margin-top: 123px
-    padding-left: 20px
+.nav-header
+    z-index: 99999
 
-    @screen md
-        @apply bg-white
-        padding-left: 0
-        margin-top: 0
-        padding-top: 48px
-
-    li
-        list-style: none
-        margin-bottom: 1em
-        border-left: 3px solid #fff
-        @apply block
+    .navigation
+        margin-top: 123px
+        padding-left: 20px
 
         @screen md
-            @apply mb-0
-            border-left: 3px solid #EDF7EF
-            @apply inline-block
-            margin-left: 2px
-            line-height: 1
+            @apply bg-white
+            padding-left: 0
+            margin-top: 0
+            padding-top: 48px
 
-        @screen xl
-            margin-left: 20px
-
-        &:first-child
-            @screen md
-                margin-left: 0
-
-        a
-            @apply text-white
-            font-weight: 600
-            font-size: 22px
-            font-family: Montserrat
-            line-height: 1
-            padding: 0 0.5em 0 0.5em
-            -webkit-text-decoration: none
-            text-decoration: none
+        li
+            list-style: none
+            margin-bottom: 1em
+            border-left: 3px solid #fff
+            @apply block
 
             @screen md
-                @apply text-black
-                @apply pt-12
-                font-size: 14px
+                @apply mb-0
+                border-left: 3px solid #EDF7EF
+                @apply inline-block
+                margin-left: 2px
+                line-height: 1
 
-                &:hover,:active
-                    @apply border-t-8
-                    @apply border-burg
+            @screen xl
+                margin-left: 20px
+
+            &:first-child
+                @screen md
+                    margin-left: 0
+
+            a
+                @apply text-white
+                font-weight: 600
+                font-size: 22px
+                font-family: Montserrat
+                line-height: 1
+                padding: 0 0.5em 0 0.5em
+                -webkit-text-decoration: none
+                text-decoration: none
+
+                @screen md
+                    @apply text-black
                     @apply pt-12
+                    font-size: 14px
+
+                    &:hover,:active
+                        @apply border-t-8
+                        @apply border-burg
+                        @apply pt-12
