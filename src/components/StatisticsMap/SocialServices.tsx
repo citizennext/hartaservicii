@@ -1,4 +1,4 @@
-export const districtSocialServices: { [index: string]: number } = {
+export const districts = {
   alba: 2,
   arges: 5,
   arad: 0,
