@@ -1,0 +1,55 @@
+.page-statistici
+    main
+        padding-top: 6px
+        @apply pb-0
+
+        @screen lg
+            @apply pb-6
+
+    .grid-statistics
+        & > div
+            @apply bg-snow
+            @apply p-6
+
+        .grid-statistic-item
+            .centers-of-services,
+            .supliers-of-services,
+            .statistics-map
+                & > svg
+                    &:first-of-type,
+                    &:last-of-type
+                        width: 100%
+
+                    &:last-of-type:not(.svg-gradient)
+                        @apply -mt-16
+
+                        @screen xs
+                            @apply -mt-8
+
+
+            .statistics-map-title
+                max-width: 100%
+
+            .statistics-map-title,
+            .circle-total,
+            .progress-copy
+                @apply pb-6
+
+            .progress-bar
+                @apply mt-6
+
+                @screen md
+                    @apply mt-20
+
+                .progress-bar-images,
+                .progress-amount-container
+                    width: 100%
+
+            .statistics-map
+                @apply mt-2
+
+                @screen md
+                    @apply mt-8
+
+            &.invisible
+                @apply p-0
