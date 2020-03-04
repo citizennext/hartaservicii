@@ -1,5 +1,4 @@
 import React from 'react';
-// import { distric/tSocialServices } from './SocialServices';
 import { districtSvgMapping } from './DistrictMapping';
 import { graphql, StaticQuery } from 'gatsby';
 const query = graphql`
