@@ -9,7 +9,7 @@ import { useWindowSize } from '../hooks/useWindowSize';
 import Separator from './Separator';
 
 type Props = {
-  mapHeader?: string;
+  mapHeader?: boolean;
 };
 
 export function Header({ mapHeader }: Props) {
@@ -34,9 +34,4 @@ export function Header({ mapHeader }: Props) {
     </header>
   );
 }
-
-Header.defaultProps = {
-  headerClassName: '',
-};
-
 export default Header;

@@ -16,14 +16,9 @@ import {
 } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch';
 
-const indexCommon: string | undefined = `${process.env.ALGOLIA_INDEX_NAME_COMMON}`;
-const client = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_API_KEY}`);
-const common = client.initIndex(indexCommon);
-
-common.setSettings({
-  searchableAttributes: ['name', 'location', 'district', 'supplier.name', 'title', 'summary', 'content.text'],
-  attributesForFaceting: ['location', 'district', 'type'],
-});
+const indexCommon = process.env.GATSBY_ALGOLIA_INDEX_NAME_COMMON;
+// @ts-ignore
+const client = algoliasearch(process.env.GATSBY_ALGOLIA_APP_ID, process.env.GATSBY_ALGOLIA_SEARCH_KEY);
 
 export function InstaSearchPage(props: any) {
   return (

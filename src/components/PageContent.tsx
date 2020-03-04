@@ -19,7 +19,7 @@ type Props = {
 };
 
 export function Content({ content, summary, additionalData }: Props) {
-  const button = additionalData.button;
+  const button = additionalData?.button;
 
   function createMarkup() {
     return { __html: content.html };
@@ -29,10 +29,14 @@ export function Content({ content, summary, additionalData }: Props) {
     <>
       <div className="summary">{summary}</div>
       <div className="content" dangerouslySetInnerHTML={createMarkup()} />
-      {/* eslint-disable-next-line @typescript-eslint/no-unused-vars */}
-      <button className="btn btn-citizennext" title={button.label} onClick={event => (window.location.href = button.href)}>
-        {button.label}
-      </button>
+
+      {button && (
+        <a href={button.href} target="_blank" rel="noopener noreferrer" title={button.label}>
+          <button className="btn btn-citizennext" title={button.label}>
+            {button.label}
+          </button>
+        </a>
+      )}
     </>
   );
 }

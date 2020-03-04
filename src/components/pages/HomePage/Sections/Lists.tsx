@@ -1,7 +1,7 @@
 import Data from '../../../../data/global.json';
 import React from 'react';
 import Img from 'gatsby-image';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link } from 'gatsby';
 const query = graphql`
   query {
     face1: file(relativePath: { regex: "/hp_section2.png/" }) {
@@ -41,9 +41,9 @@ function Lists() {
                     <li>{Data.page.homepage.content.section2.list2}</li>
                     <li>{Data.page.homepage.content.section2.list3}</li>
                   </ol>
-                  <button className="button section-button -mt-2 md:-mt-6 xl:mt-0">
-                    {Data.page.homepage.links.section2.label}
-                  </button>
+                  <Link to={Data.page.homepage.links.section2.url}>
+                    <button className="section-button -mt-2 md:-mt-6 xl:mt-0">{Data.page.homepage.links.section2.label}</button>
+                  </Link>
                 </div>
               </div>
               <div className="section-list bg-snow md:w-1/2 md:ml-2 xl:ml-4 xl:mr-8">
@@ -59,7 +59,9 @@ function Lists() {
                     <li>{Data.page.homepage.content.section3.list2}</li>
                     <li>{Data.page.homepage.content.section3.list3}</li>
                   </ol>
-                  <button className="button section-button -mt-2 md:-mt-6">{Data.page.homepage.links.section2.label}</button>
+                  <Link to={Data.page.homepage.links.section2.url}>
+                    <button className="section-button -mt-2 md:-mt-6">{Data.page.homepage.links.section2.label}</button>
+                  </Link>
                 </div>
               </div>
             </div>

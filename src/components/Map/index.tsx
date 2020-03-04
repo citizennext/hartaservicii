@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Leaflet, { LatLngTuple } from 'leaflet';
-import { Map, Marker, TileLayer, Tooltip } from 'react-leaflet';
+import { Map, Marker, TileLayer, Tooltip, ZoomControl } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { navigate } from '@reach/router';
 import getSlug from 'speakingurl';
@@ -205,6 +205,7 @@ export default class Harta extends Component<any, State> {
               }}
             </Query>
           </MarkerClusterGroup>
+          <ZoomControl position="bottomright" />
         </Map>
         <Filter
           filterClass="filter-options"

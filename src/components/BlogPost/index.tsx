@@ -18,7 +18,7 @@ function BlogPost(props: Props) {
   return (
     <div className={`${props.classBlogPost} relative blog-post md:px-2 xl:px-4`}>
       <div className="blog-image">
-        <Img fluid={props.image.urlSharp.childImageSharp.fluid} className="md:w-full" />
+        {props.image && <Img fluid={props.image.urlSharp.childImageSharp.fluid} className="md:w-full" />}
       </div>
       <h3 className="pt-4">{props.title}</h3>
       <p className="date">

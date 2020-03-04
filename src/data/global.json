@@ -33,16 +33,6 @@
   },
   "page": {
     "harta": {
-      "seo": {
-        "title": "Harta",
-        "keywords": "Harta Google Map",
-        "description": "Harta Google Map"
-      },
-      "content": {
-        "title": "Harta Google Map Content"
-      },
-      "sidebarLeft": null,
-      "sidebarRight": null,
       "navigation": {
         "label": "Harta",
         "url": "/harta",
@@ -50,28 +40,7 @@
         "nav": true
       }
     },
-    "test": {
-      "seo": {
-        "title": "Lorem Ipsum Dolor",
-        "keywords": "Lorem, Ipsum, Dolor",
-        "description": "Lorem Ipsum Dolor"
-      },
-      "content": "[ Test Content Page - Lorem Ipsum Dolor ]",
-      "sidebarLeft": "[ Sidebar Left - Lorem Ipsum Dolor ]",
-      "sidebarRight": "[ Sidebar Right - Lorem Ipsum Dolor ]",
-      "navigation": {
-        "label": "TestPage",
-        "url": "/test",
-        "title": "Test Page",
-        "nav": false
-      }
-    },
     "homepage": {
-      "seo": {
-        "title": "HomePage",
-        "keywords": "HomePage, Lorem, Ipsum, Dolor",
-        "description": "HomePage - Lorem Ipsum Dolor"
-      },
       "content": {
         "title": "Îngrijim și suntem îngrijiți mai bine",
         "intro": "...când ne cunoaștem drepturile, modalitățile de acces la servicii și localizarea acestora.",
@@ -104,17 +73,17 @@
       },
       "links": {
         "intro": {
-          "url": "/",
-          "title": "",
+          "url": "noutati/harta-serviciilor-sociale-din-romania-proiect-finalist-in-programul-tara-lui-andrei",
+          "title": "Despre proiect",
           "label": "detalii"
         },
         "section2": {
-          "url": "/",
+          "url": "harta",
           "title": "Deschide harta",
           "label": "Deschide harta"
         },
         "section3": {
-          "url": "/",
+          "url": "harta",
           "title": "Deschide harta",
           "label": "Deschide harta"
         }
@@ -156,19 +125,23 @@
       "content": {
         "social_media": {
           "facebook": {
-            "title": "Hai cu noi pe Facebook",
+            "title": "Facebook",
             "url": "https://facebook.com/hartaserviciilorsociale"
+          },
+          "instagram": {
+            "title": "Instagram",
+            "url": "https://www.instagram.com/hartaserviciilorsociale/"
           }
         },
         "support": {
           "social": {
-            "heading": "Scrie-ne dacă ai informații actualizate pentru centrele de servicii sociale.",
-            "text": "Nu uita să menționezi numărul de identificare al centrului.",
+            "heading": "Actializare date platformă",
+            "text": "Dacă ai informații actualizate despre centrele de servicii sociale și nu le regăsești pe platforma noastră, nu ezita să ne contactezi la adresa:",
             "email": "actualizare@serviciisociale.ro"
           },
           "technical": {
-            "heading": "Scrie-ne dacă ai probleme în accesarea sitului.",
-            "text": "Descrie problema în amânunt și eventual include și o captură de ecran relevantă.",
+            "heading": "Feedback platformă",
+            "text": "Dacă întâmpini probleme la accesarea site-ului, te rugăm să ne informezi la adresa de mai jos. Descrie-ne problema și eventual, include o captură de ecran pentru a înțelege și rezolva rapid situația.",
             "email": "tehnic@serviciisociale.ro"
           }
         },
