@@ -5,7 +5,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import CopyToClipboard from 'react-copy-to-clipboard';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
-import iconClose from '../../assets/images/icon_Close.svg';
+import { X as Close } from 'react-feather';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
 
@@ -83,7 +83,7 @@ function PopUps(props: any) {
           <img src={hssLogo} />
         </div>
         <button className="close-map-marker-popup" onClick={props.onDismiss}>
-          <img src={iconClose} />
+          <Close className="text-celeste" size={30} />
         </button>
       </header>
       <div className="main-section">
