@@ -3,7 +3,9 @@ import { graphql, StaticQuery } from 'gatsby';
 import CircularProgressBar from '../../../CircularProgressBar';
 import ProgressBar from '../../../ProgressBar';
 import HsSlider from '../../../Slider';
+import StatisticsMap from '../../../StatisticsMap';
 // import GradientMap from '../../../GradientMap';
+
 const query = graphql`
   query {
     hasura {
@@ -76,8 +78,8 @@ function Statistics() {
           privateServices,
           homelessServices,
           childServices,
-          publicSuppliers,
-          privateSuppliers,
+          // publicSuppliers,
+          // privateSuppliers,
         } = data.hasura;
         return (
           <div id="statistics" className="section circularprogressbar">
@@ -92,13 +94,16 @@ function Statistics() {
                     title="Centre servicii sociale lincențiate pe tot teritoriul țării"
                   />
                   <ProgressBar firstBar={homelessServices.aggregate.count} secondBar={childServices.aggregate.count} />
-                  <CircularProgressBar
+                  {/* @todo Seco -> aici trebuie sa vezi stilizari pe responsive */}
+                  <StatisticsMap title="Capacitate servicii sociale (locuri)" />
+                  {/* @todo Cezar -> am comentat "CircularProgressBar", s-a pus harta dinamica */}
+                  {/*<CircularProgressBar
                     firstBar={publicSuppliers.aggregate.count}
                     secondBar={privateSuppliers.aggregate.count}
                     firstBarLabel="publice"
                     secondBarLabel="private"
                     title="Furnizori de servicii sociale acreditați pe tot teritoriul țării"
-                  />
+                  />*/}
                   {/* <GradientMap classGradientMap="hidden xl:block xl:w-1/3 xl:m-auto" /> */}
                 </HsSlider>
               </div>

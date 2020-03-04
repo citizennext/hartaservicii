@@ -16,7 +16,7 @@ function ProgressBar(props: Props) {
 
   return (
     <div className={`progress-bar ${props.classProgressBar}`}>
-      <div className="relative m-auto">
+      <div className="progress-bar-images m-auto">
         <img className="progressbar-image absolute" src={siluette} alt="Social Worker Icon" />
         <svg width={props.sqSize} height={props.sqSize} viewBox={viewBox} className="xl:m-auto">
           <line
@@ -52,12 +52,11 @@ function ProgressBar(props: Props) {
             pentru copii
           </text>
         </svg>
-        <svg width="295" height="8" viewBox="0 0 295 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="m-auto">
-          <path d="M0.355103 4.22156H294.645" stroke="#968584" strokeWidth="7" strokeMiterlimit="10" />
-        </svg>
       </div>
-      <p className="progress-first-amount">{`${props.firstBar}`}</p>
-      <p className="progress-second-amount">{`${props.secondBar}`}</p>
+      <div className="progress-amount-container m-auto">
+        <span className="progress-first-amount">{`${props.firstBar}`}</span>
+        <span className="progress-second-amount">{`${props.secondBar}`}</span>
+      </div>
       <p className="progress-copy">Centre servicii sociale</p>
     </div>
   );

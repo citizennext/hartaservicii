@@ -5,8 +5,9 @@ import { DrawerProvider } from '../../Drawer/DrawerContext';
 export default class Harta extends Component {
   render() {
     return (
-    <DrawerProvider>
-      <Providers />
-    </DrawerProvider>);
+      <DrawerProvider>
+        <Providers />
+      </DrawerProvider>
+    );
   }
 }
