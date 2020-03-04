@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+// @ts-ignore
 import NetlifyForm from 'react-netlify-form';
 import Data from '../../../data/global.json';
 
@@ -10,10 +10,20 @@ export function Content() {
       <div className="contact-wrapper">
         <div className="contact-info">
           <div className="social-media">
-            <h4>{data.social_media.facebook.title}</h4>
-            <Link to={data.social_media.facebook.url} className="social button">
-              Comunitate
-            </Link>
+            <h4>
+              Alătură-te comunității noastre de pe{' '}
+              <a href={data.social_media.facebook.url} target="_blank" rel="noopener noreferrer">
+                Facebook
+              </a>{' '}
+              și{' '}
+              <a href={data.social_media.instagram.url} target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+            </h4>
+            <p>
+              Ai sugestii de îmbunătățire a platformei sau îți dorești să devii voluntar, pentru a dezvolta proiectul alături de
+              noi? Ne poți scrie oricând folosind unul dintre canalele noastre de comunicare.
+            </p>
           </div>
           <div className="contact-support">
             <h4>{data.support.social.heading}</h4>
@@ -29,7 +39,7 @@ export function Content() {
         <div className="contact-form">
           <h4>{data.form.title}</h4>
           <NetlifyForm name="contact">
-            {({ loading, error, success }) => (
+            {({ loading, error, success }: any) => (
               <>
                 {loading && <div className="text-leaf">Loading...</div>}
                 {error && <div className="text-error">Your information was not sent. Please try again later.</div>}

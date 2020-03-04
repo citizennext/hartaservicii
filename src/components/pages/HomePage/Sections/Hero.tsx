@@ -2,7 +2,7 @@ import Data from '../../../../data/global.json';
 import React from 'react';
 import Separator from '../../../Separator';
 import Img from 'gatsby-image';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link } from 'gatsby';
 import { AutocompleteSearch } from '../../SearchResult/AutocompleteSearch';
 
 function Hero() {
@@ -31,12 +31,14 @@ function Hero() {
               <div className="md:w-1/3 xl:w-1/4">
                 <h1 className="py-4 md:pt-10 xl:pt-20">{Data.page.homepage.content.title}</h1>
                 <p className="pb-4">{Data.page.homepage.content.intro}</p>
-                <button
-                  className="small mb-4 ml-0"
-                  formAction={Data.page.homepage.links.intro.url}
-                  title={Data.page.homepage.links.intro.title}>
-                  {Data.page.homepage.links.intro.label}
-                </button>
+                <Link to={Data.page.homepage.links.intro.url} style={{ textDecoration: 'none' }}>
+                  <button
+                    className="small mb-4"
+                    formAction={Data.page.homepage.links.intro.url}
+                    title={Data.page.homepage.links.intro.title}>
+                    {Data.page.homepage.links.intro.label}
+                  </button>
+                </Link>
               </div>
               <div className="hero-image md:w-2/3 md:-ml-0 xl:-ml-0 xl:w-3/4 xl:self-end">
                 <Separator color="celeste" classSeparator="xl:hidden" css={{ zIndex: 9 }} />

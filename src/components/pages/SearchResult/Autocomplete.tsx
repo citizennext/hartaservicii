@@ -5,14 +5,9 @@ import { navigate } from '@reach/router';
 import getSlug from 'speakingurl';
 class Autocomplete extends Component {
   // @ts-ignore
-  state = { value: this.props.currentRefinement };
-
-  onChange = (event: any, { newValue }: any) => {
-    this.setState({ value: newValue });
-  };
+  state = { value: this.props.currentRefinement, active: false };
 
   onSuggestionSelected = (event: any, { suggestion, suggestionValue, method }: any) => {
-    event.preventDefault();
     const typeFy = suggestion.type.toLowerCase();
     const slug =
       typeFy === 'servicii'
@@ -63,14 +58,20 @@ class Autocomplete extends Component {
       </>
     );
   }
+  onChange = (event: any, { newValue, method }: any) => {
+    if (method === 'enter') {
+      return navigate('/cautare', { state: { searchValue: this.state.value } });
+    }
+    this.setState({ value: newValue, active: true });
+  };
   render() {
     const { hits }: any = this.props;
-    const { value } = this.state;
 
     const inputProps = {
       placeholder: 'Caută serviciu, zonă sau tipologie beneficiar',
       onChange: this.onChange,
-      value,
+      onBlur: () => this.setState({ active: false }),
+      value: this.state.value,
     };
     return (
       <>
@@ -84,6 +85,7 @@ class Autocomplete extends Component {
           onSuggestionSelected={this.onSuggestionSelected}
         />
         <PoweredBy
+          className={this.state.active ? 'active' : ''}
           // Optional parameters
           translations={{
             searchBy: 'Search by',

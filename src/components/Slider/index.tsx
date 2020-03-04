@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 
 type Props = {
   children: object;
-  settings: object;
+  settings: any;
 };
 function HsSlider(props: Props) {
   return <Slider {...props.settings}>{props.children}</Slider>;
