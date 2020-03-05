@@ -73,7 +73,7 @@ export function Content() {
               <div className="grid-statistic-item">
                 <StatisticsMap title="Capacitate servicii sociale (locuri)" classStatisticsMap="statistics-map" />
               </div>
-              <div className="grid-statistic-item">
+              <div className="grid-statistic-item last-item">
                 <CircularProgressBar
                   firstBar={publicSuppliers.aggregate.count}
                   secondBar={privateSuppliers.aggregate.count}

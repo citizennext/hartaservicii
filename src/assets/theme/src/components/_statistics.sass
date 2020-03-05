@@ -3,7 +3,7 @@
         padding-top: 6px
         @apply pb-0
 
-        @screen lg
+        @screen md
             @apply pb-6
 
     .grid-statistics
@@ -12,6 +12,53 @@
             @apply p-6
 
         .grid-statistic-item
+            position: relative
+
+            &:before,
+            &:after
+                @apply bg-snow
+                content: ""
+                width: 1.5rem
+                height: 1.5rem
+                position: absolute
+                bottom: -1.5rem
+
+            &:before
+                left: -1.5rem
+
+            &:after
+                right: -1.5rem
+
+            //&.last-item
+            //    &:before,
+            //    &:after
+            //        display: none
+
+            &.invisible
+                display: none
+
+                &[class*="lg:visible"]
+                    @screen lg
+                        display: block
+
+            //&:nth-child(2)
+            &:nth-child(3n+1)
+                @screen lg
+                    &:before
+                        $size: 500px
+                        width: $size
+                        left: -$size
+
+            &:nth-child(3n+3)
+                @screen lg
+                    &:after
+                        $size: 500px
+                        width: $size
+                        right: -$size
+
+                    @at-root #gatsby-focus-wrapper
+                        overflow-x: hidden
+
             .centers-of-services,
             .supliers-of-services,
             .statistics-map
