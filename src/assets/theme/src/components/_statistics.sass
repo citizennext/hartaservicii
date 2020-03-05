@@ -1,0 +1,102 @@
+.page-statistici
+    main
+        padding-top: 6px
+        @apply pb-0
+
+        @screen md
+            @apply pb-6
+
+    .grid-statistics
+        & > div
+            @apply bg-snow
+            @apply p-6
+
+        .grid-statistic-item
+            position: relative
+
+            &:before,
+            &:after
+                @apply bg-snow
+                content: ""
+                width: 1.5rem
+                height: 1.5rem
+                position: absolute
+                bottom: -1.5rem
+
+            &:before
+                left: -1.5rem
+
+            &:after
+                right: -1.5rem
+
+            //&.last-item
+            //    &:before,
+            //    &:after
+            //        display: none
+
+            &.invisible
+                display: none
+
+                &[class*="lg:visible"]
+                    @screen lg
+                        display: block
+
+            //&:nth-child(2)
+            &:nth-child(3n+1)
+                @screen lg
+                    &:before
+                        $size: 500px
+                        width: $size
+                        left: -$size
+
+            &:nth-child(3n+3)
+                @screen lg
+                    &:after
+                        $size: 500px
+                        width: $size
+                        right: -$size
+
+                    @at-root #gatsby-focus-wrapper
+                        overflow-x: hidden
+
+            .centers-of-services,
+            .supliers-of-services,
+            .statistics-map
+                & > svg
+                    &:first-of-type,
+                    &:last-of-type
+                        width: 100%
+
+                    &:last-of-type:not(.svg-gradient)
+                        @apply -mt-16
+
+                        @screen xs
+                            @apply -mt-8
+
+
+            .statistics-map-title
+                max-width: 100%
+
+            .statistics-map-title,
+            .circle-total,
+            .progress-copy
+                @apply pb-6
+
+            .progress-bar
+                @apply mt-6
+
+                @screen md
+                    @apply mt-20
+
+                .progress-bar-images,
+                .progress-amount-container
+                    width: 100%
+
+            .statistics-map
+                @apply mt-2
+
+                @screen md
+                    @apply mt-8
+
+            &.invisible
+                @apply p-0
