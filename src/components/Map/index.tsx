@@ -54,7 +54,6 @@ const PROVIDERS = gql`
     ) {
       id
       coordinates
-      address
       name
     }
   }
