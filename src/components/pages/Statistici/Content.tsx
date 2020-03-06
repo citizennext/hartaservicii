@@ -122,7 +122,9 @@ export function Content() {
                     labelPosition={70}
                     lengthAngle={360}
                     lineWidth={18}
-                    onClick={undefined}
+                    onClick={e => {
+                      onMouseOver(e, 'dWithoutShelter');
+                    }}
                     onMouseOut={undefined}
                     onMouseOver={e => {
                       onMouseOver(e, 'dWithoutShelter');
@@ -162,7 +164,9 @@ export function Content() {
                     labelPosition={70}
                     lengthAngle={360}
                     lineWidth={18}
-                    onClick={undefined}
+                    onClick={e => {
+                      onMouseOver(e, 'dChildren');
+                    }}
                     onMouseOut={undefined}
                     onMouseOver={e => {
                       onMouseOver(e, 'dChildren');
