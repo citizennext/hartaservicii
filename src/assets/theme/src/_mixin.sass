@@ -1,1 +1,16 @@
 // Mixin
+$size: 95
+$bg-color_1: #6FBBB7
+$bg-color_2: #877272
+
+@for $i from 1 through $size
+
+    //@if $i == 1
+        //$i =
+
+    .bg-color-#{$i}
+        background-color: lighten($bg-color_1, $size / ($i * 2))
+        fill: none
+
+    .text-color-#{$i}
+        color: lighten($bg-color_1, $size / $i)
