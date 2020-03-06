@@ -49,11 +49,6 @@ const query = graphql`
           count
         }
       }
-      bucuresti: providers_aggregate(where: { district: { _eq: "București" } }) {
-        aggregate {
-          count
-        }
-      }
       buzau: providers_aggregate(where: { district: { _eq: "Buzău" } }) {
         aggregate {
           count
@@ -125,11 +120,6 @@ const query = graphql`
         }
       }
       iasi: providers_aggregate(where: { district: { _eq: "Iași" } }) {
-        aggregate {
-          count
-        }
-      }
-      ilfov: providers_aggregate(where: { district: { _eq: "Ilfov" } }) {
         aggregate {
           count
         }
@@ -214,6 +204,16 @@ const query = graphql`
           count
         }
       }
+      ilfov: providers_aggregate(where: { district: { _eq: "Ilfov" } }) {
+        aggregate {
+          count
+        }
+      }
+      bucuresti: providers_aggregate(where: { district: { _eq: "București" } }) {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `;
@@ -263,6 +263,7 @@ function StatisticsMap(props: Props) {
                     key={`map-${socialService[0]}-${index}`}
                     d={districtSvgMapping[socialService[0]]}
                     fill={`hsl(${props.districtHueAndSaturation}, ${lightness(socialService[1].aggregate.count)}%)`}
+                    stroke={`${socialService[0] === 'ilfov' ? '#CDE5C0' : ''}`}
                   />
                 );
               })}
