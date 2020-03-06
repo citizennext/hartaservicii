@@ -131,24 +131,72 @@ const Filter: React.FC<Props> = props => {
                 value={districts.filter(({ value }: any) => value === filters.district)}
                 options={districts}
                 onChange={handleChangeDistrict}
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 0,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#CEE6C1',
+                    primary: '#6FBBB7',
+                  },
+                })}
               />
               <Select
                 value={options.age.filter(({ value }) => value === filters.category)}
                 options={options.age}
                 onChange={handleChangeAge}
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 0,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#CEE6C1',
+                    primary: '#6FBBB7',
+                  },
+                })}
               />
               <Select
                 value={optionsService.filter(({ value }: any) => value === filters.service)}
                 options={optionsService}
                 onChange={handleChangeService}
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 0,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#CEE6C1',
+                    primary: '#6FBBB7',
+                  },
+                })}
               />
               <Select
                 isDisabled={isDisabled}
                 value={optionsSpecialization.filter(({ value }: any) => value === filters.specialization)}
                 options={optionsSpecialization}
                 onChange={handleChangeSpecialization}
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 0,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#cee6c1',
+                    primary: '#6fbbb7',
+                  },
+                })}
               />
-              <Select options={options.administrator} onChange={handleChangeAdministrator} />
+              <Select
+                options={options.administrator}
+                onChange={handleChangeAdministrator}
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 0,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#cee6c1',
+                    primary: '#6fbbb7',
+                  },
+                })}
+              />
             </div>
           </Drawer>
         </div>
@@ -160,6 +208,15 @@ const Filter: React.FC<Props> = props => {
               value={districts.filter(({ value }: any) => value === filters.district)}
               options={districts}
               onChange={handleChangeDistrict}
+              theme={theme => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  primary25: '#cee6c1',
+                  primary: '#6fbbb7',
+                },
+              })}
             />
           </div>
           <div className="select-container">
@@ -168,6 +225,15 @@ const Filter: React.FC<Props> = props => {
               value={options.age.filter(({ value }) => value === filters.category)}
               options={options.age}
               onChange={handleChangeAge}
+              theme={theme => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  primary25: '#cee6c1',
+                  primary: '#6fbbb7',
+                },
+              })}
             />
           </div>
           <div className="select-container">
@@ -176,6 +242,15 @@ const Filter: React.FC<Props> = props => {
               value={optionsService.filter(({ value }: any) => value === filters.service)}
               options={optionsService}
               onChange={handleChangeService}
+              theme={theme => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  primary25: '#cee6c1',
+                  primary: '#6fbbb7',
+                },
+              })}
             />
           </div>
           <div className="select-container">
@@ -185,6 +260,15 @@ const Filter: React.FC<Props> = props => {
               value={optionsSpecialization.filter(({ value }: any) => value === filters.specialization)}
               options={optionsSpecialization}
               onChange={handleChangeSpecialization}
+              theme={theme => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  primary25: '#cee6c1',
+                  primary: '#6fbbb7',
+                },
+              })}
             />
           </div>
           <div className="select-container">
@@ -193,6 +277,15 @@ const Filter: React.FC<Props> = props => {
               value={options.administrator.filter(({ value }) => value === filters.administrator)}
               options={options.administrator}
               onChange={handleChangeAdministrator}
+              theme={theme => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  primary25: '#cee6c1',
+                  primary: '#6fbbb7',
+                },
+              })}
             />
           </div>
           <div className="pin-number select-container">

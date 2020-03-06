@@ -100,3 +100,28 @@
 
             &.invisible
                 @apply p-0
+
+
+    .pie-chart
+        position: relative
+
+        .pie-chart-district
+            position: absolute
+            top: 0
+            left: 0
+            z-index: 1
+            width: 100%
+            height: auto
+            text-align: center
+            color: #978585
+            font-size: 1.5rem
+
+        .centers-piechart
+            position: relative
+            z-index: 0
+
+            svg
+                fill: none
+
+                text
+                    font-size: 8px
