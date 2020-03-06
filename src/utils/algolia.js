@@ -45,7 +45,7 @@ const queries = [
   {
     query: common,
     transformer: ({ data }) => prepareData(data.hasura),
-    indexName: process.env.ALGOLIA_INDEX_NAME_COMMON,
+    indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME_COMMON,
   },
 ];
 module.exports = queries;
