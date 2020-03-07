@@ -15,11 +15,11 @@ type Blogs = {
 };
 
 type Props = {
-  blogs: [Blogs];
+  featured: [Blogs];
+  regular: [Blogs];
 };
 
-export function Content({ blogs }: Props) {
-  const featuredPosts = { featuredPosts: blogs };
+export function Content({ featured, regular }: Props) {
   const firstSlug = 'noutati';
   const windowSize = useWindowSize();
   const dateFormat = (date: any) => {
@@ -28,9 +28,9 @@ export function Content({ blogs }: Props) {
 
   return (
     <div className="wrapper">
-      <FeaturedPosts {...featuredPosts} />
+      <FeaturedPosts featured={featured} />
       <ul className="blog-posts flex flex-wrap">
-        {blogs.map((item, index) => (
+        {regular.map((item, index) => (
           <li className="blog-post-item" key={`${item.id}-${index}`}>
             <div className="flex flex-wrap">
               {windowSize.width && windowSize.width >= 768

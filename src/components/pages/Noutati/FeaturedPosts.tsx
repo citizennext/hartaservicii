@@ -13,11 +13,10 @@ type Blogs = {
 };
 
 type Props = {
-  featuredPosts: [Blogs];
+  featured: [Blogs];
 };
 
-export function FeaturedPosts({ featuredPosts }: Props) {
-  const featured = featuredPosts.filter(item => item.featured).slice(0, 2);
+export function FeaturedPosts({ featured }: Props) {
   const countFeatured = featured.length;
   const firstSlug = 'noutati';
   const dateFormat = (date: any) => {
