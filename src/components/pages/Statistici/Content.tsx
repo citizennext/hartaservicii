@@ -3,6 +3,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import CircularProgressBar from '../../CircularProgressBar';
 import ProgressBar from '../../ProgressBar';
 import StatisticsMap from '../../StatisticsMap';
+import { StatisticsMapCapacity } from '../../StatisticsMap/StatisticsMapCapacity';
 const query = graphql`
   query {
     hasura {
@@ -21,6 +22,7 @@ const query = graphql`
           count
         }
         nodes {
+          capacity
           district
         }
       }
@@ -125,6 +127,15 @@ export function Content() {
                     classStatisticsMap="statistics-map"
                     data={childServices}
                     total={childServices.aggregate.count}
+                  />
+                </div>
+              </div>
+              <div className="grid-statistic-item last-item">
+                <div className="pie-chart">
+                  <StatisticsMapCapacity
+                    title="Capacitate locuri servicii locale"
+                    classStatisticsMap="statistics-map"
+                    data={services}
                   />
                 </div>
               </div>
