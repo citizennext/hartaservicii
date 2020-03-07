@@ -1,7 +1,14 @@
 import React from 'react';
 import { districtSvgMapping } from './DistrictMapping';
-import { countBy, identity, pipe, map, objOf, toPairs, apply, keys, values, difference, reverse } from 'ramda';
-
+import { objOf, keys, values, difference, reverse, uniq } from 'ramda';
+interface District {
+  district: string;
+  capacity: string;
+}
+interface DistrictNum {
+  district: string;
+  capacity: number;
+}
 type Props = {
   sqSizeWidth: number;
   sqSizeHeight: number;
@@ -14,14 +21,12 @@ type Props = {
     aggregate: {
       count: number;
     };
-    nodes: {
-      district: string;
-    }[];
+    nodes: District[];
   };
-  total: number;
+  total?: number;
 };
 
-function StatisticsMap(props: Props) {
+export function StatisticsMapCapacity(props: Props) {
   // Width of the enclosing square
   const sqSizeWidth = props.sqSizeWidth;
   // Height of the enclosing square
@@ -32,18 +37,22 @@ function StatisticsMap(props: Props) {
   const mapColor = props.mapColor;
   // Current color lightness
   const currentLightness = props.districtLightness;
-  interface District {
-    district: string;
-  }
+
   function manipulateData(array: District[]) {
-    const startArray: string[] = array.map(a => a.district);
-    // @ts-ignore
-    const startObject = countBy(identity)(startArray);
-    // @ts-ignore
-    const toIndividualKeys = pipe(toPairs, map(apply(objOf)));
-    return toIndividualKeys(startObject);
+    const newArray: DistrictNum[] = array.reduce((acc, val) => {
+      const o = acc.filter((obj: District) => obj.district === val.district).pop() || { district: val.district, capacity: 0 };
+      const stripped = val.capacity && val.capacity.match(/\d+\.?\d*/g);
+      const capacity = stripped ? parseInt(stripped[0]) : 0;
+
+      o.capacity += capacity;
+      // @ts-ignore
+      acc.push(o);
+      return acc;
+    }, []);
+    return newArray.map(a => objOf(a.district, a.capacity));
   }
-  const dataArray = manipulateData(props.data.nodes);
+  const dataArray = uniq(manipulateData(props.data.nodes));
+
   const missingDistricts = difference(
     keys(districtSvgMapping),
     dataArray.map((obj: { [key: string]: number }) => keys(obj)[0])
@@ -94,13 +103,13 @@ function StatisticsMap(props: Props) {
         <span className="map-min-amount">{minAmount}</span>
         <span className="map-max-amount">{maxAmount}</span>
       </div>
-      <p className="circle-total-amount text-center block mt-4">{props.total}</p>
+      {props.total && <p className="circle-total-amount text-center block mt-4">{props.total}</p>}
       <p className="statistics-map-title pb-20">{props.title}</p>
     </div>
   );
 }
 
-StatisticsMap.defaultProps = {
+StatisticsMapCapacity.defaultProps = {
   sqSizeWidth: 360,
   sqSizeHeight: 257,
   mapColor: `#CDE5C0`,
@@ -108,5 +117,3 @@ StatisticsMap.defaultProps = {
   districtLightness: 58,
   classStatisticsMap: '',
 };
-
-export default StatisticsMap;

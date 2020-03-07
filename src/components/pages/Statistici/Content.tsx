@@ -3,7 +3,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import CircularProgressBar from '../../CircularProgressBar';
 import ProgressBar from '../../ProgressBar';
 import StatisticsMap from '../../StatisticsMap';
-
+import { StatisticsMapCapacity } from '../../StatisticsMap/StatisticsMapCapacity';
 const query = graphql`
   query {
     hasura {
@@ -17,14 +17,35 @@ const query = graphql`
           count
         }
       }
-      homelessServices: providers_aggregate(where: { service: { category: { name: { _like: "%fără adăpost%" } } } }) {
+      services: providers_aggregate {
         aggregate {
           count
         }
+        nodes {
+          capacity
+          district
+        }
       }
-      childServices: providers_aggregate(where: { service: { category: { name: { _like: "%pentru copii%" } } } }) {
+      homelessServices: providers_aggregate(
+        where: { service: { category: { name: { _like: "%fără adăpost%" } } } }
+        order_by: { district: asc }
+      ) {
         aggregate {
           count
+        }
+        nodes {
+          district
+        }
+      }
+      childServices: providers_aggregate(
+        where: { service: { category: { name: { _like: "%pentru copii%" } } } }
+        order_by: { district: asc }
+      ) {
+        aggregate {
+          count
+        }
+        nodes {
+          district
         }
       }
       publicSuppliers: suppliers_aggregate(where: { supplier_type: { private: { _eq: false } } }) {
@@ -50,6 +71,7 @@ export function Content() {
           const {
             publicServices,
             privateServices,
+            services,
             homelessServices,
             childServices,
             publicSuppliers,
@@ -71,7 +93,12 @@ export function Content() {
                 <ProgressBar firstBar={homelessServices.aggregate.count} secondBar={childServices.aggregate.count} />
               </div>
               <div className="grid-statistic-item">
-                <StatisticsMap title="Capacitate servicii sociale (locuri)" classStatisticsMap="statistics-map" />
+                <StatisticsMap
+                  title="Capacitate servicii sociale (locuri)"
+                  classStatisticsMap="statistics-map"
+                  data={services}
+                  total={services.aggregate.count}
+                />
               </div>
               <div className="grid-statistic-item last-item">
                 <CircularProgressBar
@@ -83,8 +110,37 @@ export function Content() {
                   title="Furnizori de servicii sociale acreditați pe tot teritoriul țării"
                 />
               </div>
-              <div className="grid-statistic-item invisible lg:visible"></div>
-              <div className="grid-statistic-item invisible lg:visible"></div>
+              <div className="grid-statistic-item last-item">
+                <div className="pie-chart">
+                  <StatisticsMap
+                    title="Servicii pentru persoane fără adăpost"
+                    classStatisticsMap="statistics-map"
+                    data={homelessServices}
+                    total={homelessServices.aggregate.count}
+                  />
+                </div>
+              </div>
+              <div className="grid-statistic-item last-item">
+                <div className="pie-chart">
+                  <StatisticsMap
+                    title="Servicii pentru copii"
+                    classStatisticsMap="statistics-map"
+                    data={childServices}
+                    total={childServices.aggregate.count}
+                  />
+                </div>
+              </div>
+              <div className="grid-statistic-item last-item">
+                <div className="pie-chart">
+                  <StatisticsMapCapacity
+                    title="Capacitate locuri servicii locale"
+                    classStatisticsMap="statistics-map"
+                    data={services}
+                  />
+                </div>
+              </div>
+              {/* @todo - if need an empty element */}
+              {/*<div className="grid-statistic-item invisible lg:visible"></div>*/}
             </div>
           );
         }}
