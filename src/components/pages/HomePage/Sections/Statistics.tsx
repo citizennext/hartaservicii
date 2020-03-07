@@ -39,6 +39,14 @@ const query = graphql`
           count
         }
       }
+      services: providers_aggregate {
+        aggregate {
+          count
+        }
+        nodes {
+          district
+        }
+      }
     }
   }
 `;
@@ -73,14 +81,7 @@ function Statistics() {
     <StaticQuery
       query={query}
       render={data => {
-        const {
-          publicServices,
-          privateServices,
-          homelessServices,
-          childServices,
-          // publicSuppliers,
-          // privateSuppliers,
-        } = data.hasura;
+        const { publicServices, privateServices, homelessServices, childServices, services } = data.hasura;
         return (
           <div id="statistics" className="section circularprogressbar">
             <div className="bg-snow py-8 mb-32 xl:mb-56">
@@ -95,16 +96,11 @@ function Statistics() {
                   />
                   <ProgressBar firstBar={homelessServices.aggregate.count} secondBar={childServices.aggregate.count} />
                   {/* @todo Seco -> aici trebuie sa vezi stilizari pe responsive */}
-                  <StatisticsMap title="Capacitate servicii sociale (locuri)" />
-                  {/* @todo Cezar -> am comentat "CircularProgressBar", s-a pus harta dinamica */}
-                  {/*<CircularProgressBar
-                    firstBar={publicSuppliers.aggregate.count}
-                    secondBar={privateSuppliers.aggregate.count}
-                    firstBarLabel="publice"
-                    secondBarLabel="private"
-                    title="Furnizori de servicii sociale acreditați pe tot teritoriul țării"
-                  />*/}
-                  {/* <GradientMap classGradientMap="hidden xl:block xl:w-1/3 xl:m-auto" /> */}
+                  <StatisticsMap
+                    title="Distribuția serviciilor sociale pe județe"
+                    data={services}
+                    total={services.aggregate.count}
+                  />
                 </HsSlider>
               </div>
               <button className="button section-button my-1">Toate statisticile</button>
