@@ -141,6 +141,8 @@ export function Content() {
               </div>
               {/* @todo - if need an empty element */}
               {/*<div className="grid-statistic-item invisible lg:visible"></div>*/}
+              <div className="grid-statistic-item invisible lg:visible"></div>
+              <div className="grid-statistic-item invisible lg:visible"></div>
             </div>
           );
         }}

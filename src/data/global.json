@@ -89,6 +89,14 @@
         }
       }
     },
+    "cautare": {
+      "navigation": {
+        "label": "Căutare",
+        "url": "/cautare",
+        "title": "Căutare",
+        "nav": true
+      }
+    },
     "desprenoi": {
       "navigation": {
         "label": "Despre noi",

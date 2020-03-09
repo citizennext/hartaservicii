@@ -25,13 +25,13 @@ export function Footer() {
                 {Data.footer.links.asociatia.text}
               </a>{' '}
               cu <br className="hidden sm:block" />
-              sprijinul{' '}
+              sprijinul {' '}
+              <a title="RO SMART în Țara lui Andrei" href="https://taraluiandrei.ro/" target="_blank" rel="noreferrer noopener">
+                RO SMART în Țara lui Andrei
+              </a>{' '}
+              un program{' '}
               <a href="https://www.omvpetrom.com/ro" title="Omv Petrom" target="_blank" rel="noreferrer noopener">
                 OMV Petrom
-              </a>{' '}
-              prin programul{' '}
-              <a title="Țara lui Andrei" href="https://taraluiandrei.ro/" target="_blank" rel="noreferrer noopener">
-                Țara lui Andrei
               </a>
               .
             </p>
