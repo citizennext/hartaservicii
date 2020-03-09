@@ -6,14 +6,13 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { X as Close } from 'react-feather';
-import NetlifyForm from 'react-netlify-form';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
 
 function PopUps(props: any) {
   const ratingMutation = gql`
     mutation MyMutation($provider: uuid!, $rating: Int!) {
-      insert_provider_rating(objects: { provider_id: $provider, rating: $rating }) {
+      insert_provider_rating(objects: { provider_id: $provider, rating: $rating, email: $email, feedback: $feedback }) {
         returning {
           id
         }
@@ -62,7 +61,10 @@ function PopUps(props: any) {
   `;
 
   const [rating, setRating] = useState<number>(1);
-  const [popup, setRatingPopUp] = useState<number>(false);
+  const [email, setEmail] = useState<string>('');
+  const [feedback, setFeedback] = useState<string>('');
+  const [acceptSavingEmail, setAcceptance] = useState<boolean>(false);
+  const [popup, setRatingPopUp] = useState<boolean>(false);
   const provider = props.id;
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
@@ -73,55 +75,53 @@ function PopUps(props: any) {
   const providers = data.providers_by_pk;
   const averageRating = (providers.rating_aggregate.aggregate.avg.rating / 10).toFixed(1);
   const percentageRating = (providers.rating_aggregate.aggregate.avg.rating * 100) / 50;
-  const closeRatingPopup = () => {
-    setRatingPopUp(false);
-  };
   const ratingPopUp = (popup: boolean, value: number) => {
     if (popup) {
       return (
         <div className="rating-popup">
-          <button
-            className="close-map-marker-popup"
-            onClick={() => {
-              closeRatingPopup();
-            }}>
+          <button className="close-map-marker-popup" onClick={() => setRatingPopUp(false)}>
             <Close className="text-celeste" size={30} />
           </button>
-          <NetlifyForm name="rating-review">
-            {({ loading, error, success }: any) => (
-              <>
-                {loading && <div className="text-leaf">Loading...</div>}
-                {error && <div className="text-error">Your information was not sent. Please try again later.</div>}
-                {success && <div className="text-celeste">Thank you for your rating and reviews!</div>}
-                {!loading && !success && (
-                  <>
-                    <div className="full">
-                      <StarRatingComponent
-                        name="ratei" /* name of the radio input, it is required */
-                        value={rating} /* number of selected icon (`0` - none, `1` - first) */
-                        starCount={5} /* number of icons in rating, default `5` */
-                        onStarClick={(value: number) => saveRating(value)} /* on icon click handler */
-                        onStarHover={(value: number) => setRating(value)} /* on icon hover handler */
-                        renderStarIcon={() => <span>●</span>}
-                        starColor="#6FBBB7"
-                        emptyStarColor="transparent"
-                      />
-                    </div>
-                    <input type="email" name="email" placeholder="Adresa ta de email" />
-                    <textarea name="review" rows={5} placeholder="Your Review ..." />
-                    <button
-                      type="submit"
-                      className="text-white"
-                      onClick={() => {
-                        saveRatingReview(value);
-                      }}>
-                      Salveaza
-                    </button>
-                  </>
-                )}
-              </>
-            )}
-          </NetlifyForm>
+          <>
+            <div className="full">
+              <StarRatingComponent
+                name="ratei" /* name of the radio input, it is required */
+                value={rating} /* number of selected icon (`0` - none, `1` - first) */
+                starCount={5} /* number of icons in rating, default `5` */
+                onStarClick={(value: number) => saveRating(value)} /* on icon click handler */
+                onStarHover={(value: number) => setRating(value)} /* on icon hover handler */
+                renderStarIcon={() => <span>●</span>}
+                starColor="#6FBBB7"
+                emptyStarColor="transparent"
+              />
+            </div>
+            <label>
+              Adresa ta de email nu va fi publicată. Comentariul tău va fi asociat unui numar de identificare alfanumeric.
+            </label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Adresa ta de email"
+              value={email}
+              onChange={e => setEmail(e.currentTarget.value)}
+            />
+            <textarea
+              name="review"
+              rows={5}
+              placeholder="Lasă un testimonial despre acest serviciu social..."
+              value={feedback}
+              onChange={e => setFeedback(e.currentTarget.value)}
+            />
+            <label>Accept salvarea adresei de email si a testimonialului</label>
+            <input type="checkbox" checked={acceptSavingEmail} onChange={() => setAcceptance(!acceptSavingEmail)} />
+            <button
+              type="submit"
+              className="text-white"
+              disabled={!acceptSavingEmail}
+              onClick={() => addRating({ variables: { provider: props.id, rating: value * 10, email, feedback } })}>
+              Salveaza
+            </button>
+          </>
         </div>
       );
     }
@@ -129,9 +129,6 @@ function PopUps(props: any) {
   const saveRating = (value: number) => {
     setRating(value);
     setRatingPopUp(true);
-  };
-  const saveRatingReview = (value: number) => {
-    addRating({ variables: { provider: props.id, rating: value * 10 } });
   };
   return (
     <section className="map-marker-popup" id="map-marker-popup" data-id={providers.id}>
