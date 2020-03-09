@@ -1027,3 +1027,75 @@
 
 	&.drawer-open
 		display: block
+
+.rating-popup
+	position: fixed
+	top: 20%
+	right: 0
+	z-index: 999999
+	width: 100%
+	height: 80%
+	padding: 15px
+	border-radius: 5px 5px 0 0
+	box-shadow: 0 0 100px #000000
+	@apply bg-white
+
+	@screen md
+		top: 10%
+		right: 10%
+		width: 80%
+		height: auto
+		padding: 50px
+		border-radius: 5px
+
+	@screen lg
+		top: 15%
+		right: 10%
+		width: 50%
+		padding: 50px
+		border-radius: 5px
+
+	textarea
+		height: 180px !important
+
+		@screen xs
+			height: 200px !important
+
+		@screen sm
+			height: 250px !important
+
+	.dv-star-rating
+		@apply mb-16
+
+		label
+			padding-right: 9px
+
+			span
+				@apply relative
+				@apply rounded-full
+				border: 4px solid #978585
+				padding: 0 3px
+				line-height: 19px
+				font-size: 20.5px
+
+			&:first-of-type,
+			&:last-of-type
+				span
+					&:after
+						content: ''
+						bottom: -48px
+						left: -20%
+						@apply absolute
+						@apply text-celeste
+						text-align: center
+						font-family: 'Koho'
+						font-size: 14px
+
+			&:first-of-type
+				span
+					&:after
+						content: 'Foarte bine'
+			&:last-of-type
+				span
+					&:after
+						content: 'Foarte rău'
