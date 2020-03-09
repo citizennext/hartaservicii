@@ -73,8 +73,11 @@ function StatisticsMap(props: Props) {
               key={`map-${key}-${index}`}
               d={districtSvgMapping[key]}
               fill={`hsl(${props.districtHueAndSaturation}, ${lightness(value)}%)`}
-              stroke={key === 'Ilfov' || key === 'Prahova' || key === 'Ialomița' ? '#CDE5C0' : ''}
-            />
+              stroke={key === 'Ilfov' || key === 'Prahova' || key === 'Ialomița' ? '#CDE5C0' : ''}>
+              <title>
+                {key} ({value})
+              </title>
+            </path>
           );
         })}
       </svg>
