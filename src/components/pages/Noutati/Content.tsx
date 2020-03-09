@@ -42,7 +42,7 @@ export function Content({ featured, regular }: Props) {
                     </div>
                   )
                 : null}
-              <div className="content">
+              <div className="content" data-image-exist={!!item.image}>
                 <h3 className="title">
                   <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
                     {item.title}
