@@ -11,8 +11,15 @@ import iconDirections from '../../assets/images/icon_directions.svg';
 
 function PopUps(props: any) {
   const ratingMutation = gql`
-    mutation MyMutation($provider: uuid!, $rating: Int!) {
-      insert_provider_rating(objects: { provider_id: $provider, rating: $rating, email: $email, feedback: $feedback }) {
+    mutation AddRating($provider: uuid!, $rating: Int!, $email: String!, $feedback: String!, $username: String!) {
+      insert_provider_rating(
+        objects: {
+          provider_id: $provider
+          rating: $rating
+          user: { data: { email: $email, username: $username, id: $username } }
+          feedback: $feedback
+        }
+      ) {
         returning {
           id
         }
@@ -118,7 +125,18 @@ function PopUps(props: any) {
               type="submit"
               className="text-white"
               disabled={!acceptSavingEmail}
-              onClick={() => addRating({ variables: { provider: props.id, rating: value * 10, email, feedback } })}>
+              onClick={() =>
+                addRating({
+                  variables: {
+                    provider: props.id,
+                    rating: value * 10,
+                    email: email,
+                    // @ts-ignore
+                    username: email.match(/([^@]+)/g)[0],
+                    feedback: feedback,
+                  },
+                })
+              }>
               Salveaza
             </button>
           </>
