@@ -1,31 +1,16 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import StarRatingComponent from 'react-star-rating-component';
 import CopyToClipboard from 'react-copy-to-clipboard';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { X as Close } from 'react-feather';
+import RatingReview from './RatingReview';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
 
 function PopUps(props: any) {
-  const ratingMutation = gql`
-    mutation AddRating($provider: uuid!, $rating: Int!, $email: String!, $feedback: String!, $username: String!) {
-      insert_provider_rating(
-        objects: {
-          provider_id: $provider
-          rating: $rating
-          user: { data: { email: $email, username: $username, id: $username } }
-          feedback: $feedback
-        }
-      ) {
-        returning {
-          id
-        }
-      }
-    }
-  `;
   const providersQuery = gql`
     query Provider($provider: uuid!) {
       providers_by_pk(id: $provider) {
@@ -66,84 +51,17 @@ function PopUps(props: any) {
       }
     }
   `;
-
   const [rating, setRating] = useState<number>(1);
-  const [email, setEmail] = useState<string>('');
-  const [feedback, setFeedback] = useState<string>('');
-  const [acceptSavingEmail, setAcceptance] = useState<boolean>(false);
   const [popup, setRatingPopUp] = useState<boolean>(false);
   const provider = props.id;
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
   });
-  const [addRating] = useMutation(ratingMutation);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! ${error.message}</p>;
   const providers = data.providers_by_pk;
   const averageRating = (providers.rating_aggregate.aggregate.avg.rating / 10).toFixed(1);
   const percentageRating = (providers.rating_aggregate.aggregate.avg.rating * 100) / 50;
-  const ratingPopUp = (popup: boolean, value: number) => {
-    if (popup) {
-      return (
-        <div className="rating-popup">
-          <button className="close-map-marker-popup" onClick={() => setRatingPopUp(false)}>
-            <Close className="text-celeste" size={30} />
-          </button>
-          <>
-            <div className="full">
-              <StarRatingComponent
-                name="ratei" /* name of the radio input, it is required */
-                value={rating} /* number of selected icon (`0` - none, `1` - first) */
-                starCount={5} /* number of icons in rating, default `5` */
-                onStarClick={(value: number) => saveRating(value)} /* on icon click handler */
-                onStarHover={(value: number) => setRating(value)} /* on icon hover handler */
-                renderStarIcon={() => <span>●</span>}
-                starColor="#6FBBB7"
-                emptyStarColor="transparent"
-              />
-            </div>
-            <label>
-              Adresa ta de email nu va fi publicată. Comentariul tău va fi asociat unui numar de identificare alfanumeric.
-            </label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Adresa ta de email"
-              value={email}
-              onChange={e => setEmail(e.currentTarget.value)}
-            />
-            <textarea
-              name="review"
-              rows={5}
-              placeholder="Lasă un testimonial despre acest serviciu social..."
-              value={feedback}
-              onChange={e => setFeedback(e.currentTarget.value)}
-            />
-            <label>Accept salvarea adresei de email si a testimonialului</label>
-            <input type="checkbox" checked={acceptSavingEmail} onChange={() => setAcceptance(!acceptSavingEmail)} />
-            <button
-              type="submit"
-              className="text-white"
-              disabled={!acceptSavingEmail}
-              onClick={() =>
-                addRating({
-                  variables: {
-                    provider: props.id,
-                    rating: value * 10,
-                    email: email,
-                    // @ts-ignore
-                    username: email.match(/([^@]+)/g)[0],
-                    feedback: feedback,
-                  },
-                })
-              }>
-              Salveaza
-            </button>
-          </>
-        </div>
-      );
-    }
-  };
   const saveRating = (value: number) => {
     setRating(value);
     setRatingPopUp(true);
@@ -304,7 +222,8 @@ function PopUps(props: any) {
           />
         </div>
       </footer>
-      {ratingPopUp(popup, rating)}
+      // @ts-ignore
+      <RatingReview rating={rating} validate={popup} providerId={provider} dataClass="PopUps"/>
     </section>
   );
 }

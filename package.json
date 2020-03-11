@@ -80,7 +80,8 @@
     "tailwindcss": "^1.1.4",
     "typeface-montserrat": "^0.0.75",
     "webpack": "^4.41.5",
-    "yallist": "^4.0.0"
+    "yallist": "^4.0.0",
+    "@types/yup": "^0.26.32"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",

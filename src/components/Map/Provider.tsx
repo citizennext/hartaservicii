@@ -2,26 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import Leaflet, { LatLngTuple } from 'leaflet';
 import CopyToClipboard from 'react-copy-to-clipboard';
+// @ts-ignore
 import { NotificationManager } from 'react-notifications';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import StarRatingComponent from 'react-star-rating-component';
 import iconDirections from '../../assets/images/icon_directions.svg';
 import iconClose from '../../assets/images/icon_arrowg.svg';
 import { useWindowSize } from '../../hooks/useWindowSize';
+import RatingReview from "./RatingReview";
 
 function Provider(props: any) {
-  const ratingMutation = gql`
-    mutation MyMutation($provider: uuid!, $rating: Int!) {
-      insert_provider_rating(objects: { provider_id: $provider, rating: $rating }) {
-        returning {
-          id
-        }
-      }
-    }
-  `;
   const providersQuery = gql`
     query Provider($provider: uuid!) {
       providers_by_pk(id: $provider) {
@@ -64,24 +57,23 @@ function Provider(props: any) {
   `;
   const windowSize = useWindowSize();
   const [rating, setRating] = useState<number>(1);
+  const [popup, setRatingPopUp] = useState<boolean>(false);
   const provider = props.id;
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
   });
-  const [addRating] = useMutation(ratingMutation);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! ${error.message}</p>;
   const providers = data.providers_by_pk;
   const averageRating = (providers.rating_aggregate.aggregate.avg.rating / 10).toFixed(1);
   const percentageRating = (providers.rating_aggregate.aggregate.avg.rating * 100) / 50;
-  const saveRating = (value: number) => {
-    setRating(value);
-    addRating({ variables: { provider: props.id, rating: value * 10 } });
-  };
   // @ts-ignore
   const zoomControl: boolean = windowSize.width >= 768;
   const position: LatLngTuple = providers.coordinates;
-
+  const saveRating = (value: number) => {
+    setRating(value);
+    setRatingPopUp(true);
+  };
   return (
     <>
       <Map
@@ -261,6 +253,8 @@ function Provider(props: any) {
               />
             </div>
           </footer>
+          // @ts-ignore
+          <RatingReview rating={rating} validate={popup} providerId={provider} dataClass="Providers"/>
         </section>
       </div>
     </>

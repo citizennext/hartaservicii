@@ -13280,6 +13280,13 @@ react-focus-lock@^2.2.1:
     use-callback-ref "^1.2.1"
     use-sidecar "^1.0.1"
 
+react-form-with-constraints@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/react-form-with-constraints/-/react-form-with-constraints-0.15.0.tgz#414e4fd3abc896801fa3a7007f49fd586b31a9f0"
+  integrity sha512-K67BbJKzZCGg3I06ReAbyScAs0FPmERP0Y+58pNGnbpY33KR276LXZ7J+Dr6oOTxuG3MMhUuZ6LKCAO2dtxxEQ==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-google-recaptcha@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-google-recaptcha/-/react-google-recaptcha-1.1.0.tgz#f33bef3e22e8c016820e80da48d573f516bb99e8"

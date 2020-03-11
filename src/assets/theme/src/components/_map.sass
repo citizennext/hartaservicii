@@ -1056,13 +1056,13 @@
 		border-radius: 5px
 
 	textarea
-		height: 180px !important
+		height: 160px !important
 
 		@screen xs
-			height: 200px !important
+			height: 180px !important
 
 		@screen sm
-			height: 250px !important
+			height: 230px !important
 
 	.dv-star-rating
 		@apply mb-16
@@ -1099,3 +1099,29 @@
 				span
 					&:after
 						content: 'Foarte rău'
+
+	input
+		box-shadow: unset !important
+
+		&#rating-review-msg
+			top: 7px
+			left: 0
+
+		&[type="email"]
+			@apply mb-0
+
+	&.field-validation-error
+		border-color: #cc0000
+
+	button
+		&[disabled]
+			opacity: .5
+			cursor: unset
+
+			&:hover
+				@apply bg-celeste
+
+	.validation-error
+		font-size: 14px
+		font-style: italic
+		@apply text-error
