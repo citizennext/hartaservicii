@@ -61,6 +61,8 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/assets/images/harta-icon.png`, // This path is relative to the root of the site.
+        crossOrigin: `anonymous`,
+        rel: `preload`
       },
     },
     {
@@ -119,5 +121,24 @@ module.exports = {
         chunkSize: 10000, // default: 1000
       },
     },
+    {
+      resolve: "gatsby-plugin-preconnect",
+      options: {
+        domains: [
+          "https://f2r31ssu7s-dsn.algolia.net"
+        ]
+      }
+    },
+    {
+      resolve: `gatsby-plugin-minify`,
+      options: {
+        removeAttributeQuotes: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true
+      }
+    }
   ],
 };

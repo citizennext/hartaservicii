@@ -10,7 +10,7 @@ function Hero() {
     <StaticQuery
       query={graphql`
         query heroQuery {
-          file(relativePath: { regex: "/HSS_people_clean_2000.png/" }) {
+          file(relativePath: { regex: "/HSS_people_clean_2000.jpg/" }) {
             childImageSharp {
               fluid(
                 maxWidth: 870
