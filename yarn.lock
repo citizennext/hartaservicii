@@ -2489,6 +2489,11 @@
   resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-11.0.0.tgz#124b9ed9c65b7091cc36da59ae12cbd47d8745ea"
   integrity sha512-vFql3tOxs6clgh+WVoLW3nOkNGCdeKsMU6mQZkOerJpV/CR9Xc1c1lZ+kYU+hNSobrQIOcNovWfPFDJIhcG5Pw==
 
+"@types/yup@^0.26.32":
+  version "0.26.32"
+  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.26.32.tgz#bd356fb405f3d641eff963854edf7ad854a8e829"
+  integrity sha512-55WFAq8lNYXdRzSP1cenMFFXtPRe7PWsqn5y9ibqKHOQZ/cSLErkcnB1LE89M7W2TSXVDFtx+T7eFePkGoB+xw==
+
 "@types/zen-observable@^0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.8.0.tgz#8b63ab7f1aa5321248aad5ac890a485656dcea4d"
@@ -13279,13 +13284,6 @@ react-focus-lock@^2.2.1:
     react-clientside-effect "^1.2.2"
     use-callback-ref "^1.2.1"
     use-sidecar "^1.0.1"
-
-react-form-with-constraints@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/react-form-with-constraints/-/react-form-with-constraints-0.15.0.tgz#414e4fd3abc896801fa3a7007f49fd586b31a9f0"
-  integrity sha512-K67BbJKzZCGg3I06ReAbyScAs0FPmERP0Y+58pNGnbpY33KR276LXZ7J+Dr6oOTxuG3MMhUuZ6LKCAO2dtxxEQ==
-  dependencies:
-    prop-types "^15.7.2"
 
 react-google-recaptcha@^1.0.2:
   version "1.1.0"

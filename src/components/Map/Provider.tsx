@@ -253,7 +253,6 @@ function Provider(props: any) {
               />
             </div>
           </footer>
-          // @ts-ignore
           <RatingReview rating={rating} validate={popup} providerId={provider} dataClass="Providers"/>
         </section>
       </div>

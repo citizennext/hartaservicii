@@ -66,6 +66,8 @@ function PopUps(props: any) {
     setRating(value);
     setRatingPopUp(true);
   };
+  // @ts-ignore
+  // @ts-ignore
   return (
     <section className="map-marker-popup" id="map-marker-popup" data-id={providers.id}>
       <NotificationContainer />
@@ -222,7 +224,6 @@ function PopUps(props: any) {
           />
         </div>
       </footer>
-      // @ts-ignore
       <RatingReview rating={rating} validate={popup} providerId={provider} dataClass="PopUps"/>
     </section>
   );

@@ -1035,7 +1035,7 @@
 	z-index: 999999
 	width: 100%
 	height: 80%
-	padding: 15px
+	padding: 30px 15px 15px 15px
 	border-radius: 5px 5px 0 0
 	box-shadow: 0 0 100px #000000
 	@apply bg-white
@@ -1055,13 +1055,27 @@
 		padding: 50px
 		border-radius: 5px
 
+	&[data-class="Providers"]
+		@screen lg
+			top: 10%
+			right: 25%
+			width: 50%
+			padding: 50px
+			border-radius: 5px
+
 	textarea
-		height: 160px !important
+		height: 100px !important
 
 		@screen xs
-			height: 180px !important
+			height: 160px !important
 
 		@screen sm
+			height: 230px !important
+
+		@screen lg
+			height: 160px !important
+
+		@screen xl
 			height: 230px !important
 
 	.dv-star-rating
@@ -1100,18 +1114,33 @@
 					&:after
 						content: 'Foarte rău'
 
-	input
-		box-shadow: unset !important
+	.popup-suucess .dv-star-rating
+		@apply mb-2
 
+		label
+			cursor: unset !important
+
+			&:first-of-type,
+			&:last-of-type
+				span
+					&:after
+						display: none
+
+	input
 		&#rating-review-msg
 			top: 7px
 			left: 0
 
-		&[type="email"]
+		&[name="email"]
 			@apply mb-0
 
-	&.field-validation-error
-		border-color: #cc0000
+	input,
+	select,
+	textarea
+		box-shadow: unset !important
+
+		&.field-validation-error
+			border-color: #cc0000
 
 	button
 		&[disabled]
@@ -1122,6 +1151,21 @@
 				@apply bg-celeste
 
 	.validation-error
+		display: block
+		position: absolute
+		bottom: -12px
+		right: 0
 		font-size: 14px
 		font-style: italic
-		@apply text-error
+		border-radius: 5px 0 5px 5px
+		padding: 0.1rem 0.5rem
+		@apply text-white
+		@apply bg-error
+
+	.message
+		&.message-success
+			@apply py-2
+			@apply px-4
+			@apply bg-leaf
+			@apply text-brown
+			@apply rounded
