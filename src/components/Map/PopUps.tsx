@@ -224,7 +224,7 @@ function PopUps(props: any) {
           />
         </div>
       </footer>
-      <RatingReview rating={rating} validate={popup} providerId={provider} dataClass="PopUps"/>
+      {popup && <RatingReview rating={rating} setRating={setRating} setRatingPopUp={setRatingPopUp} providerId={provider} dataClass="PopUps"/>}
     </section>
   );
 }

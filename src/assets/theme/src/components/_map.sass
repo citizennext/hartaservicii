@@ -1150,6 +1150,7 @@
 			&:hover
 				@apply bg-celeste
 
+	.validation-passed,
 	.validation-error
 		display: block
 		position: absolute
@@ -1159,8 +1160,14 @@
 		font-style: italic
 		border-radius: 5px 0 5px 5px
 		padding: 0.1rem 0.5rem
-		@apply text-white
+
+	.validation-passed
+		@apply bg-leaf
+		@apply text-brown
+
+	.validation-error
 		@apply bg-error
+		@apply text-white
 
 	.message
 		&.message-success
