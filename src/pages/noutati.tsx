@@ -20,7 +20,7 @@ export default class Noutati extends React.Component<{ data: any }, {}> {
           bodyClassName="page-blog"
         />
         <Header />
-        {hasura.featured.length > 0 ? <AfterHeader /> : <></>}
+        {hasura.featured.length > 0 ? <AfterHeader hasTopSeparator={false} hasBottomSeparator={false} /> : <></>}
         <Layout>
           <Content {...hasura} />
         </Layout>

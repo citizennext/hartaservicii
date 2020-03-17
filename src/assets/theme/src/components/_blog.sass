@@ -28,11 +28,6 @@
                 width: 769px
 
     .blog-posts
-        @apply px-6
-
-        @screen lg
-            @apply px-0
-
         .blog-post-item
             @apply w-full
             @apply py-6
@@ -93,11 +88,6 @@
                     @screen md
                         @apply w-full
 
-                    .summary
-                        text-overflow: ellipsis
-                        white-space: nowrap
-                        overflow: hidden
-
             .title
                 @apply mb-3
                 font-weight: 600
@@ -114,7 +104,6 @@
 
     .blog-posts-featured
         @apply w-full
-        @apply px-6
         position: relative
         top: 15px
         margin-top: -$height
