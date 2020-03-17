@@ -73,6 +73,19 @@
                         @screen xs
                             @apply -mt-8
 
+                    path
+                        &:hover
+                            position: relative
+
+                            text
+                                position: absolute
+                                top: -10px
+                                left: 10px
+                                width: 50px
+                                height: 50px
+                                background-color: #51a351
+                                color: white
+                                display: block
 
             .statistics-map-title
                 max-width: 100%
@@ -125,3 +138,18 @@
 
                 text
                     font-size: 8px
+
+.statistics-tooltip
+    @apply px-4
+    @apply py-1
+    @apply bg-brown
+    border-radius: 5px
+    box-shadow: 10px 10px 20px #999999
+
+    span
+        @apply w-full
+        @apply py-1
+        @apply text-white
+        display: block
+        clear: left
+        text-align: center
