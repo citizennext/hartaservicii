@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import Drawer from './Drawer/Drawer';
-
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Close, Menu } from './Icons';
 
@@ -28,7 +27,6 @@ type Props = {
 
 const Navigation: React.FC<Props> = props => {
   const nav = props.nav;
-
   const [isOpen, setIsOpen] = useState(false);
   const openDrawer = () => {
     setIsOpen((current: boolean) => !current);
@@ -66,7 +64,7 @@ const Navigation: React.FC<Props> = props => {
               title="Facebook Page"
               target="_blank"
               rel="noreferrer noopener">
-              <button className="social-nav"></button>
+              <span className="social-nav"></span>
             </a>
           </Drawer>
         </div>

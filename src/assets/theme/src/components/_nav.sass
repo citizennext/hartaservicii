@@ -155,7 +155,9 @@ header
                     @apply pt-12
                     font-size: 14px
 
-                    &:hover,:active
+                    &:hover,
+                    &.active,
+                    &[aria-current="page"]
                         @apply border-t-8
                         @apply border-burg
                         @apply pt-12
