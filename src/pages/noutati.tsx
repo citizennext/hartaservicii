@@ -20,7 +20,7 @@ export default class Noutati extends React.Component<{ data: any }, {}> {
           bodyClassName="page-blog"
         />
         <Header />
-        {hasura.blogs.filter((item: { featured: boolean }) => item.featured).length ? <AfterHeader /> : <></>}
+        {hasura.featured.length > 0 ? <AfterHeader hasTopSeparator={false} hasBottomSeparator={false} /> : <></>}
         <Layout>
           <Content {...hasura} />
         </Layout>
@@ -33,12 +33,28 @@ export default class Noutati extends React.Component<{ data: any }, {}> {
 export const pageQuery = graphql`
   query {
     hasura {
-      blogs(last: 10) {
+      featured: blogs(last: 2, where: { featured: true }) {
         id
         title
         summary
         slug
-        featured
+        createdAt
+        image {
+          url
+          urlSharp {
+            childImageSharp {
+              fluid(maxWidth: 370, maxHeight: 190) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+        }
+      }
+      regular: blogs(last: 8, where: { featured: false }) {
+        id
+        title
+        summary
+        slug
         createdAt
         image {
           url

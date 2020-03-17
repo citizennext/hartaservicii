@@ -13,18 +13,17 @@ type Blogs = {
 };
 
 type Props = {
-  featuredPosts: [Blogs];
+  featured: [Blogs];
 };
 
-export function FeaturedPosts({ featuredPosts }: Props) {
-  const featured = featuredPosts.filter(item => item.featured).slice(0, 2);
+export function FeaturedPosts({ featured }: Props) {
   const countFeatured = featured.length;
   const firstSlug = 'noutati';
   const dateFormat = (date: any) => {
     return new Date(date);
   };
   return (
-    <ul className="flex flex-wrap blog-posts-featured">
+    <ul className="flex flex-wrap blog-posts-featured px-0 md:px-6">
       {featured.map((item, index) => (
         <li className="blog-post-featured-item" data-items={countFeatured} key={`${item.id}-${item.featured}-${index}`}>
           <div className="flex flex-wrap">
@@ -36,18 +35,18 @@ export function FeaturedPosts({ featuredPosts }: Props) {
             <div className="content">
               <h3 className="title">
                 <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
-                  {item.title}
+                  <span className="ellipsis-clamp-2">{item.title}</span>
                 </Link>
               </h3>
-              <span className="date">
+              <div className="date">
                 {dateFormat(item.createdAt).toLocaleString('ro-RO', {
                   timeZone: 'UTC',
                   year: 'numeric',
                   month: 'short',
                   day: 'numeric',
                 })}
-              </span>
-              <span className="summary">{item.summary}</span>
+              </div>
+              <div className="summary ellipsis-clamp-3">{item.summary}</div>
               <Link to={`/${firstSlug}/${item.slug}`} title={item.title} className="btn-arrowonly">
                 <span>View Post</span>
               </Link>
