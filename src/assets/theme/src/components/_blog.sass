@@ -27,19 +27,24 @@
                 height: 357px
                 width: 769px
 
-    .blog-posts
+    .main
+        @apply mb-32
+
+    .blog-posts // px-0 md:px-6
+        @apply w-full
+        @apply p-0
+
+        @screen md
+            @apply px-6
+
+        @screen lg
+            @apply w-4/6
+            @apply m-auto
+
         .blog-post-item
             @apply w-full
-            @apply py-6
+            @apply py-8
             border-bottom: 1px solid #efefef
-
-            @screen md
-                @apply py-4
-
-            @screen lg
-                @apply w-4/6
-                @apply m-auto
-                @apply py-4
 
             .image
                 @screen md

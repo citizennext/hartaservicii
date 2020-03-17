@@ -1,10 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
-// @ts-ignore
-import LinesEllipsis from 'react-lines-ellipsis';
-// @ts-ignore
-import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
 
 type Blogs = {
   id: string;
@@ -23,7 +19,6 @@ type Props = {
 export function FeaturedPosts({ featured }: Props) {
   const countFeatured = featured.length;
   const firstSlug = 'noutati';
-  const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
   const dateFormat = (date: any) => {
     return new Date(date);
   };
@@ -40,7 +35,7 @@ export function FeaturedPosts({ featured }: Props) {
             <div className="content">
               <h3 className="title">
                 <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
-                  <ResponsiveEllipsis text={item.title} maxLine="2" ellipsis="..." trimRight basedOn="letters" />
+                  <span className="ellipsis-clamp-2">{item.title}</span>
                 </Link>
               </h3>
               <div className="date">
@@ -51,9 +46,7 @@ export function FeaturedPosts({ featured }: Props) {
                   day: 'numeric',
                 })}
               </div>
-              <div className="summary">
-                <ResponsiveEllipsis text={item.summary} maxLine="3" ellipsis="..." trimRight basedOn="letters" />
-              </div>
+              <div className="summary ellipsis-clamp-3">{item.summary}</div>
               <Link to={`/${firstSlug}/${item.slug}`} title={item.title} className="btn-arrowonly">
                 <span>View Post</span>
               </Link>
