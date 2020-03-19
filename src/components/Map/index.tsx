@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Leaflet, { LatLngTuple } from 'leaflet';
-import { Map, Marker, TileLayer, Tooltip, ZoomControl } from 'react-leaflet';
+import { Map, Marker, TileLayer, Tooltip, ZoomControl, MapEvents } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { navigate } from '@reach/router';
 import getSlug from 'speakingurl';
@@ -8,6 +8,7 @@ import Filter from './Filter';
 import gql from 'graphql-tag';
 import queryString from 'query-string';
 import { Query } from 'react-apollo';
+import { Spinner } from '../Spinner';
 import FilterOptions from '../../data/filter-options.json';
 import ROCoordinates from '../../data/ro-coordinates.json';
 
@@ -29,6 +30,7 @@ type State = {
   active: boolean;
   filters: FilterObject;
   totalResults: number;
+  loadingSpinner: boolean;
 };
 
 type Provider = {
@@ -70,6 +72,7 @@ export default class Harta extends Component<any, State> {
     active: false,
     filters: { district: null, category: null, service: null, specialization: null, administrator: null },
     totalResults: 0,
+    loadingSpinner: true,
   };
 
   componentDidMount() {
@@ -148,6 +151,11 @@ export default class Harta extends Component<any, State> {
     });
   };
 
+  completedQuery = (provider: { [key: string]: [] }, loading: boolean) => {
+    this.setState({ totalResults: provider.providers.length });
+    this.setState({ loadingSpinner: loading });
+  };
+
   render() {
     const position: LatLngTuple = [this.state.lat, this.state.lng];
     const filters = this.state.filters;
@@ -158,6 +166,7 @@ export default class Harta extends Component<any, State> {
       specialization: filters.specialization ? `%${filters.specialization}%` : null,
       supplierPrivate: filters.administrator,
     };
+    // @ts-ignore
     return (
       <>
         <Map
@@ -175,11 +184,9 @@ export default class Harta extends Component<any, State> {
             <Query
               query={PROVIDERS}
               variables={queryVariables}
-              onCompleted={(provider: { [key: string]: [] }) => {
-                this.setState({ totalResults: provider.providers.length });
-              }}>
+              onCompleted={(provider: { [key: string]: [] }, loading: boolean) => this.completedQuery(provider, loading)}>
               {({ loading, error, data }: any) => {
-                if (loading) return <div>Fetching</div>;
+                if (loading) return <div></div>;
                 if (error) return <div>Error</div>;
 
                 const providers: Provider[] = data.providers.map((item: Provider) => {
@@ -214,6 +221,7 @@ export default class Harta extends Component<any, State> {
           totalResults={this.state.totalResults}
           onFilterChange={this.handleFilterChange}
         />
+        {this.state.loadingSpinner && <Spinner />}
       </>
     );
   }

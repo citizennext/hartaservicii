@@ -139,6 +139,6 @@ module.exports = {
         removeEmptyAttributes: true,
         removeRedundantAttributes: true
       }
-    }
+    },
   ],
 };
