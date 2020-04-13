@@ -32,6 +32,14 @@
     }
   },
   "page": {
+    "covid": {
+      "navigation": {
+        "label": "CoVid19",
+        "url": "/nevoijudetecovid19",
+        "title": "CoVid19",
+        "nav": true
+      }
+    },
     "harta": {
       "navigation": {
         "label": "Harta",

@@ -65,14 +65,15 @@
 	width: 375px
 	max-width: 100vw
 	height: calc(100vh - 94.5vw)
-	overflow-y: scroll
+	overflow-y: scroll 
 	overflow-x: hidden
 	@apply bg-transparent
 	&.needs
 		position: relative
-		margin: -40px auto 20px auto
+		margin: 0px auto 20px auto
 		width: 600px
-		height: auto
+		height: calc(100vh - 100px)
+		top: 100px
 		.content
 			background: #fff
 			padding: 1rem
@@ -84,16 +85,22 @@
 				justify-content: space-between
 				margin-bottom: .5rem
 				border-bottom: solid 1px #dadada
-
-
-		
-
 	@screen md
 		height: calc(100vh - 115px)
 		top: 115px
+		&.needs
+			height: calc(100vh - 50px)
+			top: 140px
+	@screen lg
+		&.needs
+			height: calc(100vh - 60px)
+			top: 40px
 
 	@screen xl
 		height: calc(100vh - 115px)
+		top: 115px
+		&.needs
+			height: calc(100vh - 115px)
 		top: 115px
 
 	.close-map-marker-popup

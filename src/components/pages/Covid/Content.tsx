@@ -26,60 +26,60 @@ export function Content({ counties }: { counties: Needs[] }) {
 
         <div className="content">
           <div>
-            <h1>{county.county}</h1>
+            <h1 className="text-celeste">{county.county}</h1>
           </div>
           <ul>
             <li>
-              <span className="label">MASTI CHIRURGICALE (BUC)</span>
-              <span className="value">{county.surgicalMasks}</span>
+              <span className="text-brown">MASTI CHIRURGICALE (BUC)</span>
+              <span className="font-semibold">{county.surgicalMasks}</span>
             </li>
             <li>
-              <span className="label">MANUSI CHIRURGICALE (BUC)</span>
-              <span className="value">{county.surgicalHandgloves}</span>
+              <span className="text-brown">MANUSI CHIRURGICALE (BUC)</span>
+              <span className="font-semibold">{county.surgicalHandgloves}</span>
             </li>
             <li>
-              <span className="label">DEZINFECTANT MAINI (LITRI)</span>
-              <span className="value">{county.handDesinfectant}</span>
+              <span className="text-brown">DEZINFECTANT MAINI (LITRI)</span>
+              <span className="font-semibold">{county.handDesinfectant}</span>
             </li>
             <li>
-              <span className="label">DEZINFECTANT SUPRAFETE (LITRI)</span>
-              <span className="value">{county.surfaceDesinfectant}</span>
+              <span className="text-brown">DEZINFECTANT SUPRAFETE (LITRI)</span>
+              <span className="font-semibold">{county.surfaceDesinfectant}</span>
             </li>
             <li>
-              <span className="label">MASTI FILTRU FFP2-3 (BUC)</span>
-              <span className="value">{county.masks}</span>
+              <span className="text-brown">MASTI FILTRU FFP2-3 (BUC)</span>
+              <span className="font-semibold">{county.masks}</span>
             </li>
             <li>
-              <span className="label">VIZIERE PROTECTIE</span>
-              <span className="value">{county.visors}</span>
+              <span className="text-brown">VIZIERE PROTECTIE</span>
+              <span className="font-semibold">{county.visors}</span>
             </li>
             <li>
-              <span className="label">CLOR</span>
-              <span className="value">{county.chlor}</span>
+              <span className="text-brown">CLOR</span>
+              <span className="font-semibold">{county.chlor}</span>
             </li>
             <li>
-              <span className="label">COMBINEZOANE PROTECTIE</span>
-              <span className="value">{county.surgicalGown}</span>
+              <span className="text-brown">COMBINEZOANE PROTECTIE</span>
+              <span className="font-semibold">{county.surgicalGown}</span>
             </li>
             <li>
-              <span className="label">ALCOOL SANITAR</span>
-              <span className="value">{county.sanitaryAlchohol}</span>
+              <span className="text-brown">ALCOOL SANITAR</span>
+              <span className="font-semibold">{county.sanitaryAlchohol}</span>
             </li>
             <li>
-              <span className="label">BOTOSI UNICA FOLOSINTA</span>
-              <span className="value">{county.surgicalShoeProtection}</span>
+              <span className="text-brown">BOTOSI UNICA FOLOSINTA</span>
+              <span className="font-semibold">{county.surgicalShoeProtection}</span>
             </li>
             <li>
-              <span className="label">OCHELARI PROTECTIE</span>
-              <span className="value">{county.protectionGlasses}</span>
+              <span className="text-brown">OCHELARI PROTECTIE</span>
+              <span className="font-semibold">{county.protectionGlasses}</span>
             </li>
             <li>
-              <span className="label">BONETE</span>
-              <span className="value">{county.protectionHood}</span>
+              <span className="text-brown">BONETE</span>
+              <span className="font-semibold">{county.protectionHood}</span>
             </li>
             <li>
-              <span className="label">HALATE UNICA FOLOSINTA</span>
-              <span className="value">{county.surgicalGownSingleUse}</span>
+              <span className="text-brown">HALATE UNICA FOLOSINTA</span>
+              <span className="font-semibold">{county.surgicalGownSingleUse}</span>
             </li>
           </ul>
         </div>
@@ -89,7 +89,7 @@ export function Content({ counties }: { counties: Needs[] }) {
   return (
     <div className="wrapper">
       <div className="section blogposts bg-white xl:w-4/5 xl:m-auto">
-        <h1 className="my-10">Covid 19 - Nevoi Județe</h1>
+        <h1 className="mt-10 mb-5">Covid 19 - Nevoi Județe</h1>
         <p className="mb-5">
           Harta serviciilor sociale centralizează <strong>nevoile din centrele rezidențiale de la nivelul fiecărui județ</strong>{' '}
           cu scopul de a conecta grupurile și inițiativele locale cu Direcțiile Generale de Asistență Socială și Protecția
@@ -105,24 +105,24 @@ export function Content({ counties }: { counties: Needs[] }) {
         </p>
       </div>
       <div className="section blogposts mb-20 bg-white">
-        <h2 className="mx-auto w-1/2 my-20 text-center ">Nevoi Județe</h2>
+        <h2 className="mx-auto w-1/2 mt-20 mb-10 text-center text-brown">Nevoi Județe</h2>
         <div className="needs-counties">
           {counties.map((county: Needs) => (
-            <div onClick={() => setOpen(county.id)} key={county.id}>
+            <div onClick={() => setOpen(county.id)} key={county.id} className="text-celeste text-base pb-2">
               {county.county}
             </div>
           ))}
         </div>
         <DialogOverlay
-          aria-label="detalii serviciu"
+          aria-text-brown="detalii serviciu"
           isOpen={!!open}
           onDismiss={() => setOpen(null)}
           style={{ background: 'rgba(151,133,133, 0.4)', position: 'fixed', top: 0, width: '100%', height: '100vh' }}>
           <DialogContent>{getCounty()}</DialogContent>
         </DialogOverlay>
 
-        <div className="needs-form xl:w-1/2 xl:mx-auto mt-15">
-          <h4>Înscrie donație</h4>
+        <div className="needs-form md:w-1/2 md:mx-auto mt-20">
+          <h2 className="text-brown text-center mb-5">Înscrie donație</h2>
           <NetlifyForm name="donations">
             {({ loading, error, success }: any) => (
               <>
@@ -131,15 +131,15 @@ export function Content({ counties }: { counties: Needs[] }) {
                 {success && <div className="text-celeste">Thank you for donating!</div>}
                 {!loading && !success && (
                   <>
-                    <input type="text" name="nume" placeholder="Numele tau" />
-                    <select name="tip" placeholder="Tip donator">
-                      <option value="ONG">ONG</option>
-                      <option value="companiePrivata">Companie Privata</option>
-                      <option value="persoanaFizica">Persoana Fizica</option>
+                    <input type="text" name="nume" placeholder="Numele tau*" required />
+                    <select name="tip" placeholder="Tip donator*">
+                      <option font-semibold="ONG">ONG</option>
+                      <option font-semibold="companiePrivata">Companie Privata</option>
+                      <option font-semibold="persoanaFizica">Persoana Fizica</option>
                     </select>
                     <input type="text" name="telefon" placeholder="Telefonul tau" />
-                    <input type="email" name="email" placeholder="Email" />
-                    <textarea name="details" placeholder="Detalii" />
+                    <input type="email" name="email" placeholder="Email*" required />
+                    <textarea name="details" placeholder="Detalii*" required />
                     <button type="submit">Trimite</button>
                   </>
                 )}
