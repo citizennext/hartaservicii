@@ -17,7 +17,7 @@ module.exports = {
           {
             family: `KoHo`,
             subsets: [`latin-ext`],
-            variants: [`400`, `400i`, `700`, `700i`],
+            variants: [`200i`, `400`, `400i`, `700`, `700i`],
           },
           {
             family: `Montserrat`,
@@ -62,7 +62,7 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/assets/images/harta-icon.png`, // This path is relative to the root of the site.
         crossOrigin: `anonymous`,
-        rel: `preload`
+        rel: `preload`,
       },
     },
     {
@@ -122,12 +122,10 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-preconnect",
+      resolve: 'gatsby-plugin-preconnect',
       options: {
-        domains: [
-          "https://f2r31ssu7s-dsn.algolia.net"
-        ]
-      }
+        domains: ['https://f2r31ssu7s-dsn.algolia.net'],
+      },
     },
     {
       resolve: `gatsby-plugin-minify`,
@@ -137,8 +135,8 @@ module.exports = {
         minifyJS: true,
         removeComments: true,
         removeEmptyAttributes: true,
-        removeRedundantAttributes: true
-      }
-    }
+        removeRedundantAttributes: true,
+      },
+    },
   ],
 };

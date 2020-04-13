@@ -16,14 +16,14 @@ type Props = {
 };
 
 export function SidebarLeft({ sidebar }: Props) {
-  const imgProps = typeof sidebar !== 'boolean' ? sidebar?.images[0] : null;
+  const imgProps = typeof sidebar !== 'boolean' ? sidebar?.images : null;
   return (
     <>
-      {imgProps && (
-        <Link to={imgProps.href} title={imgProps.alt}>
-          <img src={imgProps.url} alt={imgProps.alt} />
+      {imgProps?.map((image: Image) => (
+        <Link to={image.href} title={image.alt} style={{ marginBottom: 20 }} key={image.url}>
+          <img src={image.url} alt={image.alt} />
         </Link>
-      )}
+      ))}
     </>
   );
 }
