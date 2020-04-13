@@ -44,6 +44,18 @@
 				background: #968585
 				border-radius: 30px
 				color: white
+.needs-counties
+	display: grid
+	grid-template-columns: repeat(3, 1fr)
+	justify-content: space-around
+	align-items: center
+	text-align: center
+	width: 80%
+	margin: 10px auto 40px auto
+	div
+		font-weight: bold
+		cursor: pointer
+
 
 .map-marker-popup
 	position: fixed
@@ -56,6 +68,25 @@
 	overflow-y: scroll
 	overflow-x: hidden
 	@apply bg-transparent
+	&.needs
+		position: relative
+		margin: -40px auto 20px auto
+		width: 600px
+		height: auto
+		.content
+			background: #fff
+			padding: 1rem
+			h1
+				margin-bottom: 1rem
+			li
+				display: flex
+				flex-direction: row
+				justify-content: space-between
+				margin-bottom: .5rem
+				border-bottom: solid 1px #dadada
+
+
+		
 
 	@screen md
 		height: calc(100vh - 115px)
