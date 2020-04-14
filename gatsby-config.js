@@ -17,7 +17,7 @@ module.exports = {
           {
             family: `KoHo`,
             subsets: [`latin-ext`],
-            variants: [`400`, `400i`, `700`, `700i`],
+            variants: [`200i`, `400`, `400i`, `700`, `700i`],
           },
           {
             family: `Montserrat`,
@@ -61,6 +61,8 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/assets/images/harta-icon.png`, // This path is relative to the root of the site.
+        crossOrigin: `anonymous`,
+        rel: `preload`,
       },
     },
     {
@@ -117,6 +119,23 @@ module.exports = {
         apiKey: process.env.ALGOLIA_API_KEY,
         queries: queries,
         chunkSize: 10000, // default: 1000
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-preconnect',
+      options: {
+        domains: ['https://f2r31ssu7s-dsn.algolia.net'],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-minify`,
+      options: {
+        removeAttributeQuotes: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
       },
     },
   ],

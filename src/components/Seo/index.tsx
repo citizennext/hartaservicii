@@ -19,7 +19,7 @@ const SEO = ({ postTitle, summary, postImage, slug, isRepeatable, bodyClassName 
 
   return (
     <Helmet bodyAttributes={{ class: bodyClassName || '' }}>
-      <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js?features=default,Symbol" />
+      <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js" />
       {postTitle ? <title>{`${postTitle} | ${data.head.title}`}</title> : <title>{`${data.head.title}`}</title>}
       {/* General tags */}
       <meta name="description" content={description} />

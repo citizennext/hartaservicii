@@ -6,7 +6,7 @@ type Button = {
 };
 
 type Buttons = {
-  button: Button;
+  buttons: Button[];
 };
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 };
 
 export function Content({ content, summary, additionalData }: Props) {
-  const button = additionalData?.button;
+  const buttons = additionalData?.buttons;
 
   function createMarkup() {
     return { __html: content.html };
@@ -30,13 +30,14 @@ export function Content({ content, summary, additionalData }: Props) {
       <div className="summary">{summary}</div>
       <div className="content" dangerouslySetInnerHTML={createMarkup()} />
 
-      {button && (
-        <a href={button.href} target="_blank" rel="noopener noreferrer" title={button.label}>
-          <button className="btn btn-citizennext" title={button.label}>
-            {button.label}
-          </button>
-        </a>
-      )}
+      {buttons &&
+        buttons.map(button => (
+          <a key={button.href} href={button.href} target="_blank" rel="noopener noreferrer" title={button.label}>
+            <button className="btn btn-citizennext" title={button.label} style={{ marginBottom: 40 }}>
+              {button.label}
+            </button>
+          </a>
+        ))}
     </>
   );
 }

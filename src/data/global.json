@@ -32,6 +32,14 @@
     }
   },
   "page": {
+    "covid": {
+      "navigation": {
+        "label": "CoVid19",
+        "url": "/nevoijudetecovid19",
+        "title": "CoVid19",
+        "nav": true
+      }
+    },
     "harta": {
       "navigation": {
         "label": "Harta",
@@ -65,7 +73,7 @@
       },
       "images": {
         "intro": {
-          "src": "assets/images/hp_hero.png"
+          "src": "assets/images/hp_hero.jpg"
         },
         "section2": {
           "src": "assets/images/hp_section2.png"
@@ -73,8 +81,7 @@
       },
       "links": {
         "intro": {
-          "url": "noutati/harta-serviciilor-sociale-din-romania-proiect-finalist-in-programul-tara-lui-andrei",
-          "title": "Despre proiect",
+          "url": "noutati/ingrijim-si-suntem-ingrijiti-mai-bine",
           "label": "detalii"
         },
         "section2": {
