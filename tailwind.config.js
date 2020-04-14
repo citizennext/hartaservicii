@@ -35,7 +35,10 @@ module.exports = {
         '6': '6px',
       },
       spacing: {
-        s: '6px',
+        sm: '8px',
+        md: '16px',
+        lg: '24px',
+        xl: '48px',
       },
       maxWidth: {
         screen: '100vw',
