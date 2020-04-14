@@ -32,14 +32,8 @@ export function Content({ content, summary, additionalData }: Props) {
 
       {buttons &&
         buttons.map(button => (
-          <a
-            key={button.href}
-            href={button.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={button.label}
-            style={{ marginBottom: 10 }}>
-            <button className="btn btn-citizennext" title={button.label}>
+          <a key={button.href} href={button.href} target="_blank" rel="noopener noreferrer" title={button.label}>
+            <button className="btn btn-citizennext" title={button.label} style={{ marginBottom: 40 }}>
               {button.label}
             </button>
           </a>
