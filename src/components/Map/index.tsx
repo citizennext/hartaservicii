@@ -10,7 +10,7 @@ import queryString from 'query-string';
 import { Query } from 'react-apollo';
 import FilterOptions from '../../data/filter-options.json';
 import ROCoordinates from '../../data/ro-coordinates.json';
-
+import { Spinner } from '../Spinner';
 type FilterObject = {
   district?: string | null;
   category?: string | null;
@@ -179,7 +179,7 @@ export default class Harta extends Component<any, State> {
                 this.setState({ totalResults: provider.providers.length });
               }}>
               {({ loading, error, data }: any) => {
-                if (loading) return <div>Fetching</div>;
+                if (loading) return <Spinner />;
                 if (error) return <div>Error</div>;
 
                 const providers: Provider[] = data.providers.map((item: Provider) => {
