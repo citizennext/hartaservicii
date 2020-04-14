@@ -33,7 +33,7 @@ export default class Noutati extends React.Component<{ data: any }, {}> {
 export const pageQuery = graphql`
   query {
     hasura {
-      featured: blogs(last: 2, where: { featured: true }) {
+      featured: blogs(last: 2, where: { featured: true, status: PUBLISHED }) {
         id
         title
         summary
@@ -43,14 +43,14 @@ export const pageQuery = graphql`
           url
           urlSharp {
             childImageSharp {
-              fluid(maxWidth: 370, maxHeight: 190) {
+              fluid(maxWidth: 370, maxHeight: 190, duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
         }
       }
-      regular: blogs(last: 8, where: { featured: false }) {
+      regular: blogs(last: 8, where: { featured: false, status: PUBLISHED }) {
         id
         title
         summary
@@ -60,7 +60,7 @@ export const pageQuery = graphql`
           url
           urlSharp {
             childImageSharp {
-              fluid(maxWidth: 370, maxHeight: 190) {
+              fluid(maxWidth: 370, maxHeight: 190, duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
