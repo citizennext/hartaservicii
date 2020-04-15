@@ -99,7 +99,7 @@ export function Content({ counties }: { counties: Needs[] }) {
           Franța sau Italia unde virusul a cauzat numeroase decese în rândul azilelor de bătrâni.
         </p>
         <p>
-          <strong>Ce poți face în mod practic</strong> este să te uiți pe harta serviciilor sociale(link) și să identifici centrul
+          <strong>Ce poți face în mod practic</strong> este să te uiți pe harta serviciilor sociale și să identifici centrul
           social cel mai apropiat de tine pe care să îl sprijini cu cele necesare. Dacă ai făcut o donație, anunță-ne și pe noi
           pentru a putea redirecționa pe cei care vor să ajute acolo unde este cea mai mare nevoie.
         </p>
