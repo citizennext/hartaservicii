@@ -5,7 +5,7 @@ import { Needs } from '../../../pages/nevoijudetecovid19';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import hssLogo from '../../../assets/images/icon_HSS_symbolleaf.svg';
 import { X as Close } from 'react-feather';
-
+import { formatNumber } from '../../../utils';
 export function Content({ counties }: { counties: Needs[] }) {
   const [open, setOpen] = useState<string | null>(null);
   function getCounty() {
@@ -31,55 +31,55 @@ export function Content({ counties }: { counties: Needs[] }) {
           <ul>
             <li>
               <span className="text-brown">MASTI CHIRURGICALE (BUC)</span>
-              <span className="font-semibold">{county.surgicalMasks}</span>
+              <span className="font-semibold">{formatNumber(county.surgicalMasks)}</span>
             </li>
             <li>
               <span className="text-brown">MANUSI CHIRURGICALE (BUC)</span>
-              <span className="font-semibold">{county.surgicalHandgloves}</span>
+              <span className="font-semibold">{formatNumber(county.surgicalHandgloves)}</span>
             </li>
             <li>
               <span className="text-brown">DEZINFECTANT MAINI (LITRI)</span>
-              <span className="font-semibold">{county.handDesinfectant}</span>
+              <span className="font-semibold">{formatNumber(county.handDesinfectant)}</span>
             </li>
             <li>
               <span className="text-brown">DEZINFECTANT SUPRAFETE (LITRI)</span>
-              <span className="font-semibold">{county.surfaceDesinfectant}</span>
+              <span className="font-semibold">{formatNumber(county.surfaceDesinfectant)}</span>
             </li>
             <li>
               <span className="text-brown">MASTI FILTRU FFP2-3 (BUC)</span>
-              <span className="font-semibold">{county.masks}</span>
+              <span className="font-semibold">{formatNumber(county.masks)}</span>
             </li>
             <li>
               <span className="text-brown">VIZIERE PROTECTIE</span>
-              <span className="font-semibold">{county.visors}</span>
+              <span className="font-semibold">{formatNumber(county.visors)}</span>
             </li>
             <li>
               <span className="text-brown">CLOR</span>
-              <span className="font-semibold">{county.chlor}</span>
+              <span className="font-semibold">{formatNumber(county.chlor)}</span>
             </li>
             <li>
               <span className="text-brown">COMBINEZOANE PROTECTIE</span>
-              <span className="font-semibold">{county.surgicalGown}</span>
+              <span className="font-semibold">{formatNumber(county.surgicalGown)}</span>
             </li>
             <li>
               <span className="text-brown">ALCOOL SANITAR</span>
-              <span className="font-semibold">{county.sanitaryAlchohol}</span>
+              <span className="font-semibold">{formatNumber(county.sanitaryAlchohol)}</span>
             </li>
             <li>
               <span className="text-brown">BOTOSI UNICA FOLOSINTA</span>
-              <span className="font-semibold">{county.surgicalShoeProtection}</span>
+              <span className="font-semibold">{formatNumber(county.surgicalShoeProtection)}</span>
             </li>
             <li>
               <span className="text-brown">OCHELARI PROTECTIE</span>
-              <span className="font-semibold">{county.protectionGlasses}</span>
+              <span className="font-semibold">{formatNumber(county.protectionGlasses)}</span>
             </li>
             <li>
               <span className="text-brown">BONETE</span>
-              <span className="font-semibold">{county.protectionHood}</span>
+              <span className="font-semibold">{formatNumber(county.protectionHood)}</span>
             </li>
             <li>
               <span className="text-brown">HALATE UNICA FOLOSINTA</span>
-              <span className="font-semibold">{county.surgicalGownSingleUse}</span>
+              <span className="font-semibold">{formatNumber(county.surgicalGownSingleUse)}</span>
             </li>
           </ul>
         </div>
