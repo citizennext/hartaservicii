@@ -126,9 +126,9 @@ export function Content({ counties }: { counties: Needs[] }) {
           <NetlifyForm name="donations">
             {({ loading, error, success }: any) => (
               <>
-                {loading && <div className="text-leaf">Loading...</div>}
-                {error && <div className="text-error">Your information was not sent. Please try again later.</div>}
-                {success && <div className="text-celeste">Thank you for donating!</div>}
+                {loading && <div className="text-leaf">Formularul tău se trimite!</div>}
+                {error && <div className="text-error">Formularul nu a fost trimis. Încearcă mai târziu!</div>}
+                {success && <div className="text-celeste">Mulțumim pentru suportul tău! Împreună mergem mai departe!</div>}
                 {!loading && !success && (
                   <>
                     <input type="text" name="nume" placeholder="Numele tau*" required />
