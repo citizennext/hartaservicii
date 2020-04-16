@@ -22,18 +22,14 @@ export function Footer() {
                 href={Data.footer.links.asociatia.url}
                 target="_blank"
                 rel="noreferrer noopener">
-                {Data.footer.links.asociatia.text}
+                {Data.footer.links.asociatia.title}
               </a>{' '}
               și{' '}
-              <a
-                title="Social Innovation Solutions"
-                href="https://www.socialinnovationsolutions.org"
-                target="_blank"
-                rel="noreferrer noopener">
-                Social Innovation Solutions
+              <a title={Data.footer.links.sis.title} href={Data.footer.links.sis.url} target="_blank" rel="noreferrer noopener">
+                {Data.footer.links.sis.title}
               </a>{' '}
               cu <br className="hidden sm:block" />
-              sprijinul {' '}
+              sprijinul{' '}
               <a title="RO SMART în Țara lui Andrei" href="https://taraluiandrei.ro/" target="_blank" rel="noreferrer noopener">
                 RO SMART în Țara lui Andrei
               </a>{' '}

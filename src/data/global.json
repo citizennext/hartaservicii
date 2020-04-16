@@ -3,31 +3,25 @@
     "lang": "ro",
     "title": "Harta serviciilor sociale",
     "description": "Bine ai venit în Harta serviciilor sociale",
-    "url": "https://www.serviciisociale.ro",
-    "image": "/src/assets/images/hero.png",
+    "url": "https://beta.serviciisociale.ro",
+    "image": "/src/assets/images/cover.jpg",
     "logo": "/src/assets/images/logo.svg",
     "logoSquare": "/src/assets/images/harta-icon.png",
-    "twitter": "@serviciisociale",
-    "instagram": "serviciisociale",
-    "fbAppID": "2345678"
+    "instagram": "hartaserviciilorsociale",
+    "fbAppID": "230938941312776"
   },
-  "externalLinks": {
-    "anpc": {
-      "label": "ANPC",
-      "title": "ANPC",
-      "url": "https://anpc.ro/"
-    }
-  },
-  "header": {},
   "footer": {
     "texts": {
-      "copyright": "Asociația Citizen Next — toate drepturile rezervate © "
+      "copyright": "Asociația Citizen Next — toate drepturile rezervate ©"
     },
     "links": {
       "asociatia": {
         "title": "Asociația Citizen Next",
-        "url": "https://citizennext.ro/contribute",
-        "text": "Asociația Citizen Next"
+        "url": "https://citizennext.ro/contribute"
+      },
+      "sis": {
+        "title": "Social Innovation Solutions",
+        "url": "https://www.socialinnovationsolutions.org"
       }
     }
   },
