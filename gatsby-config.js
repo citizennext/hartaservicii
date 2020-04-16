@@ -11,6 +11,18 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
     {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: '226417208680464',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: 'GTM-KNQ9RQZ',
+      },
+    },
+    {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
         fonts: [

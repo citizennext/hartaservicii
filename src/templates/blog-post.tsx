@@ -107,7 +107,7 @@ export const pageQuery = graphql`
           url
           urlSharp {
             childImageSharp {
-              fluid(maxHeight: 350, maxWidth: 770, duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }) {
+              fluid(maxHeight: 350, maxWidth: 770) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
