@@ -13,10 +13,10 @@ export default class Noutati extends React.Component<{ data: any }, {}> {
     return (
       <>
         <Seo
-          postTitle="Noutati"
+          postTitle="Noutăți"
           isRepeatable={false}
-          postImage="https://media.graphcms.com/hIcyysxST27oQvtJkvAw"
-          summary={'test'}
+          postImage="https://beta.serviciisociale.ro/ajutam.jpg"
+          summary={'Ultimele noutăți legate de serviciile sociale din România și de platforma noastră'}
           bodyClassName="page-blog"
         />
         <Header />

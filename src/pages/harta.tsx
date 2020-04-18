@@ -14,7 +14,7 @@ function HartaPage() {
         const { oldLocation } = location?.state || {};
         return (
           <>
-            <Seo bodyClassName="page-harta" />
+            <Seo isRepeatable={false} postTitle="Harta Serviciilor" bodyClassName="page-harta" />
             <Header mapHeader={true} />
             <Layout>
               <Router location={oldLocation ? oldLocation : location} basepath="/harta">

@@ -9,7 +9,7 @@ export default class IndexPage extends React.Component {
   render() {
     return (
       <div>
-        <Seo isRepeatable={false} postTitle="Bine ai venit!" bodyClassName="page-homepage" />
+        <Seo isRepeatable={false} postTitle="Îngrijim și suntem îngrijiți mai bine" bodyClassName="page-homepage" />
         <Header />
         <Layout>
           <HomePageContent />

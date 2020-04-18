@@ -9,7 +9,12 @@ export default class ContactPage extends React.Component {
   render() {
     return (
       <div>
-        <Seo isRepeatable={false} postTitle="Statistici" bodyClassName="page-statistici" />
+        <Seo
+          isRepeatable={false}
+          postTitle="Statistici"
+          summary="Câteva statistici rezultate din datele din platformă"
+          bodyClassName="page-statistici"
+        />
         <Header />
         <Layout>
           <Content />
