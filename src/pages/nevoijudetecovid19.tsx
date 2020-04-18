@@ -34,6 +34,7 @@ export default class ContactPage extends React.Component<{ data: Props }, {}> {
         <Seo
           isRepeatable={false}
           postTitle="CoVid19 - Nevoi în județe"
+          slug="nevoijudetecovid19"
           bodyClassName="page-contact"
           summary="Împreună putem ajuta cele mai vulnerabile grupuri sociale să depășească această criză"
         />

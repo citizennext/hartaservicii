@@ -11,6 +11,7 @@ function SearchResultPage(props: any) {
       <Seo
         isRepeatable={false}
         postTitle="Cautare"
+        slug="cautare"
         bodyClassName="page-search-reesult"
         summary="Gasesti rapid serviciul social de care ai nevoie"
       />

@@ -12,6 +12,7 @@ export default class ContactPage extends React.Component {
         <Seo
           isRepeatable={false}
           postTitle="Statistici"
+          slug="statistici"
           summary="Câteva statistici rezultate din datele din platformă"
           bodyClassName="page-statistici"
         />

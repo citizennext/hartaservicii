@@ -13,6 +13,7 @@ export default class ContactPage extends React.Component {
         <Seo
           isRepeatable={false}
           postTitle="Contact"
+          slug="contact"
           bodyClassName="page-contact"
           summary="Așteptăm oricand sugestiile voastre pentru a îmbunătății platforma!"
         />
