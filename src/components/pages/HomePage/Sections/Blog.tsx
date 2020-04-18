@@ -2,7 +2,7 @@ import React from 'react';
 import BlogPost from '../../../BlogPost';
 import HsSlider from '../../../Slider';
 
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, Link } from 'gatsby';
 const query = graphql`
   query {
     hasura {
@@ -67,7 +67,9 @@ function Blog() {
                   ))}
                 </HsSlider>
               </div>
-              <button className="section-button mb-4 mt-16 md:mt-20">Toate noutățile</button>
+              <Link to="/noutati">
+                <button className="section-button mb-4 mt-16 md:mt-20">Toate noutățile</button>
+              </Link>
             </div>
           </div>
         );
