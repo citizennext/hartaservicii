@@ -4,23 +4,27 @@ require('dotenv').config({
 const common = `query {
   hasura {
     pages {
+      objectID: id
       slug
       title
       summary
       content {
         text
       }
+      updatedAt
     }
     blogs {
+      objectID: id
       slug
       title
       summary
       content {
         text
       }
+      updatedAt
     }
     providers {
-      id
+      objectID: id
       name
       location
       district

@@ -4,9 +4,9 @@
     "title": "Harta serviciilor sociale",
     "description": "Bine ai venit în Harta serviciilor sociale",
     "url": "https://beta.serviciisociale.ro",
-    "image": "/src/assets/images/cover.jpg",
-    "logo": "/src/assets/images/logo.svg",
-    "logoSquare": "/src/assets/images/harta-icon.png",
+    "image": "/cover.jpg",
+    "logo": "/logo.svg",
+    "logoSquare": "/harta-icon.png",
     "instagram": "hartaserviciilorsociale",
     "fbAppID": "230938941312776"
   },

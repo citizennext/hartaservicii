@@ -125,12 +125,18 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-algolia',
+      resolve: `gatsby-plugin-algolia-search`,
       options: {
         appId: process.env.GATSBY_ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_API_KEY,
-        queries: queries,
-        chunkSize: 10000, // default: 1000
+        indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME_COMMON, // for all queries
+        queries,
+        chunkSize: 10000,
+        settings: {
+          // optional, any index settings
+        },
+        enablePartialUpdates: true,
+        matchFields: ['updatedAt'],
       },
     },
     {
