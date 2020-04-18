@@ -15,7 +15,7 @@ const SEO = ({ postTitle, summary, postImage, slug, isRepeatable, bodyClassName 
   const title = postTitle || data.head.title;
   const description = summary || data.head.description;
   const image = postImage ? postImage : data.head.image;
-  const url = slug ? `${data.head.url}${slug}` : data.head.url;
+  const url = slug ? `${data.head.url}/${slug}` : data.head.url;
 
   return (
     <Helmet bodyAttributes={{ class: bodyClassName || '' }}>

@@ -26,7 +26,7 @@ const BlogPost = ({ data, pageContext, location }: BlogProps): JSX.Element => {
   }
   return (
     <>
-      <Seo postTitle={blog.title} isRepeatable={true} postImage={blog?.image?.url} summary={blog.summary} />
+      <Seo postTitle={blog.title} isRepeatable={true} postImage={blog?.image?.url} summary={blog.summary} slug={blog.slug} />
       <Header />
       <AfterHeader
         image={blog?.image?.urlSharp?.childImageSharp?.fluid}
