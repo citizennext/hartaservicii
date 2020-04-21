@@ -31,7 +31,13 @@ export default class ContactPage extends React.Component<{ data: Props }, {}> {
     const { hasura } = this.props.data;
     return (
       <div>
-        <Seo isRepeatable={false} postTitle="CoVid19" bodyClassName="page-contact" />
+        <Seo
+          isRepeatable={false}
+          postTitle="CoVid19 - Nevoi în județe"
+          slug="nevoijudetecovid19"
+          bodyClassName="page-contact"
+          summary="Împreună putem ajuta cele mai vulnerabile grupuri sociale să depășească această criză"
+        />
         <Header />
         <AfterHeader header="CoVid 19" />
         <Layout>

@@ -5,11 +5,11 @@ import { Needs } from '../../../pages/nevoijudetecovid19';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import hssLogo from '../../../assets/images/icon_HSS_symbolleaf.svg';
 import { X as Close } from 'react-feather';
-
+import { formatNumber } from '../../../utils';
 export function Content({ counties }: { counties: Needs[] }) {
   const [open, setOpen] = useState<string | null>(null);
   function getCounty() {
-    const county = counties.find(county => county.id === open);
+    const county = counties.find((county) => county.id === open);
     if (!county) {
       return <div>hello</div>;
     }
@@ -31,55 +31,55 @@ export function Content({ counties }: { counties: Needs[] }) {
           <ul>
             <li>
               <span className="text-brown">MASTI CHIRURGICALE (BUC)</span>
-              <span className="font-semibold">{county.surgicalMasks}</span>
+              <span className="font-semibold">{formatNumber(county.surgicalMasks)}</span>
             </li>
             <li>
               <span className="text-brown">MANUSI CHIRURGICALE (BUC)</span>
-              <span className="font-semibold">{county.surgicalHandgloves}</span>
+              <span className="font-semibold">{formatNumber(county.surgicalHandgloves)}</span>
             </li>
             <li>
               <span className="text-brown">DEZINFECTANT MAINI (LITRI)</span>
-              <span className="font-semibold">{county.handDesinfectant}</span>
+              <span className="font-semibold">{formatNumber(county.handDesinfectant)}</span>
             </li>
             <li>
               <span className="text-brown">DEZINFECTANT SUPRAFETE (LITRI)</span>
-              <span className="font-semibold">{county.surfaceDesinfectant}</span>
+              <span className="font-semibold">{formatNumber(county.surfaceDesinfectant)}</span>
             </li>
             <li>
               <span className="text-brown">MASTI FILTRU FFP2-3 (BUC)</span>
-              <span className="font-semibold">{county.masks}</span>
+              <span className="font-semibold">{formatNumber(county.masks)}</span>
             </li>
             <li>
               <span className="text-brown">VIZIERE PROTECTIE</span>
-              <span className="font-semibold">{county.visors}</span>
+              <span className="font-semibold">{formatNumber(county.visors)}</span>
             </li>
             <li>
               <span className="text-brown">CLOR</span>
-              <span className="font-semibold">{county.chlor}</span>
+              <span className="font-semibold">{formatNumber(county.chlor)}</span>
             </li>
             <li>
               <span className="text-brown">COMBINEZOANE PROTECTIE</span>
-              <span className="font-semibold">{county.surgicalGown}</span>
+              <span className="font-semibold">{formatNumber(county.surgicalGown)}</span>
             </li>
             <li>
               <span className="text-brown">ALCOOL SANITAR</span>
-              <span className="font-semibold">{county.sanitaryAlchohol}</span>
+              <span className="font-semibold">{formatNumber(county.sanitaryAlchohol)}</span>
             </li>
             <li>
               <span className="text-brown">BOTOSI UNICA FOLOSINTA</span>
-              <span className="font-semibold">{county.surgicalShoeProtection}</span>
+              <span className="font-semibold">{formatNumber(county.surgicalShoeProtection)}</span>
             </li>
             <li>
               <span className="text-brown">OCHELARI PROTECTIE</span>
-              <span className="font-semibold">{county.protectionGlasses}</span>
+              <span className="font-semibold">{formatNumber(county.protectionGlasses)}</span>
             </li>
             <li>
               <span className="text-brown">BONETE</span>
-              <span className="font-semibold">{county.protectionHood}</span>
+              <span className="font-semibold">{formatNumber(county.protectionHood)}</span>
             </li>
             <li>
               <span className="text-brown">HALATE UNICA FOLOSINTA</span>
-              <span className="font-semibold">{county.surgicalGownSingleUse}</span>
+              <span className="font-semibold">{formatNumber(county.surgicalGownSingleUse)}</span>
             </li>
           </ul>
         </div>
@@ -99,7 +99,7 @@ export function Content({ counties }: { counties: Needs[] }) {
           Franța sau Italia unde virusul a cauzat numeroase decese în rândul azilelor de bătrâni.
         </p>
         <p>
-          <strong>Ce poți face în mod practic</strong> este să te uiți pe harta serviciilor sociale(link) și să identifici centrul
+          <strong>Ce poți face în mod practic</strong> este să te uiți pe harta serviciilor sociale și să identifici centrul
           social cel mai apropiat de tine pe care să îl sprijini cu cele necesare. Dacă ai făcut o donație, anunță-ne și pe noi
           pentru a putea redirecționa pe cei care vor să ajute acolo unde este cea mai mare nevoie.
         </p>
@@ -126,9 +126,9 @@ export function Content({ counties }: { counties: Needs[] }) {
           <NetlifyForm name="donations">
             {({ loading, error, success }: any) => (
               <>
-                {loading && <div className="text-leaf">Loading...</div>}
-                {error && <div className="text-error">Your information was not sent. Please try again later.</div>}
-                {success && <div className="text-celeste">Thank you for donating!</div>}
+                {loading && <div className="text-leaf">Formularul tău se trimite!</div>}
+                {error && <div className="text-error">Formularul nu a fost trimis. Încearcă mai târziu!</div>}
+                {success && <div className="text-celeste">Mulțumim pentru suportul tău! Împreună mergem mai departe!</div>}
                 {!loading && !success && (
                   <>
                     <input type="text" name="nume" placeholder="Numele tau*" required />

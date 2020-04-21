@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, Link } from 'gatsby';
 import CircularProgressBar from '../../../CircularProgressBar';
 import ProgressBar from '../../../ProgressBar';
 import HsSlider from '../../../Slider';
@@ -80,7 +80,7 @@ function Statistics() {
   return (
     <StaticQuery
       query={query}
-      render={data => {
+      render={(data) => {
         const { publicServices, privateServices, homelessServices, childServices, services } = data.hasura;
         return (
           <div id="statistics" className="section circularprogressbar">
@@ -103,7 +103,9 @@ function Statistics() {
                   />
                 </HsSlider>
               </div>
-              <button className="button section-button my-1">Toate statisticile</button>
+              <Link to="/statistici">
+                <button className="button section-button my-1">Toate statisticile</button>
+              </Link>
             </div>
           </div>
         );

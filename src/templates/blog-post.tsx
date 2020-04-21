@@ -26,7 +26,13 @@ const BlogPost = ({ data, pageContext, location }: BlogProps): JSX.Element => {
   }
   return (
     <>
-      <Seo postTitle={blog.title} isRepeatable={true} postImage={blog?.image?.url} summary={blog.summary} />
+      <Seo
+        postTitle={blog.title}
+        isRepeatable={true}
+        postImage={blog?.image?.url}
+        summary={blog.summary}
+        slug={`noutati/${blog.slug}`}
+      />
       <Header />
       <AfterHeader
         image={blog?.image?.urlSharp?.childImageSharp?.fluid}
@@ -107,7 +113,7 @@ export const pageQuery = graphql`
           url
           urlSharp {
             childImageSharp {
-              fluid(maxHeight: 350, maxWidth: 770, duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }) {
+              fluid(maxHeight: 350, maxWidth: 770) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }

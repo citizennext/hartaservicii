@@ -8,7 +8,13 @@ import Footer from '../components/Footer';
 function SearchResultPage(props: any) {
   return (
     <div>
-      <Seo isRepeatable={false} postTitle="Bine ai venit!" bodyClassName="page-search-reesult" />
+      <Seo
+        isRepeatable={false}
+        postTitle="Cautare"
+        slug="cautare"
+        bodyClassName="page-search-reesult"
+        summary="Gasesti rapid serviciul social de care ai nevoie"
+      />
       <Header />
       <Layout>
         <InstaSearchPage {...props} />

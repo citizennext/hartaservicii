@@ -10,7 +10,13 @@ export default class ContactPage extends React.Component {
   render() {
     return (
       <div>
-        <Seo isRepeatable={false} postTitle="Contact" bodyClassName="page-contact" />
+        <Seo
+          isRepeatable={false}
+          postTitle="Contact"
+          slug="contact"
+          bodyClassName="page-contact"
+          summary="Așteptăm oricand sugestiile voastre pentru a îmbunătății platforma!"
+        />
         <Header />
         <AfterHeader header="contact" />
         <Layout>

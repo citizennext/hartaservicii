@@ -13,10 +13,11 @@ export default class Noutati extends React.Component<{ data: any }, {}> {
     return (
       <>
         <Seo
-          postTitle="Noutati"
+          postTitle="Noutăți"
           isRepeatable={false}
-          postImage="https://media.graphcms.com/hIcyysxST27oQvtJkvAw"
-          summary={'test'}
+          slug="noutati"
+          postImage="https://beta.serviciisociale.ro/ajutam.jpg"
+          summary={'Ultimele noutăți legate de serviciile sociale din România și de platforma noastră'}
           bodyClassName="page-blog"
         />
         <Header />
@@ -33,7 +34,7 @@ export default class Noutati extends React.Component<{ data: any }, {}> {
 export const pageQuery = graphql`
   query {
     hasura {
-      featured: blogs(last: 2, where: { featured: true, status: PUBLISHED }) {
+      featured: blogs(last: 2, where: { featured: true, status: PUBLISHED }, orderBy: createdAt_DESC) {
         id
         title
         summary
@@ -50,7 +51,7 @@ export const pageQuery = graphql`
           }
         }
       }
-      regular: blogs(last: 8, where: { featured: false, status: PUBLISHED }) {
+      regular: blogs(last: 8, where: { featured: false, status: PUBLISHED }, orderBy: createdAt_DESC) {
         id
         title
         summary

@@ -77,7 +77,7 @@ function Hit(props: any) {
       <Link
         to={
           typeFy === 'servicii'
-            ? `/harta/serviciu/${getSlug(props.hit.name)}/${props.hit.id}`
+            ? `/harta/serviciu/${getSlug(props.hit.name)}/${props.hit.objectID}`
             : typeFy === 'noutăți'
             ? `/noutati/${props.hit.slug}`
             : `/${props.hit.slug}`
