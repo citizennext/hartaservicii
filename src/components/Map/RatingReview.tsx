@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
+import { Formik, Field, Form, FormikErrors } from 'formik';
 import StarRatingComponent from 'react-star-rating-component';
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs';
+import '@reach/tabs/styles.css';
 import { useMutation } from '@apollo/react-hooks';
 import { X as Close } from 'react-feather';
 import gql from 'graphql-tag';
+import { isEmpty } from 'ramda';
 
+interface Values {
+  username: string;
+  email: string;
+  feedback: string;
+  acceptance: boolean;
+}
+const initialValues: Values = {
+  username: '',
+  email: '',
+  feedback: '',
+  acceptance: false,
+};
 function RatingReview(props: any) {
   const ratingMutation = gql`
     mutation AddRating($provider: uuid!, $rating: Int!, $email: String!, $feedback: String!, $username: String!) {
@@ -19,183 +35,194 @@ function RatingReview(props: any) {
         }
       ) {
         returning {
-          id
+          feedback
+          rating
+          user {
+            email
+            username
+          }
         }
       }
     }
   `;
-  const minReviewChar = 10;
-  const [email, setEmail] = useState<string>('');
-  const [feedback, setFeedback] = useState<string>('');
-  const [acceptSavingEmail, setAcceptance] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState<boolean>(false);
-  const [reviewError, setReviewError] = useState<boolean>(false);
-  const [successForm, setFormValidation] = useState<boolean>(false);
+
   // eslint-disable-next-line
-  const [addRating, { data }] = useMutation(ratingMutation);
-
-  // eslint-disable-next-line no-useless-escape
-  const validEmailRegex = RegExp(
-    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
-  );
-  const fieldValidation = (target: any) => {
-    const { email, review } = target;
-    if (email) {
-      setEmailError(!validEmailRegex.test(email.value));
-    }
-    if (review) {
-      setReviewError(review.value.length < minReviewChar);
-    }
-  };
-  const handleChanged = (e: any) => {
-    const { name, value } = e.target;
-    if (name === 'email') {
-      setEmail(e.currentTarget.value);
-      emailError && setEmailError(!validEmailRegex.test(value));
-    }
-    if (name === 'review') {
-      setFeedback(e.currentTarget.value);
-      reviewError && setReviewError(value.length < minReviewChar);
-    }
-  };
-  const handleLeave = (e: any) => {
-    const { name, value } = e.target;
-    if (name === 'email') {
-      setEmailError(!validEmailRegex.test(value));
-    }
-    if (name === 'review') {
-      setReviewError(value.length < minReviewChar);
-    }
-  };
-  const saveRatingReview = (e: any) => {
-    e.preventDefault();
-
-    fieldValidation(e.target);
-    if (!emailError && !reviewError) {
-      addRating({
-        variables: {
-          provider: props.providerId,
-          rating: props.rating * 10,
-          email: email,
-          username: email,
-          feedback: feedback,
-        },
-        context: {
-          headers: { 'x-hasura-user-email': email },
-        },
-      });
-
-      setFormValidation(true);
-    }
-  };
-
+  const [addRating, { data, loading, error }] = useMutation(ratingMutation);
+  const [successForm, setSuccessForm] = useState(false);
   return (
     <div className="rating-popup" data-class={props.dataClass}>
       <button className="close-map-marker-popup" onClick={() => props.setRatingPopUp(false)}>
         <Close className="text-celeste" size={30} />
       </button>
-      {!successForm ? (
-        <>
-          <div className="full">
-            <StarRatingComponent
-              name="ratei" /* name of the radio input, it is required */
-              value={props.rating} /* number of selected icon (`0` - none, `1` - first) */
-              starCount={5} /* number of icons in rating, default `5` */
-              // onStarClick={(value: number) => setRating(value)} /* on icon click handler */
-              onStarHover={(value: number) => props.setRating(value)} /* on icon hover handler */
-              renderStarIcon={() => <span>●</span>}
-              starColor="#6FBBB7"
-              emptyStarColor="transparent"
-            />
-          </div>
-          <form
-            name="rating-review"
-            action="#"
-            onSubmit={e => {
-              saveRatingReview(e);
-            }}>
-            <label className="hidden md:block mb-3">
-              Adresa ta de email nu va fi publicată. Comentariul tău va fi asociat unui numar de identificare alfanumeric.
-            </label>
-            <div className="block relative mb-6">
-              <input
-                type="text"
-                name="email"
-                placeholder="Adresa ta de email"
-                value={email}
-                onChange={e => handleChanged(e)}
-                onBlur={e => handleLeave(e)}
-                className={`mb-0 ${emailError ? 'field-validation-error' : ''}`}
-                title="Completeaza cu o adresa de email valida !"
-              />
-              <span className={`block absolute ${emailError ? 'validation-error' : 'validation-passed'}`}>
-                Completeaza cu o adresa de email valida !
-              </span>
-            </div>
-            <div className="block relative mb-4 xs:mb-6">
-              <textarea
-                name="review"
-                rows={5}
-                placeholder="Lasă un testimonial despre acest serviciu social..."
-                value={feedback}
-                onChange={e => handleChanged(e)}
-                onBlur={e => handleLeave(e)}
-                minLength={minReviewChar}
-                maxLength={800}
-                className={`mb-0 ${reviewError ? 'field-validation-error' : ''}`}
-                title="Scrie un testimonial intre 100 si 800 de caratere !"
-              />
-              <span className={`block absolute ${reviewError ? 'validation-error' : 'validation-passed'}`}>
-                Scrie un testimonial intre 100 si 800 de caratere !
-              </span>
-            </div>
+      <Tabs>
+        <TabList>
+          <Tab>Adauga testimonial</Tab> <Tab>Testimoniale</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            {!successForm && !loading ? (
+              <Formik
+                initialValues={initialValues}
+                validate={(values) => {
+                  const errors: FormikErrors<Values> = {};
+                  if (!values.username) {
+                    errors.username = 'Câmp obligatoriu';
+                  }
+                  if (!values.email) {
+                    errors.email = 'Câmp obligatoriu';
+                  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                    errors.email = 'Adresă de email invalidă';
+                  }
+                  if (!values.feedback) {
+                    errors.feedback = 'Câmp obligatoriu';
+                  }
+                  if (values.feedback.length < 100 || values.feedback.length > 800) {
+                    errors.feedback =
+                      'Vă rugăm să ne spuneți mai multe detalii despre serviciul evaluat! Scrieți un testimonial intre 100 si 800 de caratere!';
+                  }
 
-            <div className="terms-conditions relative block mb-4 sm:mb-10 lg:mb-6 xl:mb-10">
-              <input
-                type="checkbox"
-                id="rating-review-msg"
-                className="absolute"
-                checked={acceptSavingEmail}
-                onChange={() => setAcceptance(!acceptSavingEmail)}
-              />
-              <label htmlFor="rating-review-msg" className="ml-6">
-                Accept salvarea adresei de email si a testimonialului
-              </label>
-            </div>
-            <button type="submit" className="text-white" disabled={!acceptSavingEmail}>
-              Salveaza
-            </button>
-          </form>
-        </>
-      ) : (
-        <div className="popup-suucess">
-          <div className="full my-10">
-            <p className="message message-success">Multumim pentru feedback !!!</p>
-          </div>
-          <div className="full my-10">
-            <p className="message message-success">Mesaj Custom !!!</p>
-          </div>
-          <div className="full">
-            <StarRatingComponent
-              name="ratei" /* name of the radio input, it is required */
-              value={props.rating} /* number of selected icon (`0` - none, `1` - first) */
-              starCount={5} /* number of icons in rating, default `5` */
-              // onStarClick={(value: number) => setRating(value)} /* on icon click handler */
-              renderStarIcon={() => <span>●</span>}
-              starColor="#6FBBB7"
-              emptyStarColor="transparent"
-            />
-          </div>
-          <div className="full">
-            <p>
-              <strong>Email:</strong> {email}
-            </p>
-            <p>
-              <strong>Feedback:</strong> {feedback}
-            </p>
-          </div>
-        </div>
-      )}
+                  return errors;
+                }}
+                onSubmit={async (values, actions) => {
+                  try {
+                    addRating({
+                      variables: {
+                        provider: props.providerId,
+                        rating: props.rating * 10,
+                        email: values.email,
+                        username: values.username,
+                        feedback: values.feedback,
+                      },
+                      context: {
+                        headers: { 'x-hasura-user-email': values.email },
+                      },
+                    });
+                    !loading && !error && setSuccessForm(true);
+                    if (error) {
+                      // eslint-disable-next-line
+                      console.info(error.message);
+                    }
+                  } catch (err) {
+                    // eslint-disable-next-line
+                    console.info(err.message);
+                  }
+                  actions.resetForm({ values: initialValues, errors: {}, touched: {} });
+                }}>
+                {({ values, errors, dirty, touched }) => (
+                  <>
+                    <div className="full">
+                      <StarRatingComponent
+                        name="ratei" /* name of the radio input, it is required */
+                        value={props.rating} /* number of selected icon (`0` - none, `1` - first) */
+                        starCount={5} /* number of icons in rating, default `5` */
+                        // onStarClick={(value: number) => setRating(value)} /* on icon click handler */
+                        onStarHover={(value: number) => props.setRating(value)} /* on icon hover handler */
+                        renderStarIcon={() => <span>●</span>}
+                        starColor="#6FBBB7"
+                        emptyStarColor="transparent"
+                      />
+                    </div>
+                    <Form>
+                      <label className="hidden md:block mb-3">
+                        Adresa ta de email nu va fi publicată. Comentariul tău va fi asociat numelui.
+                      </label>
+                      <div className="block relative mb-4">
+                        <Field
+                          type="text"
+                          name="username"
+                          placeholder="Utilizator: de ex.: cetatean1"
+                          value={values.username}
+                          className={`mb-0 ${errors.username ? 'field-validation-error' : ''}`}
+                        />
+                        {touched.username && errors.username && (
+                          <span className={`block absolute validation-error`}>{errors.username}</span>
+                        )}
+                      </div>
+                      <div className="block relative mb-6">
+                        <Field
+                          type="text"
+                          name="email"
+                          placeholder="Adresa ta de email"
+                          value={values.email}
+                          className={`mb-0 ${errors.email ? 'field-validation-error' : ''}`}
+                        />
+                        {touched.email && errors.email && (
+                          <span className={`block absolute validation-error`}>{errors.email}</span>
+                        )}
+                      </div>
+                      <div className="block relative mb-4 xs:mb-6">
+                        <Field
+                          as="textarea"
+                          name="feedback"
+                          rows={5}
+                          placeholder="Lasă un testimonial despre acest serviciu social..."
+                          value={values.feedback}
+                          className={`mb-0 ${errors.feedback ? 'field-validation-error' : ''}`}
+                        />
+                        {touched.feedback && errors.feedback && (
+                          <span className={`block absolute validation-error`}>{errors.feedback}</span>
+                        )}
+                      </div>
+
+                      <div className="terms-conditions relative block mb-4 sm:mb-10 lg:mb-6 xl:mb-10">
+                        <Field
+                          type="checkbox"
+                          id="rating-review-msg"
+                          className="absolute"
+                          name="acceptance"
+                          checked={values.acceptance}
+                        />
+                        <label htmlFor="rating-review-msg" className="ml-6">
+                          Accept salvarea adresei de email si a testimonialului
+                        </label>
+                      </div>
+                      <button type="submit" className="text-white" disabled={!values.acceptance || !isEmpty(errors) || !dirty}>
+                        Salveaza
+                      </button>
+                    </Form>
+                  </>
+                )}
+              </Formik>
+            ) : (
+              data && (
+                <div className="popup-suucess">
+                  <div className="full my-10">
+                    <p className="message message-success">Multumim pentru feedback !!!</p>
+                  </div>
+                  <div className="full my-10">
+                    <p className="message message-success">Am primit datele transmise și le vom verifica!</p>
+                  </div>
+                  <div className="full">
+                    <StarRatingComponent
+                      name="ratei" /* name of the radio input, it is required */
+                      value={
+                        data.insert_provider_rating.returning[0].rating / 10
+                      } /* number of selected icon (`0` - none, `1` - first) */
+                      starCount={5} /* number of icons in rating, default `5` */
+                      // onStarClick={(value: number) => setRating(value)} /* on icon click handler */
+                      renderStarIcon={() => <span>●</span>}
+                      starColor="#6FBBB7"
+                      emptyStarColor="transparent"
+                    />
+                  </div>
+                  <div className="full">
+                    <p>
+                      <strong>Nume:</strong> {data.insert_provider_rating.returning[0].user.username}
+                    </p>
+                    <p>
+                      <strong>Email:</strong> {data.insert_provider_rating.returning[0].user.email}
+                    </p>
+                    <p>
+                      <strong>Feedback:</strong> {data.insert_provider_rating.returning[0].feedback}
+                    </p>
+                  </div>
+                </div>
+              )
+            )}
+          </TabPanel>
+          <TabPanel>Comentarii</TabPanel>
+        </TabPanels>
+      </Tabs>
     </div>
   );
 }

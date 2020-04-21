@@ -51,7 +51,7 @@ function PopUps(props: any) {
       }
     }
   `;
-  const [rating, setRating] = useState<number>(1);
+  const [rating, setRating] = useState<number>(0);
   const [popup, setRatingPopUp] = useState<boolean>(false);
   const provider = props.id;
   const { loading, error, data } = useQuery(providersQuery, {
@@ -224,7 +224,15 @@ function PopUps(props: any) {
           />
         </div>
       </footer>
-      {popup && <RatingReview rating={rating} setRating={setRating} setRatingPopUp={setRatingPopUp} providerId={provider} dataClass="PopUps"/>}
+      {popup && (
+        <RatingReview
+          rating={rating}
+          setRating={setRating}
+          setRatingPopUp={setRatingPopUp}
+          providerId={provider}
+          dataClass="PopUps"
+        />
+      )}
     </section>
   );
 }
