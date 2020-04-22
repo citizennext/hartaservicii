@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Formik, Field, Form, FormikErrors } from 'formik';
 import StarRatingComponent from 'react-star-rating-component';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs';
-import '@reach/tabs/styles.css';
+// import '@reach/tabs/styles.css';
 import { useMutation } from '@apollo/react-hooks';
 import { X as Close } from 'react-feather';
 import gql from 'graphql-tag';
@@ -55,7 +55,7 @@ function RatingReview(props: any) {
         <Close className="text-celeste" size={30} />
       </button>
       <Tabs>
-        <TabList>
+        <TabList className="tabs">
           <Tab>Adauga testimonial</Tab> <Tab>Testimoniale</Tab>
         </TabList>
         <TabPanels>
@@ -154,7 +154,7 @@ function RatingReview(props: any) {
                         <Field
                           as="textarea"
                           name="feedback"
-                          rows={5}
+                          rows={3}
                           placeholder="Lasă un testimonial despre acest serviciu social..."
                           value={values.feedback}
                           className={`mb-0 ${errors.feedback ? 'field-validation-error' : ''}`}
