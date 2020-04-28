@@ -3,35 +3,38 @@
     "lang": "ro",
     "title": "Harta serviciilor sociale",
     "description": "Bine ai venit în Harta serviciilor sociale",
-    "url": "https://www.serviciisociale.ro",
-    "image": "/src/assets/images/hero.png",
-    "logo": "/src/assets/images/logo.svg",
-    "logoSquare": "/src/assets/images/harta-icon.png",
-    "twitter": "@serviciisociale",
-    "instagram": "serviciisociale",
-    "fbAppID": "2345678"
+    "url": "https://beta.serviciisociale.ro",
+    "image": "https://beta.serviciisociale.ro/cover.jpg",
+    "logo": "https://beta.serviciisociale.ro/logo.svg",
+    "logoSquare": "https://beta.serviciisociale.ro/harta-icon.png",
+    "instagram": "hartaserviciilorsociale",
+    "fbAppID": "230938941312776",
+    "twitter": "citizennextro"
   },
-  "externalLinks": {
-    "anpc": {
-      "label": "ANPC",
-      "title": "ANPC",
-      "url": "https://anpc.ro/"
-    }
-  },
-  "header": {},
   "footer": {
     "texts": {
-      "copyright": "Asociația Citizen Next — toate drepturile rezervate © "
+      "copyright": "Asociația Citizen Next — toate drepturile rezervate ©"
     },
     "links": {
       "asociatia": {
         "title": "Asociația Citizen Next",
-        "url": "https://citizennext.ro/contribute",
-        "text": "Asociația Citizen Next"
+        "url": "https://citizennext.ro/contribute"
+      },
+      "sis": {
+        "title": "Social Innovation Solutions",
+        "url": "https://www.socialinnovationsolutions.org"
       }
     }
   },
   "page": {
+    "covid": {
+      "navigation": {
+        "label": "CoVid19",
+        "url": "/nevoijudetecovid19",
+        "title": "CoVid19",
+        "nav": true
+      }
+    },
     "harta": {
       "navigation": {
         "label": "Harta",
@@ -73,8 +76,7 @@
       },
       "links": {
         "intro": {
-          "url": "noutati/harta-serviciilor-sociale-din-romania-proiect-finalist-in-programul-tara-lui-andrei",
-          "title": "Despre proiect",
+          "url": "noutati/ingrijim-si-suntem-ingrijiti-mai-bine",
           "label": "detalii"
         },
         "section2": {

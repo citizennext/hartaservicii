@@ -2,7 +2,7 @@ import React from 'react';
 import BlogPost from '../../../BlogPost';
 import HsSlider from '../../../Slider';
 
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, Link } from 'gatsby';
 const query = graphql`
   query {
     hasura {
@@ -16,7 +16,7 @@ const query = graphql`
           url
           urlSharp {
             childImageSharp {
-              fluid(maxHeight: 350, maxWidth: 770) {
+              fluid(maxHeight: 350, maxWidth: 770, duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
@@ -67,7 +67,9 @@ function Blog() {
                   ))}
                 </HsSlider>
               </div>
-              <button className="section-button mb-4 mt-16 md:mt-20">Toate noutățile</button>
+              <Link to="/noutati">
+                <button className="section-button mb-4 mt-16 md:mt-20">Toate noutățile</button>
+              </Link>
             </div>
           </div>
         );

@@ -16,13 +16,18 @@ export default class Contact extends React.Component {
               <img className="illu-logo" src={Illu} alt="Illu Logo" />
               <img className="no-type" src={Notype} alt="HS Logo" />
             </div>
-            <button className="social md:ml-6">Comunitate</button>
+            <a
+              className="button social md:ml-6"
+              href="https://www.facebook.com/hartaserviciilorsociale"
+              target="_blank"
+              rel="noopener noreferrer">
+              Comunitate
+            </a>
           </div>
           <div className="contact-right mb-32 md:w-1/2 md:mb-0 md:ml-2 md:self-end">
             <p className="py-8">
-              {' '}
-              Aici scriem ce avem nevoie de la public, de la vizitatori.Să promoveze proiectul pe social media, să se partenerize
-              cu noi instituțional - avem nevoie și de alți parteneri financiari ?
+              Dacă dorești să fii voluntar sau să devii partener al proiectului, suntem nerăbdători să ne contactezi și să începem
+              colaborarea.
             </p>
             <Link to="/contact" className="button">
               Contact
