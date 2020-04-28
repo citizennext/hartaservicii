@@ -67,7 +67,7 @@ export function Content() {
     <div className="wrapper">
       <StaticQuery
         query={query}
-        render={data => {
+        render={(data) => {
           const {
             publicServices,
             privateServices,
@@ -94,7 +94,7 @@ export function Content() {
               </div>
               <div className="grid-statistic-item">
                 <StatisticsMap
-                  title="Capacitate servicii sociale (locuri)"
+                  title="Servicii sociale pe județe"
                   classStatisticsMap="statistics-map"
                   data={services}
                   total={services.aggregate.count}
@@ -141,6 +141,8 @@ export function Content() {
               </div>
               {/* @todo - if need an empty element */}
               {/*<div className="grid-statistic-item invisible lg:visible"></div>*/}
+              <div className="grid-statistic-item invisible lg:visible"></div>
+              <div className="grid-statistic-item invisible lg:visible"></div>
             </div>
           );
         }}
