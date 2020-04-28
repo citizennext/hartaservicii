@@ -8,9 +8,20 @@ import Filter from './Filter';
 import gql from 'graphql-tag';
 import queryString from 'query-string';
 import { Query } from 'react-apollo';
+import Amplify from 'aws-amplify';
 import FilterOptions from '../../data/filter-options.json';
 import ROCoordinates from '../../data/ro-coordinates.json';
 import { Spinner } from '../Spinner';
+
+Amplify.configure({
+  Auth: {
+    identityPoolId: process.env.GATSBY_IDENTITY_POOL_ID,
+    region: process.env.GATSBY_REGION,
+    identityPoolRegion: process.env.GATSBY_REGION,
+    userPoolId: process.env.GATSBY_USER_POOL_ID,
+    userPoolWebClientId: process.env.GATSBY_USER_POOL_WEB_CLIENT_ID,
+  },
+});
 type FilterObject = {
   district?: string | null;
   category?: string | null;
