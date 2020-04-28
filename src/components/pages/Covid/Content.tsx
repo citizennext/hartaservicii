@@ -9,9 +9,9 @@ import { formatNumber } from '../../../utils';
 export function Content({ counties }: { counties: Needs[] }) {
   const [open, setOpen] = useState<string | null>(null);
   function getCounty() {
-    const county = counties.find(county => county.id === open);
+    const county = counties.find((county) => county.id === open);
     if (!county) {
-      return <div>hello</div>;
+      return <div>...</div>;
     }
     return (
       <div className="map-marker-popup needs">
@@ -102,6 +102,17 @@ export function Content({ counties }: { counties: Needs[] }) {
           <strong>Ce poți face în mod practic</strong> este să te uiți pe harta serviciilor sociale și să identifici centrul
           social cel mai apropiat de tine pe care să îl sprijini cu cele necesare. Dacă ai făcut o donație, anunță-ne și pe noi
           pentru a putea redirecționa pe cei care vor să ajute acolo unde este cea mai mare nevoie.
+        </p>
+        <p>
+          Pentru donații către centrele de bătrâni vă rugăm să vă alăturați campaniei
+          <a
+            href="https://www.facebook.com/donate/3254515761248340/10159092302869672/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontWeight: 'bold', padding: '0 8px' }}>
+            Împreună pentru bunicii noștri
+          </a>
+          inițiată de Marius Manole, MagiCAMP și Romanian United Fund.
         </p>
       </div>
       <div className="section blogposts mb-20 bg-white">
