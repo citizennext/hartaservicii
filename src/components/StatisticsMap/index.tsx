@@ -20,9 +20,21 @@ type Props = {
   };
   total: number;
 };
-
+interface Tooltip {
+  X: number;
+  Y: number;
+  name: string;
+  count: number;
+}
 function StatisticsMap(props: Props) {
-  const [tooltip, setToolTip] = useState<object>({});
+  const [tooltip, setToolTip] = useState<Tooltip>();
+  const getToolTip = (e: any, key: any, value: number) => {
+    if (e && key && value) {
+      setToolTip({ X: e.nativeEvent.offsetX, Y: e.nativeEvent.offsetY, name: key, count: value });
+    } else {
+      setToolTip({ X: 0, Y: 0, name: '', count: 0 });
+    }
+  };
   // Width of the enclosing square
   const sqSizeWidth = props.sqSizeWidth;
   // Height of the enclosing square
@@ -37,7 +49,7 @@ function StatisticsMap(props: Props) {
     district: string;
   }
   function manipulateData(array: District[]) {
-    const startArray: string[] = array.map(a => a.district);
+    const startArray: string[] = array.map((a) => a.district);
     // @ts-ignore
     const startObject = countBy(identity)(startArray);
     // @ts-ignore
@@ -58,14 +70,6 @@ function StatisticsMap(props: Props) {
     return 100 - (amount / maxAmount) * currentLightness;
   }
 
-  const getToolTip = (e: any, key: any, value: number) => {
-    if (e && key && value) {
-      setToolTip({ X: e.pageX, Y: e.pageY, name: key, count: value });
-    } else {
-      setToolTip({ X: 0, Y: 0, name: '', count: 0 });
-    }
-  };
-
   return (
     <div className={props.classStatisticsMap}>
       <svg width={sqSizeWidth} height={sqSizeHeight} viewBox={viewBox}>
@@ -85,8 +89,8 @@ function StatisticsMap(props: Props) {
               d={districtSvgMapping[key]}
               fill={`hsl(${props.districtHueAndSaturation}, ${lightness(value)}%)`}
               stroke={key === 'Ilfov' || key === 'Prahova' || key === 'Ialomița' ? '#CDE5C0' : ''}
-              onMouseMove={e => getToolTip(e, key, value)}
-              onMouseOut={e => getToolTip(e, '', 0)}
+              onMouseMove={(e) => getToolTip(e, key, value)}
+              onMouseOut={(e) => getToolTip(e, '', 0)}
             />
           );
         })}
@@ -109,10 +113,10 @@ function StatisticsMap(props: Props) {
       </div>
       <p className="circle-total-amount text-center block mt-4">{props.total}</p>
       <p className="statistics-map-title pb-20">{props.title}</p>
-      {tooltip.name && (
-        <div className="statistics-tooltip" style={{ position: 'fixed', top: tooltip.Y, left: tooltip.X }}>
+      {tooltip?.name && (
+        <div className="statistics-tooltip" style={{ position: 'absolute', top: tooltip.Y, left: tooltip.X }}>
           <span>{tooltip.name}</span>
-          <span>{tooltip.count} locuri</span>
+          <span>{tooltip.count}</span>
         </div>
       )}
     </div>
