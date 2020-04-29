@@ -23,6 +23,7 @@ export const isLoggedIn = () => {
   if (!isBrowser) return false;
   const user = getUser();
   if (!isEmpty(user)) return true;
+  return false;
 };
 
 export function getCurrentUser() {
