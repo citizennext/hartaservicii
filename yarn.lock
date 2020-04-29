@@ -3488,22 +3488,6 @@
     lodash.debounce "^4.0.8"
     react-dev-utils "^9.1.0"
 
-"@reach/auto-id@^0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@reach/auto-id/-/auto-id-0.10.1.tgz#5c8f7573d6271e0e55df04e459a1d1d1cf11a216"
-  integrity sha512-xGFW2v+L39M/mafdW7v+NhhsjT1LBnQJCGj64dm37T4IGNgAexlfMkRRwsqHOvuVvV38mR114YOy0xrlkqduRQ==
-  dependencies:
-    "@reach/utils" "^0.10.1"
-    tslib "^1.11.1"
-
-"@reach/descendants@^0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@reach/descendants/-/descendants-0.10.1.tgz#e466a1ba52946ba5c809b4b4e7152d9b044b5437"
-  integrity sha512-Wh6VnCCDwqK/07GBx259fQsVGGwb+IT17GP3LYPtabo2L/t9Mw5oIiAkXZ6VVvw7zGpQGfm9cZYBxdYCbQOwuA==
-  dependencies:
-    "@reach/utils" "^0.10.1"
-    tslib "^1.11.1"
-
 "@reach/dialog@^0.10.1":
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/@reach/dialog/-/dialog-0.10.1.tgz#c4056a0eef402a46ce94017415dd3c947855f73b"
@@ -3533,17 +3517,6 @@
     invariant "^2.2.3"
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
-
-"@reach/tabs@^0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@reach/tabs/-/tabs-0.10.1.tgz#35752444083427d19628344af02d051d1b7e0ea0"
-  integrity sha512-a3lpLU7KEZrvJJdzyqWB90Q50rPhBWAWBWcHAyewkm6uWTamSB/GNTHxylKo3B8fSkFMUL7r1e/odKsE+GB29w==
-  dependencies:
-    "@reach/auto-id" "^0.10.1"
-    "@reach/descendants" "^0.10.1"
-    "@reach/utils" "^0.10.1"
-    prop-types "^15.7.2"
-    tslib "^1.11.1"
 
 "@reach/utils@^0.10.1":
   version "0.10.1"

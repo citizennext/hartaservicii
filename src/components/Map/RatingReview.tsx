@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form, FormikErrors } from 'formik';
 import StarRatingComponent from 'react-star-rating-component';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs';
-import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
-import '@reach/tabs/styles.css';
+import { useParams } from '@reach/router';
 import { useMutation } from '@apollo/react-hooks';
-import { X as Close } from 'react-feather';
 import gql from 'graphql-tag';
 import { isEmpty } from 'ramda';
+import Footer from '../Footer';
+import Seo from '../Seo';
+import Header from '../Header';
+import Layout from '../Layout';
+import { AfterHeader } from '../AfterHeader';
+import { SidebarAccount } from '../SidebarAccount';
 
 interface Values {
   feedback: string;
@@ -31,34 +34,32 @@ function RatingReview(props: any) {
   `;
   // eslint-disable-next-line
   const [addRating, { data, loading, error }] = useMutation(ratingMutation);
+  const params = useParams();
   const [successForm, setSuccessForm] = useState(false);
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
   const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
+  const [rating, setRating] = useState<number>(props.location.state.rating);
 
   return (
-    <div className="rating" data-class={props.dataClass}>
-      <button className="close-map-marker-popup" onClick={() => props.setRatingPopUp(false)}>
-        <Close className="text-celeste" size={30} />
-      </button>
-      <Tabs>
-        <TabList className="tabs">
-          <Tab>Adauga testimonial</Tab> <Tab>Testimoniale</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
+    <div className="rating">
+      <Seo isRepeatable={false} postTitle="Testimonial" bodyClassName="page-review" summary="Lasă un testimonial" />
+      <Header />
+      <AfterHeader header="testimonial" />
+      <Layout left={<SidebarAccount />}>
+        <div className="wrapper">
+          <div className="contact-wrapper">
             {!successForm && !loading ? (
-              <AmplifyAuthenticator initialAuthState="signup">
-                <AmplifySignUp
-                  headerText="Crează-ti un cont"
-                  slot="sign-up"
-                  submitButtonText="Trimite"
-                  formFields={[
-                    { type: 'username', label: 'Utilizator', placeholder: 'alege un nume de utilizator', required: true },
-                    { type: 'email', label: 'Email', placeholder: 'adresă de email validă', required: true },
-                    { type: 'password', label: 'Parolă', placeholder: 'alege o parolă puternica', required: true },
-                    { type: 'phone_number', label: 'Telefon', placeholder: 'numar fara 0 in fata', required: true },
-                  ]}></AmplifySignUp>
+              <>
+                <h1 className="mt-4 xl:mt-24 mb-12">Povestește-ne experiența ta!</h1>
+                <p>
+                  Aceste testimoniale pot avea un impact enorm. Pot duce la soluționarea unor probleme raportate de cetățeni. Pot
+                  ajuta personalul serviciului să își îmbunătățească serviciile. Pot ajuta alți oameni să ia o decizie extrem de
+                  importantă.
+                </p>
+                <p>
+                  <strong>Fi politicos, folosește un ton și un limbaj constructiv! </strong>
+                </p>
                 <Formik
                   initialValues={initialValues}
                   validate={(values) => {
@@ -76,8 +77,8 @@ function RatingReview(props: any) {
                     try {
                       addRating({
                         variables: {
-                          provider: props.providerId,
-                          rating: props.rating * 10,
+                          provider: params.id,
+                          rating: rating * 10,
                           feedback: values.feedback,
                         },
                         context: {
@@ -101,19 +102,25 @@ function RatingReview(props: any) {
                   }}>
                   {({ values, errors, dirty, touched }) => (
                     <>
-                      <div className="full">
+                      <div className="md:flex bg-snow rounded-lg p-6 border border-leaf mb-4">
                         <StarRatingComponent
                           name="ratei" /* name of the radio input, it is required */
-                          value={props.rating} /* number of selected icon (`0` - none, `1` - first) */
+                          value={rating} /* number of selected icon (`0` - none, `1` - first) */
                           starCount={5} /* number of icons in rating, default `5` */
-                          // onStarClick={(value: number) => setRating(value)} /* on icon click handler */
-                          onStarHover={(value: number) => props.setRating(value)} /* on icon hover handler */
+                          onStarClick={(value: number) => setRating(value)} /* on icon click handler */
+                          onStarHover={(value: number) => setRating(value)} /* on icon hover handler */
                           renderStarIcon={() => <span>●</span>}
                           starColor="#6FBBB7"
                           emptyStarColor="transparent"
                         />
+                        <div className="text-center md:text-left md:ml-20">
+                          <h2 className="text-lg md:p-0">Calificativul tau</h2>
+                          <div className="text-brown text-lg font-body">
+                            Cunoști situația din acest centru din experiență proprie? Oferă-i un indicativ!
+                          </div>
+                        </div>
                       </div>
-                      <Form>
+                      <Form className="md:flex flex-col">
                         <div className="block relative mb-4 xs:mb-6">
                           <Field
                             as="textarea"
@@ -121,48 +128,35 @@ function RatingReview(props: any) {
                             rows={3}
                             placeholder="Lasă un testimonial despre acest serviciu social..."
                             value={values.feedback}
-                            className={`mb-0 ${errors.feedback ? 'field-validation-error' : ''}`}
+                            className={`w-full mb-0 ${errors.feedback ? 'field-validation-error' : ''}`}
                           />
                           {touched.feedback && errors.feedback && (
                             <span className={`block absolute validation-error`}>{errors.feedback}</span>
                           )}
                         </div>
-                        <button type="submit" className="text-white" disabled={!isEmpty(errors) || !dirty}>
+                        <button type="submit" className="text-white md:ml-auto md:mr-0" disabled={!isEmpty(errors) || !dirty}>
                           Salveaza
                         </button>
                       </Form>
                     </>
                   )}
                 </Formik>
-              </AmplifyAuthenticator>
+              </>
             ) : (
               data && (
                 <div className="popup-suucess">
                   <div className="full my-10">
-                    <p className="message message-success">Multumim pentru feedback !!!</p>
+                    <h1 className="mt-4 xl:mt-24 mb-12">Multumim pentru feedback !!!</h1>
                   </div>
                   <div className="full my-10">
-                    <p className="message message-success">Am primit datele transmise și le vom verifica!</p>
-                  </div>
-                  <div className="full">
-                    <StarRatingComponent
-                      name="ratei" /* name of the radio input, it is required */
-                      value={
-                        data.insert_provider_rating.returning[0].rating / 10
-                      } /* number of selected icon (`0` - none, `1` - first) */
-                      starCount={5} /* number of icons in rating, default `5` */
-                      // onStarClick={(value: number) => setRating(value)} /* on icon click handler */
-                      renderStarIcon={() => <span>●</span>}
-                      starColor="#6FBBB7"
-                      emptyStarColor="transparent"
-                    />
+                    <p>Am primit datele transmise și le vom verifica!</p>
                   </div>
                   <div className="full">
                     <p>
-                      <strong>Nume:</strong> {data.insert_provider_rating.returning[0].user.username}
+                      <strong>Calificativ:</strong> {data.insert_provider_rating.returning[0].rating / 10} / 5
                     </p>
                     <p>
-                      <strong>Email:</strong> {data.insert_provider_rating.returning[0].user.email}
+                      <strong>Nume:</strong> {data.insert_provider_rating.returning[0].user.username}
                     </p>
                     <p>
                       <strong>Feedback:</strong> {data.insert_provider_rating.returning[0].feedback}
@@ -171,10 +165,10 @@ function RatingReview(props: any) {
                 </div>
               )
             )}
-          </TabPanel>
-          <TabPanel>Comentarii</TabPanel>
-        </TabPanels>
-      </Tabs>
+          </div>
+        </div>
+      </Layout>
+      <Footer />
     </div>
   );
 }

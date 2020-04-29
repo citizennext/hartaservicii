@@ -8,11 +8,13 @@ import Filter from './Filter';
 import gql from 'graphql-tag';
 import queryString from 'query-string';
 import { Query } from 'react-apollo';
-import Amplify from 'aws-amplify';
+import Seo from '../Seo';
+import Header from '../Header';
+import Layout from '../Layout';
 import FilterOptions from '../../data/filter-options.json';
 import ROCoordinates from '../../data/ro-coordinates.json';
 import { Spinner } from '../Spinner';
-
+import Amplify from 'aws-amplify';
 Amplify.configure({
   Auth: {
     identityPoolId: process.env.GATSBY_IDENTITY_POOL_ID,
@@ -154,7 +156,7 @@ export default class Harta extends Component<any, State> {
   };
 
   handleClick = (item: Provider) => {
-    navigate(`/harta/serviciu/${item.slug}`, {
+    navigate(`/harta/serviciu/${item.slug}/`, {
       state: { oldLocation: JSON.parse(JSON.stringify(this.props.location)) },
     });
   };
@@ -171,60 +173,64 @@ export default class Harta extends Component<any, State> {
     };
     return (
       <>
-        <Map
-          center={position}
-          zoom={this.state.zoom}
-          maxZoom={20}
-          zoomControl={false}
-          scrollWheelZoom={this.state.scrollWheelZoom}
-          className="markercluster-map">
-          <TileLayer
-            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
-            <Query
-              query={PROVIDERS}
-              variables={queryVariables}
-              onCompleted={(provider: { [key: string]: [] }) => {
-                this.setState({ totalResults: provider.providers.length });
-              }}>
-              {({ loading, error, data }: any) => {
-                if (loading) return <Spinner />;
-                if (error) return <div>Error</div>;
+        <Seo isRepeatable={false} slug="harta" postTitle="Harta Serviciilor" bodyClassName="page-harta" />
+        <Header mapHeader={true} />
+        <Layout>
+          <Map
+            center={position}
+            zoom={this.state.zoom}
+            maxZoom={20}
+            zoomControl={false}
+            scrollWheelZoom={this.state.scrollWheelZoom}
+            className="markercluster-map">
+            <TileLayer
+              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <MarkerClusterGroup showCoverageOnHover={false} iconCreateFunction={this.createMarkerClusterCustomIcon}>
+              <Query
+                query={PROVIDERS}
+                variables={queryVariables}
+                onCompleted={(provider: { [key: string]: [] }) => {
+                  this.setState({ totalResults: provider.providers.length });
+                }}>
+                {({ loading, error, data }: any) => {
+                  if (loading) return <Spinner />;
+                  if (error) return <div>Error</div>;
 
-                const providers: Provider[] = data.providers.map((item: Provider) => {
-                  return {
-                    ...item,
-                    slug: `${getSlug(item.name)}/${item.id}`,
-                  };
-                });
-                return (
-                  <>
-                    {providers.map((item, index) => (
-                      <Marker
-                        position={item.coordinates}
-                        key={`marker-${item.id}-${index}`}
-                        icon={this.createMarkerCustomIcon()}
-                        onClick={() => this.handleClick(item)}>
-                        <Tooltip>{item.name}</Tooltip>
-                      </Marker>
-                    ))}
-                  </>
-                );
-              }}
-            </Query>
-          </MarkerClusterGroup>
-          <ZoomControl position="bottomright" />
-        </Map>
-        <Filter
-          filterClass="filter-options"
-          options={Object.values(FilterOptions)}
-          drawer={true}
-          filters={filters}
-          totalResults={this.state.totalResults}
-          onFilterChange={this.handleFilterChange}
-        />
+                  const providers: Provider[] = data.providers.map((item: Provider) => {
+                    return {
+                      ...item,
+                      slug: `${getSlug(item.name)}/${item.id}`,
+                    };
+                  });
+                  return (
+                    <>
+                      {providers.map((item, index) => (
+                        <Marker
+                          position={item.coordinates}
+                          key={`marker-${item.id}-${index}`}
+                          icon={this.createMarkerCustomIcon()}
+                          onClick={() => this.handleClick(item)}>
+                          <Tooltip>{item.name}</Tooltip>
+                        </Marker>
+                      ))}
+                    </>
+                  );
+                }}
+              </Query>
+            </MarkerClusterGroup>
+            <ZoomControl position="bottomright" />
+          </Map>
+          <Filter
+            filterClass="filter-options"
+            options={Object.values(FilterOptions)}
+            drawer={true}
+            filters={filters}
+            totalResults={this.state.totalResults}
+            onFilterChange={this.handleFilterChange}
+          />
+        </Layout>
       </>
     );
   }

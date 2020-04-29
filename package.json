@@ -23,7 +23,6 @@
     "@apollo/react-hooks": "^3.1.5",
     "@aws-amplify/ui-react": "^0.2.3",
     "@openfonts/koho_all": "^1.44.2",
-    "@reach/tabs": "^0.10.1",
     "algoliasearch": "^4.2.0",
     "apollo-boost": "^0.4.7",
     "aws-amplify": "^3.0.8",

@@ -31,8 +31,14 @@ export function Content({ content, summary, additionalData }: Props) {
       <div className="content" dangerouslySetInnerHTML={createMarkup()} />
 
       {buttons &&
-        buttons.map(button => (
-          <a key={button.href} href={button.href} target="_blank" rel="noopener noreferrer" title={button.label}>
+        buttons.map((button) => (
+          <a
+            key={button.href}
+            href={button.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={button.label}
+            style={{ width: 'auto' }}>
             <button className="btn btn-citizennext" title={button.label} style={{ marginBottom: 40 }}>
               {button.label}
             </button>

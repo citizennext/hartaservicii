@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
+import { navigate } from '@reach/router';
 import { useQuery } from '@apollo/react-hooks';
 import StarRatingComponent from 'react-star-rating-component';
 import CopyToClipboard from 'react-copy-to-clipboard';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { X as Close } from 'react-feather';
-import RatingReview from './RatingReview';
+// import RatingReview from './RatingReview';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
 
@@ -52,7 +53,6 @@ function PopUps(props: any) {
     }
   `;
   const [rating, setRating] = useState<number>(0);
-  const [popup, setRatingPopUp] = useState<boolean>(false);
   const provider = props.id;
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
@@ -64,7 +64,7 @@ function PopUps(props: any) {
   const percentageRating = (providers.rating_aggregate.aggregate.avg.rating * 100) / 50;
   const saveRating = (value: number) => {
     setRating(value);
-    setRatingPopUp(true);
+    navigate(`rating`, { state: { rating } });
   };
   // @ts-ignore
   // @ts-ignore
@@ -224,7 +224,7 @@ function PopUps(props: any) {
           />
         </div>
       </footer>
-      {popup && (
+      {/* {popup && (
         <RatingReview
           rating={rating}
           setRating={setRating}
@@ -232,7 +232,7 @@ function PopUps(props: any) {
           providerId={provider}
           dataClass="PopUps"
         />
-      )}
+      )} */}
     </section>
   );
 }

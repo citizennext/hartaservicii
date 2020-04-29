@@ -10,7 +10,7 @@ export function SidebarAccount() {
   return (
     <div>
       <NotificationContainer />
-      <h1 className="mt-24 mb-12">Profilul meu</h1>
+      <h4 className="mt-4 xl:mt-24 mb-12">Profilul meu</h4>
       <p>
         <strong>e: </strong>
         {user?.email}
@@ -24,7 +24,7 @@ export function SidebarAccount() {
         {user?.username}
       </p>
       <button
-        className="small invert mt-8 ml-0"
+        className="small invert mt-8 xl:ml-0"
         onClick={() =>
           Auth.signOut()
             .then(() => logout())
@@ -33,7 +33,7 @@ export function SidebarAccount() {
         Logout
       </button>
       <Link to="/harta">
-        <button className="small invert mt-4 ml-0">Harta</button>
+        <button className="small invert mt-4 xl:ml-0 mb-12">Harta</button>
       </Link>
     </div>
   );
