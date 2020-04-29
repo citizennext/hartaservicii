@@ -98,7 +98,6 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       name="username"
                       required={true}
                       value={this.state.username}
-                      style={styles.input}
                     />
                     <input
                       onChange={this.handleUpdate}
@@ -107,7 +106,6 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       required={true}
                       value={this.state.password}
                       type="password"
-                      style={styles.input}
                     />
                     <input
                       onChange={this.handleUpdate}
@@ -115,7 +113,6 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       name="email"
                       required={true}
                       value={this.state.email}
-                      style={styles.input}
                     />
                     <input
                       onChange={this.handleUpdate}
@@ -123,7 +120,6 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       name="phone_number"
                       required={true}
                       value={this.state.phone_number}
-                      style={styles.input}
                     />
                     <button type="submit" className="mt-4">
                       Crează cont nou
@@ -138,8 +134,8 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       onChange={this.handleUpdate}
                       placeholder="Cod autorizare"
                       name="authCode"
+                      required={true}
                       value={this.state.authCode}
-                      style={styles.input}
                     />
                     <button type="submit" className="mt-4">
                       Confirmă contul
@@ -160,27 +156,5 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
     );
   }
 }
-
-const styles = {
-  input: {
-    height: 40,
-    margin: '10px 0px',
-    padding: 7,
-  },
-  formContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  button: {
-    backgroundColor: 'rebeccapurple',
-    padding: '15px 7px',
-    cursor: 'pointer',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: 'white',
-  },
-};
 
 export default SignUp;
