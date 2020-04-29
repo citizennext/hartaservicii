@@ -39,7 +39,7 @@ class SignIn extends React.Component<{ location?: StateLocation; path: string },
       setUser(userInfo);
 
       navigate(this.props.location?.state ? this.props.location.state.referrer : '/harta', {
-        state: { rating: this.props.location?.state?.rating },
+        state: { rating: this.props.location?.state ? this.props.location?.state?.rating : 0 },
       });
     } catch (err) {
       this.setState({ error: err.message });
