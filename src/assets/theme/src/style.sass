@@ -50,15 +50,17 @@ p
         @apply leading-tight
 
 a
-    @apply text-black
-    @apply underline
+    @apply text-celeste
 
     &:hover
-        @apply text-celeste
+        @apply text-leaf
 
     &.mini
         @apply text-xs
-
+a > button, a.button
+    @apply text-black
+    &:hover
+        @apply text-celeste
 /* elements */
 .separator
     @apply absolute

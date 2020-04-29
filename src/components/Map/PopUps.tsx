@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { navigate } from '@reach/router';
+import { useQuery } from '@apollo/react-hooks';
 import StarRatingComponent from 'react-star-rating-component';
 import CopyToClipboard from 'react-copy-to-clipboard';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { X as Close } from 'react-feather';
+// import RatingReview from './RatingReview';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
 
 function PopUps(props: any) {
-  const ratingMutation = gql`
-    mutation MyMutation($provider: uuid!, $rating: Int!) {
-      insert_provider_rating(objects: { provider_id: $provider, rating: $rating }) {
-        returning {
-          id
-        }
-      }
-    }
-  `;
   const providersQuery = gql`
     query Provider($provider: uuid!) {
       providers_by_pk(id: $provider) {
@@ -59,13 +52,11 @@ function PopUps(props: any) {
       }
     }
   `;
-
-  const [rating, setRating] = useState<number>(1);
+  const [rating, setRating] = useState<number>(0);
   const provider = props.id;
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
   });
-  const [addRating] = useMutation(ratingMutation);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! ${error.message}</p>;
   const providers = data.providers_by_pk;
@@ -73,8 +64,10 @@ function PopUps(props: any) {
   const percentageRating = (providers.rating_aggregate.aggregate.avg.rating * 100) / 50;
   const saveRating = (value: number) => {
     setRating(value);
-    addRating({ variables: { provider: props.id, rating: value * 10 } });
+    navigate(`rating`, { state: { rating } });
   };
+  // @ts-ignore
+  // @ts-ignore
   return (
     <section className="map-marker-popup" id="map-marker-popup" data-id={providers.id}>
       <NotificationContainer />
@@ -231,6 +224,15 @@ function PopUps(props: any) {
           />
         </div>
       </footer>
+      {/* {popup && (
+        <RatingReview
+          rating={rating}
+          setRating={setRating}
+          setRatingPopUp={setRatingPopUp}
+          providerId={provider}
+          dataClass="PopUps"
+        />
+      )} */}
     </section>
   );
 }

@@ -55,6 +55,10 @@ module.exports = {
         '3xl': '1.625rem',
         '3xxl': '1.875rem',
       },
+      fontFamily: {
+        display: ['Montserrat', 'sans-serif'],
+        body: ['KoHo', 'sans-serif'],
+      },
     },
   },
   variants: {},

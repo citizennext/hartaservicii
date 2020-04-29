@@ -125,11 +125,10 @@ export function Content({ counties }: { counties: Needs[] }) {
           ))}
         </div>
         <DialogOverlay
-          aria-text-brown="detalii serviciu"
           isOpen={!!open}
           onDismiss={() => setOpen(null)}
           style={{ background: 'rgba(151,133,133, 0.4)', position: 'fixed', top: 0, width: '100%', height: '100vh' }}>
-          <DialogContent>{getCounty()}</DialogContent>
+          <DialogContent aria-label="modal detalii nevoi">{getCounty()}</DialogContent>
         </DialogOverlay>
 
         <div className="needs-form md:w-1/2 md:mx-auto mt-20">

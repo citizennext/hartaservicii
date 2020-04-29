@@ -80,7 +80,7 @@ function Statistics() {
   return (
     <StaticQuery
       query={query}
-      render={data => {
+      render={(data) => {
         const { publicServices, privateServices, homelessServices, childServices, services } = data.hasura;
         return (
           <div id="statistics" className="section circularprogressbar">
