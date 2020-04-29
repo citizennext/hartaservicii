@@ -10,7 +10,7 @@ function Hero() {
     <StaticQuery
       query={graphql`
         query heroQuery {
-          file(relativePath: { regex: "/HSS_people_clean_2000.png/" }) {
+          file(relativePath: { regex: "/HSS_people_clean_2000.jpg/" }) {
             childImageSharp {
               fluid(
                 maxWidth: 870
@@ -32,12 +32,7 @@ function Hero() {
                 <h1 className="py-4 md:pt-10 xl:pt-20">{Data.page.homepage.content.title}</h1>
                 <p className="pb-4">{Data.page.homepage.content.intro}</p>
                 <Link to={Data.page.homepage.links.intro.url} style={{ textDecoration: 'none' }}>
-                  <button
-                    className="small mb-4"
-                    formAction={Data.page.homepage.links.intro.url}
-                    title={Data.page.homepage.links.intro.title}>
-                    {Data.page.homepage.links.intro.label}
-                  </button>
+                  <button className="small mb-4">{Data.page.homepage.links.intro.label}</button>
                 </Link>
               </div>
               <div className="hero-image md:w-2/3 md:-ml-0 xl:-ml-0 xl:w-3/4 xl:self-end">

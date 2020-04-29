@@ -14,19 +14,19 @@ type Props = {
 const SEO = ({ postTitle, summary, postImage, slug, isRepeatable, bodyClassName }: Props) => {
   const title = postTitle || data.head.title;
   const description = summary || data.head.description;
-  const image = `${postImage}` || data.head.image;
-  const url = slug ? `${data.head.url}${slug}` : data.head.url;
+  const image = postImage ? postImage : data.head.image;
+  const url = slug ? `${data.head.url}/${slug}` : data.head.url;
 
   return (
     <Helmet bodyAttributes={{ class: bodyClassName || '' }}>
-      <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js?features=default,Symbol" />
+      <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.js" />
       {postTitle ? <title>{`${postTitle} | ${data.head.title}`}</title> : <title>{`${data.head.title}`}</title>}
       {/* General tags */}
       <meta name="description" content={description} />
       <meta name="image" content={image} />
       {/* OpenGraph tags */}
       <meta property="og:url" content={url} />
-      {isRepeatable ? <meta property="og:type" content="article" /> : null}
+      {isRepeatable ? <meta property="og:type" content="article" /> : <meta property="og:type" content="website" />}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />

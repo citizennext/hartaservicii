@@ -11,13 +11,25 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
     {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: '226417208680464',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: 'GTM-KNQ9RQZ',
+      },
+    },
+    {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
         fonts: [
           {
             family: `KoHo`,
             subsets: [`latin-ext`],
-            variants: [`400`, `400i`, `700`, `700i`],
+            variants: [`200i`, `400`, `400i`, `700`, `700i`],
           },
           {
             family: `Montserrat`,
@@ -61,6 +73,8 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/assets/images/harta-icon.png`, // This path is relative to the root of the site.
+        crossOrigin: `anonymous`,
+        rel: `preload`,
       },
     },
     {
@@ -111,12 +125,35 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-algolia',
+      resolve: `gatsby-plugin-algolia-search`,
       options: {
         appId: process.env.GATSBY_ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_API_KEY,
-        queries: queries,
-        chunkSize: 10000, // default: 1000
+        indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME_COMMON, // for all queries
+        queries,
+        chunkSize: 10000,
+        settings: {
+          // optional, any index settings
+        },
+        enablePartialUpdates: true,
+        matchFields: ['updatedAt'],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-preconnect',
+      options: {
+        domains: ['https://f2r31ssu7s-dsn.algolia.net'],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-minify`,
+      options: {
+        removeAttributeQuotes: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
       },
     },
   ],

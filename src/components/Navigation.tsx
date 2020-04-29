@@ -4,7 +4,9 @@ import Drawer from './Drawer/Drawer';
 
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Close, Menu } from './Icons';
-
+const isActive = ({ isCurrent }: { isCurrent: boolean }) => {
+  return isCurrent ? { className: 'active' } : {};
+};
 type NavItem = {
   label: string;
   url: string;
@@ -26,7 +28,7 @@ type Props = {
   drawer: boolean;
 };
 
-const Navigation: React.FC<Props> = props => {
+const Navigation: React.FC<Props> = (props) => {
   const nav = props.nav;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -51,10 +53,10 @@ const Navigation: React.FC<Props> = props => {
             <nav className={props.navClass}>
               <ul className="navigation">
                 {Object.values(nav)
-                  .filter(item => item.navigation.nav)
+                  .filter((item) => item.navigation.nav)
                   .map((item, index) => (
                     <li key={`${item.navigation.url}-${index}`}>
-                      <Link to={item.navigation.url} title={item.navigation.title}>
+                      <Link to={item.navigation.url} title={item.navigation.title} getProps={isActive}>
                         {item.navigation.label}
                       </Link>
                     </li>
@@ -74,10 +76,10 @@ const Navigation: React.FC<Props> = props => {
         <nav className={props.navClass}>
           <ul className="navigation">
             {Object.values(nav)
-              .filter(item => item.navigation.nav)
+              .filter((item) => item.navigation.nav)
               .map((item, index) => (
                 <li key={`${item.navigation.url}-${index}`}>
-                  <Link to={item.navigation.url} title={item.navigation.title}>
+                  <Link to={item.navigation.url} title={item.navigation.title} getProps={isActive}>
                     {item.navigation.label}
                   </Link>
                 </li>

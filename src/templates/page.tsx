@@ -17,6 +17,7 @@ export default ({ data }: any) => {
         isRepeatable={false}
         postImage={page.image !== null && page.image.url}
         summary={page.summary}
+        slug={page.slug}
         bodyClassName={`page-${page.slug}`}
       />
       <Header />

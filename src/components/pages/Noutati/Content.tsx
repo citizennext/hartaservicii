@@ -15,11 +15,11 @@ type Blogs = {
 };
 
 type Props = {
-  blogs: [Blogs];
+  featured: [Blogs];
+  regular: [Blogs];
 };
 
-export function Content({ blogs }: Props) {
-  const featuredPosts = { featuredPosts: blogs };
+export function Content({ featured, regular }: Props) {
   const firstSlug = 'noutati';
   const windowSize = useWindowSize();
   const dateFormat = (date: any) => {
@@ -28,9 +28,12 @@ export function Content({ blogs }: Props) {
 
   return (
     <div className="wrapper">
-      <FeaturedPosts {...featuredPosts} />
+      <FeaturedPosts featured={featured} />
+      <h1 className="flex flex-wrap mx-0 md:mx-6 lg:mx-48 xl:mx-56 mt-16 mb-4">
+        <span>Noutăţi</span>
+      </h1>
       <ul className="blog-posts flex flex-wrap">
-        {blogs.map((item, index) => (
+        {regular.map((item, index) => (
           <li className="blog-post-item" key={`${item.id}-${index}`}>
             <div className="flex flex-wrap">
               {windowSize.width && windowSize.width >= 768
@@ -42,10 +45,10 @@ export function Content({ blogs }: Props) {
                     </div>
                   )
                 : null}
-              <div className="content">
+              <div className="content" data-image-exist={!!item.image}>
                 <h3 className="title">
                   <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
-                    {item.title}
+                    <span className="ellipsis-clamp-3">{item.title}</span>
                   </Link>
                 </h3>
                 <span className="date">
@@ -56,7 +59,7 @@ export function Content({ blogs }: Props) {
                     day: 'numeric',
                   })}
                 </span>
-                <span className="summary">{item.summary}</span>
+                <span className="summary ellipsis-clamp-3">{item.summary}</span>
               </div>
             </div>
           </li>

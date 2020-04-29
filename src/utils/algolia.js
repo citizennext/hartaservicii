@@ -3,24 +3,28 @@ require('dotenv').config({
 });
 const common = `query {
   hasura {
-    pages {
+    pages (where: { status: PUBLISHED }) {
+      objectID: id
       slug
       title
       summary
       content {
         text
       }
+      updatedAt
     }
-    blogs {
+    blogs (where: { status: PUBLISHED }) {
+      objectID: id
       slug
       title
       summary
       content {
         text
       }
+      updatedAt
     }
     providers {
-      id
+      objectID: id
       name
       location
       district
@@ -32,10 +36,10 @@ const common = `query {
 }`;
 
 const addType = (data, type) =>
-  data.map(a => {
+  data.map((a) => {
     return { ...a, type };
   });
-const prepareData = data => [
+const prepareData = (data) => [
   ...addType(data.blogs, 'Noutăți'),
   ...addType(data.pages, 'Pagini'),
   ...addType(data.providers, 'Servicii'),

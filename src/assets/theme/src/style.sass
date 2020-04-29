@@ -50,15 +50,17 @@ p
         @apply leading-tight
 
 a
-    @apply text-black
-    @apply underline
+    @apply text-celeste
 
     &:hover
-        @apply text-celeste
+        @apply text-leaf
 
     &.mini
         @apply text-xs
-
+a > button, a.button
+    @apply text-black
+    &:hover
+        @apply text-celeste
 /* elements */
 .separator
     @apply absolute
@@ -423,7 +425,7 @@ ol
             @screen md
                 z-index: 2
                 left: 95%
-                top: 35%
+                top: 30%
 
     .contact-right
         z-index: 2
@@ -518,6 +520,7 @@ button
 
         &:hover
             @apply bg-celeste
+            color: white
 
     &.small.invert
         @apply bg-snow
