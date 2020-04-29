@@ -42,9 +42,7 @@ class SignIn extends React.Component<{ location?: StateLocation; path: string },
         state: { rating: this.props.location?.state?.rating },
       });
     } catch (err) {
-      this.setState({ error: err });
-      // eslint-disable-next-line
-      console.log('error...: ', err);
+      this.setState({ error: err.message });
     }
   };
 
@@ -73,11 +71,12 @@ class SignIn extends React.Component<{ location?: StateLocation; path: string },
             <div className="contact-wrapper">
               <div className="contact-info">
                 <div className="social-media">
-                  <h4>header text</h4>
+                  <h4>Ai deja un cont?</h4>
                   <p>
-                    Ai sugestii de îmbunătățire a platformei sau îți dorești să devii voluntar, pentru a dezvolta proiectul
-                    alături de noi? Ne poți scrie oricând folosind unul dintre canalele noastre de comunicare.
+                    Dacă ai deja un cont pe platformă, poți să actualizezi datele serviciilor tale după ce vei intra în contul
+                    tău.
                   </p>
+                  <p>Dacă nu, crează unul nou și vei putea să adaugi testimoniale, să actualizezi datele care îți aparțin.</p>
                 </div>
               </div>
               <div className="contact-form">
@@ -94,8 +93,10 @@ class SignIn extends React.Component<{ location?: StateLocation; path: string },
                   />
                   <button type="submit">Trimite</button>
                 </form>
+                <Link to="/harta/inregistrare">
+                  <button className="mt-4">Crează un cont</button>
+                </Link>
               </div>
-              <Link to="/harta/signup">Sign Up</Link>
             </div>
           </div>
         </Layout>

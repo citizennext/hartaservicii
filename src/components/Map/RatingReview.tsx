@@ -135,7 +135,7 @@ function RatingReview(props: any) {
                           )}
                         </div>
                         <button type="submit" className="text-white md:ml-auto md:mr-0" disabled={!isEmpty(errors) || !dirty}>
-                          Salveaza
+                          Trimite
                         </button>
                       </Form>
                     </>

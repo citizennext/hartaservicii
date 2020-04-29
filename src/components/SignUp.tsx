@@ -30,7 +30,8 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
     });
   };
 
-  signUp = async () => {
+  signUp = async (e: any) => {
+    e.preventDefault();
     const { username, password, email, phone_number } = this.state;
     try {
       await Auth.signUp({ username, password, attributes: { email, phone_number } });
@@ -42,7 +43,8 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
     }
   };
 
-  confirmSignUp = async () => {
+  confirmSignUp = async (e: any) => {
+    e.preventDefault();
     const { username, authCode } = this.state;
     try {
       await Auth.confirmSignUp(username, authCode);
@@ -75,20 +77,26 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                 <div className="social-media">
                   <h4>Crează-ți contul tău</h4>
                   <p>
-                    Ai sugestii de îmbunătățire a platformei sau îți dorești să devii voluntar, pentru a dezvolta proiectul
-                    alături de noi? Ne poți scrie oricând folosind unul dintre canalele noastre de comunicare.
+                    Dacă ești un <strong>reprezentant al unui furnizor de servicii sociale</strong>, creându-ți un cont vei putea
+                    să actualizezi datele tale de pe platformă și să adaugi ce nevoi au serviciile tale. (va fi lansată in
+                    curand...)
+                  </p>
+                  <p>
+                    Dacă ești un <strong>beneficiar de servicii sociale</strong>, creându-ți un cont vei putea să oferi un
+                    calificativ serviciului social de care ai beneficiat și să scrii un testimonial cu experiența ta.
                   </p>
                 </div>
               </div>
               <div className="contact-form">
                 <h4>Crează cont</h4>
                 {this.state.stage === 0 && (
-                  <div>
+                  <form onSubmit={this.signUp}>
                     {this.state.error && <Error errorMessage={this.state.error} />}
                     <input
                       onChange={this.handleUpdate}
                       placeholder="Utilizator"
                       name="username"
+                      required={true}
                       value={this.state.username}
                       style={styles.input}
                     />
@@ -96,6 +104,7 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       onChange={this.handleUpdate}
                       placeholder="Parolă"
                       name="password"
+                      required={true}
                       value={this.state.password}
                       type="password"
                       style={styles.input}
@@ -104,6 +113,7 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       onChange={this.handleUpdate}
                       placeholder="Email"
                       name="email"
+                      required={true}
                       value={this.state.email}
                       style={styles.input}
                     />
@@ -111,16 +121,18 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       onChange={this.handleUpdate}
                       placeholder="Număr telefon"
                       name="phone_number"
+                      required={true}
                       value={this.state.phone_number}
                       style={styles.input}
                     />
-                    <button type="submit" onClick={this.signUp}>
-                      Trimite
+                    <button type="submit" className="mt-4">
+                      Crează cont nou
                     </button>
-                  </div>
+                  </form>
                 )}
                 {this.state.stage === 1 && (
-                  <div>
+                  <form onSubmit={this.confirmSignUp}>
+                    <p>Un cod de verificare a fost trimis pe emailul din pasul anterior!</p>
                     {this.state.error && <Error errorMessage={this.state.error} />}
                     <input
                       onChange={this.handleUpdate}
@@ -129,10 +141,10 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       value={this.state.authCode}
                       style={styles.input}
                     />
-                    <button className="mt-4" onClick={this.confirmSignUp}>
-                      Confirmă cont
+                    <button type="submit" className="mt-4">
+                      Confirmă contul
                     </button>
-                  </div>
+                  </form>
                 )}
                 <Link
                   to="/harta/login"
