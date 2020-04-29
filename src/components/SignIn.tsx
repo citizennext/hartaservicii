@@ -85,14 +85,14 @@ class SignIn extends React.Component<{ location?: StateLocation; path: string },
                   {this.state.error && <Error errorMessage={this.state.error} />}
                   <input
                     onChange={this.handleUpdate}
-                    placeholder="Username"
+                    placeholder="Utilizator"
                     name="username"
                     required={true}
                     value={this.state.username}
                   />
                   <input
                     onChange={this.handleUpdate}
-                    placeholder="Password"
+                    placeholder="Parolă"
                     name="password"
                     required={true}
                     value={this.state.password}
