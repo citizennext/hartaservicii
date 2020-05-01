@@ -30,9 +30,11 @@ function RatingReview(props: any) {
           }
         }
       }
+      sendEmail(message: $feedback, subject: "new review on a service", toEmails: ["contact@serviciisociale.ro"]) {
+        success
+      }
     }
   `;
-  // eslint-disable-next-line
   const [addRating, { data, loading, error }] = useMutation(ratingMutation);
   const params = useParams();
   const [successForm, setSuccessForm] = useState(false);
