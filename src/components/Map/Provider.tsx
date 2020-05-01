@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
+import { Link, navigate } from '@reach/router';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
@@ -12,7 +12,6 @@ import StarRatingComponent from 'react-star-rating-component';
 import iconDirections from '../../assets/images/icon_directions.svg';
 import iconClose from '../../assets/images/icon_arrowg.svg';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import RatingReview from "./RatingReview";
 
 function Provider(props: any) {
   const providersQuery = gql`
@@ -56,8 +55,7 @@ function Provider(props: any) {
     }
   `;
   const windowSize = useWindowSize();
-  const [rating, setRating] = useState<number>(1);
-  const [popup, setRatingPopUp] = useState<boolean>(false);
+  const [rating, setRating] = useState<number>(0);
   const provider = props.id;
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
@@ -72,7 +70,7 @@ function Provider(props: any) {
   const position: LatLngTuple = providers.coordinates;
   const saveRating = (value: number) => {
     setRating(value);
-    setRatingPopUp(true);
+    navigate(`rating`, { state: { rating } });
   };
   return (
     <>
@@ -253,7 +251,6 @@ function Provider(props: any) {
               />
             </div>
           </footer>
-          <RatingReview rating={rating} validate={popup} providerId={provider} dataClass="Providers"/>
         </section>
       </div>
     </>

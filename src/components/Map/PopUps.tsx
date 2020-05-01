@@ -67,7 +67,6 @@ function PopUps(props: any) {
     navigate(`rating`, { state: { rating } });
   };
   // @ts-ignore
-  // @ts-ignore
   return (
     <section className="map-marker-popup" id="map-marker-popup" data-id={providers.id}>
       <NotificationContainer />
