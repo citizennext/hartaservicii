@@ -41,7 +41,7 @@ function RatingReview(props: any) {
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
   const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
-  const [rating, setRating] = useState<number>(props.location.state.rating);
+  const [rating, setRating] = useState<number>(props.location?.state?.rating || 0);
 
   return (
     <div className="rating">

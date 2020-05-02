@@ -9,6 +9,7 @@ import SignUp from '../components/SignUp';
 import UserProfile from '../components/UserProfile';
 import Provider from '../components/Map/Provider';
 import RatingReview from '../components/Map/RatingReview';
+import AddCovidNeeds from '../components/Map/AddCovidNeeds';
 import PopUps from '../components/Map/PopUps';
 
 function HartaPage() {
@@ -22,6 +23,7 @@ function HartaPage() {
               <Harta path="/" />
               <Provider path="serviciu/:provider/:id/" />
               <PrivateRoute path="serviciu/:provider/:id/rating" component={RatingReview} />
+              <PrivateRoute path="serviciu/:provider/:id/adauga-nevoi-covid" component={AddCovidNeeds} />
               <PrivateRoute path="profile" component={UserProfile} />
               <SignIn path="login" />
               <SignUp path="inregistrare" />

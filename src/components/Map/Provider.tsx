@@ -220,7 +220,10 @@ function Provider(props: any) {
               <h3>Ce nevoie are centrul, cum poti sa ajuti?</h3>
             </div>
             <div className="pin-help">
-              <p>Centrul primește donații / acceptă voluntariat:</p>
+              <p>Ești furnizor de servicii sociale?</p>
+              <Link to="adauga-nevoi-covid">
+                <button>Adauga nevoi protecție COVID19</button>
+              </Link>
               <ul>
                 <li>Donații haine</li>
                 <li>Donații echipamente/obiecte</li>
