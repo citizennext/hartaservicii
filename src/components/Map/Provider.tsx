@@ -14,6 +14,7 @@ import iconShare from '../../assets/images/icon_share.svg';
 import iconClose from '../../assets/images/icon_arrowg.svg';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { Button } from '../../components/Buttons';
+import Seo from '../Seo';
 
 function Provider(props: any) {
   const providersQuery = gql`
@@ -91,6 +92,7 @@ function Provider(props: any) {
   };
   return (
     <>
+      <Seo isRepeatable={true} postTitle={providers.name} summary="Servicii sociale" />
       <Map
         center={position}
         zoom={17}
@@ -198,24 +200,25 @@ function Provider(props: any) {
                 <p>
                   <strong>Tip / cod serviciu </strong>
                 </p>
-                <span>
+                <span className="pb-6">
                   {providers.service.name} ({providers.service.code})
                 </span>
-                <div className="pin-license">
-                  <div>
-                    <p>
-                      <strong>Dată licență</strong>{' '}
-                    </p>
-                    <span>
-                      {providers.license_date_5years ? providers.license_date_5years : providers.license_date_provisional}
-                    </span>
-                  </div>
-                  <div>
-                    <p>
-                      <strong>Instituția care a eliberat licența</strong>{' '}
-                    </p>
-                    <span>{providers.license_by ? providers.license_by : '-'}</span>
-                  </div>
+              </div>
+
+              <div className="pin-license grid grid-cols-2 py-6 border-t border-snow">
+                <div>
+                  <p>
+                    <strong>Dată licență</strong>{' '}
+                  </p>
+                  <span>
+                    {providers.license_date_5years ? providers.license_date_5years : providers.license_date_provisional}
+                  </span>
+                </div>
+                <div>
+                  <p>
+                    <strong>Instituția care a eliberat licența</strong>{' '}
+                  </p>
+                  <span>{providers.license_by ? providers.license_by : '-'}</span>
                 </div>
               </div>
             </div>
@@ -381,7 +384,7 @@ function Provider(props: any) {
             <div className="p-6 md:p-12 border-b border-brown md:border-0">
               <h3 className="text-white">Ești furnizor de servicii sociale?</h3>
               <Link to="adauga-nevoi-covid">
-                <Button className="mt-4">Adauga nevoi covid19</Button>
+                <Button className="btn btn-celeste mt-4">Adauga nevoi covid19</Button>
               </Link>
             </div>
             <div className="p-6 md:p-12 border-b border-brown">
@@ -391,7 +394,7 @@ function Provider(props: any) {
                 telefon.
               </p>
               <a href="mailto@contact@serviciisociale.ro">
-                <Button className="mt-4">Contactează-ne</Button>
+                <Button className="btn btn-celeste mt-4">Contactează-ne</Button>
               </a>
             </div>
             <div className="p-6 md:p-12 border-b border-brown md:border-0">

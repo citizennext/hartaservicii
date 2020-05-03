@@ -6,6 +6,7 @@ import { Auth } from 'aws-amplify';
 import Footer from '../components/Footer';
 import Seo from '../components/Seo';
 import Header from '../components/Header';
+import { Button } from '../components/Buttons';
 import Layout from '../components/Layout';
 import { AfterHeader } from '../components/AfterHeader';
 
@@ -92,13 +93,16 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                 {this.state.stage === 0 && (
                   <form onSubmit={this.signUp}>
                     {this.state.error && <Error errorMessage={this.state.error} />}
+                    <label htmlFor="username">Nume utilizator (fara spatii)</label>
                     <input
                       onChange={this.handleUpdate}
-                      placeholder="Utilizator"
+                      placeholder="ex: matei123"
                       name="username"
+                      id="username"
                       required={true}
                       value={this.state.username}
                     />
+
                     <input
                       onChange={this.handleUpdate}
                       placeholder="Parolă"
@@ -121,9 +125,9 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       required={true}
                       value={this.state.phone_number}
                     />
-                    <button type="submit" className="mt-4">
+                    <Button className="btn-celeste w-3/4" type="submit">
                       Crează cont nou
-                    </button>
+                    </Button>
                   </form>
                 )}
                 {this.state.stage === 1 && (
@@ -137,15 +141,17 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       required={true}
                       value={this.state.authCode}
                     />
-                    <button type="submit" className="mt-4">
+                    <Button className="btn-celeste w-3/4" type="submit">
                       Confirmă contul
-                    </button>
+                    </Button>
                   </form>
                 )}
                 <Link
                   to="/harta/login"
                   state={{ referrer: this.props.location?.state?.referrer, rating: this.props.location?.state?.rating }}>
-                  <button className="mt-4">Login</button>
+                  <Button className="btn-celeste w-3/4 mt-4" type="submit">
+                    Login
+                  </Button>
                 </Link>
               </div>
             </div>

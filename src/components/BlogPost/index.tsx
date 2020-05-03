@@ -35,11 +35,11 @@ function BlogPost(props: Props) {
           day: 'numeric',
         })}
       </p>
-      <p className="excerpt pb-16 md:pb-0">{props.summary}</p>
+      <p className="ellipsis-clamp-5 pb-16 md:pb-0">{props.summary}</p>
       <div className="blog-bottom flex items-center">
         <Separator color="burg"></Separator>
-        <Link to={`/noutati/${props.slug}`}>
-          <button className="arrowonly absolute md:relative md:1/4 " title="Citeste articolul"></button>
+        <Link to={`/noutati/${props.slug}`} className="md:ml-auto">
+          <button className="btn btn-arrow-only relative" title="Citeste articolul"></button>
         </Link>
       </div>
     </div>

@@ -78,7 +78,7 @@ const BlogPost = ({ data, pageContext, location }: BlogProps): JSX.Element => {
         <Separator color="snow" width="100px" />
         <CopyToClipboard text={location.href}>
           <button
-            className="share-button"
+            className="btn btn-share"
             onClick={() =>
               addToast('Link copiat în clipboard! ', {
                 appearance: 'info',

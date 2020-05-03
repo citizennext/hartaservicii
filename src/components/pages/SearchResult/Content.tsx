@@ -82,7 +82,7 @@ function Hit(props: any) {
             ? `/noutati/${props.hit.slug}`
             : `/${props.hit.slug}`
         }
-        className="button small invert">
+        className="btn btn-tight w-1/4">
         Detalii
       </Link>
     </div>

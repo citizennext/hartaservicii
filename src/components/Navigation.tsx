@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import Drawer from './Drawer/Drawer';
-
 import { useWindowSize } from '../hooks/useWindowSize';
 import { Close, Menu } from './Icons';
 const isActive = ({ isCurrent }: { isCurrent: boolean }) => {
@@ -64,12 +63,11 @@ const Navigation: React.FC<Props> = (props) => {
               </ul>
             </nav>
             <a
+              className="btn btn-fb mt-20 absolute right-0 mr-12"
               href="https://www.facebook.com/hartaserviciilorsociale"
-              title="Facebook Page"
               target="_blank"
-              rel="noreferrer noopener">
-              <button className="social-nav"></button>
-            </a>
+              title="Pagina Facebook"
+              rel="noopener noreferrer"></a>
           </Drawer>
         </div>
       ) : (

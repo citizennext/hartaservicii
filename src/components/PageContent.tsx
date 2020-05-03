@@ -39,7 +39,7 @@ export function Content({ content, summary, additionalData }: Props) {
             rel="noopener noreferrer"
             title={button.label}
             style={{ width: 'auto' }}>
-            <button className="btn btn-citizennext" title={button.label} style={{ marginBottom: 40 }}>
+            <button className="btn btn-celeste btn-arrow" title={button.label} style={{ marginBottom: 40 }}>
               {button.label}
             </button>
           </a>

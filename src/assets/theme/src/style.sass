@@ -87,7 +87,8 @@ ol
     counter-reset: li
     margin-left: 3.7em
     @screen md
-        @apply mx-8
+        @apply ml-8
+        @apply mr-4
 
     li
         @apply relative
@@ -324,17 +325,6 @@ ol
 /* sections */
 .section
     @apply w-full
-
-    .interior
-        @apply relative
-        @apply mx-6
-
-        @screen md
-            @apply mx-auto
-
-        @screen xl
-            @apply mx-auto
-
 .wide
     @apply w-screen
     @apply relative
@@ -389,9 +379,6 @@ ol
                     padding-bottom: 57.4713% !important
                     max-height: 500px
 
-.section-list
-    @apply relative
-
 .progress-bar > div
     width: 310px
     max-width: 84vw
@@ -430,50 +417,6 @@ ol
     .contact-right
         z-index: 2
 
-// .button,
-// button
-//     @apply bg-celeste
-//     @apply rounded-full
-//     @apply text-center
-//     width: 86vw
-//     max-width: 320px
-//     @apply text-lg
-//     @apply font-medium
-//     @apply leading-tight
-//     @apply py-3
-//     @apply pr-6
-//     position: relative
-//     @apply m-auto
-//     font-family: Montserrat
-//     text-decoration: none
-//     display: block
-
-//     @screen md
-//         width: auto
-//         max-width: auto
-
-//     &.section-button
-//         @apply absolute
-//         left: calc(50% - 160px)
-
-//     &.button:after
-//         content: ''
-//         background-image: url('../../images/icon_arroww.svg')
-//         background-size: 22px 22px
-//         height: 22px
-//         width: 22px
-//         position: absolute
-//         background-repeat: no-repeat
-//         top: 13px
-//         right: 13px
-//         @apply bg-left
-
-//     &.button.small:after
-//         top: 3px
-//         @apply text-celeste
-
-//     &:hover
-//         @apply bg-leaf
 
 //     &.social,&.social-nav
 //         &:before

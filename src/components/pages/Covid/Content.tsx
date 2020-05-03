@@ -140,7 +140,7 @@ export function Content({ counties }: { counties: Needs[] }) {
                 {error && <div className="text-error">Formularul nu a fost trimis. Încearcă mai târziu!</div>}
                 {success && <div className="text-celeste">Mulțumim pentru suportul tău! Împreună mergem mai departe!</div>}
                 {!loading && !success && (
-                  <>
+                  <div className="flex flex-col">
                     <input type="text" name="nume" placeholder="Numele tau*" required />
                     <select name="tip" placeholder="Tip donator*">
                       <option font-semibold="ONG">ONG</option>
@@ -150,8 +150,10 @@ export function Content({ counties }: { counties: Needs[] }) {
                     <input type="text" name="telefon" placeholder="Telefonul tau" />
                     <input type="email" name="email" placeholder="Email*" required />
                     <textarea name="details" placeholder="Detalii*" required />
-                    <button type="submit">Trimite</button>
-                  </>
+                    <button type="submit" className="btn btn-celeste btn-full mr-0">
+                      Trimite
+                    </button>
+                  </div>
                 )}
               </>
             )}

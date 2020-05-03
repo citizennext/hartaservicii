@@ -23,10 +23,8 @@ function Partners() {
             utilizatori în prima lună de la lansare.
           </p>
           <p className="pt-2 pb-10 xl:pl-24">Acest interes stă la baza motivației de a continua proiectul.</p>
-          <Link
-            style={{ textDecoration: 'none' }}
-            to={`/noutati/harta-serviciilor-sociale-din-romania-proiect-finalist-in-programul-tara-lui-andrei`}>
-            <button className="small invert xl:ml-24">detalii</button>
+          <Link to={`/noutati/harta-serviciilor-sociale-din-romania-proiect-finalist-in-programul-tara-lui-andrei`}>
+            <button className="btn btn-tight xl:ml-24">detalii</button>
           </Link>
         </div>
         <div className="mt-12 md:w-1/2 md:px-4 md:mt-0">
@@ -42,7 +40,7 @@ function Partners() {
             platformei și furnizând datele necesare.
           </p>
           <Link to={`/parteneri`} style={{ textDecoration: 'none' }}>
-            <button className="small invert xl:ml-24">detalii</button>
+            <button className="btn btn-tight xl:ml-24">detalii</button>
           </Link>
         </div>
       </div>

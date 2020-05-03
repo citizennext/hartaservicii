@@ -1,0 +1,122 @@
+.btn
+  @apply text-white 
+  @apply text-center 
+  @apply leading-tight 
+  @apply no-underline 
+  @apply rounded-full 
+  @apply py-3 
+  @apply px-5 
+  @apply text-lg 
+  @apply font-medium
+  @apply block
+
+.btn-tight
+  @apply py-2
+  @apply px-3
+  @apply text-left
+  @apply uppercase
+  @apply bg-snow
+  @apply text-sm
+  @apply text-black
+  @apply font-bold
+  @apply tracking-wide
+  &:hover
+    @apply bg-celeste
+    @apply text-white
+  &:before
+    content: '▶'
+    @apply pr-3
+
+
+
+.btn-full
+  @apply w-3/4
+  @apply mx-auto
+  @screen md
+    width: 320px
+    min-width: 320px
+
+.btn-celeste
+  @apply bg-celeste 
+  @apply border-0
+
+.btn-celeste:hover
+  @apply bg-leaf 
+  @apply text-black
+
+.btn-arrow
+  @apply relative
+  @apply pr-12
+
+.btn-arrow:after
+  content: ''
+  background-image: url('../../images/icon_arroww.svg')
+  background-size: 22px 22px
+  height: 22px
+  width: 22px
+  position: absolute
+  background-repeat: no-repeat
+  top: 13px
+  right: 13px
+  @apply bg-left
+  
+
+.btn-arrow-only
+  @apply bg-snow
+
+  @apply p-4
+  @apply h-12
+  @apply w-12
+  @apply mr-0
+  @apply ml-auto
+  
+  @screen md
+    @apply mb-0
+
+.btn-arrow-only:after
+  content: ''
+  background-image: url('../../images/icon_arrowg.svg')
+  background-size: contain
+  height: 26px
+  width: 26px
+  position: absolute
+  background-repeat: no-repeat
+  top: 10px
+  right: 10px
+
+.btn-fb
+  @apply relative
+.btn-fb:before
+  &:before
+  content: ''
+  background-image: url('../../images/icon_FB.svg')
+  background-size: 15px 29px
+  position: absolute
+  background-repeat: no-repeat
+  bottom: 1px
+  left: 1px
+  @apply bg-bottom
+  @apply border-white
+  @apply border-2
+  @apply rounded-full
+  @apply pt-10
+  @apply px-5
+.btn-share
+  @apply bg-transparent
+  width: 50px
+  height: 50px
+  margin: 0
+
+  &:before
+    content: ''
+    background-image: url('../../images/icon_share.svg')
+    height: 50px
+    width: 50px
+    position: absolute
+    background-repeat: no-repeat
+    background-position: 12px center
+    top: 6px
+    left: 6px
+    @apply bg-snow
+    //@apply p-6
+    @apply rounded-full

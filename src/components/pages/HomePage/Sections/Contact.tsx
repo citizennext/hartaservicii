@@ -17,7 +17,7 @@ export default class Contact extends React.Component {
               <img className="no-type" src={Notype} alt="HS Logo" />
             </div>
             <a
-              className="button social md:ml-6"
+              className="btn btn-celeste btn-arrow btn-fb w-3/4"
               href="https://www.facebook.com/hartaserviciilorsociale"
               target="_blank"
               rel="noopener noreferrer">
@@ -29,7 +29,7 @@ export default class Contact extends React.Component {
               Dacă dorești să fii voluntar sau să devii partener al proiectului, suntem nerăbdători să ne contactezi și să începem
               colaborarea.
             </p>
-            <Link to="/contact" className="button">
+            <Link to="/contact" className="btn btn-celeste btn-arrow w-3/4">
               Contact
             </Link>
           </div>

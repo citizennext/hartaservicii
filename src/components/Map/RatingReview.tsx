@@ -11,6 +11,7 @@ import Header from '../Header';
 import Layout from '../Layout';
 import { AfterHeader } from '../AfterHeader';
 import { SidebarAccount } from '../SidebarAccount';
+import { Button } from '../Buttons';
 
 interface Values {
   feedback: string;
@@ -136,12 +137,12 @@ function RatingReview(props: any) {
                             <span className={`block absolute validation-error`}>{errors.feedback}</span>
                           )}
                         </div>
-                        <button
+                        <Button
                           type="submit"
-                          className="text-white md:ml-auto md:mr-0"
+                          className="btn-celeste btn-full md:ml-auto md:mr-0"
                           disabled={!isEmpty(errors) || !dirty || !loading}>
                           Trimite
-                        </button>
+                        </Button>
                       </Form>
                     </>
                   )}

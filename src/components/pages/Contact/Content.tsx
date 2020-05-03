@@ -47,12 +47,19 @@ export function Content() {
                 {!loading && !success && (
                   <>
                     <input
+                      className="w-full"
                       type={data.form.fields.email.type}
                       name={data.form.fields.email.name}
                       placeholder={data.form.fields.email.placeholder}
                     />
-                    <textarea name={data.form.fields.message.name} placeholder={data.form.fields.message.placeholder} />
-                    <button type="submit">{data.form.button}</button>
+                    <textarea
+                      className="w-full"
+                      name={data.form.fields.message.name}
+                      placeholder={data.form.fields.message.placeholder}
+                    />
+                    <button className="btn btn-celeste btn-full" type="submit">
+                      {data.form.button}
+                    </button>
                   </>
                 )}
               </>

@@ -58,8 +58,8 @@ function Blog() {
       render={(data: { hasura: any }) => {
         const { blogs } = data.hasura;
         return (
-          <div id="blog" className="section blogposts mb-40 bg-white md:mb-56 xl:max-w-griddw xl:m-auto xl:mb-64">
-            <div className="interior mb-16">
+          <div id="blog" className="mb-16 bg-white md:mb-24 xl:max-w-griddw xl:m-auto xl:mb-32">
+            <div className="mb-16">
               <div className="md:flex md:justify-center">
                 <HsSlider settings={settings}>
                   {blogs.map((blog: any) => (
@@ -67,10 +67,10 @@ function Blog() {
                   ))}
                 </HsSlider>
               </div>
-              <Link to="/noutati">
-                <button className="section-button mb-4 mt-16 md:mt-20">Toate noutățile</button>
-              </Link>
             </div>
+            <Link to="/noutati" className="md:mx-auto -mb-6">
+              <button className="btn btn-celeste btn-full btn-arrow">Toate noutățile</button>
+            </Link>
           </div>
         );
       }}

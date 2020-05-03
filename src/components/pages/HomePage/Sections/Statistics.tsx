@@ -4,7 +4,6 @@ import CircularProgressBar from '../../../CircularProgressBar';
 import ProgressBar from '../../../ProgressBar';
 import HsSlider from '../../../Slider';
 import StatisticsMap from '../../../StatisticsMap';
-// import GradientMap from '../../../GradientMap';
 
 const query = graphql`
   query {
@@ -84,7 +83,7 @@ function Statistics() {
         const { publicServices, privateServices, homelessServices, childServices, services } = data.hasura;
         return (
           <div id="statistics" className="section circularprogressbar">
-            <div className="bg-snow py-8 mb-32 xl:mb-56">
+            <div className="flex flex-col bg-snow pt-8 pb-2 mb-32 xl:mb-56">
               <div className="xl:max-w-griddw xl:m-auto">
                 <HsSlider settings={settings}>
                   <CircularProgressBar
@@ -95,16 +94,16 @@ function Statistics() {
                     title="Centre servicii sociale lincențiate pe tot teritoriul țării"
                   />
                   <ProgressBar firstBar={homelessServices.aggregate.count} secondBar={childServices.aggregate.count} />
-                  {/* @todo Seco -> aici trebuie sa vezi stilizari pe responsive */}
                   <StatisticsMap
                     title="Distribuția serviciilor sociale pe județe"
                     data={services}
                     total={services.aggregate.count}
+                    classStatisticsMap="absolute"
                   />
                 </HsSlider>
               </div>
-              <Link to="/statistici">
-                <button className="button section-button my-1">Toate statisticile</button>
+              <Link to="/statistici" className="md:mx-auto -my-8 btn btn-celeste btn-full btn-arrow">
+                Toate statisticile
               </Link>
             </div>
           </div>

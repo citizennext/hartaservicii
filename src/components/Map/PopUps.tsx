@@ -354,7 +354,7 @@ function PopUps(props: any) {
         <div className="p-6 border-b border-brown">
           <h3 className="text-white">Ești furnizor de servicii sociale?</h3>
           <Link to="adauga-nevoi-covid">
-            <Button className="mt-4">Adauga nevoi covid19</Button>
+            <Button className="btn-full btn-celeste mt-4">Adauga nevoi covid19</Button>
           </Link>
         </div>
         <div className="p-6 border-b border-brown">
@@ -364,7 +364,7 @@ function PopUps(props: any) {
             telefon.
           </p>
           <a href="mailto@contact@serviciisociale.ro">
-            <Button className="mt-4">Contactează-ne</Button>
+            <Button className="btn-full btn-celeste mt-4">Contactează-ne</Button>
           </a>
         </div>
         <div className="p-6 border-b border-brown">

@@ -10,6 +10,7 @@ import Header from '../Header';
 import Layout from '../Layout';
 import { AfterHeader } from '../AfterHeader';
 import { SidebarAccount } from '../SidebarAccount';
+import { Button } from '../Buttons';
 
 interface Values {
   chlor: string;
@@ -158,7 +159,7 @@ function AddCovidNeeds() {
                     actions.resetForm({ values: initialValues, errors: {}, touched: {} });
                   }}>
                   {({ values, errors, dirty, touched }) => (
-                    <Form className="w-2/3">
+                    <Form className="w-full md:w-2/3 grid">
                       <div className="grid grid-cols-2  gap-4 items-center border-dotted border-celeste mb-5 border-b">
                         <label htmlFor="surgicalMasks" className="mb-5 text-burg font-semibold">
                           Măști chirurgicale (buc):
@@ -364,12 +365,12 @@ function AddCovidNeeds() {
                         <span className={`block absolute validation-error`}>{errors.surgicalGownSingleUse}</span>
                       )}
 
-                      <button
+                      <Button
                         type="submit"
-                        className="text-white md:ml-auto md:mr-0"
+                        className="btn-celeste btn-full md:ml-auto md:mr-0"
                         disabled={!isEmpty(errors) || !dirty || !loading}>
                         Trimite
-                      </button>
+                      </Button>
                     </Form>
                   )}
                 </Formik>
