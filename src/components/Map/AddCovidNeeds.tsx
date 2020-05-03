@@ -364,7 +364,10 @@ function AddCovidNeeds() {
                         <span className={`block absolute validation-error`}>{errors.surgicalGownSingleUse}</span>
                       )}
 
-                      <button type="submit" className="text-white md:ml-auto md:mr-0" disabled={!isEmpty(errors) || !dirty}>
+                      <button
+                        type="submit"
+                        className="text-white md:ml-auto md:mr-0"
+                        disabled={!isEmpty(errors) || !dirty || !loading}>
                         Trimite
                       </button>
                     </Form>
@@ -384,7 +387,7 @@ function AddCovidNeeds() {
                     <h4>Nevoi semnalate</h4>
                     <table className="table-auto mt-12">
                       <thead>
-                        <tr>
+                        <tr className="bg-celeste">
                           <th className="text-left  px-4 py-2">Nevoi</th>
                           <th className="px-4 py-2 text-center">Cantitate</th>
                         </tr>

@@ -430,156 +430,158 @@ ol
     .contact-right
         z-index: 2
 
-.button,
-button
-    @apply bg-celeste
-    @apply rounded-full
-    @apply text-center
-    width: 86vw
-    max-width: 320px
-    @apply text-lg
-    @apply font-medium
-    @apply leading-tight
-    @apply py-3
-    position: relative
-    @apply m-auto
-    font-family: Montserrat
-    text-decoration: none
-    display: block
+// .button,
+// button
+//     @apply bg-celeste
+//     @apply rounded-full
+//     @apply text-center
+//     width: 86vw
+//     max-width: 320px
+//     @apply text-lg
+//     @apply font-medium
+//     @apply leading-tight
+//     @apply py-3
+//     @apply pr-6
+//     position: relative
+//     @apply m-auto
+//     font-family: Montserrat
+//     text-decoration: none
+//     display: block
 
-    @screen md
-        max-width: 320px
+//     @screen md
+//         width: auto
+//         max-width: auto
 
-    &.section-button
-        @apply absolute
-        left: calc(50% - 160px)
+//     &.section-button
+//         @apply absolute
+//         left: calc(50% - 160px)
 
-    &.button:after
-        content: ''
-        background-image: url('../../images/icon_arroww.svg')
-        background-size: 22px 22px
-        height: 22px
-        width: 22px
-        position: absolute
-        background-repeat: no-repeat
-        top: 13px
-        right: 13px
-        @apply bg-left
+//     &.button:after
+//         content: ''
+//         background-image: url('../../images/icon_arroww.svg')
+//         background-size: 22px 22px
+//         height: 22px
+//         width: 22px
+//         position: absolute
+//         background-repeat: no-repeat
+//         top: 13px
+//         right: 13px
+//         @apply bg-left
 
-    &.button.small:after
-        top: 3px
-        @apply text-celeste
+//     &.button.small:after
+//         top: 3px
+//         @apply text-celeste
 
-    &:hover
-        @apply bg-leaf
+//     &:hover
+//         @apply bg-leaf
 
-    &.social,&.social-nav
-        &:before
-            content: ''
-            background-image: url('../../images/icon_FB.svg')
-            background-size: 15px 29px
-            position: absolute
-            background-repeat: no-repeat
-            bottom: 1px
-            left: 1px
-            @apply bg-bottom
-            @apply border-white
-            @apply border-2
-            @apply rounded-full
-            @apply pt-10
-            @apply px-5
-        &:after
-            $size: 38px
-            content: ''
-            background: url('../../images/icon_arroww.svg') no-repeat 50% / 26px
-            position: absolute
-            top: 4px
-            right: 6px
-            z-index: 1
-            width: $size
-            height: $size
+//     &.social,&.social-nav
+//         &:before
+//             content: ''
+//             background-image: url('../../images/icon_FB.svg')
+//             background-size: 15px 29px
+//             position: absolute
+//             background-repeat: no-repeat
+//             bottom: 1px
+//             left: 1px
+//             @apply bg-bottom
+//             @apply border-white
+//             @apply border-2
+//             @apply rounded-full
+//             @apply pt-10
+//             @apply px-5
+//         &:after
+//             $size: 38px
+//             content: ''
+//             background: url('../../images/icon_arroww.svg') no-repeat 50% / 26px
+//             position: absolute
+//             top: 4px
+//             right: 6px
+//             z-index: 1
+//             width: $size
+//             height: $size
 
-    &.social-nav
-        position: initial
-        width: auto
-        &:after
-            display: none
-        &:before
-            right: 7.2vw
-            left: initial
-            bottom: 25.33vw
+//     &.social-nav
+//         position: initial
+//         width: auto
+//         &:after
+//             display: none
+//         &:before
+//             right: 7.2vw
+//             left: initial
+//             bottom: 25.33vw
 
-    &.small
-        @apply text-sm
-        @apply font-bold
-        @apply leading-tight
-        @apply tracking-wide
-        @apply text-left
-        @apply bg-white
-        @apply uppercase
-        @apply w-5/12
-        min-width: 170px
-        min-height: 28px
-        @apply py-1
+//     &.small
+//         @apply text-sm
+//         @apply font-bold
+//         @apply leading-tight
+//         @apply tracking-wide
+//         @apply text-left
+//         @apply bg-white
+//         @apply uppercase
+//         @apply w-5/12
+//         min-width: 170px
+//         min-height: 28px
+//         @apply py-1
 
-        &:hover
-            @apply bg-celeste
-            color: white
+//         &:hover
+//             @apply bg-celeste
+//             color: white
 
-    &.small.invert
-        @apply bg-snow
+//     &.small.invert
+//         @apply bg-snow
 
-        &:hover
-            @apply bg-celeste
+//         &:hover
+//             @apply bg-celeste
 
-    &.small:before
-        content: '▶'
-        @apply px-3
+//     &.small:before
+//         content: '▶'
+//         @apply px-3
 
-    &.arrowonly
-        @apply bg-snow
-        @apply p-4
-        height: 38px
-        width: 38px
-        @apply mr-0
-        margin-top: -3rem
-        margin-left: 288px
+//     &.arrowonly
+//         @apply bg-snow
+//         @apply p-4
+//         height: 38px
+//         width: 38px
+//         @apply mr-0
+//         margin-top: -3rem
+//         margin-left: 288px
 
-        @screen md
-            @apply mb-0
-            margin-left: 316px
-            margin-top: 0
+//         @screen md
+//             @apply mb-0
+//             margin-left: 316px
+//             margin-top: 0
 
-    &.arrowonly:after
-        content: ''
-        background-image: url('../../images/icon_arrowg.svg')
-        background-size: contain
-        height: 26px
-        width: 26px
-        position: absolute
-        background-repeat: no-repeat
-        top: 6px
-        right: 6px
+//     &.arrowonly:after
+//         content: ''
+//         background-image: url('../../images/icon_arrowg.svg')
+//         background-size: contain
+//         height: 26px
+//         width: 26px
+//         position: absolute
+//         background-repeat: no-repeat
+//         top: 6px
+//         right: 6px
 
-    &.share-button
-        @apply bg-transparent
-        width: 50px
-        height: 50px
-        margin: 0
+//     &.share-button
+//         @apply bg-transparent
+//         width: 50px
+//         height: 50px
+//         margin: 0
 
-        &:before
-            content: ''
-            background-image: url('../../images/icon_share.svg')
-            height: 50px
-            width: 50px
-            position: absolute
-            background-repeat: no-repeat
-            background-position: 12px center
-            top: 6px
-            left: 6px
-            @apply bg-snow
-            //@apply p-6
-            @apply rounded-full
+//         &:before
+//             content: ''
+//             background-image: url('../../images/icon_share.svg')
+//             height: 50px
+//             width: 50px
+//             position: absolute
+//             background-repeat: no-repeat
+//             background-position: 12px center
+//             top: 6px
+//             left: 6px
+//             @apply bg-snow
+//             //@apply p-6
+//             @apply rounded-full
 
 @import "~tailwindcss/utilities"
 

@@ -136,7 +136,10 @@ function RatingReview(props: any) {
                             <span className={`block absolute validation-error`}>{errors.feedback}</span>
                           )}
                         </div>
-                        <button type="submit" className="text-white md:ml-auto md:mr-0" disabled={!isEmpty(errors) || !dirty}>
+                        <button
+                          type="submit"
+                          className="text-white md:ml-auto md:mr-0"
+                          disabled={!isEmpty(errors) || !dirty || !loading}>
                           Trimite
                         </button>
                       </Form>
