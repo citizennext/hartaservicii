@@ -275,7 +275,7 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
                       }
                     }
                   }}>
-                  {({ values, errors, touched }) => (
+                  {({ values, errors, touched, isSubmitting }) => (
                     <Form>
                       <p>Un cod de verificare a fost trimis pe emailul din pasul anterior!</p>
 
@@ -289,8 +289,12 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
                       {touched.authCode && errors.authCode && (
                         <span className={`block absolute validation-error`}>{errors.authCode}</span>
                       )}
-                      <button className="btn btn-celeste w-full" type="submit">
+                      <button
+                        className={`btn btn-celeste w-full ld-ext-left ${isSubmitting ? 'running' : ''}`}
+                        type="submit"
+                        disabled={!isEmpty(errors) || isSubmitting}>
                         Confirmă contul
+                        <div className="ld ld-ring ld-spin"></div>
                       </button>
                     </Form>
                   )}
