@@ -13,7 +13,6 @@ import iconDirections from '../../assets/images/icon_directions.svg';
 import iconShare from '../../assets/images/icon_share.svg';
 import iconClose from '../../assets/images/icon_arrowg.svg';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import { Button } from '../../components/Buttons';
 import Seo from '../Seo';
 
 function Provider(props: any) {
@@ -384,7 +383,7 @@ function Provider(props: any) {
             <div className="p-6 md:p-12 border-b border-brown md:border-0">
               <h3 className="text-white">Ești furnizor de servicii sociale?</h3>
               <Link to="adauga-nevoi-covid">
-                <Button className="btn btn-celeste mt-4">Adauga nevoi covid19</Button>
+                <button className="btn btn-celeste mt-4">Adauga nevoi covid19</button>
               </Link>
             </div>
             <div className="p-6 md:p-12 border-b border-brown">
@@ -394,7 +393,7 @@ function Provider(props: any) {
                 telefon.
               </p>
               <a href="mailto@contact@serviciisociale.ro">
-                <Button className="btn btn-celeste mt-4">Contactează-ne</Button>
+                <button className="btn btn-celeste mt-4">Contactează-ne</button>
               </a>
             </div>
             <div className="p-6 md:p-12 border-b border-brown md:border-0">

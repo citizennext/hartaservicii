@@ -4,7 +4,6 @@ import { Link } from 'gatsby';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { getCurrentUser, logout } from '../utils/auth';
 import { Auth } from 'aws-amplify';
-import { Button } from '../components/Buttons';
 export function SidebarAccount() {
   const user = getCurrentUser();
   return (
@@ -23,18 +22,18 @@ export function SidebarAccount() {
         <strong>u: </strong>
         {user?.username}
       </p>
-      <Button
-        className="btn-tight mt-8"
-        action={() =>
+      <button
+        className="btn btn-tight w-1/2 mt-8"
+        onClick={() =>
           Auth.signOut()
             .then(() => logout())
             .catch((err) => NotificationManager.success(err))
         }>
         Logout
-      </Button>
+      </button>
       <br />
-      <Link to="/harta">
-        <Button className="btn-tight mt-4">Harta</Button>
+      <Link to="/harta" className="btn btn-tight w-1/2 mt-4">
+        Harta
       </Link>
     </div>
   );

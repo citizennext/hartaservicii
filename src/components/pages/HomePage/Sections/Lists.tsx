@@ -1,7 +1,6 @@
 import Data from '../../../../data/global.json';
 import React from 'react';
 import Img from 'gatsby-image';
-import { Button } from '../../../Buttons';
 import { StaticQuery, graphql, Link } from 'gatsby';
 const query = graphql`
   query {
@@ -43,8 +42,8 @@ function Lists() {
                     <li>{Data.page.homepage.content.section2.list3}</li>
                   </ol>
                 </div>
-                <Link to={Data.page.homepage.links.section2.url} className="w-full -mb-6">
-                  <Button className="btn-celeste btn-full">{Data.page.homepage.links.section2.label}</Button>
+                <Link to={Data.page.homepage.links.section2.url} className="btn btn-celeste btn-full -mb-6">
+                  {Data.page.homepage.links.section2.label}
                 </Link>
               </div>
               <div className="flex flex-col bg-snow md:w-1/2 md:ml-2 xl:ml-4 xl:mr-8">
@@ -61,8 +60,8 @@ function Lists() {
                     <li>{Data.page.homepage.content.section3.list3}</li>
                   </ol>
                 </div>
-                <Link to={Data.page.homepage.links.section2.url} className="w-full -mb-6">
-                  <Button className="btn-celeste btn-full">{Data.page.homepage.links.section2.label}</Button>
+                <Link to={Data.page.homepage.links.section2.url} className="btn btn-celeste btn-full -mb-6">
+                  {Data.page.homepage.links.section2.label}
                 </Link>
               </div>
             </div>

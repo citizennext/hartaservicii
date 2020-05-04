@@ -9,8 +9,8 @@ import ArrowB from '../../../../assets/images/icon_arrowb.svg';
 function Partners() {
   return (
     <div id="section5" className="section blogposts bg-white xl:max-w-gridd xl:m-auto xl:px-8 xl:pt-16">
-      <div className="interior md:flex">
-        <div className="md:w-1/2 md:px-4">
+      <div className="md:flex">
+        <div className="md:w-1/2 md:px-4 px-4">
           <h3 className="border-b-8 border-leaf pl-4 wide md:pl-0 xl:pl-24">Istoric Proiect</h3>
           <div className="flex pt-10 xl:pl-24">
             <img style={{ width: '32px', marginRight: '36px' }} src={Pin} alt="Pin Icon" />
@@ -27,7 +27,7 @@ function Partners() {
             <button className="btn btn-tight xl:ml-24">detalii</button>
           </Link>
         </div>
-        <div className="mt-12 md:w-1/2 md:px-4 md:mt-0">
+        <div className="mt-12 md:w-1/2 md:px-4 px-4 md:mt-0">
           <h3 className="border-b-8 border-leaf pl-4 wide md:pl-0 xl:pl-24">Parteneri</h3>
           <img className="mt-10 xl:ml-24 h-xl float-left" src={tla} alt="RO SMART în Țara lui Andrei" />
           <img className="mt-10 xl:pl-12 xs:pl-4 h-xl" src={mmu} alt="Ministerul Muncii și Protecției Sociale" />

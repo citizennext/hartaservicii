@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Formik, Field, Form, FormikErrors } from 'formik';
+import { Formik, Field, FormikErrors } from 'formik';
 import StarRatingComponent from 'react-star-rating-component';
 import { useParams } from '@reach/router';
 import { useMutation } from '@apollo/react-hooks';
@@ -11,7 +11,6 @@ import Header from '../Header';
 import Layout from '../Layout';
 import { AfterHeader } from '../AfterHeader';
 import { SidebarAccount } from '../SidebarAccount';
-import { Button } from '../Buttons';
 
 interface Values {
   feedback: string;
@@ -103,7 +102,7 @@ function RatingReview(props: any) {
                     }
                     actions.resetForm({ values: initialValues, errors: {}, touched: {} });
                   }}>
-                  {({ values, errors, dirty, touched }) => (
+                  {({ values, errors, dirty, touched, handleSubmit }) => (
                     <>
                       <div className="md:flex bg-snow rounded-lg p-6 border border-leaf mb-4">
                         <StarRatingComponent
@@ -123,7 +122,7 @@ function RatingReview(props: any) {
                           </div>
                         </div>
                       </div>
-                      <Form className="md:flex flex-col">
+                      <form className="md:flex flex-col" onSubmit={handleSubmit}>
                         <div className="block relative mb-4 xs:mb-6">
                           <Field
                             as="textarea"
@@ -137,13 +136,13 @@ function RatingReview(props: any) {
                             <span className={`block absolute validation-error`}>{errors.feedback}</span>
                           )}
                         </div>
-                        <Button
+                        <button
                           type="submit"
-                          className="btn-celeste btn-full md:ml-auto md:mr-0"
-                          disabled={!isEmpty(errors) || !dirty || !loading}>
+                          className="btn btn-celeste btn-full md:ml-auto md:mr-0"
+                          disabled={!isEmpty(errors) || !dirty || !loading ? false : true}>
                           Trimite
-                        </Button>
-                      </Form>
+                        </button>
+                      </form>
                     </>
                   )}
                 </Formik>

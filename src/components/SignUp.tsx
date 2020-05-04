@@ -6,7 +6,6 @@ import { Auth } from 'aws-amplify';
 import Footer from '../components/Footer';
 import Seo from '../components/Seo';
 import Header from '../components/Header';
-import { Button } from '../components/Buttons';
 import Layout from '../components/Layout';
 import { AfterHeader } from '../components/AfterHeader';
 
@@ -125,9 +124,9 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       required={true}
                       value={this.state.phone_number}
                     />
-                    <Button className="btn-celeste w-3/4" type="submit">
+                    <button className="btn btn-celeste w-3/4" type="submit">
                       Crează cont nou
-                    </Button>
+                    </button>
                   </form>
                 )}
                 {this.state.stage === 1 && (
@@ -141,17 +140,17 @@ class SignUp extends React.Component<{ location?: StateLocation; path: string },
                       required={true}
                       value={this.state.authCode}
                     />
-                    <Button className="btn-celeste w-3/4" type="submit">
+                    <button className="btn btn-celeste w-3/4" type="submit">
                       Confirmă contul
-                    </Button>
+                    </button>
                   </form>
                 )}
                 <Link
                   to="/harta/login"
                   state={{ referrer: this.props.location?.state?.referrer, rating: this.props.location?.state?.rating }}>
-                  <Button className="btn-celeste w-3/4 mt-4" type="submit">
+                  <button className="btn btn-celeste w-3/4 mt-4" type="submit">
                     Login
-                  </Button>
+                  </button>
                 </Link>
               </div>
             </div>

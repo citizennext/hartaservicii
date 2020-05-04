@@ -11,7 +11,6 @@ import { X as Close } from 'react-feather';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
 import iconShare from '../../assets/images/icon_share.svg';
-import { Button } from '../../components/Buttons';
 
 function PopUps(props: any) {
   const providersQuery = gql`
@@ -354,7 +353,7 @@ function PopUps(props: any) {
         <div className="p-6 border-b border-brown">
           <h3 className="text-white">Ești furnizor de servicii sociale?</h3>
           <Link to="adauga-nevoi-covid">
-            <Button className="btn-full btn-celeste mt-4">Adauga nevoi covid19</Button>
+            <button className="btn btn-celeste mt-4">Adauga nevoi covid19</button>
           </Link>
         </div>
         <div className="p-6 border-b border-brown">
@@ -364,7 +363,7 @@ function PopUps(props: any) {
             telefon.
           </p>
           <a href="mailto@contact@serviciisociale.ro">
-            <Button className="btn-full btn-celeste mt-4">Contactează-ne</Button>
+            <button className="btn btn-celeste mt-4">Contactează-ne</button>
           </a>
         </div>
         <div className="p-6 border-b border-brown">

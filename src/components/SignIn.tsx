@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import Layout from '../components/Layout';
 import { AfterHeader } from '../components/AfterHeader';
 import Footer from '../components/Footer';
-import { Button } from '../components/Buttons';
 import { Link } from 'gatsby';
 import { navigate } from '@reach/router';
 import { setUser, isLoggedIn } from '../utils/auth';
@@ -99,12 +98,12 @@ class SignIn extends React.Component<{ location?: StateLocation; path: string },
                     value={this.state.password}
                     type="password"
                   />
-                  <Button className="btn-celeste btn-full w-3/4" type="submit">
+                  <button className="btn btn-celeste w-3/4" type="submit">
                     Trimite
-                  </Button>
+                  </button>
                 </form>
-                <Link to="/harta/inregistrare">
-                  <Button className="btn-celeste btn-full w-3/4 mt-4">Crează un cont</Button>
+                <Link to="/harta/inregistrare" className="btn btn-celeste  w-3/4 mt-4">
+                  Crează un cont
                 </Link>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field } from 'formik';
 import { useParams } from '@reach/router';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -10,7 +10,6 @@ import Header from '../Header';
 import Layout from '../Layout';
 import { AfterHeader } from '../AfterHeader';
 import { SidebarAccount } from '../SidebarAccount';
-import { Button } from '../Buttons';
 
 interface Values {
   chlor: string;
@@ -158,8 +157,8 @@ function AddCovidNeeds() {
                     }
                     actions.resetForm({ values: initialValues, errors: {}, touched: {} });
                   }}>
-                  {({ values, errors, dirty, touched }) => (
-                    <Form className="w-full md:w-2/3 grid">
+                  {({ values, errors, dirty, touched, handleSubmit }) => (
+                    <form className="w-full md:w-2/3 grid" onSubmit={handleSubmit}>
                       <div className="grid grid-cols-2  gap-4 items-center border-dotted border-celeste mb-5 border-b">
                         <label htmlFor="surgicalMasks" className="mb-5 text-burg font-semibold">
                           Măști chirurgicale (buc):
@@ -365,13 +364,13 @@ function AddCovidNeeds() {
                         <span className={`block absolute validation-error`}>{errors.surgicalGownSingleUse}</span>
                       )}
 
-                      <Button
+                      <button
                         type="submit"
-                        className="btn-celeste btn-full md:ml-auto md:mr-0"
-                        disabled={!isEmpty(errors) || !dirty || !loading}>
+                        className="btn btn-celeste btn-full md:ml-auto md:mr-0"
+                        disabled={!isEmpty(errors) || !dirty || !loading ? false : true}>
                         Trimite
-                      </Button>
-                    </Form>
+                      </button>
+                    </form>
                   )}
                 </Formik>
               </>
