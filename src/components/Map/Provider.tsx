@@ -382,8 +382,8 @@ function Provider(props: any) {
             </div>
             <div className="p-6 md:p-12 border-b border-brown md:border-0">
               <h3 className="text-white">Ești furnizor de servicii sociale?</h3>
-              <Link to="adauga-nevoi-covid">
-                <button className="btn btn-celeste mt-4">Adauga nevoi covid19</button>
+              <Link to="adauga-nevoi-covid" className="btn btn-celeste btn-full mt-4 md:ml-0">
+                Adauga nevoi covid19
               </Link>
             </div>
             <div className="p-6 md:p-12 border-b border-brown">
@@ -392,8 +392,8 @@ function Provider(props: any) {
                 Informațiile primite vor fi folosite pentru a completa și actualiza datele acestui centru - de exemplu număr de
                 telefon.
               </p>
-              <a href="mailto@contact@serviciisociale.ro">
-                <button className="btn btn-celeste mt-4">Contactează-ne</button>
+              <a href="mailto@contact@serviciisociale.ro" className="btn btn-celeste btn-full mt-4 md:ml-0">
+                Contactează-ne
               </a>
             </div>
             <div className="p-6 md:p-12 border-b border-brown md:border-0">

@@ -352,8 +352,8 @@ function PopUps(props: any) {
         </div>
         <div className="p-6 border-b border-brown">
           <h3 className="text-white">Ești furnizor de servicii sociale?</h3>
-          <Link to="adauga-nevoi-covid">
-            <button className="btn btn-celeste mt-4">Adauga nevoi covid19</button>
+          <Link to="adauga-nevoi-covid" className="btn btn-celeste mt-4 hover:no-underline">
+            Adauga nevoi covid19
           </Link>
         </div>
         <div className="p-6 border-b border-brown">
@@ -362,8 +362,8 @@ function PopUps(props: any) {
             Informațiile primite vor fi folosite pentru a completa și actualiza datele acestui centru - de exemplu număr de
             telefon.
           </p>
-          <a href="mailto@contact@serviciisociale.ro">
-            <button className="btn btn-celeste mt-4">Contactează-ne</button>
+          <a href="mailto@contact@serviciisociale.ro" className="btn btn-celeste mt-4 hover:no-underline">
+            Contactează-ne
           </a>
         </div>
         <div className="p-6 border-b border-brown">
