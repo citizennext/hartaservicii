@@ -77,12 +77,12 @@ function Hit(props: any) {
       <Link
         to={
           typeFy === 'servicii'
-            ? `/harta/serviciu/${getSlug(props.hit.name)}/${props.hit.objectID}`
+            ? `/harta/serviciu/${getSlug(props.hit.name)}/${props.hit.objectID}/`
             : typeFy === 'noutăți'
             ? `/noutati/${props.hit.slug}`
             : `/${props.hit.slug}`
         }
-        className="btn btn-tight w-1/4">
+        className="btn btn-tight w-1/4 hover:text-white">
         Detalii
       </Link>
     </div>

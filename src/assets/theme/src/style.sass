@@ -55,16 +55,28 @@ a
         
     &:hover
         @apply text-white
-        background-color: #1C847E
+        // background-color: #1C847E
 
     &.mini
         @apply text-xs
 a > button, a.btn
     @apply text-black
     @apply no-underline
-    &:hover
-        @apply text-celeste
+
 /* elements */
+.field-error
+    @apply absolute 
+    @apply block 
+    @apply bottom-0 
+    @apply right-0 
+    @apply text-xs 
+    @apply py-1 
+    @apply px-2 
+    @apply bg-error 
+    @apply text-white 
+    @apply rounded-br-lg 
+    @apply rounded-tl-lg 
+    @apply mb-5
 .separator
     @apply absolute
     width: 100%

@@ -23,8 +23,10 @@ function Partners() {
             utilizatori în prima lună de la lansare.
           </p>
           <p className="pt-2 pb-10 xl:pl-24">Acest interes stă la baza motivației de a continua proiectul.</p>
-          <Link to={`/noutati/harta-serviciilor-sociale-din-romania-proiect-finalist-in-programul-tara-lui-andrei`}>
-            <button className="btn btn-tight xl:ml-24">detalii</button>
+          <Link
+            to={`/noutati/harta-serviciilor-sociale-din-romania-proiect-finalist-in-programul-tara-lui-andrei`}
+            className="btn btn-tight w-1/3 mx-auto xl:ml-24">
+            detalii
           </Link>
         </div>
         <div className="mt-12 md:w-1/2 md:px-4 px-4 md:mt-0">
@@ -39,8 +41,8 @@ function Partners() {
             Ministerul Muncii și Protecției Sociale este partenerul instituțional al proiectului, facilitând îmbunătățirea
             platformei și furnizând datele necesare.
           </p>
-          <Link to={`/parteneri`} style={{ textDecoration: 'none' }}>
-            <button className="btn btn-tight xl:ml-24">detalii</button>
+          <Link to={`/parteneri`} className="btn btn-tight w-1/3 mx-auto xl:ml-24">
+            detalii
           </Link>
         </div>
       </div>

@@ -94,7 +94,7 @@ function PopUps(props: any) {
           <Close className="text-celeste" size={30} />
         </button>
       </header>
-      <div className="grid bg-white px-6 md:px-0">
+      <div className="grid bg-white md:px-0">
         <div className="px-6 pb-6 pt-3">
           <h2 className="border-b border-snow py-6">{providers.name}</h2>
           <p className="border-b border-snow py-6">{providers.supplier.name}</p>
@@ -228,7 +228,7 @@ function PopUps(props: any) {
           </table>
         </div>
       </div>
-      <footer className="grid">
+      <footer className="grid pb-12">
         <div className="p-6 border-b border-brown">
           <h3 className="text-white">Ce nevoie are centrul, cum poti sa ajuti?</h3>
           {providers.provider_covid_needs[0] ? (

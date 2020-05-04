@@ -68,8 +68,8 @@ function Blog() {
                 </HsSlider>
               </div>
             </div>
-            <Link to="/noutati" className="md:mx-auto -mb-6">
-              <button className="btn btn-celeste btn-full btn-arrow">Toate noutățile</button>
+            <Link to="/noutati" className="btn btn-celeste btn-full btn-arrow md:mx-auto -mb-6">
+              Toate noutățile
             </Link>
           </div>
         );
