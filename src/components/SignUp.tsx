@@ -88,7 +88,7 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
                 <h4>Crează-ți contul tău</h4>
                 <p>
                   Dacă ești un <strong>reprezentant al unui furnizor de servicii sociale</strong>, creându-ți un cont vei putea să
-                  actualizezi datele tale de pe platformă și să adaugi ce nevoi au serviciile tale. (va fi lansată in curand...)
+                  actualizezi datele tale de pe platformă și să adaugi ce nevoi au serviciile tale.
                 </p>
                 <p>
                   Dacă ești un <strong>beneficiar de servicii sociale</strong>, creându-ți un cont vei putea să oferi un

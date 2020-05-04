@@ -54,7 +54,7 @@ function SignIn({ location }: { location?: StateLocation; path: string }) {
                 <p>
                   Dacă ai deja un cont pe platformă, poți să actualizezi datele serviciilor tale după ce vei intra în contul tău.
                 </p>
-                <p>Dacă nu, crează unul nou și vei putea să adaugi testimoniale, să actualizezi datele care îți aparțin.</p>
+                <p>Dacă nu, creează unul nou și vei putea să adaugi testimoniale, să actualizezi datele care îți aparțin.</p>
               </div>
             </div>
             <div className="contact-form">

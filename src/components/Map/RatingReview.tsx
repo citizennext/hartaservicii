@@ -63,7 +63,7 @@ function RatingReview(props: any) {
                   importantă.
                 </p>
                 <p>
-                  <strong>Fi politicos, folosește un ton și un limbaj constructiv! </strong>
+                  <strong>Fii politicos, folosește un ton și un limbaj constructiv! </strong>
                 </p>
                 <Formik
                   initialValues={initialValues}
