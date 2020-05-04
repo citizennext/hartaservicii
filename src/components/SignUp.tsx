@@ -164,7 +164,7 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
                       <label htmlFor="name">Nume Prenume</label>
                       <div className="relative w-full">
                         <Field
-                          placeholder="ex: matei123"
+                          placeholder="ex: Matei Cojocaru"
                           className={`w-full ${touched.name && errors.name ? 'field-validation-error' : ''}`}
                           name="name"
                           id="name"
@@ -264,7 +264,6 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
                     const userId = userStorage ? userStorage : '';
                     try {
                       await Auth.confirmSignUp(userId, values.authCode, { forceAliasCreation: false });
-                      NotificationManager.success('Cont validat. Login!');
                       localStorage.removeItem('gatsbyUserTemp');
                       navigate('/harta/login', {
                         state: { referrer: location?.state?.referrer, rating: location?.state?.rating },
