@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Formik, Field, FormikErrors } from 'formik';
+
+// @ts-ignore
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import StarRatingComponent from 'react-star-rating-component';
 import { useParams } from '@reach/router';
 import { useMutation } from '@apollo/react-hooks';
@@ -37,7 +40,6 @@ function RatingReview(props: any) {
   `;
   const [addRating, { data, loading, error }] = useMutation(ratingMutation);
   const params = useParams();
-  const [successForm, setSuccessForm] = useState(false);
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
   const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
@@ -48,10 +50,11 @@ function RatingReview(props: any) {
       <Seo isRepeatable={false} postTitle="Testimonial" bodyClassName="page-review" summary="Lasă un testimonial" />
       <Header />
       <AfterHeader header="testimonial" />
+      <NotificationContainer />
       <Layout left={<SidebarAccount />}>
         <div className="wrapper">
           <div className="contact-wrapper">
-            {!successForm && !loading ? (
+            {!data ? (
               <>
                 <h1 className="mt-4 xl:mt-24 mb-12">Povestește-ne experiența ta!</h1>
                 <p>
@@ -91,18 +94,15 @@ function RatingReview(props: any) {
                           },
                         },
                       });
-                      !loading && !error && setSuccessForm(true);
                       if (error) {
-                        // eslint-disable-next-line
-                        console.info(error.message);
+                        NotificationManager.error(error.message);
                       }
                     } catch (err) {
-                      // eslint-disable-next-line
-                      console.info(err.message);
+                      NotificationManager.error(err.message);
                     }
                     actions.resetForm({ values: initialValues, errors: {}, touched: {} });
                   }}>
-                  {({ values, errors, dirty, touched, handleSubmit }) => (
+                  {({ values, errors, touched, handleSubmit }) => (
                     <>
                       <div className="md:flex bg-snow rounded-lg p-6 border border-leaf mb-4">
                         <StarRatingComponent
@@ -115,7 +115,7 @@ function RatingReview(props: any) {
                           starColor="#6FBBB7"
                           emptyStarColor="transparent"
                         />
-                        <div className="text-center md:text-left md:ml-20">
+                        <div className="md:w-1/2 text-center md:text-left md:ml-10">
                           <h2 className="text-lg md:p-0">Calificativul tau</h2>
                           <div className="text-brown text-lg font-body">
                             Cunoști situația din acest centru din experiență proprie? Oferă-i un indicativ!
@@ -137,10 +137,11 @@ function RatingReview(props: any) {
                           )}
                         </div>
                         <button
+                          className={`btn btn-celeste btn-full md:ml-auto md:mr-0 ld-ext-left ${loading ? 'running' : ''}`}
                           type="submit"
-                          className="btn btn-celeste btn-full md:ml-auto md:mr-0"
-                          disabled={!isEmpty(errors) || !dirty || !loading ? false : true}>
+                          disabled={loading}>
                           Trimite
+                          <div className="ld ld-ring ld-spin"></div>
                         </button>
                       </form>
                     </>
@@ -148,27 +149,25 @@ function RatingReview(props: any) {
                 </Formik>
               </>
             ) : (
-              data && (
-                <div className="popup-suucess">
-                  <div className="full my-10">
-                    <h1 className="mt-4 xl:mt-24 mb-12">Multumim pentru feedback !!!</h1>
-                  </div>
-                  <div className="full my-10">
-                    <p>Am primit datele transmise și le vom verifica!</p>
-                  </div>
-                  <div className="full">
-                    <p>
-                      <strong>Calificativ:</strong> {data.insert_provider_rating.returning[0].rating / 10} / 5
-                    </p>
-                    <p>
-                      <strong>Nume:</strong> {data.insert_provider_rating.returning[0].user.username}
-                    </p>
-                    <p>
-                      <strong>Feedback:</strong> {data.insert_provider_rating.returning[0].feedback}
-                    </p>
-                  </div>
+              <div className="popup-suucess">
+                <div className="full my-10">
+                  <h1 className="mt-4 xl:mt-24 mb-12">Multumim pentru feedback !!!</h1>
                 </div>
-              )
+                <div className="full my-10">
+                  <p>Am primit datele transmise și le vom verifica!</p>
+                </div>
+                <div className="full">
+                  <p>
+                    <strong>Calificativ:</strong> {data.insert_provider_rating.returning[0].rating / 10} / 5
+                  </p>
+                  <p>
+                    <strong>Nume:</strong> {data.insert_provider_rating.returning[0].user.username}
+                  </p>
+                  <p>
+                    <strong>Feedback:</strong> {data.insert_provider_rating.returning[0].feedback}
+                  </p>
+                </div>
+              </div>
             )}
           </div>
         </div>

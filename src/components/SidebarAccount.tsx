@@ -23,7 +23,7 @@ export function SidebarAccount() {
         {user?.username}
       </p>
       <button
-        className="btn btn-tight w-1/2 mt-8"
+        className="btn btn-tight w-full lg:w-1/2 mt-8"
         onClick={() =>
           Auth.signOut()
             .then(() => logout())
@@ -32,7 +32,7 @@ export function SidebarAccount() {
         Logout
       </button>
       <br />
-      <Link to="/harta" className="btn btn-tight w-1/2 mt-4">
+      <Link to="/harta" className="btn btn-tight w-full lg:w-1/2 mt-4">
         Harta
       </Link>
     </div>
