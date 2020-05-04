@@ -13,6 +13,7 @@ module.exports = {
       snow: '#EDF7EF',
       burg: '#978585',
       error: '#cc0000',
+      link: '#1C847E',
     },
     minWidth: {
       '0': '0',

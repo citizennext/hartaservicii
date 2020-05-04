@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'gatsby';
 
 type Image = {
   href: string;
@@ -20,9 +19,9 @@ export function SidebarLeft({ sidebar }: Props) {
   return (
     <>
       {imgProps?.map((image: Image) => (
-        <Link to={image.href} title={image.alt} style={{ marginBottom: 20 }} key={image.url}>
+        <a href={image.href} title={image.alt} style={{ marginBottom: 20 }} key={image.url} className="hover:bg-white">
           <img src={image.url} alt={image.alt} />
-        </Link>
+        </a>
       ))}
     </>
   );

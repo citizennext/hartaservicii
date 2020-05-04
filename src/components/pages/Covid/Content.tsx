@@ -104,14 +104,14 @@ export function Content({ counties }: { counties: Needs[] }) {
           pentru a putea redirecționa pe cei care vor să ajute acolo unde este cea mai mare nevoie.
         </p>
         <p>
-          Pentru donații către centrele de bătrâni vă rugăm să vă alăturați campaniei
+          Pentru donații către centrele de bătrâni vă rugăm să vă alăturați campaniei{' '}
           <a
             href="https://www.facebook.com/donate/3254515761248340/10159092302869672/"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ fontWeight: 'bold', padding: '0 8px' }}>
+            title="Împreună pentru bunicii noștri">
             Împreună pentru bunicii noștri
-          </a>
+          </a>{' '}
           inițiată de Marius Manole, MagiCAMP și Romanian United Fund.
         </p>
       </div>
@@ -119,7 +119,7 @@ export function Content({ counties }: { counties: Needs[] }) {
         <h2 className="mx-auto w-1/2 mt-20 mb-10 text-center text-brown">Nevoi Județe</h2>
         <div className="needs-counties">
           {counties.map((county: Needs) => (
-            <div onClick={() => setOpen(county.id)} key={county.id} className="text-celeste text-base pb-2">
+            <div onClick={() => setOpen(county.id)} key={county.id} className="text-link text-base pb-2">
               {county.county}
             </div>
           ))}
@@ -150,7 +150,7 @@ export function Content({ counties }: { counties: Needs[] }) {
                     <input type="text" name="telefon" placeholder="Telefonul tau" />
                     <input type="email" name="email" placeholder="Email*" required />
                     <textarea name="details" placeholder="Detalii*" required />
-                    <button type="submit" className="btn btn-celeste btn-full mr-0">
+                    <button type="submit" className="btn btn-celeste btn-full mr-0 font-bold">
                       Trimite
                     </button>
                   </div>
