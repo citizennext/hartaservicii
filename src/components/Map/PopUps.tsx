@@ -30,6 +30,14 @@ function PopUps(props: any) {
         license_date_provisional
         license_no
         rating_aggregate {
+          nodes {
+            id
+            rating
+            user {
+              username
+            }
+            feedback
+          }
           aggregate {
             avg {
               rating
@@ -254,11 +262,11 @@ function PopUps(props: any) {
         <div className="p-6 border-b border-brown">
           <h3 className="text-white">Ce nevoie are centrul, cum poti sa ajuti?</h3>
           {providers.provider_covid_needs[0] ? (
-            <table className="table-auto text-white ml-12">
+            <table className="table-auto text-white ml-0 font-body">
               <thead>
                 <tr>
-                  <th className="text-left  px-0 py-2">Nevoi</th>
-                  <th className="px-0 py-2 text-center">Cantitate</th>
+                  <th className="text-left  px-0 py-2 text-sm">Nevoi</th>
+                  <th className="px-0 py-2 text-center text-sm">Cantitate</th>
                 </tr>
               </thead>
               <tbody>
@@ -384,9 +392,29 @@ function PopUps(props: any) {
             Informațiile primite vor fi folosite pentru a completa și actualiza datele acestui centru - de exemplu număr de
             telefon.
           </p>
-          <a href="mailto@contact@serviciisociale.ro" className="btn btn-celeste mt-4 hover:no-underline">
+          <a
+            href="mailto:contact@serviciisociale.ro?subject=Actualizare date"
+            className="btn btn-celeste mt-4 hover:no-underline">
             Contactează-ne
           </a>
+        </div>
+        <div className="p-6 border-b border-brown">
+          <h3 className="text-white">Testimoniale</h3>
+          <ul className="font-body italic">
+            {providers.rating_aggregate.nodes.map(
+              (testimonial: { id: string; rating: number; feedback: string; user: { username: string } }) => {
+                return (
+                  <li key={testimonial.id} className="py-2 border-dotted border-b border-brown">
+                    {testimonial.feedback}
+
+                    <span className="block w-full text-right font-bold">
+                      {testimonial.user.username} ({testimonial.rating / 10}/5)
+                    </span>
+                  </li>
+                );
+              }
+            )}
+          </ul>
         </div>
         <div className="p-6 border-b border-brown">
           <h3 className="text-white">Evaluare centru</h3>
