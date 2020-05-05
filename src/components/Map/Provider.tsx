@@ -143,8 +143,9 @@ function Provider(props: any) {
                   <span className="font-semibold text-celeste text-xl">{providers.license_no}</span>
                 </p>
                 <div className="pin-eval">
-                  <strong className="font-body">Evaluare utilizatori</strong>
-                  <br />
+                  <p className="pb-0">
+                    <strong className="font-body">Evaluare utilizatori</strong>
+                  </p>
                   <span className="font-semibold text-celeste text-xl">{averageRating}</span>
                   <div className="rating-parent">
                     <div className="rating-child" style={{ width: `${percentageRating}%` }}>
