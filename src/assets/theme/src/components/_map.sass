@@ -71,13 +71,13 @@
 		width: 18px
 		height: 100%
 
-	.pin-services > ul
-		@apply relative
-		margin-left: 35px
+.pin-services > ul
+	@apply relative
 
-		li:before
-			content: '▶'
-			margin-right: 5px
+	li:before
+		@apply text-brown
+		content: '▶'
+		margin-right: 5px
 .pin-eval
 	span.average-rateing
 		@apply font-semibold
@@ -137,7 +137,7 @@
 			height: 18px
 			@apply bg-celeste
 
-.pin-address, .pin-phone, .pin-web
+.pin-address, .pin-phone, .pin-web, .pin-email
 	overflow: hidden
 	p
 		@apply relative
@@ -159,6 +159,10 @@
 		width: 280px
 		text-overflow: ellipsis
 		overflow: hidden
+.pin-email
+	p
+		&:before
+			background-image: url('../../images/icon_mail.svg')
 .pin-address
 	p
 		&:before

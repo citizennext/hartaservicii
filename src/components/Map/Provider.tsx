@@ -27,6 +27,7 @@ function Provider(props: any) {
         capacity
         district
         email
+        phone
         license_by
         license_date_5years
         license_date_provisional
@@ -52,6 +53,12 @@ function Provider(props: any) {
         service {
           name
           code
+          service_offers {
+            offer {
+              id
+              name
+            }
+          }
         }
         provider_covid_needs(where: { verified: { _eq: true } }, order_by: { created_at: desc }, limit: 1) {
           chlor
@@ -178,7 +185,7 @@ function Provider(props: any) {
                   </CopyToClipboard>
                 </p>
               </div>
-              <div className="pin-address py-6 border-b border-snow">
+              <div className="pin-address py-6">
                 <p>
                   <strong>Adresă</strong>
                 </p>
@@ -187,27 +194,42 @@ function Provider(props: any) {
                   {providers.district}
                 </span>
               </div>
+              {providers.email && (
+                <div className="pin-email py-6">
+                  <p>
+                    <strong>Email</strong>
+                  </p>
+                  <span>{providers.email}</span>
+                </div>
+              )}
               {providers.phone && (
-                <div className="pin-phone">
+                <div className="pin-phone py-6">
                   <p>
                     <strong>Telefon</strong>
                   </p>
                   <span>{providers.phone}</span>
                 </div>
               )}
-              <div className="pin-services py-6 font-body">
+              <div className="pin-services py-6 font-body border-t border-snow">
                 <p>
                   <strong>Tip / cod serviciu </strong>
                 </p>
                 <span className="pb-6">
                   {providers.service.name} ({providers.service.code})
                 </span>
+                <br />
+                <strong>Servicii oferite:</strong>
+                <ul>
+                  {providers.service.service_offers.map((offer: { offer: { id: string; name: string } }) => (
+                    <li key={offer.offer.id}>{offer.offer.name}</li>
+                  ))}
+                </ul>
               </div>
 
               <div className="pin-license grid grid-cols-2 py-6 border-t border-snow">
                 <div>
                   <p>
-                    <strong>Dată licență</strong>{' '}
+                    <strong>Dată licență</strong>
                   </p>
                   <span>
                     {providers.license_date_5years ? providers.license_date_5years : providers.license_date_provisional}
