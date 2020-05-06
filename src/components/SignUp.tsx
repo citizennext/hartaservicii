@@ -97,7 +97,6 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
               </div>
             </div>
             <div className="contact-form">
-              <h4>Creează cont</h4>
               {stage === 0 && (
                 <Formik
                   initialValues={initialValues}
@@ -146,6 +145,7 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
                   }}>
                   {({ values, errors, touched, isSubmitting, setFieldValue }) => (
                     <Form>
+                      <h4>Creează cont</h4>
                       <label htmlFor="username">Nume utilizator (fara spatii)*</label>
                       <div className="relative w-full">
                         <Field
@@ -253,9 +253,8 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
                       errors.authCode = 'Camp obligatoriu';
                     } else if (!values.authCode.match(/^[0-9]+$/)) {
                       errors.authCode = 'Caractere valide sunt doar cifre';
-                    }
-                    if (values.authCode.length !== 6) {
-                      errors.authCode = 'Codul contine 6 cifre';
+                    } else if (values.authCode.length !== 6) {
+                      errors.authCode = 'Doar 6 cifre';
                     }
                     return errors;
                   }}
@@ -276,23 +275,79 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
                   }}>
                   {({ values, errors, touched, isSubmitting }) => (
                     <Form>
+                      <h4 className="pt-6">Confirmă-ți adresa de email</h4>
                       <p>Un cod de verificare a fost trimis pe emailul din pasul anterior!</p>
-
-                      <Field
-                        placeholder="Cod autorizare"
-                        name="authCode"
-                        required={true}
-                        value={values.authCode}
-                        className="w-full"
-                      />
-                      {touched.authCode && errors.authCode && (
-                        <span className={`block absolute validation-error`}>{errors.authCode}</span>
-                      )}
+                      <label htmlFor="authCode">Introduce-ți codul primit pe email*</label>
+                      <div className="relative w-full">
+                        <Field
+                          placeholder="Cod autorizare de 6 cifre"
+                          name="authCode"
+                          required={true}
+                          value={values.authCode}
+                          className="w-full"
+                        />
+                        {touched.authCode && errors.authCode && <span className={`field-error`}>{errors.authCode}</span>}
+                      </div>
                       <button
                         className={`btn btn-celeste w-full ld-ext-left ${isSubmitting ? 'running' : ''}`}
                         type="submit"
                         disabled={!isEmpty(errors) || isSubmitting}>
                         Confirmă contul
+                        <div className="ld ld-ring ld-spin"></div>
+                      </button>
+                      <h4 className="pt-6">Nu ai primit codul?</h4>
+                      <p>Verifică înainte că nu a ajuns cumva în spam. Dacă nu e acolo:</p>
+                      <button className={`btn btn-celeste w-full ld-ext-left`} onClick={() => setStage(2)}>
+                        Retrimite cod verificare
+                      </button>
+                    </Form>
+                  )}
+                </Formik>
+              )}
+              {stage === 2 && (
+                <Formik
+                  initialValues={{ username: localStorage.getItem('gatsbyUserTemp') || '' }}
+                  validate={(values: { username: string }) => {
+                    const errors: FormikErrors<{ username: string }> = {};
+
+                    if (!values.username) {
+                      errors.username = 'Camp obligatoriu';
+                    }
+                    return errors;
+                  }}
+                  onSubmit={async (values) => {
+                    try {
+                      await Auth.resendSignUp(values.username);
+                      NotificationManager.success('Un nou cod a fost trimis!');
+                      setStage(1);
+                    } catch (err) {
+                      NotificationManager.error('S-a produs o eroare! Contactează-ne!');
+                    }
+                  }}>
+                  {({ values, errors, touched, isSubmitting, setFieldValue }) => (
+                    <Form>
+                      <h4>Ai nevoie de un cod nou?</h4>
+
+                      <label htmlFor="username">Nume utilizator (fara spatii)*</label>
+                      <div className="relative w-full">
+                        <Field
+                          onChange={(e: any) => {
+                            setFieldValue('username', e.target.value.replace(' ', '').toLowerCase());
+                          }}
+                          placeholder="ex: matei123"
+                          className={`w-full ${touched.username && errors.username ? 'field-validation-error' : ''}`}
+                          name="username"
+                          id="username"
+                          required={false}
+                          value={values.username}
+                        />
+                        {touched.username && errors.username && <span className="field-error">{errors.username}</span>}
+                      </div>
+                      <button
+                        className={`btn btn-celeste w-full ld-ext-left ${isSubmitting ? 'running' : ''}`}
+                        type="submit"
+                        disabled={!isEmpty(errors) || isSubmitting}>
+                        Retrimite cod
                         <div className="ld ld-ring ld-spin"></div>
                       </button>
                     </Form>
