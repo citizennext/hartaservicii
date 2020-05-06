@@ -291,7 +291,7 @@ function Provider(props: any) {
           </div>
           <footer className="grid md:grid-cols-2">
             <div className="p-6 md:p-12 border-b border-brown">
-              <h3 className="text-white">Ce nevoie are centrul, cum poti sa ajuti?</h3>
+              <h3 className="text-white">Ce nevoie are centrul, cum poți să ajuti?</h3>
               {providers.provider_covid_needs[0] ? (
                 <table className="table-auto text-white ml-0 font-body">
                   <thead>
@@ -414,7 +414,7 @@ function Provider(props: any) {
             <div className="p-6 md:p-12 border-b border-brown md:border-0">
               <h3 className="text-white">Ești furnizor de servicii sociale?</h3>
               <Link to="adauga-nevoi-covid" className="btn btn-celeste btn-full mt-4 md:ml-0">
-                Adauga nevoi covid19
+                Adaugă nevoi covid19
               </Link>
               <h3 className="text-white pt-12">Actualizare informații</h3>
               <p>

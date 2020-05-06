@@ -85,7 +85,7 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
           <div className="contact-wrapper">
             <div className="contact-info">
               <div className="social-media">
-                <h4>Crează-ți contul tău</h4>
+                <h4>Creează-ți contul tău</h4>
                 <p>
                   Dacă ești un <strong>reprezentant al unui furnizor de servicii sociale</strong>, creându-ți un cont vei putea să
                   actualizezi datele tale de pe platformă și să adaugi ce nevoi au serviciile tale.
@@ -97,7 +97,7 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
               </div>
             </div>
             <div className="contact-form">
-              <h4>Crează cont</h4>
+              <h4>Creează cont</h4>
               {stage === 0 && (
                 <Formik
                   initialValues={initialValues}
@@ -236,7 +236,7 @@ function SignUp({ location }: { location?: StateLocation; path: string }) {
                         className={`btn btn-celeste w-full ld-ext-left ${isSubmitting ? 'running' : ''}`}
                         type="submit"
                         disabled={!isEmpty(errors) || isSubmitting}>
-                        Crează cont nou
+                        Creează cont nou
                         <div className="ld ld-ring ld-spin"></div>
                       </button>
                     </Form>
