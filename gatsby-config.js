@@ -114,12 +114,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-postcss`,
-      options: {
-        postCssPlugins: [],
-      },
-    },
-    {
       resolve: 'gatsby-plugin-react-leaflet',
       options: {
         linkStyles: true,
