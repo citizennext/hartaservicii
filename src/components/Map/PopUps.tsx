@@ -7,7 +7,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { X as Close } from 'react-feather';
-// import RatingReview from './RatingReview';
+import { Spinner } from '../Spinner';
 import hssLogo from '../../assets/images/icon_HSS_symbolleaf.svg';
 import iconDirections from '../../assets/images/icon_directions.svg';
 import iconShare from '../../assets/images/icon_share.svg';
@@ -88,7 +88,7 @@ function PopUps(props: any) {
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
   });
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p>Error! ${error.message}</p>;
   const providers = data.providers_by_pk;
   const averageRating = (providers.rating_aggregate.aggregate.avg.rating / 10).toFixed(1);

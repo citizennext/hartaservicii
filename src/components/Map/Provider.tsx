@@ -14,6 +14,7 @@ import iconShare from '../../assets/images/icon_share.svg';
 import iconClose from '../../assets/images/icon_arrowg.svg';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import Seo from '../Seo';
+import { Spinner } from '../Spinner';
 
 function Provider(props: any) {
   const providersQuery = gql`
@@ -92,7 +93,7 @@ function Provider(props: any) {
   const { loading, error, data } = useQuery(providersQuery, {
     variables: { provider },
   });
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p>Error! ${error.message}</p>;
   const providers = data.providers_by_pk;
   const averageRating = (providers.rating_aggregate.aggregate.avg.rating / 10).toFixed(1);

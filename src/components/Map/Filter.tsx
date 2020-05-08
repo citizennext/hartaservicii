@@ -4,6 +4,7 @@ import Drawer from '../Drawer/Drawer';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { FilterMenu } from '../Icons';
 import options from '../../data/filter-options.json';
+import { Spinner } from '../Spinner';
 import { graphql, useStaticQuery } from 'gatsby';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -51,7 +52,7 @@ const SERVICES = gql`
   }
 `;
 
-const Filter: React.FC<Props> = props => {
+const Filter: React.FC<Props> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const openDrawer = () => {
     setIsOpen((current: boolean) => !current);
@@ -77,7 +78,7 @@ const Filter: React.FC<Props> = props => {
   const { loading, error, data } = useQuery(SERVICES, {
     variables: { selectedCategory: selectedCategory },
   });
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p>Error! ${error}</p>;
 
   const services = data.services;
@@ -131,7 +132,7 @@ const Filter: React.FC<Props> = props => {
                 value={districts.filter(({ value }: any) => value === filters.district)}
                 options={districts}
                 onChange={handleChangeDistrict}
-                theme={theme => ({
+                theme={(theme) => ({
                   ...theme,
                   borderRadius: 0,
                   colors: {
@@ -145,7 +146,7 @@ const Filter: React.FC<Props> = props => {
                 value={options.age.filter(({ value }) => value === filters.category)}
                 options={options.age}
                 onChange={handleChangeAge}
-                theme={theme => ({
+                theme={(theme) => ({
                   ...theme,
                   borderRadius: 0,
                   colors: {
@@ -159,7 +160,7 @@ const Filter: React.FC<Props> = props => {
                 value={optionsService.filter(({ value }: any) => value === filters.service)}
                 options={optionsService}
                 onChange={handleChangeService}
-                theme={theme => ({
+                theme={(theme) => ({
                   ...theme,
                   borderRadius: 0,
                   colors: {
@@ -174,7 +175,7 @@ const Filter: React.FC<Props> = props => {
                 value={optionsSpecialization.filter(({ value }: any) => value === filters.specialization)}
                 options={optionsSpecialization}
                 onChange={handleChangeSpecialization}
-                theme={theme => ({
+                theme={(theme) => ({
                   ...theme,
                   borderRadius: 0,
                   colors: {
@@ -187,7 +188,7 @@ const Filter: React.FC<Props> = props => {
               <Select
                 options={options.administrator}
                 onChange={handleChangeAdministrator}
-                theme={theme => ({
+                theme={(theme) => ({
                   ...theme,
                   borderRadius: 0,
                   colors: {
@@ -208,7 +209,7 @@ const Filter: React.FC<Props> = props => {
               value={districts.filter(({ value }: any) => value === filters.district)}
               options={districts}
               onChange={handleChangeDistrict}
-              theme={theme => ({
+              theme={(theme) => ({
                 ...theme,
                 borderRadius: 0,
                 colors: {
@@ -225,7 +226,7 @@ const Filter: React.FC<Props> = props => {
               value={options.age.filter(({ value }) => value === filters.category)}
               options={options.age}
               onChange={handleChangeAge}
-              theme={theme => ({
+              theme={(theme) => ({
                 ...theme,
                 borderRadius: 0,
                 colors: {
@@ -242,7 +243,7 @@ const Filter: React.FC<Props> = props => {
               value={optionsService.filter(({ value }: any) => value === filters.service)}
               options={optionsService}
               onChange={handleChangeService}
-              theme={theme => ({
+              theme={(theme) => ({
                 ...theme,
                 borderRadius: 0,
                 colors: {
@@ -260,7 +261,7 @@ const Filter: React.FC<Props> = props => {
               value={optionsSpecialization.filter(({ value }: any) => value === filters.specialization)}
               options={optionsSpecialization}
               onChange={handleChangeSpecialization}
-              theme={theme => ({
+              theme={(theme) => ({
                 ...theme,
                 borderRadius: 0,
                 colors: {
@@ -277,7 +278,7 @@ const Filter: React.FC<Props> = props => {
               value={options.administrator.filter(({ value }) => value === filters.administrator)}
               options={options.administrator}
               onChange={handleChangeAdministrator}
-              theme={theme => ({
+              theme={(theme) => ({
                 ...theme,
                 borderRadius: 0,
                 colors: {

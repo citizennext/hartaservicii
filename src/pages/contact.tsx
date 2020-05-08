@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Layout from '../components/Layout';
 import { AfterHeader } from '../components/AfterHeader';
 import Footer from '../components/Footer';
+import { Spinner } from '../components/Spinner';
 
 export default function ContactPage() {
   const data = Data.page.contact.content;
@@ -57,7 +58,7 @@ export default function ContactPage() {
               <NetlifyForm name="contact">
                 {({ loading, error, success }: any) => (
                   <>
-                    {loading && <div className="text-leaf">Loading...</div>}
+                    {loading && <Spinner />}
                     {error && <div className="text-error">Your information was not sent. Please try again later.</div>}
                     {success && (
                       <>
