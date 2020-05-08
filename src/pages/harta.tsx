@@ -11,7 +11,16 @@ import Provider from '../components/Map/Provider';
 import RatingReview from '../components/Map/RatingReview';
 import AddCovidNeeds from '../components/Map/AddCovidNeeds';
 import PopUps from '../components/Map/PopUps';
-
+import Amplify from 'aws-amplify';
+Amplify.configure({
+  Auth: {
+    identityPoolId: process.env.GATSBY_IDENTITY_POOL_ID,
+    region: process.env.GATSBY_REGION,
+    identityPoolRegion: process.env.GATSBY_REGION,
+    userPoolId: process.env.GATSBY_USER_POOL_ID,
+    userPoolWebClientId: process.env.GATSBY_USER_POOL_WEB_CLIENT_ID,
+  },
+});
 function HartaPage() {
   return (
     <Location>
