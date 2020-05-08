@@ -1,6 +1,7 @@
 require('dotenv').config();
 const siteConfig = require('./site-config');
 const queries = require('./src/utils/algolia.js');
+const tailwindConfig = require('./tailwind.config.js');
 
 module.exports = {
   siteMetadata: {
@@ -96,11 +97,26 @@ module.exports = {
         cachePublic: true,
       },
     },
+    // {
+    //   resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
+    //   // options: {},
+    // },
     {
       resolve: `gatsby-plugin-sass`,
       options: {
         // Configure SASS to process Tailwind
-        postCssPlugins: [require('tailwindcss'), require('./tailwind.config.js')],
+        postCssPlugins: [
+          require('tailwindcss'),
+          tailwindConfig,
+          require(`autoprefixer`),
+          ...(process.env.NODE_ENV === `production` ? [require(`cssnano`)] : []),
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-postcss`,
+      options: {
+        postCssPlugins: [],
       },
     },
     {

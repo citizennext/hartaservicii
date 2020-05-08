@@ -69,6 +69,10 @@ const PROVIDERS = gql`
       coordinates
       name
     }
+    districts {
+      name
+      coordinates
+    }
   }
 `;
 
@@ -96,6 +100,7 @@ export default class Harta extends Component<any, State> {
   zoomOnSelectedDistrict = (districtValue: any) => {
     if (districtValue) {
       const district = ROCoordinates.filter(({ admin }) => admin === districtValue)[0];
+      // console.log('Harta -> zoomOnSelectedDistrict -> district', district);
       if (district) {
         this.setState({ lat: parseFloat(district.lat) });
         this.setState({ lng: parseFloat(district.lng) });
