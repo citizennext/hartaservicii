@@ -44,7 +44,7 @@ const initialValues: Values = {
   visors: '',
 };
 function AddCovidNeeds() {
-  const ratingMutation = gql`
+  const covidNeedsMutation = gql`
     mutation AddCovidNeeds(
       $provider: uuid!
       $chlor: Int
@@ -99,7 +99,7 @@ function AddCovidNeeds() {
       }
     }
   `;
-  const [addCovidNeeds, { data, loading, error }] = useMutation(ratingMutation);
+  const [addCovidNeeds, { data, loading, error }] = useMutation(covidNeedsMutation);
   const params = useParams();
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;

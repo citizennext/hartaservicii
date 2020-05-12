@@ -1,14 +1,10 @@
 schema: http://localhost:8000/___graphql
 documents:
   - ./src/**/*.{ts,tsx}
-  - ./node_modules/gatsby-*/**/*.js
-overwrite:
-  - true
+  - ./node_modules/gatsby*/!(node_modules)/**/*.js
 generates:
   ./src/types/graphqlTypes.ts:
+    schema: https://api.serviciisociale.ro/v1/graphql
     plugins:
       - typescript
       - typescript-operations
-  ./graphql.schema.json:
-    plugins:
-      - introspection

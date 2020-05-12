@@ -102,8 +102,8 @@
   li
     position: relative
     display: inline-block
-    width: 20px
-    height: 20px
+    width: 12px
+    height: 12px
     margin: 0 5px
     padding: 0
     cursor: pointer
@@ -112,40 +112,44 @@
       font-size: 0
       line-height: 0
       display: block
-      width: 20px
-      height: 20px
-      padding: 5px
+      width: 12px
+      height: 12px
+      padding: 4px
       cursor: pointer
       color: transparent
       border: 0
       outline: none
-      background: transparent
+      @apply bg-burg
+      @apply rounded-full
+      opacity: .5
 
       &:hover, &:focus
         outline: none
+        opacity: 1
 
       &:hover:before, &:focus:before
         opacity: 1
 
-      &:before
-        font-family: 'slick'
-        font-size: 6px
-        line-height: 20px
-        position: absolute
-        top: 0
-        left: 0
-        width: 20px
-        height: 20px
-        content: '•'
-        text-align: center
-        opacity: .25
-        color: black
-        -webkit-font-smoothing: antialiased
-        -moz-osx-font-smoothing: grayscale
-
-    &.slick-active button:before
-      opacity: .75
-      color: black
+      // &:before
+      //   font-family: 'slick'
+      //   font-size: 6px
+      //   line-height: 20px
+      //   position: absolute
+      //   top: 0
+      //   left: 0
+      //   width: 12px
+      //   height: 12px
+      //   content: '•'
+      //   text-align: center
+      //   opacity: .25
+      //   color: black
+      //   -webkit-font-smoothing: antialiased
+      //   -moz-osx-font-smoothing: grayscale
+    &.slick-active button
+      opacity: 1
+    // &.slick-active button:before
+    //   opacity: .75
+    //   color: black
 
 .slick-slider
   width: 88vw
@@ -252,5 +256,18 @@
 
   .slick-slider
     width: 88vw
+    @screen md
+      width: 95vw
+#covid
+  .slick-prev, .slick-next
+    top: 95%
+    @screen md
+      top: 98%
+
+  .slick-next:before
+    @apply bg-snow
+
+  .slick-slider
+    width: 100vw
     @screen md
       width: 95vw

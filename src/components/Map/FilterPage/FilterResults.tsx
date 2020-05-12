@@ -1,15 +1,15 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { Spinner } from '../Spinner';
+import { Spinner } from '../../Spinner';
 
 type Props = {
   service: number;
 };
 
 const FilterResults: React.FC<Props> = (props) => {
-  const PROVIDERS = gql`
-    query Providers($service: smallint) {
+  const PROVIDERS_FILTER = gql`
+    query ProvidersFilter($service: smallint) {
       providers(where: { _and: [{ supplier: { supplier_type: { private: { _eq: true } } } }, { type_id: { _eq: $service } }] }) {
         service {
           category {
@@ -38,7 +38,7 @@ const FilterResults: React.FC<Props> = (props) => {
   `;
 
   const service = props.service;
-  const { loading, error, data } = useQuery(PROVIDERS, {
+  const { loading, error, data } = useQuery(PROVIDERS_FILTER, {
     variables: { service },
   });
   if (loading) return <Spinner />;

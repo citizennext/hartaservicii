@@ -5,7 +5,6 @@ import { useWindowSize } from '../../hooks/useWindowSize';
 import { FilterMenu } from '../Icons';
 import options from '../../data/filter-options.json';
 import { Spinner } from '../Spinner';
-import { graphql, useStaticQuery } from 'gatsby';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
@@ -26,28 +25,16 @@ type Props = {
   totalResults: number;
 };
 
-const useServices = () => {
-  const { hasura } = useStaticQuery(
-    graphql`
-      query {
-        hasura {
-          categories: categories {
-            name
-          }
-          districts: suppliers(distinct_on: district, where: { district: { _is_null: false } }) {
-            district
-          }
-        }
-      }
-    `
-  );
-  return hasura;
-};
-
 const SERVICES = gql`
   query MyQuery($selectedCategory: String) {
     services: services(where: { category: { name: { _eq: $selectedCategory } } }) {
       name
+    }
+    categories: categories {
+      name
+    }
+    districts: suppliers(distinct_on: district, where: { district: { _is_null: false } }) {
+      district
     }
   }
 `;
@@ -63,27 +50,23 @@ const Filter: React.FC<Props> = (props) => {
 
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const query = useServices();
-
-  const districts = query.districts.map((item: { [name: string]: string }) => {
-    return { value: item.district, label: item.district };
-  });
-  districts.unshift({ value: null, label: 'Toate judetele' });
-
-  const optionsService = query.categories.map((item: { [name: string]: string }) => {
-    return { value: item.name, label: item.name };
-  });
-  optionsService.unshift({ value: null, label: 'Toate categoriile de servicii' });
-
   const { loading, error, data } = useQuery(SERVICES, {
     variables: { selectedCategory: selectedCategory },
   });
   if (loading) return <Spinner />;
   if (error) return <p>Error! ${error}</p>;
 
-  const services = data.services;
+  const districts = data.districts.map((item: { [name: string]: string }) => {
+    return { value: item.district, label: item.district };
+  });
+  districts.unshift({ value: null, label: 'Toate judetele' });
 
-  const optionsSpecialization = services.map((item: { [name: string]: string }) => {
+  const optionsService = data.categories.map((item: { [name: string]: string }) => {
+    return { value: item.name, label: item.name };
+  });
+  optionsService.unshift({ value: null, label: 'Toate categoriile de servicii' });
+
+  const optionsSpecialization = data.services.map((item: { [name: string]: string }) => {
     return { value: item.name, label: item.name };
   });
   optionsSpecialization.unshift({ value: null, label: 'Toate specializarile' });

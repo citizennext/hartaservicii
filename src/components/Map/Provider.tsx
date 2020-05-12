@@ -28,7 +28,9 @@ function Provider(props: any) {
         capacity
         district
         email
-        phone
+        phones {
+          number
+        }
         license_by
         license_date_5years
         license_date_provisional
@@ -212,12 +214,14 @@ function Provider(props: any) {
                   <span>{providers.email}</span>
                 </div>
               )}
-              {providers.phone && (
+              {providers.phones.length > 0 && (
                 <div className="pin-phone py-6">
                   <p>
                     <strong>Telefon</strong>
                   </p>
-                  <span>{providers.phone}</span>
+                  {providers.phones.map((phone: { number: string }, index: number) => {
+                    return <span key={index}>{phone.number}</span>;
+                  })}
                 </div>
               )}
               <div className="pin-services py-6 font-body border-t border-snow">

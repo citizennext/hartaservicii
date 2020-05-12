@@ -24,7 +24,9 @@ function PopUps(props: any) {
         capacity
         district
         email
-        phone
+        phones {
+          number
+        }
         license_by
         license_date_5years
         license_date_provisional
@@ -184,12 +186,14 @@ function PopUps(props: any) {
               <span>{providers.email}</span>
             </div>
           )}
-          {providers.phone && (
+          {providers.phones.length > 0 && (
             <div className="pin-phone py-6">
               <p>
                 <strong>Telefon</strong>
               </p>
-              <span>{providers.phone}</span>
+              {providers.phones.map((phone: { number: string }, index: number) => {
+                return <span key={index}>{phone.number}</span>;
+              })}
             </div>
           )}
           <div className="pin-services py-6 font-body border-t border-snow">
@@ -402,18 +406,22 @@ function PopUps(props: any) {
         <div className="p-6 border-b border-brown">
           <h3 className="text-white">Testimoniale</h3>
           <ul className="font-body italic">
-            {providers.rating_aggregate.nodes.map(
-              (testimonial: { id: string; rating: number; feedback: string; user: { username: string } }) => {
-                return (
-                  <li key={testimonial.id} className="py-2 border-dotted border-b border-brown">
-                    {testimonial.feedback}
+            {providers.rating_aggregate.nodes.length === 0 ? (
+              <li>Acest serviciu nu are nici un testimonial. Ești familiar cu acest serviciu? Fii primul!</li>
+            ) : (
+              providers.rating_aggregate.nodes.map(
+                (testimonial: { id: string; rating: number; feedback: string; user: { username: string } }) => {
+                  return (
+                    <li key={testimonial.id} className="py-2 border-dotted border-b border-brown">
+                      {testimonial.feedback}
 
-                    <span className="block w-full text-right font-bold">
-                      {testimonial.user.username} ({testimonial.rating / 10}/5)
-                    </span>
-                  </li>
-                );
-              }
+                      <span className="block w-full text-right font-bold">
+                        {testimonial.user.username} ({testimonial.rating / 10}/5)
+                      </span>
+                    </li>
+                  );
+                }
+              )
             )}
           </ul>
         </div>

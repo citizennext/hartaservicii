@@ -44574,9 +44574,7 @@
       {
         "name": "default",
         "description": "",
-        "locations": [
-          "INPUT_FIELD_DEFINITION"
-        ],
+        "locations": ["INPUT_FIELD_DEFINITION"],
         "args": [
           {
             "name": "value",
@@ -44597,9 +44595,7 @@
       {
         "name": "dateformat",
         "description": "",
-        "locations": [
-          "FIELD_DEFINITION"
-        ],
+        "locations": ["FIELD_DEFINITION"],
         "args": [
           {
             "name": "formatString",
@@ -44646,9 +44642,7 @@
       {
         "name": "link",
         "description": "",
-        "locations": [
-          "FIELD_DEFINITION"
-        ],
+        "locations": ["FIELD_DEFINITION"],
         "args": [
           {
             "name": "by",
@@ -44689,9 +44683,7 @@
       {
         "name": "fileByRelativePath",
         "description": "",
-        "locations": [
-          "FIELD_DEFINITION"
-        ],
+        "locations": ["FIELD_DEFINITION"],
         "args": [
           {
             "name": "from",
@@ -44708,9 +44700,7 @@
       {
         "name": "proxy",
         "description": "",
-        "locations": [
-          "FIELD_DEFINITION"
-        ],
+        "locations": ["FIELD_DEFINITION"],
         "args": [
           {
             "name": "from",
@@ -44745,9 +44735,7 @@
       {
         "name": "infer",
         "description": "",
-        "locations": [
-          "OBJECT"
-        ],
+        "locations": ["OBJECT"],
         "args": [
           {
             "name": "noDefaultResolvers",
@@ -44764,9 +44752,7 @@
       {
         "name": "dontInfer",
         "description": "",
-        "locations": [
-          "OBJECT"
-        ],
+        "locations": ["OBJECT"],
         "args": [
           {
             "name": "noDefaultResolvers",
@@ -44783,9 +44769,7 @@
       {
         "name": "mimeTypes",
         "description": "",
-        "locations": [
-          "OBJECT"
-        ],
+        "locations": ["OBJECT"],
         "args": [
           {
             "name": "types",
@@ -44814,9 +44798,7 @@
       {
         "name": "childOf",
         "description": "",
-        "locations": [
-          "OBJECT"
-        ],
+        "locations": ["OBJECT"],
         "args": [
           {
             "name": "mimeTypes",
@@ -44881,19 +44863,13 @@
       {
         "name": "nodeInterface",
         "description": "",
-        "locations": [
-          "INTERFACE"
-        ],
+        "locations": ["INTERFACE"],
         "args": []
       },
       {
         "name": "skip",
         "description": "Directs the executor to skip this field or fragment when the `if` argument is true.",
-        "locations": [
-          "FIELD",
-          "FRAGMENT_SPREAD",
-          "INLINE_FRAGMENT"
-        ],
+        "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
         "args": [
           {
             "name": "if",
@@ -44914,11 +44890,7 @@
       {
         "name": "include",
         "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
-        "locations": [
-          "FIELD",
-          "FRAGMENT_SPREAD",
-          "INLINE_FRAGMENT"
-        ],
+        "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
         "args": [
           {
             "name": "if",
@@ -44939,10 +44911,7 @@
       {
         "name": "deprecated",
         "description": "Marks an element of a GraphQL schema as no longer supported.",
-        "locations": [
-          "FIELD_DEFINITION",
-          "ENUM_VALUE"
-        ],
+        "locations": ["FIELD_DEFINITION", "ENUM_VALUE"],
         "args": [
           {
             "name": "reason",
