@@ -76,6 +76,7 @@ function Provider(props: any) {
           created_at
           handDesinfectant
           masks
+          visors
           protectionGlasses
           protectionHood
           sanitaryAlchohol
@@ -378,19 +379,19 @@ function Provider(props: any) {
                         </td>
                       </tr>
                     )}
-                    {providers.provider_covid_needs[0].protectionGlasses && (
+                    {providers.provider_covid_needs[0].surgicalShoeProtection && (
                       <tr>
                         <td className="border-b border-brown border-dotted px-0 py-2">Botoși unică folosință (buc):</td>
                         <td className="border-b border-brown border-dotted px-0 py-2 text-center">
-                          {providers.provider_covid_needs[0].protectionGlasses}
+                          {providers.provider_covid_needs[0].surgicalShoeProtection}
                         </td>
                       </tr>
                     )}
-                    {providers.provider_covid_needs[0].surgicalShoeProtection && (
+                    {providers.provider_covid_needs[0].protectionGlasses && (
                       <tr>
                         <td className="border-b border-brown border-dotted px-0 py-2">Ochelari protecție (buc):</td>
                         <td className="border-b border-brown border-dotted px-0 py-2 text-center">
-                          {providers.provider_covid_needs[0].surgicalShoeProtection}
+                          {providers.provider_covid_needs[0].protectionGlasses}
                         </td>
                       </tr>
                     )}
