@@ -57,7 +57,8 @@ function Covid() {
         return (
           <div id="covid" className="mb-40 bg-white md:mb-24 xl:max-w-griddw xl:m-auto xl:mb-32">
             <div className="mb-16">
-              <h2 className="text-center mb-6">Nevoi de protecție #covid19 anunțate</h2>
+              <h2 className="text-center mb-2">Nevoi de protecție #covid19 anunțate</h2>
+              <h3 className="text-center mb-6 text-celeste">{`${provider_covid_needs.length} servicii au publicat date până acum`}</h3>
               <div className="md:flex md:justify-center">
                 <HsSlider settings={settings}>
                   {provider_covid_needs.map(({ provider }: any) => (
