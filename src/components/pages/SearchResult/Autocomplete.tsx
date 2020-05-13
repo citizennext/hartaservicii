@@ -11,7 +11,7 @@ class Autocomplete extends Component {
     const typeFy = suggestion.type.toLowerCase();
     const slug =
       typeFy === 'servicii'
-        ? `/harta/serviciu/${getSlug(suggestion.name)}/${suggestion.objectID}`
+        ? `/harta/serviciu/${getSlug(suggestion.name)}/${suggestion.objectID}/`
         : typeFy === 'noutăți'
         ? `/noutati/${suggestion.slug}`
         : `/${suggestion.slug}`;
