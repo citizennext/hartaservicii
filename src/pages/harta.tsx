@@ -10,6 +10,7 @@ import UserProfile from '../components/UserProfile';
 import Provider from '../components/Map/Provider';
 import RatingReview from '../components/Map/RatingReview';
 import AddCovidNeeds from '../components/Map/AddCovidNeeds';
+import Admin from '../components/Admin';
 import PopUps from '../components/Map/PopUps';
 import Amplify from 'aws-amplify';
 Amplify.configure({
@@ -33,6 +34,7 @@ function HartaPage() {
               <Provider path="serviciu/:provider/:id/" />
               <PrivateRoute path="serviciu/:provider/:id/rating" component={RatingReview} />
               <PrivateRoute path="serviciu/:provider/:id/adauga-nevoi-covid" component={AddCovidNeeds} />
+              <PrivateRoute path="serviciu/:provider/:id/administrare" component={Admin} />
               <PrivateRoute path="profile" component={UserProfile} />
               <SignIn path="login" />
               <SignUp path="inregistrare" />

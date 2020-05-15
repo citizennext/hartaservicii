@@ -6,15 +6,20 @@ import { graphql, StaticQuery, Link } from 'gatsby';
 const query = graphql`
   query {
     hasura {
-      provider_covid_needs {
-        provider {
-          name
-          id
-          district
-          location
-          email
-          phones {
-            number
+      entries: provider_covid_needs_aggregate(order_by: { created_at: desc }) {
+        aggregate {
+          count
+        }
+        nodes {
+          provider {
+            name
+            id
+            district
+            location
+            email
+            phones {
+              number
+            }
           }
         }
       }
@@ -53,15 +58,15 @@ function Covid() {
     <StaticQuery
       query={query}
       render={(data: { hasura: any }) => {
-        const { provider_covid_needs } = data.hasura;
+        const { entries } = data.hasura;
         return (
           <div id="covid" className="mb-40 bg-white md:mb-24 xl:max-w-griddw xl:m-auto xl:mb-32">
             <div className="mb-16">
               <h2 className="text-center mb-2">Nevoi de protecție #covid19 anunțate</h2>
-              <h3 className="text-center mb-6 text-celeste">{`${provider_covid_needs.length} servicii au publicat date până acum`}</h3>
+              <h3 className="text-center mb-6 text-celeste">{`${entries.aggregate.count} servicii au publicat date până acum`}</h3>
               <div className="md:flex md:justify-center">
                 <HsSlider settings={settings}>
-                  {provider_covid_needs.map(({ provider }: any) => (
+                  {entries.nodes.map(({ provider }: any) => (
                     <Link
                       to={`harta/serviciu/${getSlug(provider.name)}/${provider.id}`}
                       key={provider.id}

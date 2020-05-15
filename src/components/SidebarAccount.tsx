@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { getCurrentUser, logout } from '../utils/auth';
@@ -26,8 +26,11 @@ export function SidebarAccount() {
         className="btn btn-tight w-full lg:w-1/2 mt-8"
         onClick={() =>
           Auth.signOut()
-            .then(() => logout())
-            .catch((err) => NotificationManager.success(err))
+            .then(() => {
+              logout();
+              navigate('/harta');
+            })
+            .catch((err) => NotificationManager.error(err))
         }>
         Logout
       </button>

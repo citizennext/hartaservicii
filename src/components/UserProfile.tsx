@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { getCurrentUser, logout } from '../utils/auth';
@@ -17,8 +17,12 @@ const UserProfile = () => {
       <button
         onClick={() =>
           Auth.signOut()
-            .then(() => logout())
-            .catch((err) => NotificationManager.success(err))
+            .then(() => {
+              logout();
+              navigate('/harta');
+              NotificationManager.success('V-ați delogat cu succes!');
+            })
+            .catch((err) => NotificationManager.error(err))
         }>
         Logout
       </button>

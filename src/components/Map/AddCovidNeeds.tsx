@@ -125,7 +125,7 @@ function AddCovidNeeds() {
                       addCovidNeeds({
                         variables: {
                           provider: params.id,
-                          message: `Serviciul cu id: ${params.id} a fost updatat. Noi nevoi de protectie au fost adaugate.`,
+                          message: `Un nou serviciu a adaugat nevoi covid. \nvezi mai multe aici: https://serviciisociale.ro/harta/serviciu/${params.provider}/${params.id}/administrare`,
                           surgicalMasks: values.surgicalMasks === '' ? null : values.surgicalMasks,
                           surgicalHandgloves: values.surgicalHandgloves === '' ? null : values.surgicalHandgloves,
                           handDesinfectant: values.handDesinfectant === '' ? null : values.handDesinfectant,
