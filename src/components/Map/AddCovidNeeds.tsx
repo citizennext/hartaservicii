@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { Formik, Field } from 'formik';
-import { useParams } from '@reach/router';
+import { useParams, Link } from '@reach/router';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { isEmpty } from 'ramda';
@@ -374,7 +374,7 @@ function AddCovidNeeds() {
                 </Formik>
               </>
             ) : (
-              <div className="popup-suucess">
+              <div className="popup-success">
                 <div className="full my-10">
                   <h1 className="mt-4 xl:mt-24 mb-12">Multumim pentru completarea formularului !!!</h1>
                 </div>
@@ -472,6 +472,11 @@ function AddCovidNeeds() {
                     </tbody>
                   </table>
                 </div>
+                <Link
+                  className="btn btn-celeste ml-auto w-1/2 mt-6"
+                  to={`/harta/serviciu/${params.provider}/${params.id}/administrare/`}>
+                  Înapoi la pagina de administrare
+                </Link>
               </div>
             )}
           </div>

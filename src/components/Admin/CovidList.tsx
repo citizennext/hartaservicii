@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { isEmpty } from 'ramda';
 
-import { useParams } from '@reach/router';
+import { useParams, Link } from '@reach/router';
 import { Spinner } from '../Spinner';
 import { Covid } from './Covid';
 // @ts-ignore
@@ -51,6 +51,9 @@ export function CovidList() {
         ) : (
           <li>Momentan nu sunt înregistrate nevoi de protecție!</li>
         )}
+        <Link className="btn btn-celeste mx-auto w-1/2 mt-6" to="adauga-nevoi-covid">
+          Adaugă nevoi
+        </Link>
       </ul>
     </div>
   );

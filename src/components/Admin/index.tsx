@@ -1,6 +1,5 @@
 import React from 'react';
 import { CovidList } from './CovidList';
-
 import Footer from '../Footer';
 import Seo from '../Seo';
 import Header from '../Header';
