@@ -70,7 +70,7 @@ function Covid() {
         <div className="md:flex md:justify-center">
           <HsSlider settings={settings}>
             {nodes.map(({ provider }: any) => (
-              <Link to={`harta/serviciu/${getSlug(provider.name)}/${provider.id}`} key={provider.id} className="no-underline">
+              <Link to={`harta/serviciu/${getSlug(provider.name)}/${provider.id}/`} key={provider.id} className="no-underline">
                 <div className=" rounded p-6 bg-celeste text-black ">
                   <strong className="ellipsis-clamp-1">{provider.name}</strong>
                   <span className="text-sm">
