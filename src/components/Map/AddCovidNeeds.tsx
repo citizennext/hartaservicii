@@ -3,7 +3,7 @@ import React from 'react';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { Formik, Field } from 'formik';
 import { useParams } from '@reach/router';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { isEmpty } from 'ramda';
 import Footer from '../Footer';
@@ -12,6 +12,7 @@ import Header from '../Header';
 import Layout from '../Layout';
 import { AfterHeader } from '../AfterHeader';
 import { SidebarAccount } from '../SidebarAccount';
+import { Ripple } from '../Ripple';
 
 interface Values {
   chlor: string;
@@ -43,68 +44,84 @@ const initialValues: Values = {
   surgicalShoeProtection: '',
   visors: '',
 };
-function AddCovidNeeds() {
-  const covidNeedsMutation = gql`
-    mutation AddCovidNeeds(
-      $provider: uuid!
-      $chlor: Int
-      $handDesinfectant: Int
-      $masks: Int
-      $protectionGlasses: Int
-      $protectionHood: Int
-      $sanitaryAlchohol: Int
-      $surfaceDesinfectant: Int
-      $surgicalGown: Int
-      $surgicalGownSingleUse: Int
-      $surgicalHandgloves: Int
-      $surgicalMasks: Int
-      $surgicalShoeProtection: Int
-      $visors: Int
-      $message: String!
-    ) {
-      insert_provider_covid_needs_one(
-        object: {
-          provider_id: $provider
-          chlor: $chlor
-          handDesinfectant: $handDesinfectant
-          masks: $masks
-          protectionGlasses: $protectionGlasses
-          protectionHood: $protectionHood
-          sanitaryAlchohol: $sanitaryAlchohol
-          surfaceDesinfectant: $surfaceDesinfectant
-          surgicalGown: $surgicalGown
-          surgicalGownSingleUse: $surgicalGownSingleUse
-          surgicalHandgloves: $surgicalHandgloves
-          surgicalMasks: $surgicalMasks
-          surgicalShoeProtection: $surgicalShoeProtection
-          visors: $visors
-        }
-      ) {
-        surgicalMasks
-        surgicalHandgloves
-        handDesinfectant
-        surfaceDesinfectant
-        masks
-        visors
-        chlor
-        surgicalGown
-        sanitaryAlchohol
-        protectionGlasses
-        surgicalShoeProtection
-        protectionHood
-        surgicalGownSingleUse
+const covidNeedsMutation = gql`
+  mutation AddCovidNeeds(
+    $provider: uuid!
+    $chlor: Int
+    $handDesinfectant: Int
+    $masks: Int
+    $protectionGlasses: Int
+    $protectionHood: Int
+    $sanitaryAlchohol: Int
+    $surfaceDesinfectant: Int
+    $surgicalGown: Int
+    $surgicalGownSingleUse: Int
+    $surgicalHandgloves: Int
+    $surgicalMasks: Int
+    $surgicalShoeProtection: Int
+    $visors: Int
+    $message: String!
+  ) {
+    insert_provider_covid_needs_one(
+      object: {
+        provider_id: $provider
+        chlor: $chlor
+        handDesinfectant: $handDesinfectant
+        masks: $masks
+        protectionGlasses: $protectionGlasses
+        protectionHood: $protectionHood
+        sanitaryAlchohol: $sanitaryAlchohol
+        surfaceDesinfectant: $surfaceDesinfectant
+        surgicalGown: $surgicalGown
+        surgicalGownSingleUse: $surgicalGownSingleUse
+        surgicalHandgloves: $surgicalHandgloves
+        surgicalMasks: $surgicalMasks
+        surgicalShoeProtection: $surgicalShoeProtection
+        visors: $visors
       }
-      sendEmail(message: $message, subject: "Un furnizor a introdus nevoi COVID19", toEmails: ["contact@serviciisociale.ro"]) {
-        success
+    ) {
+      surgicalMasks
+      surgicalHandgloves
+      handDesinfectant
+      surfaceDesinfectant
+      masks
+      visors
+      chlor
+      surgicalGown
+      sanitaryAlchohol
+      protectionGlasses
+      surgicalShoeProtection
+      protectionHood
+      surgicalGownSingleUse
+    }
+    sendEmail(message: $message, subject: "Un furnizor a introdus nevoi COVID19", toEmails: ["contact@serviciisociale.ro"]) {
+      success
+    }
+  }
+`;
+const providerQuery = gql`
+  query Provider($id: uuid!) {
+    providers_by_pk(id: $id) {
+      name
+      supplier {
+        name
       }
     }
-  `;
+  }
+`;
+function AddCovidNeeds() {
   const [addCovidNeeds, { data, loading, error }] = useMutation(covidNeedsMutation);
   const params = useParams();
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
   const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
-
+  const provider = useQuery(providerQuery, {
+    variables: { id: params.id },
+  });
+  if (provider.loading) <Ripple />;
+  if (provider.error) {
+    NotificationManager.error(provider.error.message);
+  }
   return (
     <div className="needs">
       <Seo isRepeatable={false} postTitle="Nevoi COVID19" bodyClassName="page-needs" summary="Adauga nevoile serviciului tau" />
@@ -116,7 +133,13 @@ function AddCovidNeeds() {
           <div className="contact-wrapper">
             {!data ? (
               <>
-                <h1 className="mt-4 xl:mt-24 mb-12">Adaugă nevoile de protecție impotriva COVID19</h1>
+                <h1 className="mt-4 xl:mt-24 mb-4">Adaugă nevoile de protecție impotriva COVID19 pentru:</h1>
+                <h2 className="mt-4">
+                  Serviciul: <span className="text-celeste">{provider?.data?.providers_by_pk?.name}</span>
+                </h2>
+                <h3 className="mb-12">
+                  Furnizat de: <span className="text-burg">{provider?.data?.providers_by_pk?.supplier?.name}</span>
+                </h3>
                 <p className="mb-4">Adaugă numarul de itemi pentru fiecare obiect necesar.</p>
                 <Formik
                   initialValues={initialValues}
