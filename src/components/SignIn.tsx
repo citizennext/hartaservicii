@@ -27,7 +27,7 @@ const initialValues = {
 function SignIn({ location }: { location?: StateLocation; path: string }) {
   if (isLoggedIn() && location?.state?.referrer) {
     navigate(location.state.referrer, {
-      state: { rating: location?.state.rating },
+      state: { rating: location?.state?.rating || 0 },
     });
   } else if (isLoggedIn() && !location) {
     navigate('/harta');

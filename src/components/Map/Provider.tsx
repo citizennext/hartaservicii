@@ -418,7 +418,7 @@ function Provider(props: any) {
               )}
             </div>
             <div className="p-6 md:p-12 border-b border-brown md:border-0">
-              <h3 className="text-white">Ești furnizor de servicii sociale?</h3>
+              <h3 className="text-white">Reprezinți furnizorul acestui serviciu social?</h3>
               <Link to="adauga-nevoi-covid" className="btn btn-celeste btn-full mt-4 md:ml-0">
                 Adaugă nevoi covid19
               </Link>
