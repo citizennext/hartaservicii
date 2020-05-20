@@ -144,11 +144,28 @@ function AddCovidNeeds() {
                 <Formik
                   initialValues={initialValues}
                   onSubmit={async (values, actions) => {
+                    const message = `
+                    Serviciul cu id: ${params.id} a fost updatat. Noi nevoi de protectie au fost adaugate:\n\n
+                    surgicalMasks: ${values.surgicalMasks}\n
+                    surgicalHandgloves: ${values.surgicalHandgloves}\n
+                    handDesinfectant: ${values.handDesinfectant}\n
+                    surfaceDesinfectant: ${values.surfaceDesinfectant}\n
+                    masks: ${values.masks}\n
+                    visors: ${values.visors}\n
+                    chlor: ${values.chlor}\n
+                    surgicalGown: ${values.surgicalGown}\n
+                    sanitaryAlchohol: ${values.sanitaryAlchohol}\n
+                    protectionGlasses: ${values.protectionGlasses}\n
+                    surgicalShoeProtection: ${values.surgicalShoeProtection}\n
+                    protectionHood: ${values.protectionHood}\n
+                    surgicalGownSingleUse: ${values.surgicalGownSingleUse}\n\n
+                    de catre userul: ${userId} cu token ${token}
+                    `;
                     try {
                       addCovidNeeds({
                         variables: {
                           provider: params.id,
-                          message: `Serviciul cu id: ${params.id} a fost updatat. Noi nevoi de protectie au fost adaugate.`,
+                          message: message,
                           surgicalMasks: values.surgicalMasks === '' ? null : values.surgicalMasks,
                           surgicalHandgloves: values.surgicalHandgloves === '' ? null : values.surgicalHandgloves,
                           handDesinfectant: values.handDesinfectant === '' ? null : values.handDesinfectant,
@@ -158,8 +175,8 @@ function AddCovidNeeds() {
                           chlor: values.chlor === '' ? null : values.chlor,
                           surgicalGown: values.surgicalGown === '' ? null : values.surgicalGown,
                           sanitaryAlchohol: values.sanitaryAlchohol === '' ? null : values.sanitaryAlchohol,
-                          protectionGlasses: values.surgicalShoeProtection === '' ? null : values.surgicalShoeProtection,
-                          surgicalShoeProtection: values.protectionGlasses === '' ? null : values.protectionGlasses,
+                          surgicalShoeProtection: values.surgicalShoeProtection === '' ? null : values.surgicalShoeProtection,
+                          protectionGlasses: values.protectionGlasses === '' ? null : values.protectionGlasses,
                           protectionHood: values.protectionHood === '' ? null : values.protectionHood,
                           surgicalGownSingleUse: values.surgicalGownSingleUse === '' ? null : values.surgicalGownSingleUse,
                         },
