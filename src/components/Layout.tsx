@@ -1,7 +1,10 @@
 import React from 'react';
 import * as Sentry from '@sentry/browser';
 import '../assets/theme/src/style.sass';
-Sentry.init({ dsn: 'https://844b8f906e2e412f9b978aab5685862f@o395451.ingest.sentry.io/5247230' });
+Sentry.init({
+  dsn: 'https://844b8f906e2e412f9b978aab5685862f@o395451.ingest.sentry.io/5247230',
+  environment: process.env.NODE_ENV,
+});
 type Props = {
   left?: React.ReactNode | boolean;
   right?: React.ReactNode | boolean;
