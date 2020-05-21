@@ -387,7 +387,7 @@ function PopUps(props: any) {
           )}
         </div>
         <div className="p-6 border-b border-brown">
-          <h3 className="text-white">Ești furnizor de servicii sociale?</h3>
+          <h3 className="text-white">Reprezinți furnizorul acestui serviciu social?</h3>
           <Link to="adauga-nevoi-covid" className="btn btn-celeste mt-4 hover:no-underline">
             Adaugă nevoi covid19
           </Link>

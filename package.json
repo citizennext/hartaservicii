@@ -24,6 +24,7 @@
     "@aws-amplify/ui-react": "^0.2.3",
     "@openfonts/koho_all": "^1.44.2",
     "@reach/alert-dialog": "^0.10.2",
+    "@sentry/browser": "^5.15.5",
     "algoliasearch": "^4.2.0",
     "apollo-boost": "^0.4.9",
     "aws-amplify": "^3.0.8",
