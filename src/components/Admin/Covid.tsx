@@ -18,8 +18,6 @@ const DELETE = gql`
 const Covid = ({ covid, providerId }: any) => {
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
-  const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
-
   const [showDialog, setShowDialog] = useState<string>('');
   const cancelRef = useRef();
   const open = (id: string) => setShowDialog(id);
@@ -46,8 +44,7 @@ const Covid = ({ covid, providerId }: any) => {
       context: {
         headers: {
           'x-hasura-user-id': userId,
-          'x-hasura-role': userId === 'cezar' ? 'admin' : 'user',
-          Authorization: `Bearer ${token}`,
+          'x-hasura-role': 'user',
         },
       },
     });

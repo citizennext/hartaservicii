@@ -12,12 +12,11 @@ interface User {
 }
 export const setUser = (user: User | {}) => (window.localStorage.gatsbyUser = JSON.stringify(user));
 
-export const getAccessToken = async () => {
+export const getAccessToken = () => {
   if (!isBrowser) {
     return '';
   }
-  const tokens = await Auth.currentUserCredentials();
-  return tokens.sessionToken || false;
+  return Auth.currentAuthenticatedUser().then((user) => user?.signInUserSession.idToken.jwtToken || false);
 };
 const getUser = () => {
   if (window.localStorage.gatsbyUser) {

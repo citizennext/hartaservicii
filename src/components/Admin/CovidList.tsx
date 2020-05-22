@@ -25,7 +25,6 @@ export function CovidList() {
   const params = useParams();
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
-  const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
 
   const { loading, error, data } = useQuery(GET_COVID_NEEDS, {
     variables: { provider: params.id },
@@ -34,7 +33,6 @@ export function CovidList() {
       headers: {
         'x-hasura-user-id': userId,
         'x-hasura-role': userId === 'cezar' ? 'admin' : 'user',
-        Authorization: `Bearer ${token}`,
       },
     },
   });

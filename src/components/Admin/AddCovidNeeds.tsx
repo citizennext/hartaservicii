@@ -189,7 +189,6 @@ function AddCovidNeeds() {
                           headers: {
                             'x-hasura-user-id': userId,
                             'x-hasura-role': 'user',
-                            Authorization: `Bearer ${token}`,
                           },
                         },
                       });
@@ -407,12 +406,14 @@ function AddCovidNeeds() {
                       {touched.surgicalGownSingleUse && errors.surgicalGownSingleUse && (
                         <span className={`block absolute validation-error`}>{errors.surgicalGownSingleUse}</span>
                       )}
-                      <div className="flex">
-                        <Link className={`btn btn-celeste btn-arrow-back md:w-1/3 md:ml-0`} to="../../">
-                          Administrare
+                      <div className="flex flex-wrap">
+                        <Link className={`btn btn-outline btn-arrow-back w-full md:w-1/3 md:ml-0`} to="../../">
+                          Înapoi
                         </Link>
                         <button
-                          className={`btn btn-celeste md:w-1/3 md:ml-auto md:mr-0 ld-ext-left ${loading ? 'running' : ''}`}
+                          className={`btn btn-celeste w-full md:w-1/3 md:ml-auto md:mr-0 mt-6 md:mt-0 ld-ext-left ${
+                            loading ? 'running' : ''
+                          }`}
                           type="submit"
                           disabled={loading}>
                           Trimite

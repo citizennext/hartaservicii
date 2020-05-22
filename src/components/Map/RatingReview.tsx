@@ -42,7 +42,6 @@ function RatingReview(props: any) {
   const params = useParams();
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
-  const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
   const [rating, setRating] = useState<number>(props.location?.state?.rating || 0);
 
   return (
@@ -90,7 +89,6 @@ function RatingReview(props: any) {
                           headers: {
                             'x-hasura-user-id': userId,
                             'x-hasura-role': 'user',
-                            Authorization: `Bearer ${token}`,
                           },
                         },
                       });

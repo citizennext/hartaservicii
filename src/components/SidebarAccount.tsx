@@ -8,9 +8,9 @@ export function SidebarAccount() {
   const user = getCurrentUser();
   const params = useParams();
   return (
-    <div className="border-b border-celeste md:border-0 pb-12">
+    <div className="border-t border-celeste md:border-0 mt-6 xl:mt-20 pt-6">
       <NotificationContainer />
-      <h4 className="mt-4 xl:mt-24 mb-12">Profilul meu</h4>
+      <h4 className="mb-4">Profilul meu</h4>
       <p>
         <strong>e: </strong>
         {user?.email}

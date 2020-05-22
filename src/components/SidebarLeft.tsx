@@ -20,7 +20,7 @@ export function SidebarLeft({ sidebar }: Props) {
     <>
       {imgProps?.map((image: Image) => (
         <a href={image.href} title={image.alt} style={{ marginBottom: 20 }} key={image.url} className="hover:bg-white">
-          <img src={image.url} alt={image.alt} />
+          <img src={image.url} alt={image.alt} width="200" />
         </a>
       ))}
     </>

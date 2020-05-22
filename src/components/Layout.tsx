@@ -30,10 +30,10 @@ const Layout: React.FC<Props> = ({ left, right, children }) => {
   };
 
   return (
-    <main className={contentColumns()}>
-      {typeof left !== 'boolean' && left && <div className="sidebar-left">{left}</div>}
+    <main className={`flex flex-wrap ${contentColumns()}`}>
+      {typeof left !== 'boolean' && left && <div className="sidebar-left order-2 w-full md:order-none">{left}</div>}
       <div className="main">{children}</div>
-      {typeof right !== 'boolean' && right && <div className="sidebar-right">{right}</div>}
+      {typeof right !== 'boolean' && right && <div className="sidebar-right order-3 w-full md:order-none">{right}</div>}
     </main>
   );
 };

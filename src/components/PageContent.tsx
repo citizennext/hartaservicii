@@ -38,7 +38,7 @@ export function Content({ content, summary, additionalData }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             title={button.label}
-            className="btn btn-celeste btn-arrow btn-full my-4">
+            className="btn btn-celeste btn-arrow w-full sm:mx-auto sm:w-2/3 lg:w-1/2 my-4">
             {button.label}
           </a>
         ))}
