@@ -173,7 +173,9 @@ function EditCovidNeeds() {
                       initialValues={initialValues}
                       onSubmit={async (values) => {
                         const message = `
-                    Un serviciu are nevoile covid actualizate. \nVezi mai multe aici: https://serviciisociale.ro/harta/serviciu/${params.provider}/${params.id}/administrare \n\n
+                    Un serviciu are nevoile covid actualizate. \nVezi mai multe aici: https://serviciisociale.ro/harta/serviciu/${
+                      params.provider
+                    }/${params.id}/administrare \n\n
                     surgicalMasks: ${values.surgicalMasks}\n
                     surgicalHandgloves: ${values.surgicalHandgloves}\n
                     handDesinfectant: ${values.handDesinfectant}\n
@@ -187,7 +189,7 @@ function EditCovidNeeds() {
                     surgicalShoeProtection: ${values.surgicalShoeProtection}\n
                     protectionHood: ${values.protectionHood}\n
                     surgicalGownSingleUse: ${values.surgicalGownSingleUse}\n\n
-                    de catre userul: ${userId} cu token ${token}
+                    de catre userul: ${userId} cu token ${token.substring(0, 10)}...
                     `;
                         try {
                           editCovidNeeds({

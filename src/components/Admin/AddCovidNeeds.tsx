@@ -148,7 +148,9 @@ function AddCovidNeeds() {
                   initialValues={initialValues}
                   onSubmit={async (values, actions) => {
                     const message = `
-                    Un nou serviciu a adaugat nevoi covid. \nvezi mai multe aici: https://serviciisociale.ro/harta/serviciu/${params.provider}/${params.id}/administrare \n\n
+                    Un nou serviciu a adaugat nevoi covid. \nvezi mai multe aici: https://serviciisociale.ro/harta/serviciu/${
+                      params.provider
+                    }/${params.id}/administrare \n\n
                     surgicalMasks: ${values.surgicalMasks}\n
                     surgicalHandgloves: ${values.surgicalHandgloves}\n
                     handDesinfectant: ${values.handDesinfectant}\n
@@ -162,7 +164,7 @@ function AddCovidNeeds() {
                     surgicalShoeProtection: ${values.surgicalShoeProtection}\n
                     protectionHood: ${values.protectionHood}\n
                     surgicalGownSingleUse: ${values.surgicalGownSingleUse}\n\n
-                    de catre userul: ${userId} cu token ${token}
+                    de catre userul: ${userId} cu token ${token.substring(0, 10)}...
                     `;
                     try {
                       addCovidNeeds({
