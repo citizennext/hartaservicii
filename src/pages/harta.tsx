@@ -34,7 +34,7 @@ function HartaPage() {
               <Harta path="/" />
               <Provider path="serviciu/:provider/:id/" />
               <PrivateRoute path="serviciu/:provider/:id/rating" component={RatingReview} />
-              <PrivateRoute path="serviciu/:provider/:id/administrare/nevoi-covid" component={AddCovidNeeds} />
+              <PrivateRoute path="serviciu/:provider/:id/administrare/nevoi-covid/adauga" component={AddCovidNeeds} />
               <PrivateRoute path="serviciu/:provider/:id/administrare/nevoi-covid/edit/:needId" component={EditCovidNeeds} />
               <PrivateRoute path="serviciu/:provider/:id/administrare" component={Admin}></PrivateRoute>
               <PrivateRoute path="profile" component={UserProfile} />

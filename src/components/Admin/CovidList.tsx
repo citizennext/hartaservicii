@@ -28,6 +28,7 @@ export function CovidList() {
 
   const { loading, error, data } = useQuery(GET_COVID_NEEDS, {
     variables: { provider: params.id },
+    pollInterval: 500,
     context: {
       headers: {
         'x-hasura-user-id': userId,
@@ -51,7 +52,7 @@ export function CovidList() {
         ) : (
           <li>Momentan nu sunt înregistrate nevoi de protecție!</li>
         )}
-        <Link className="btn btn-celeste mx-auto w-1/2 mt-6" to="adauga-nevoi-covid">
+        <Link className="btn btn-celeste mx-auto w-1/2 mt-6" to="nevoi-covid/adauga">
           Adaugă nevoi
         </Link>
       </ul>
