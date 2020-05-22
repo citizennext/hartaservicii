@@ -1,12 +1,6 @@
-export { wrapRootElement } from './src/apollo/wrapRootElement';
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
-
-// You can delete this file if you're not using it
-
+import React from 'react';
+import { ApolloProvider } from 'react-apollo';
+import { client } from './src/context/ApolloContext';
 import Auth from '@aws-amplify/auth';
 import { setUser } from './src/utils/auth';
 
@@ -20,7 +14,7 @@ export const onRouteUpdate = (state, page, pages) => {
       };
       setUser(userInfo);
     })
-    .catch((err) => {
-      window.localStorage.setItem('gatsbyUser', JSON.stringify({}));
-    });
+    .catch((err) => window.localStorage.setItem('gatsbyUser', JSON.stringify({})));
 };
+
+export const wrapRootElement = ({ element }) => <ApolloProvider client={client}>{element}</ApolloProvider>;

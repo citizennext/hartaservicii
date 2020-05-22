@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Location } from '@reach/router';
 import { Dialog } from '@reach/dialog';
-
+import { ScrollTop } from '../components/ScrollTop';
 import Harta from '../components/Map';
 import PrivateRoute from '../components/PrivateRoute';
 import SignIn from '../components/SignIn';
@@ -9,7 +9,9 @@ import SignUp from '../components/SignUp';
 import UserProfile from '../components/UserProfile';
 import Provider from '../components/Map/Provider';
 import RatingReview from '../components/Map/RatingReview';
-import AddCovidNeeds from '../components/Map/AddCovidNeeds';
+import AddCovidNeeds from '../components/Admin/AddCovidNeeds';
+import EditCovidNeeds from '../components/Admin/EditCovidNeeds';
+import Admin from '../components/Admin';
 import PopUps from '../components/Map/PopUps';
 import Amplify from 'aws-amplify';
 Amplify.configure({
@@ -25,17 +27,22 @@ function HartaPage() {
   return (
     <Location>
       {({ location, navigate }) => {
+        // @ts-ignore
         const { oldLocation } = location?.state || {};
         return (
           <>
-            <Router location={oldLocation ? oldLocation : location} basepath="/harta">
-              <Harta path="/" />
-              <Provider path="serviciu/:provider/:id/" />
-              <PrivateRoute path="serviciu/:provider/:id/rating" component={RatingReview} />
-              <PrivateRoute path="serviciu/:provider/:id/adauga-nevoi-covid" component={AddCovidNeeds} />
-              <PrivateRoute path="profile" component={UserProfile} />
-              <SignIn path="login" />
-              <SignUp path="inregistrare" />
+            <Router location={oldLocation ? oldLocation : location} basepath="/harta" primary={false}>
+              <ScrollTop path="/">
+                <Harta path="/" />
+                <Provider path="serviciu/:provider/:id/" />
+                <PrivateRoute path="serviciu/:provider/:id/rating" component={RatingReview} />
+                <PrivateRoute path="serviciu/:provider/:id/administrare/nevoi-covid/adauga" component={AddCovidNeeds} />
+                <PrivateRoute path="serviciu/:provider/:id/administrare/nevoi-covid/edit/:needId" component={EditCovidNeeds} />
+                <PrivateRoute path="serviciu/:provider/:id/administrare" component={Admin}></PrivateRoute>
+                <PrivateRoute path="profile" component={UserProfile} />
+                <SignIn path="login" />
+                <SignUp path="inregistrare" />
+              </ScrollTop>
             </Router>
 
             <Dialog

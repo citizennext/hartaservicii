@@ -1,5 +1,5 @@
 import { isEmpty } from 'ramda';
-import { navigate } from 'gatsby';
+import Auth from '@aws-amplify/auth';
 
 const isBrowser = typeof window !== `undefined`;
 interface User {
@@ -12,6 +12,12 @@ interface User {
 }
 export const setUser = (user: User | {}) => (window.localStorage.gatsbyUser = JSON.stringify(user));
 
+export const getAccessToken = () => {
+  if (!isBrowser) {
+    return '';
+  }
+  return Auth.currentAuthenticatedUser().then((user) => user?.signInUserSession.idToken.jwtToken || false);
+};
 const getUser = () => {
   if (window.localStorage.gatsbyUser) {
     const user: User = JSON.parse(window.localStorage.gatsbyUser);
@@ -34,5 +40,4 @@ export function getCurrentUser() {
 export const logout = () => {
   if (!isBrowser) return;
   setUser({});
-  navigate('/harta');
 };

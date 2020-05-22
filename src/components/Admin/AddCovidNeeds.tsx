@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { Formik, Field } from 'formik';
-import { useParams } from '@reach/router';
+import { useParams, Link } from '@reach/router';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { isEmpty } from 'ramda';
@@ -13,6 +13,7 @@ import Layout from '../Layout';
 import { AfterHeader } from '../AfterHeader';
 import { SidebarAccount } from '../SidebarAccount';
 import { Ripple } from '../Ripple';
+import { CovidList, CovidPreview } from './CovidPreview';
 
 interface Values {
   chlor: string;
@@ -110,12 +111,14 @@ const providerQuery = gql`
   }
 `;
 function AddCovidNeeds() {
-  const [addCovidNeeds, { data, loading, error }] = useMutation(covidNeedsMutation);
+  const [addCovidNeeds, { data, loading, error }] = useMutation<{ insert_provider_covid_needs_one: CovidList }>(
+    covidNeedsMutation
+  );
   const params = useParams();
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
   const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
-  const provider = useQuery(providerQuery, {
+  const provider = useQuery<{ providers_by_pk: { name: string; supplier: { name: string } } }>(providerQuery, {
     variables: { id: params.id },
   });
   if (provider.loading) <Ripple />;
@@ -145,7 +148,9 @@ function AddCovidNeeds() {
                   initialValues={initialValues}
                   onSubmit={async (values, actions) => {
                     const message = `
-                    Serviciul cu id: ${params.id} a fost updatat. Noi nevoi de protectie au fost adaugate:\n\n
+                    Un nou serviciu a adaugat nevoi covid. \nvezi mai multe aici: https://serviciisociale.ro/harta/serviciu/${
+                      params.provider
+                    }/${params.id}/administrare \n\n
                     surgicalMasks: ${values.surgicalMasks}\n
                     surgicalHandgloves: ${values.surgicalHandgloves}\n
                     handDesinfectant: ${values.handDesinfectant}\n
@@ -159,7 +164,7 @@ function AddCovidNeeds() {
                     surgicalShoeProtection: ${values.surgicalShoeProtection}\n
                     protectionHood: ${values.protectionHood}\n
                     surgicalGownSingleUse: ${values.surgicalGownSingleUse}\n\n
-                    de catre userul: ${userId} cu token ${token}
+                    de catre userul: ${userId} cu token ${token.substring(0, 10)}...
                     `;
                     try {
                       addCovidNeeds({
@@ -184,7 +189,6 @@ function AddCovidNeeds() {
                           headers: {
                             'x-hasura-user-id': userId,
                             'x-hasura-role': 'user',
-                            Authorization: `Bearer ${token}`,
                           },
                         },
                       });
@@ -402,117 +406,26 @@ function AddCovidNeeds() {
                       {touched.surgicalGownSingleUse && errors.surgicalGownSingleUse && (
                         <span className={`block absolute validation-error`}>{errors.surgicalGownSingleUse}</span>
                       )}
-                      <button
-                        className={`btn btn-celeste btn-full md:ml-auto md:mr-0 ld-ext-left ${loading ? 'running' : ''}`}
-                        type="submit"
-                        disabled={loading}>
-                        Trimite
-                        <div className="ld ld-ring ld-spin"></div>
-                      </button>
+                      <div className="flex flex-wrap">
+                        <Link className={`btn btn-outline btn-arrow-back w-full md:w-1/3 md:ml-0`} to="../../">
+                          Înapoi
+                        </Link>
+                        <button
+                          className={`btn btn-celeste w-full md:w-1/3 md:ml-auto md:mr-0 mt-6 md:mt-0 ld-ext-left ${
+                            loading ? 'running' : ''
+                          }`}
+                          type="submit"
+                          disabled={loading}>
+                          Trimite
+                          <div className="ld ld-ring ld-spin"></div>
+                        </button>
+                      </div>
                     </form>
                   )}
                 </Formik>
               </>
             ) : (
-              <div className="popup-suucess">
-                <div className="full my-10">
-                  <h1 className="mt-4 xl:mt-24 mb-12">Multumim pentru completarea formularului !!!</h1>
-                </div>
-                <div className="full my-10">
-                  <p>Am primit datele transmise și vă vom contacta telefonic pentru confirmarea identității dumneavoastră.</p>
-                </div>
-                <div className="full">
-                  <h4>Nevoi semnalate</h4>
-                  <table className="table-auto mt-12">
-                    <thead>
-                      <tr className="bg-celeste">
-                        <th className="text-left  px-4 py-2">Nevoi</th>
-                        <th className="px-4 py-2 text-center">Cantitate</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border-b border-t border-celeste border-dotted px-4 py-2">Măști chirurgicale (buc):</td>
-                        <td className="border-b border-t border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.surgicalMasks || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Mănuși chirurgicale (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.surgicalHandgloves || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Dezinfectant mâini (litri):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.handDesinfectant || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Dezinfectant suprafețe (litri):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.surfaceDesinfectant || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Măști filtru FFP2-3 (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.masks || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Viziere protecție (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.visors || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Clor (litri):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.chlor || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Combinezoane protecție (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.surgicalGown || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Alcohol sanitar (litri):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.sanitaryAlchohol || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Botoși unică folosință (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.protectionGlasses || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Ochelari protecție (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.surgicalShoeProtection || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Bonete (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.protectionHood || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Halate unică folosință (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.insert_provider_covid_needs_one.surgicalGownSingleUse || '-'}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <CovidPreview {...data.insert_provider_covid_needs_one} />
             )}
           </div>
         </div>
