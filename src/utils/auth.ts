@@ -10,7 +10,7 @@ interface User {
   email: string;
   username: string;
 }
-export const setUser = (user: User | {}) => (window.localStorage.gatsbyUser = JSON.stringify(user));
+export const setUser = (user: User | unknown) => (window.localStorage.gatsbyUser = JSON.stringify(user));
 
 export const getAccessToken = () => {
   if (!isBrowser) {

@@ -1,9 +1,9 @@
 import React from 'react';
-import HsSlider from '../../../Slider';
 import getSlug from 'speakingurl';
-import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { Link } from 'gatsby';
+import { useQuery } from '@apollo/react-hooks';
+import { Link } from '@reach/router';
+import HsSlider from '../../../Slider';
 import { Ripple } from '../../../Ripple';
 const query = gql`
   query {

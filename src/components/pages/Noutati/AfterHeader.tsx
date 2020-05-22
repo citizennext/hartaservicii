@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import Separator from '../../Separator';
 
 type Props = {
-  header: object;
+  header: string;
 };
 
 export function AfterHeader({ header }: Props) {

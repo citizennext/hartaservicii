@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import Separator from './Separator';
 
 type Props = {
-  header?: string | object | undefined;
+  header?: string | undefined;
   image?: any;
   className?: string;
   hasBottomSeparator: boolean;

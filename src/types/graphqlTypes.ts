@@ -5440,15 +5440,11 @@ export type GatsbyImageSharpSizes_WithWebp_NoBase64Fragment = { __typename?: 'Im
   'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'
 >;
 
-export type Unnamed_1_QueryVariables = {};
-
 export type Unnamed_1_Query = { __typename?: 'Query' } & {
   hasura: { __typename?: 'HASURA' } & {
     providers: Array<{ __typename?: 'HASURA_providers' } & Pick<Hasura_Providers, 'id' | 'coordinates' | 'name'>>;
   };
 };
-
-export type Unnamed_2_QueryVariables = {};
 
 export type Unnamed_2_Query = { __typename?: 'Query' } & {
   hasura: { __typename?: 'HASURA' } & {
@@ -5474,8 +5470,6 @@ export type Unnamed_2_Query = { __typename?: 'Query' } & {
   };
 };
 
-export type HeroQueryQueryVariables = {};
-
 export type HeroQueryQuery = { __typename?: 'Query' } & {
   file: Maybe<
     { __typename?: 'File' } & {
@@ -5487,8 +5481,6 @@ export type HeroQueryQuery = { __typename?: 'Query' } & {
     }
   >;
 };
-
-export type Unnamed_3_QueryVariables = {};
 
 export type Unnamed_3_Query = { __typename?: 'Query' } & {
   face1: Maybe<
@@ -5506,9 +5498,6 @@ export type Unnamed_3_Query = { __typename?: 'Query' } & {
     }
   >;
 };
-
-export type Unnamed_4_QueryVariables = {};
-
 export type Unnamed_4_Query = { __typename?: 'Query' } & {
   hasura: { __typename?: 'HASURA' } & {
     publicServices: { __typename?: 'HASURA_providers_aggregate' } & {
@@ -5531,8 +5520,6 @@ export type Unnamed_4_Query = { __typename?: 'Query' } & {
     };
   };
 };
-
-export type Unnamed_5_QueryVariables = {};
 
 export type Unnamed_5_Query = { __typename?: 'Query' } & {
   hasura: { __typename?: 'HASURA' } & {

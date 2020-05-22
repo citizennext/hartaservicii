@@ -7,7 +7,7 @@ import { Content } from '../components/pages/Noutati/Content';
 import { AfterHeader } from '../components/AfterHeader';
 import Footer from '../components/Footer';
 
-export default class Noutati extends React.Component<{ data: any }, {}> {
+export default class Noutati extends React.Component<{ data: { hasura: unknown } }> {
   render() {
     const { hasura } = this.props.data;
     return (

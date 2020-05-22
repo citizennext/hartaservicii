@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 import Drawer from '../Drawer/Drawer';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { FilterMenu } from '../Icons';
 import options from '../../data/filter-options.json';
 import { Spinner } from '../Spinner';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 
 type FilterObject = {
   district?: string | null;

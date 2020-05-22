@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+// @ts-ignore
 import Slider from 'react-slick';
 
 type Props = {
-  children: object;
+  children: ReactNode;
   settings: any;
 };
 function HsSlider(props: Props) {

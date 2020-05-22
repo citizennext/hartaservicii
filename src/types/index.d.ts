@@ -29,7 +29,7 @@ declare module '*.webp' {
 }
 
 declare module '*.svg' {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // eslint-disable-next-line
   // @ts-ignore
   import * as React from 'react';
 

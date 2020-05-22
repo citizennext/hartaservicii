@@ -26,7 +26,7 @@ export interface Needs {
 type Props = {
   hasura: { county_covid_needs: Needs[] };
 };
-export default class ContactPage extends React.Component<{ data: Props }, {}> {
+export default class ContactPage extends React.Component<{ data: Props }> {
   render() {
     const { hasura } = this.props.data;
     return (

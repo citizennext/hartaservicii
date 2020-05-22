@@ -7,7 +7,7 @@ type Props = {
   path: string;
   location?: { state: { rating?: number } };
 };
-class PrivateRoute extends React.Component<Props, {}> {
+class PrivateRoute extends React.Component<Props> {
   render() {
     // eslint-disable-next-line
     const { component: Component, uri, ...rest } = this.props;
