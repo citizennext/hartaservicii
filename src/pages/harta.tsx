@@ -9,7 +9,8 @@ import SignUp from '../components/SignUp';
 import UserProfile from '../components/UserProfile';
 import Provider from '../components/Map/Provider';
 import RatingReview from '../components/Map/RatingReview';
-import AddCovidNeeds from '../components/Map/AddCovidNeeds';
+import AddCovidNeeds from '../components/Admin/AddCovidNeeds';
+import EditCovidNeeds from '../components/Admin/EditCovidNeeds';
 import Admin from '../components/Admin';
 import PopUps from '../components/Map/PopUps';
 import Amplify from 'aws-amplify';
@@ -33,7 +34,8 @@ function HartaPage() {
               <Harta path="/" />
               <Provider path="serviciu/:provider/:id/" />
               <PrivateRoute path="serviciu/:provider/:id/rating" component={RatingReview} />
-              <PrivateRoute path="serviciu/:provider/:id/administrare/adauga-nevoi-covid" component={AddCovidNeeds} />
+              <PrivateRoute path="serviciu/:provider/:id/administrare/nevoi-covid" component={AddCovidNeeds} />
+              <PrivateRoute path="serviciu/:provider/:id/administrare/nevoi-covid/edit/:needId" component={EditCovidNeeds} />
               <PrivateRoute path="serviciu/:provider/:id/administrare" component={Admin}></PrivateRoute>
               <PrivateRoute path="profile" component={UserProfile} />
               <SignIn path="login" />

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { AlertDialog, AlertDialogLabel, AlertDialogDescription } from '@reach/alert-dialog';
 import { Trash2, Edit } from 'react-feather';
+import { Link } from '@reach/router';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 // @ts-ignore
@@ -68,7 +69,9 @@ const Covid = ({ covid, providerId }: any) => {
       <button onClick={() => open(covid.id)} className="mr-6 ml-auto" disabled={deleting}>
         <Trash2 size={16} strokeWidth={3} className="text-error" />
       </button>
-      <Edit size={16} strokeWidth={3} className="text-celeste" />
+      <Link to={`nevoi-covid/edit/${covid.id}`}>
+        <Edit size={16} strokeWidth={3} className="text-celeste" />
+      </Link>
       {showDialog !== '' && (
         <AlertDialog onDismiss={close} leastDestructiveRef={cancelRef}>
           <AlertDialogLabel>
