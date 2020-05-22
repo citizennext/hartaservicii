@@ -11,8 +11,11 @@ import { Covid } from './Covid';
 import { NotificationContainer } from 'react-notifications';
 
 export const GET_COVID_NEEDS = gql`
-  query MyCovidNeeds($provider: uuid!) {
-    provider_covid_needs(where: { provider_id: { _eq: $provider } }, order_by: { created_at: desc }) {
+  query MyCovidNeeds($provider: uuid!, $userId: String!) {
+    provider_covid_needs(
+      where: { provider_id: { _eq: $provider }, user: { id: { _eq: $userId } } }
+      order_by: { created_at: desc }
+    ) {
       id
       created_at
       updated_at
@@ -27,7 +30,7 @@ export function CovidList() {
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
 
   const { loading, error, data } = useQuery(GET_COVID_NEEDS, {
-    variables: { provider: params.id },
+    variables: { provider: params.id, userId },
     fetchPolicy: 'cache-and-network',
     context: {
       headers: {
