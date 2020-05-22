@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link, navigate } from 'gatsby';
+import { Link, navigate, useParams } from '@reach/router';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { getCurrentUser, logout } from '../utils/auth';
 import { Auth } from 'aws-amplify';
 export function SidebarAccount() {
   const user = getCurrentUser();
+  const params = useParams();
   return (
     <div className="border-b border-celeste md:border-0 pb-12">
       <NotificationContainer />
@@ -35,8 +36,8 @@ export function SidebarAccount() {
         Logout
       </button>
       <br />
-      <Link to="/harta" className="btn btn-tight w-full lg:w-1/2 mt-4">
-        Harta
+      <Link to={`/harta/serviciu/${params.provider}/${params.id}/administrare`} className="btn btn-tight w-full lg:w-2/3 mt-4">
+        Admin Serviciu
       </Link>
     </div>
   );

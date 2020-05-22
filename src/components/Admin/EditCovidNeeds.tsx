@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { Formik, Field } from 'formik';
-import { useParams } from '@reach/router';
+import { useParams, Link } from '@reach/router';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { isEmpty } from 'ramda';
@@ -434,13 +434,18 @@ function EditCovidNeeds() {
                           {touched.surgicalGownSingleUse && errors.surgicalGownSingleUse && (
                             <span className={`block absolute validation-error`}>{errors.surgicalGownSingleUse}</span>
                           )}
-                          <button
-                            className={`btn btn-celeste btn-full md:ml-auto md:mr-0 ld-ext-left ${loading ? 'running' : ''}`}
-                            type="submit"
-                            disabled={loading}>
-                            Trimite
-                            <div className="ld ld-ring ld-spin"></div>
-                          </button>
+                          <div className="flex">
+                            <Link className={`btn btn-celeste btn-arrow-back md:w-1/3 md:ml-0`} to="../../../">
+                              Administrare
+                            </Link>
+                            <button
+                              className={`btn btn-celeste md:w-1/3 md:ml-auto md:mr-0 ld-ext-left ${loading ? 'running' : ''}`}
+                              type="submit"
+                              disabled={loading}>
+                              Trimite
+                              <div className="ld ld-ring ld-spin"></div>
+                            </button>
+                          </div>
                         </form>
                       )}
                     </Formik>

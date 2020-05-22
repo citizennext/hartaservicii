@@ -15,6 +15,7 @@ export const GET_COVID_NEEDS = gql`
     provider_covid_needs(where: { provider_id: { _eq: $provider } }, order_by: { created_at: desc }) {
       id
       created_at
+      updated_at
       verified
     }
   }
@@ -28,7 +29,7 @@ export function CovidList() {
 
   const { loading, error, data } = useQuery(GET_COVID_NEEDS, {
     variables: { provider: params.id },
-    pollInterval: 500,
+    fetchPolicy: 'cache-and-network',
     context: {
       headers: {
         'x-hasura-user-id': userId,
@@ -45,14 +46,14 @@ export function CovidList() {
   return (
     <div>
       <NotificationContainer />
-      <ul className="w-3/4 no-underline mt-24 rounded-lg bg-snow p-6">
+      <ul className="md:w-3/4 no-underline mt-24 rounded-lg bg-snow p-6">
         <h3 className="mb-4">Formulare nevoi protecție #covid</h3>
         {provider_covid_needs.length > 0 ? (
           provider_covid_needs.map((covid: any) => <Covid key={covid.id} covid={covid} providerId={params.id} />)
         ) : (
           <li>Momentan nu sunt înregistrate nevoi de protecție!</li>
         )}
-        <Link className="btn btn-celeste mx-auto w-1/2 mt-6" to="nevoi-covid/adauga">
+        <Link className="btn btn-celeste mx-auto md:w-1/2 mt-6" to="nevoi-covid/adauga">
           Adaugă nevoi
         </Link>
       </ul>

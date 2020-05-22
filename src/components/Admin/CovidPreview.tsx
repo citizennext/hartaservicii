@@ -105,7 +105,9 @@ export function CovidPreview({
           </tbody>
         </table>
       </div>
-      <Link className="btn btn-celeste ml-auto w-1/2 mt-6" to={`/harta/serviciu/${params.provider}/${params.id}/administrare/`}>
+      <Link
+        className="btn btn-celeste ml-auto md:w-1/2 mt-6"
+        to={`/harta/serviciu/${params.provider}/${params.id}/administrare/`}>
         Înapoi la pagina de administrare
       </Link>
     </div>

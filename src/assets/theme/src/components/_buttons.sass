@@ -64,6 +64,21 @@
   top: 13px
   right: 13px
   @apply bg-left
+.btn-arrow-back
+  @apply relative
+  @apply pl-12
+.btn-arrow-back:after
+  content: ''
+  background-image: url('../../images/icon_arroww.svg')
+  transform: rotate(-180deg);
+  background-size: 22px 22px
+  height: 22px
+  width: 22px
+  position: absolute
+  background-repeat: no-repeat
+  top: 13px
+  left: 13px
+  @apply bg-left
   
 
 .btn-arrow-only

@@ -61,7 +61,9 @@ const Covid = ({ covid, providerId }: any) => {
   return (
     <li key={covid.id} className="border-b border-leaf mb-4 flex items-baseline">
       <span>
-        <strong className="text-celeste">Creat la: </strong> {new Date(covid.created_at).toLocaleString('ro-RO')}
+        <strong className="text-celeste">Creat: </strong> {new Date(covid.created_at).toLocaleString('ro-RO')}
+        <br />
+        <strong className="text-celeste">Actualizat: </strong> {new Date(covid.updated_at).toLocaleString('ro-RO')}
       </span>
       <span className="mx-6">
         {covid.verified ? <span className="text-celeste">Verificat</span> : <span className="text-error">Neverificat</span>}
