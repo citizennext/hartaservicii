@@ -43,13 +43,20 @@ export const client = isBrowser
             navigate('/network-error');
           }
         }),
-        new HttpLink({
-          uri: process.env.GATSBY_HASURA_GRAPHQL_URL,
-          credentials: 'same-origin', //not sure is needed
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }),
+        new HttpLink(
+          token
+            ? {
+                uri: process.env.GATSBY_HASURA_GRAPHQL_URL,
+                credentials: 'same-origin', //not sure is needed
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            : {
+                uri: process.env.GATSBY_HASURA_GRAPHQL_URL,
+                credentials: 'same-origin',
+              }
+        ),
       ]),
       cache: new InMemoryCache(),
     })
