@@ -119,6 +119,7 @@ function EditCovidNeeds() {
   const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
   const needs = useQuery(providerCovidNeeds, {
     variables: { id: params.needId },
+    pollInterval: 500,
   });
   if (needs.loading) <Ripple />;
   if (needs.error) {
@@ -149,7 +150,7 @@ function EditCovidNeeds() {
       <Layout left={<SidebarAccount />}>
         <div className="wrapper">
           <div className="contact-wrapper">
-            {!data ? (
+            {!data && needs.data ? (
               <>
                 <h1 className="mt-4 xl:mt-24 mb-4">Editare nevoi de protecție impotriva COVID19 pentru:</h1>
                 <h2 className="mt-4">
@@ -439,110 +440,112 @@ function EditCovidNeeds() {
                 )}
               </>
             ) : (
-              <div className="popup-success">
-                <div className="full my-10">
-                  <h1 className="mt-4 xl:mt-24 mb-12">Multumim pentru completarea formularului !!!</h1>
+              needs.data && (
+                <div className="popup-success">
+                  <div className="full my-10">
+                    <h1 className="mt-4 xl:mt-24 mb-12">Multumim pentru completarea formularului !!!</h1>
+                  </div>
+                  <div className="full my-10">
+                    <p>Am primit datele transmise și vă vom contacta telefonic pentru confirmarea identității dumneavoastră.</p>
+                  </div>
+                  <div className="full">
+                    <h4>Nevoi semnalate</h4>
+                    <table className="table-auto mt-12">
+                      <thead>
+                        <tr className="bg-celeste">
+                          <th className="text-left  px-4 py-2">Nevoi</th>
+                          <th className="px-4 py-2 text-center">Cantitate</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border-b border-t border-celeste border-dotted px-4 py-2">Măști chirurgicale (buc):</td>
+                          <td className="border-b border-t border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.surgicalMasks || '-'}
+                          </td>
+                        </tr>
+                        <tr className="bg-snow">
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Mănuși chirurgicale (buc):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.surgicalHandgloves || '-'}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Dezinfectant mâini (litri):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.handDesinfectant || '-'}
+                          </td>
+                        </tr>
+                        <tr className="bg-snow">
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Dezinfectant suprafețe (litri):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.surfaceDesinfectant || '-'}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Măști filtru FFP2-3 (buc):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.masks || '-'}
+                          </td>
+                        </tr>
+                        <tr className="bg-snow">
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Viziere protecție (buc):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.visors || '-'}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Clor (litri):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.chlor || '-'}
+                          </td>
+                        </tr>
+                        <tr className="bg-snow">
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Combinezoane protecție (buc):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.surgicalGown || '-'}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Alcohol sanitar (litri):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.sanitaryAlchohol || '-'}
+                          </td>
+                        </tr>
+                        <tr className="bg-snow">
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Botoși unică folosință (buc):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.protectionGlasses || '-'}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Ochelari protecție (buc):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.surgicalShoeProtection || '-'}
+                          </td>
+                        </tr>
+                        <tr className="bg-snow">
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Bonete (buc):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.protectionHood || '-'}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border-b border-celeste border-dotted px-4 py-2">Halate unică folosință (buc):</td>
+                          <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
+                            {data.update_provider_covid_needs_by_pk.surgicalGownSingleUse || '-'}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <Link
+                    className="btn btn-celeste ml-auto w-1/2 mt-6"
+                    to={`/harta/serviciu/${params.provider}/${params.id}/administrare/`}>
+                    Înapoi la pagina de administrare
+                  </Link>
                 </div>
-                <div className="full my-10">
-                  <p>Am primit datele transmise și vă vom contacta telefonic pentru confirmarea identității dumneavoastră.</p>
-                </div>
-                <div className="full">
-                  <h4>Nevoi semnalate</h4>
-                  <table className="table-auto mt-12">
-                    <thead>
-                      <tr className="bg-celeste">
-                        <th className="text-left  px-4 py-2">Nevoi</th>
-                        <th className="px-4 py-2 text-center">Cantitate</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border-b border-t border-celeste border-dotted px-4 py-2">Măști chirurgicale (buc):</td>
-                        <td className="border-b border-t border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.surgicalMasks || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Mănuși chirurgicale (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.surgicalHandgloves || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Dezinfectant mâini (litri):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.handDesinfectant || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Dezinfectant suprafețe (litri):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.surfaceDesinfectant || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Măști filtru FFP2-3 (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.masks || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Viziere protecție (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.visors || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Clor (litri):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.chlor || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Combinezoane protecție (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.surgicalGown || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Alcohol sanitar (litri):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.sanitaryAlchohol || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Botoși unică folosință (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.protectionGlasses || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Ochelari protecție (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.surgicalShoeProtection || '-'}
-                        </td>
-                      </tr>
-                      <tr className="bg-snow">
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Bonete (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.protectionHood || '-'}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="border-b border-celeste border-dotted px-4 py-2">Halate unică folosință (buc):</td>
-                        <td className="border-b border-celeste border-dotted px-4 py-2 text-center">
-                          {data.update_provider_covid_needs_by_pk.surgicalGownSingleUse || '-'}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <Link
-                  className="btn btn-celeste ml-auto w-1/2 mt-6"
-                  to={`/harta/serviciu/${params.provider}/${params.id}/administrare/`}>
-                  Înapoi la pagina de administrare
-                </Link>
-              </div>
+              )
             )}
           </div>
         </div>
