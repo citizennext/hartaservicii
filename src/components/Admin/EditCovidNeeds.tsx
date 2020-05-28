@@ -210,6 +210,7 @@ function EditCovidNeeds() {
                               protectionGlasses: values.protectionGlasses === '' ? null : values.protectionGlasses,
                               protectionHood: values.protectionHood === '' ? null : values.protectionHood,
                               surgicalGownSingleUse: values.surgicalGownSingleUse === '' ? null : values.surgicalGownSingleUse,
+                              user_id: userId,
                             },
                             context: {
                               headers: {

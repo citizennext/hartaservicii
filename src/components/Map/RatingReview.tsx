@@ -85,6 +85,7 @@ function RatingReview(props: any) {
                           provider: params.id,
                           rating: rating * 10,
                           feedback: values.feedback,
+                          user_id: userId,
                         },
                         context: {
                           headers: {
