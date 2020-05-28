@@ -9,6 +9,7 @@ interface User {
   phone_number: string;
   email: string;
   username: string;
+  token: string;
 }
 export const setUser = (user: User | unknown) => (window.localStorage.gatsbyUser = JSON.stringify(user));
 

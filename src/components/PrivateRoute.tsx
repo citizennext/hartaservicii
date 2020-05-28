@@ -9,11 +9,10 @@ type Props = {
 };
 class PrivateRoute extends React.Component<Props> {
   render() {
-    // eslint-disable-next-line
     const { component: Component, uri, ...rest } = this.props;
     if (!isLoggedIn()) {
       navigate(`/harta/inregistrare`, { state: { referrer: uri, rating: this.props.location?.state?.rating || 0 } });
-      return null;
+      // return null;
     }
     return <Component {...rest} />;
   }
