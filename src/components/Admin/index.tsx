@@ -2,7 +2,6 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from '@reach/router';
 import gql from 'graphql-tag';
-import { isEmpty } from 'ramda';
 // @ts-ignore
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { CovidList } from './CovidList';
@@ -14,7 +13,7 @@ import Header from '../Header';
 import Layout from '../Layout';
 import { AfterHeader } from '../AfterHeader';
 import { SidebarAccount } from '../SidebarAccount';
-
+import { getUser } from '../../utils/auth';
 const providerQuery = gql`
   query Provider($id: uuid!) {
     providers_by_pk(id: $id) {
@@ -32,8 +31,8 @@ const providerQuery = gql`
 `;
 export default function Admin() {
   const params = useParams();
-  const userStorage = localStorage.getItem('gatsbyUser');
-  const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
+  // const userStorage = localStorage.getItem('gatsbyUser');
+  // const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
   const provider = useQuery<{
     providers_by_pk: { name: string; supplier: { name: string }; provider_covid_needs: { user: { id: string } }[] };
   }>(providerQuery, {
@@ -43,7 +42,10 @@ export default function Admin() {
   if (provider.error) {
     NotificationManager.error(provider.error.message);
   }
-  const isProviderClaimed = userId !== provider?.data?.providers_by_pk?.provider_covid_needs[0]?.user?.id;
+  const user = getUser();
+  const isProviderClaimed =
+    provider?.data?.providers_by_pk?.provider_covid_needs[0] &&
+    user?.username !== provider?.data?.providers_by_pk?.provider_covid_needs[0]?.user?.id;
 
   return (
     <div className="admin">

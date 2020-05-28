@@ -3,6 +3,8 @@ import getSlug from 'speakingurl';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { Link } from '@reach/router';
+// @ts-ignore
+import { NotificationManager } from 'react-notifications';
 import HsSlider from '../../../Slider';
 import { Ripple } from '../../../Ripple';
 const query = gql`
@@ -57,7 +59,7 @@ function Covid() {
   const { loading, error, data } = useQuery(query);
   if (loading) return <Ripple />;
 
-  if (error) return <p>Error! ${error}</p>;
+  if (error) return NotificationManager.error(error.message);
   const {
     nodes,
     aggregate: { count },

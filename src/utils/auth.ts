@@ -18,7 +18,7 @@ export const getAccessToken = () => {
   }
   return Auth.currentAuthenticatedUser().then((user) => user?.signInUserSession.idToken.jwtToken || false);
 };
-const getUser = () => {
+export const getUser = () => {
   if (window.localStorage.gatsbyUser) {
     const user: User = JSON.parse(window.localStorage.gatsbyUser);
     return user;

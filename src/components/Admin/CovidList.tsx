@@ -28,14 +28,16 @@ export function CovidList() {
   const params = useParams();
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
+  const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
 
   const { loading, error, data } = useQuery(GET_COVID_NEEDS, {
     variables: { provider: params.id, userId },
     fetchPolicy: 'cache-and-network',
     context: {
       headers: {
+        'x-hasura-role': userId === process.env.GATSBY_ADMIN_USER ? 'admin' : 'user',
         'x-hasura-user-id': userId,
-        'x-hasura-role': userId === 'cezar' ? 'admin' : 'user',
+        authorization: `Bearer ${token}`,
       },
     },
   });

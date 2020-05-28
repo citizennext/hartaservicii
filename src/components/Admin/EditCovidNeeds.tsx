@@ -213,8 +213,9 @@ function EditCovidNeeds() {
                             },
                             context: {
                               headers: {
+                                'x-hasura-role': userId === process.env.GATSBY_ADMIN_USER ? 'admin' : 'user',
                                 'x-hasura-user-id': userId,
-                                'x-hasura-role': 'user',
+                                authorization: `Bearer ${token}`,
                               },
                             },
                           });

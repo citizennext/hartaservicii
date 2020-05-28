@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+// @ts-ignore
+import { NotificationManager } from 'react-notifications';
 import Drawer from '../Drawer/Drawer';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { FilterMenu } from '../Icons';
@@ -54,19 +56,21 @@ const Filter: React.FC<Props> = (props) => {
     variables: { selectedCategory: selectedCategory },
   });
   if (loading) return <Spinner />;
-  if (error) return <p>Error! ${error}</p>;
+  if (error) {
+    NotificationManager.error(error.message);
+  }
 
-  const districts = data.districts.map((item: { [name: string]: string }) => {
+  const districts = data?.districts?.map((item: { [name: string]: string }) => {
     return { value: item.district, label: item.district };
   });
   districts.unshift({ value: null, label: 'Toate judetele' });
 
-  const optionsService = data.categories.map((item: { [name: string]: string }) => {
+  const optionsService = data?.categories?.map((item: { [name: string]: string }) => {
     return { value: item.name, label: item.name };
   });
   optionsService.unshift({ value: null, label: 'Toate categoriile de servicii' });
 
-  const optionsSpecialization = data.services.map((item: { [name: string]: string }) => {
+  const optionsSpecialization = data?.services?.map((item: { [name: string]: string }) => {
     return { value: item.name, label: item.name };
   });
   optionsSpecialization.unshift({ value: null, label: 'Toate specializarile' });
@@ -98,19 +102,97 @@ const Filter: React.FC<Props> = (props) => {
 
   return (
     <>
-      {props.drawer && windowSize.width && windowSize.width < 768 ? (
-        <div className="filter-menu" data-open={isOpen}>
-          <FilterMenu size={20} className="filter-menu-icon" />
-          <Drawer
-            className="map-drawer map-filters"
-            width={windowSize.width < 375 ? '260px' : '300px'}
-            placement="right"
-            open={isOpen}
-            closeButtonStyle={{}}
-            toggleHandler={openDrawer}
-            closeButton={<FilterMenu className="close" size={20} />}>
-            <div className="select-options">
-              <div className="pin-number">{props.totalResults}</div>
+      {data &&
+        (props.drawer && windowSize.width && windowSize.width < 768 ? (
+          <div className="filter-menu" data-open={isOpen}>
+            <FilterMenu size={20} className="filter-menu-icon" />
+            <Drawer
+              className="map-drawer map-filters"
+              width={windowSize.width < 375 ? '260px' : '300px'}
+              placement="right"
+              open={isOpen}
+              closeButtonStyle={{}}
+              toggleHandler={openDrawer}
+              closeButton={<FilterMenu className="close" size={20} />}>
+              <div className="select-options">
+                <div className="pin-number">{props.totalResults}</div>
+                <Select
+                  value={districts.filter(({ value }: any) => value === filters.district)}
+                  options={districts}
+                  onChange={handleChangeDistrict}
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: '#CEE6C1',
+                      primary: '#6FBBB7',
+                    },
+                  })}
+                />
+                <Select
+                  value={options.age.filter(({ value }) => value === filters.category)}
+                  options={options.age}
+                  onChange={handleChangeAge}
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: '#CEE6C1',
+                      primary: '#6FBBB7',
+                    },
+                  })}
+                />
+                <Select
+                  value={optionsService.filter(({ value }: any) => value === filters.service)}
+                  options={optionsService}
+                  onChange={handleChangeService}
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: '#CEE6C1',
+                      primary: '#6FBBB7',
+                    },
+                  })}
+                />
+                <Select
+                  isDisabled={isDisabled}
+                  value={optionsSpecialization.filter(({ value }: any) => value === filters.specialization)}
+                  options={optionsSpecialization}
+                  onChange={handleChangeSpecialization}
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: '#cee6c1',
+                      primary: '#6fbbb7',
+                    },
+                  })}
+                />
+                <Select
+                  options={options.administrator}
+                  onChange={handleChangeAdministrator}
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: '#cee6c1',
+                      primary: '#6fbbb7',
+                    },
+                  })}
+                />
+              </div>
+            </Drawer>
+          </div>
+        ) : (
+          <div className="select-options">
+            <div className="select-container">
+              <label>Judet</label>
               <Select
                 value={districts.filter(({ value }: any) => value === filters.district)}
                 options={districts}
@@ -120,11 +202,14 @@ const Filter: React.FC<Props> = (props) => {
                   borderRadius: 0,
                   colors: {
                     ...theme.colors,
-                    primary25: '#CEE6C1',
-                    primary: '#6FBBB7',
+                    primary25: '#cee6c1',
+                    primary: '#6fbbb7',
                   },
                 })}
               />
+            </div>
+            <div className="select-container">
+              <label>Beneficiari</label>
               <Select
                 value={options.age.filter(({ value }) => value === filters.category)}
                 options={options.age}
@@ -134,11 +219,14 @@ const Filter: React.FC<Props> = (props) => {
                   borderRadius: 0,
                   colors: {
                     ...theme.colors,
-                    primary25: '#CEE6C1',
-                    primary: '#6FBBB7',
+                    primary25: '#cee6c1',
+                    primary: '#6fbbb7',
                   },
                 })}
               />
+            </div>
+            <div className="select-container">
+              <label>Tip servicii sociale</label>
               <Select
                 value={optionsService.filter(({ value }: any) => value === filters.service)}
                 options={optionsService}
@@ -148,11 +236,14 @@ const Filter: React.FC<Props> = (props) => {
                   borderRadius: 0,
                   colors: {
                     ...theme.colors,
-                    primary25: '#CEE6C1',
-                    primary: '#6FBBB7',
+                    primary25: '#cee6c1',
+                    primary: '#6fbbb7',
                   },
                 })}
               />
+            </div>
+            <div className="select-container">
+              <label>Tip specializare</label>
               <Select
                 isDisabled={isDisabled}
                 value={optionsSpecialization.filter(({ value }: any) => value === filters.specialization)}
@@ -168,7 +259,11 @@ const Filter: React.FC<Props> = (props) => {
                   },
                 })}
               />
+            </div>
+            <div className="select-container">
+              <label>Administrator</label>
               <Select
+                value={options.administrator.filter(({ value }) => value === filters.administrator)}
                 options={options.administrator}
                 onChange={handleChangeAdministrator}
                 theme={(theme) => ({
@@ -182,102 +277,12 @@ const Filter: React.FC<Props> = (props) => {
                 })}
               />
             </div>
-          </Drawer>
-        </div>
-      ) : (
-        <div className="select-options">
-          <div className="select-container">
-            <label>Judet</label>
-            <Select
-              value={districts.filter(({ value }: any) => value === filters.district)}
-              options={districts}
-              onChange={handleChangeDistrict}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: '#cee6c1',
-                  primary: '#6fbbb7',
-                },
-              })}
-            />
+            <div className="pin-number select-container">
+              <label>Total centre</label>
+              {props.totalResults}
+            </div>
           </div>
-          <div className="select-container">
-            <label>Beneficiari</label>
-            <Select
-              value={options.age.filter(({ value }) => value === filters.category)}
-              options={options.age}
-              onChange={handleChangeAge}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: '#cee6c1',
-                  primary: '#6fbbb7',
-                },
-              })}
-            />
-          </div>
-          <div className="select-container">
-            <label>Tip servicii sociale</label>
-            <Select
-              value={optionsService.filter(({ value }: any) => value === filters.service)}
-              options={optionsService}
-              onChange={handleChangeService}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: '#cee6c1',
-                  primary: '#6fbbb7',
-                },
-              })}
-            />
-          </div>
-          <div className="select-container">
-            <label>Tip specializare</label>
-            <Select
-              isDisabled={isDisabled}
-              value={optionsSpecialization.filter(({ value }: any) => value === filters.specialization)}
-              options={optionsSpecialization}
-              onChange={handleChangeSpecialization}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: '#cee6c1',
-                  primary: '#6fbbb7',
-                },
-              })}
-            />
-          </div>
-          <div className="select-container">
-            <label>Administrator</label>
-            <Select
-              value={options.administrator.filter(({ value }) => value === filters.administrator)}
-              options={options.administrator}
-              onChange={handleChangeAdministrator}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  primary25: '#cee6c1',
-                  primary: '#6fbbb7',
-                },
-              })}
-            />
-          </div>
-          <div className="pin-number select-container">
-            <label>Total centre</label>
-            {props.totalResults}
-          </div>
-        </div>
-      )}
+        ))}
     </>
   );
 };

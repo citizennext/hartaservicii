@@ -111,13 +111,14 @@ const providerQuery = gql`
   }
 `;
 function AddCovidNeeds() {
-  const [addCovidNeeds, { data, loading, error }] = useMutation<{ insert_provider_covid_needs_one: CovidList }>(
-    covidNeedsMutation
-  );
   const params = useParams();
   const userStorage = localStorage.getItem('gatsbyUser');
   const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
   const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
+  const [addCovidNeeds, { data, loading, error }] = useMutation<{ insert_provider_covid_needs_one: CovidList }>(
+    covidNeedsMutation
+  );
+
   const provider = useQuery<{ providers_by_pk: { name: string; supplier: { name: string } } }>(providerQuery, {
     variables: { id: params.id },
   });
@@ -187,8 +188,9 @@ function AddCovidNeeds() {
                         },
                         context: {
                           headers: {
+                            'x-hasura-role': userId === process.env.GATSBY_ADMIN_USER ? 'admin' : 'user',
                             'x-hasura-user-id': userId,
-                            'x-hasura-role': 'user',
+                            authorization: `Bearer ${token}`,
                           },
                         },
                       });
