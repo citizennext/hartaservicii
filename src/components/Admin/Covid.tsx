@@ -45,7 +45,7 @@ const Covid = ({ covid, providerId }: any) => {
       context: {
         headers: {
           'x-hasura-role': userId === process.env.GATSBY_ADMIN_USER ? 'admin' : 'user',
-          'x-hasura-user-id': userId,
+          'X-Hasura-User-Id': userId,
           authorization: `Bearer ${token}`,
         },
       },
