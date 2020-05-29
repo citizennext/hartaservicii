@@ -49,6 +49,7 @@ const covidNeedsEditMutation = gql`
     $surgicalShoeProtection: Int
     $visors: Int
     $message: String!
+    $user_id: String!
   ) {
     update_provider_covid_needs_by_pk(
       pk_columns: { id: $id }
@@ -66,6 +67,7 @@ const covidNeedsEditMutation = gql`
         surgicalMasks: $surgicalMasks
         surgicalShoeProtection: $surgicalShoeProtection
         visors: $visors
+        user_id: $user_id
       }
     ) {
       surgicalMasks

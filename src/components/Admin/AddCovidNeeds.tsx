@@ -62,6 +62,7 @@ const covidNeedsMutation = gql`
     $surgicalShoeProtection: Int
     $visors: Int
     $message: String!
+    $user_id: String!
   ) {
     insert_provider_covid_needs_one(
       object: {
@@ -79,6 +80,7 @@ const covidNeedsMutation = gql`
         surgicalMasks: $surgicalMasks
         surgicalShoeProtection: $surgicalShoeProtection
         visors: $visors
+        user_id: $user_id
       }
     ) {
       surgicalMasks

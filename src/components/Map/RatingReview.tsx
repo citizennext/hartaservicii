@@ -23,8 +23,8 @@ const initialValues: Values = {
 };
 function RatingReview(props: any) {
   const ratingMutation = gql`
-    mutation AddRating($provider: uuid!, $rating: Int!, $feedback: String!) {
-      insert_provider_rating(objects: { provider_id: $provider, rating: $rating, feedback: $feedback }) {
+    mutation AddRating($provider: uuid!, $rating: Int!, $feedback: String!, $user_id: String!) {
+      insert_provider_rating(objects: { provider_id: $provider, rating: $rating, feedback: $feedback, user_id: $user_id }) {
         returning {
           feedback
           rating
