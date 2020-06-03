@@ -1,27 +1,12 @@
 import React from 'react';
 import Img from 'gatsby-image';
 import { Link } from 'gatsby';
-import { useWindowSize } from '../../../hooks/useWindowSize';
 import { FeaturedPosts } from './FeaturedPosts';
 
-type Blogs = {
-  id: string;
-  title: string;
-  summary: string;
-  slug: string;
-  featured: boolean;
-  createdAt: any;
-  image: any;
-};
+import { Blogs } from '../../../pages/noutati';
 
-type Props = {
-  featured: [Blogs];
-  regular: [Blogs];
-};
-
-export function Content({ featured, regular }: Props) {
+export function Content({ featured, regular }: Blogs) {
   const firstSlug = 'noutati';
-  const windowSize = useWindowSize();
   const dateFormat = (date: any) => {
     return new Date(date);
   };
@@ -36,15 +21,13 @@ export function Content({ featured, regular }: Props) {
         {regular.map((item, index) => (
           <li className="blog-post-item" key={`${item.id}-${index}`}>
             <div className="flex flex-wrap">
-              {windowSize.width && windowSize.width >= 768
-                ? item.image && (
-                    <div className="image">
-                      <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
-                        <Img fluid={item.image.urlSharp.childImageSharp.fluid} className="md:w-full" />
-                      </Link>
-                    </div>
-                  )
-                : null}
+              {item.image && (
+                <div className="image">
+                  <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>
+                    <Img fluid={item.image.urlSharp.childImageSharp.fluid} className="w-full" />
+                  </Link>
+                </div>
+              )}
               <div className="content" data-image-exist={!!item.image}>
                 <h3 className="title">
                   <Link to={`/${firstSlug}/${item.slug}`} title={item.title}>

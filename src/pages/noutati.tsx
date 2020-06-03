@@ -6,8 +6,27 @@ import Layout from '../components/Layout';
 import { Content } from '../components/pages/Noutati/Content';
 import { AfterHeader } from '../components/AfterHeader';
 import Footer from '../components/Footer';
-
-export default class Noutati extends React.Component<{ data: { hasura: unknown } }> {
+import { FluidObject } from 'gatsby-image';
+export interface BlogShort {
+  id: string;
+  createdAt: string;
+  slug: string;
+  summary: string;
+  title: string;
+  image: {
+    url: string;
+    urlSharp: {
+      childImageSharp: {
+        fluid: FluidObject;
+      };
+    };
+  };
+}
+export interface Blogs {
+  featured: BlogShort[];
+  regular: BlogShort[];
+}
+export default class Noutati extends React.Component<{ data: { hasura: Blogs } }> {
   render() {
     const { hasura } = this.props.data;
     return (
@@ -44,7 +63,7 @@ export const pageQuery = graphql`
           url
           urlSharp {
             childImageSharp {
-              fluid(maxWidth: 370, maxHeight: 190, duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }) {
+              fluid(maxWidth: 1024, maxHeight: 526, duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
@@ -61,7 +80,7 @@ export const pageQuery = graphql`
           url
           urlSharp {
             childImageSharp {
-              fluid(maxWidth: 370, maxHeight: 190, duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }) {
+              fluid(maxWidth: 1024, maxHeight: 526, duotone: { highlight: "#EDF7EF", shadow: "#999999", opacity: 60 }) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }

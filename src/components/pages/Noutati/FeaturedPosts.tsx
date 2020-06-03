@@ -2,21 +2,9 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 
-type Blogs = {
-  id: string;
-  title: string;
-  summary: string;
-  slug: string;
-  featured: boolean;
-  createdAt: any;
-  image: any;
-};
+import { BlogShort } from '../../../pages/noutati';
 
-type Props = {
-  featured: [Blogs];
-};
-
-export function FeaturedPosts({ featured }: Props) {
+export function FeaturedPosts({ featured }: { featured: BlogShort[] }) {
   const countFeatured = featured.length;
   const firstSlug = 'noutati';
   const dateFormat = (date: any) => {
