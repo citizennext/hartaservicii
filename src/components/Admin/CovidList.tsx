@@ -2,8 +2,7 @@ import React from 'react';
 
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { isEmpty } from 'ramda';
-
+import { getUser } from '../../utils/auth';
 import { useParams, Link } from '@reach/router';
 import { Spinner } from '../Spinner';
 import { Covid } from './Covid';
@@ -11,7 +10,7 @@ import { Covid } from './Covid';
 import { NotificationContainer } from 'react-notifications';
 
 export const GET_COVID_NEEDS = gql`
-  query MyCovidNeeds($provider: uuid!, $userId: String!) {
+  query MyCovidNeeds($provider: uuid!, $userId: String) {
     provider_covid_needs(
       where: { provider_id: { _eq: $provider }, user: { id: { _eq: $userId } } }
       order_by: { created_at: desc }
@@ -26,16 +25,17 @@ export const GET_COVID_NEEDS = gql`
 
 export function CovidList() {
   const params = useParams();
-  const userStorage = localStorage.getItem('gatsbyUser');
-  const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
-  const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
+  const userObject = getUser();
+  const userId = userObject?.username;
+  const token = userObject?.token;
+  const role = userObject?.role;
 
   const { loading, error, data } = useQuery(GET_COVID_NEEDS, {
-    variables: { provider: params.id, userId },
+    variables: { provider: params.id, userId: role !== 'admin' ? userId : null },
     fetchPolicy: 'cache-and-network',
     context: {
       headers: {
-        'x-hasura-role': userId === process.env.GATSBY_ADMIN_USER ? 'admin' : 'user',
+        'x-hasura-role': role,
         'X-Hasura-User-Id': userId,
         authorization: `Bearer ${token}`,
       },

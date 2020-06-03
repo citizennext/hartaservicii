@@ -5,7 +5,7 @@ import { Formik, Field } from 'formik';
 import { useParams, Link } from '@reach/router';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { isEmpty } from 'ramda';
+import { getUser } from '../../utils/auth';
 import Footer from '../Footer';
 import Seo from '../Seo';
 import Header from '../Header';
@@ -111,6 +111,9 @@ const providerCovidNeeds = gql`
         }
         name
       }
+      user {
+        username
+      }
     }
   }
 `;
@@ -119,16 +122,19 @@ function EditCovidNeeds() {
     covidNeedsEditMutation
   );
   const params = useParams();
-  const userStorage = localStorage.getItem('gatsbyUser');
-  const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
-  const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
-  const needs = useQuery<{ provider_covid_needs_by_pk: CovidList & { provider: { name: string; supplier: { name: string } } } }>(
-    providerCovidNeeds,
-    {
-      variables: { id: params.needId },
-      pollInterval: 500,
-    }
-  );
+  const userObject = getUser();
+  const userId = userObject?.username;
+  const token = userObject?.token;
+  const role = userObject?.role;
+  const needs = useQuery<{
+    provider_covid_needs_by_pk: CovidList & {
+      provider: { name: string; supplier: { name: string } };
+      user: { username: string };
+    };
+  }>(providerCovidNeeds, {
+    variables: { id: params.needId },
+    pollInterval: 500,
+  });
   if (needs.loading) <Ripple />;
   if (needs.error) {
     NotificationManager.error(needs.error.message);
@@ -191,7 +197,7 @@ function EditCovidNeeds() {
                     surgicalShoeProtection: ${values.surgicalShoeProtection}\n
                     protectionHood: ${values.protectionHood}\n
                     surgicalGownSingleUse: ${values.surgicalGownSingleUse}\n\n
-                    de catre userul: ${userId} cu token ${token.substring(0, 10)}...
+                    de catre userul: ${userId} cu token ${token?.substring(0, 10)}...
                     `;
                         try {
                           editCovidNeeds({
@@ -212,11 +218,11 @@ function EditCovidNeeds() {
                               protectionGlasses: values.protectionGlasses === '' ? null : values.protectionGlasses,
                               protectionHood: values.protectionHood === '' ? null : values.protectionHood,
                               surgicalGownSingleUse: values.surgicalGownSingleUse === '' ? null : values.surgicalGownSingleUse,
-                              user_id: userId,
+                              user_id: needs?.data?.provider_covid_needs_by_pk?.user?.username,
                             },
                             context: {
                               headers: {
-                                'x-hasura-role': userId === process.env.GATSBY_ADMIN_USER ? 'admin' : 'user',
+                                'x-hasura-role': role,
                                 'X-Hasura-User-Id': userId,
                                 authorization: `Bearer ${token}`,
                               },

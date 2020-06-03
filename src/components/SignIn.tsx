@@ -13,6 +13,8 @@ import { Link } from 'gatsby';
 import { navigate } from '@reach/router';
 import { setUser, isLoggedIn } from '../utils/auth';
 import { Auth } from 'aws-amplify';
+const admins = process.env.GATSBY_ADMIN_USER?.split(',');
+
 type StateLocation = {
   state: { referrer: string; rating?: string };
 };
@@ -77,9 +79,11 @@ function SignIn({ location }: { location?: StateLocation; path: string }) {
                   try {
                     await Auth.signIn(username, password);
                     const user = await Auth.currentAuthenticatedUser();
+
                     const userInfo = {
                       ...user.attributes,
                       username: user.username,
+                      role: admins?.includes(user.username) ? 'admin' : 'user',
                       token: user.signInUserSession.idToken.jwtToken,
                     };
                     setUser(userInfo);

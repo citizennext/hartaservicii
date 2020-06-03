@@ -31,8 +31,8 @@ const providerQuery = gql`
 `;
 export default function Admin() {
   const params = useParams();
-  // const userStorage = localStorage.getItem('gatsbyUser');
-  // const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
+  const user = getUser();
+  const isAdmin = user?.role === 'admin';
   const provider = useQuery<{
     providers_by_pk: { name: string; supplier: { name: string }; provider_covid_needs: { user: { id: string } }[] };
   }>(providerQuery, {
@@ -42,7 +42,7 @@ export default function Admin() {
   if (provider.error) {
     NotificationManager.error(provider.error.message);
   }
-  const user = getUser();
+
   const isProviderClaimed =
     provider?.data?.providers_by_pk?.provider_covid_needs[0] &&
     user?.username !== provider?.data?.providers_by_pk?.provider_covid_needs[0]?.user?.id;
@@ -59,7 +59,7 @@ export default function Admin() {
             <h1 className="mt-4 xl:mt-24 mb-4">Pagina de administrare a serviciului:</h1>
             <h2 className="text-4xl font-light pt-0  text-celeste">{provider?.data?.providers_by_pk?.name}</h2>
             <h3 className="pb-0  text-brown">{provider?.data?.providers_by_pk?.supplier?.name}</h3>
-            {isProviderClaimed ? <Claim /> : <CovidList />}
+            {isAdmin || !isProviderClaimed ? <CovidList /> : <Claim />}
           </div>
         </div>
       </Layout>

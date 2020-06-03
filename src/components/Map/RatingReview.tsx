@@ -7,13 +7,13 @@ import StarRatingComponent from 'react-star-rating-component';
 import { useParams } from '@reach/router';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { isEmpty } from 'ramda';
 import Footer from '../Footer';
 import Seo from '../Seo';
 import Header from '../Header';
 import Layout from '../Layout';
 import { AfterHeader } from '../AfterHeader';
 import { SidebarAccount } from '../SidebarAccount';
+import { getUser } from '../../utils/auth';
 
 interface Values {
   feedback: string;
@@ -40,9 +40,10 @@ function RatingReview(props: any) {
   `;
   const [addRating, { data, loading, error }] = useMutation(ratingMutation);
   const params = useParams();
-  const userStorage = localStorage.getItem('gatsbyUser');
-  const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
-  const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
+  const userObject = getUser();
+  const userId = userObject?.username;
+  const token = userObject?.token;
+  const role = userObject?.role;
   const [rating, setRating] = useState<number>(props.location?.state?.rating || 0);
 
   return (
@@ -90,7 +91,7 @@ function RatingReview(props: any) {
                         context: {
                           headers: {
                             'X-Hasura-User-Id': userId,
-                            'x-hasura-role': 'user',
+                            'x-hasura-role': role,
                             authorization: `Bearer ${token}`,
                           },
                         },

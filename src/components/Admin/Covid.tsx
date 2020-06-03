@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 // @ts-ignore
 import { NotificationManager } from 'react-notifications';
-import { isEmpty } from 'ramda';
+import { getUser } from '../../utils/auth';
 import { GET_COVID_NEEDS } from './CovidList';
 const DELETE = gql`
   mutation DeleteCovidNeeds($id: uuid!) {
@@ -16,9 +16,12 @@ const DELETE = gql`
   }
 `;
 const Covid = ({ covid, providerId }: any) => {
-  const userStorage = localStorage.getItem('gatsbyUser');
-  const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
-  const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
+  const userObject = getUser();
+  const userId = userObject?.username;
+  const token = userObject?.token;
+  const role = userObject?.role;
+  const isAdmin = userObject?.role === 'admin';
+
   const [showDialog, setShowDialog] = useState<string>('');
   const cancelRef = useRef();
   const open = (id: string) => setShowDialog(id);
@@ -26,11 +29,14 @@ const Covid = ({ covid, providerId }: any) => {
   const close = () => setShowDialog('');
   const [deleteCovidNeeds, { loading: deleting, error: deleteError }] = useMutation(DELETE, {
     update(cache) {
-      const existingCovids: any = cache.readQuery({ query: GET_COVID_NEEDS, variables: { provider: providerId, userId } });
+      const existingCovids: any = cache.readQuery({
+        query: GET_COVID_NEEDS,
+        variables: { provider: providerId, userId: !isAdmin ? userId : null },
+      });
       const newCovids = existingCovids.provider_covid_needs.filter((need: any) => need.id !== covid.id);
       cache.writeQuery({
         query: GET_COVID_NEEDS,
-        variables: { provider: providerId, userId },
+        variables: { provider: providerId, userId: !isAdmin ? userId : null },
         data: { provider_covid_needs: newCovids },
       });
     },
@@ -44,7 +50,7 @@ const Covid = ({ covid, providerId }: any) => {
       },
       context: {
         headers: {
-          'x-hasura-role': userId === process.env.GATSBY_ADMIN_USER ? 'admin' : 'user',
+          'x-hasura-role': role,
           'X-Hasura-User-Id': userId,
           authorization: `Bearer ${token}`,
         },

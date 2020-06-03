@@ -5,7 +5,7 @@ import { Formik, Field } from 'formik';
 import { useParams, Link } from '@reach/router';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { isEmpty } from 'ramda';
+import { getUser } from '../../utils/auth';
 import Footer from '../Footer';
 import Seo from '../Seo';
 import Header from '../Header';
@@ -114,9 +114,11 @@ const providerQuery = gql`
 `;
 function AddCovidNeeds() {
   const params = useParams();
-  const userStorage = localStorage.getItem('gatsbyUser');
-  const userId = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).username;
-  const token = userStorage && !isEmpty(userStorage) && JSON.parse(userStorage).token;
+  const userObject = getUser();
+  const userId = userObject?.username;
+  const token = userObject?.token;
+  const role = userObject?.role;
+
   const [addCovidNeeds, { data, loading, error }] = useMutation<{ insert_provider_covid_needs_one: CovidList }>(
     covidNeedsMutation
   );
@@ -191,7 +193,7 @@ function AddCovidNeeds() {
                         },
                         context: {
                           headers: {
-                            'x-hasura-role': userId === process.env.GATSBY_ADMIN_USER ? 'admin' : 'user',
+                            'x-hasura-role': role,
                             'X-Hasura-User-Id': userId,
                             authorization: `Bearer ${token}`,
                           },

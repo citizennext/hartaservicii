@@ -10,6 +10,7 @@ interface User {
   email: string;
   username: string;
   token: string;
+  role: string;
 }
 export const setUser = (user: User | unknown) => (window.localStorage.gatsbyUser = JSON.stringify(user));
 
