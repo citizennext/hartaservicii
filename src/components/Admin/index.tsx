@@ -17,6 +17,7 @@ import { getUser } from '../../utils/auth';
 const providerQuery = gql`
   query Provider($id: uuid!) {
     providers_by_pk(id: $id) {
+      id
       name
       supplier {
         name
