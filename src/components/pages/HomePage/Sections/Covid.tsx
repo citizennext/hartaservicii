@@ -9,21 +9,17 @@ import HsSlider from '../../../Slider';
 import { Ripple } from '../../../Ripple';
 const query = gql`
   query {
-    provider_covid_needs_aggregate(where: { verified: { _eq: true } }) {
+    count: provider_covid_needs_aggregate(where: { verified: { _eq: true } }) {
       aggregate {
         count
       }
-      nodes {
-        provider {
-          name
-          id
-          district
-          location
-          email
-          phones {
-            number
-          }
-        }
+    }
+    providers: provider_covid_needs(order_by: { created_at: desc }, limit: 9) {
+      provider {
+        name
+        id
+        district
+        location
       }
     }
   }
@@ -61,17 +57,19 @@ function Covid() {
 
   if (error) return NotificationManager.error(error.message);
   const {
-    nodes,
-    aggregate: { count },
-  } = data.provider_covid_needs_aggregate;
+    count: {
+      aggregate: { count },
+    },
+    providers,
+  } = data;
   return (
     <div id="covid" className="mb-40 bg-white md:mb-24 xl:max-w-griddw xl:m-auto xl:mb-32">
       <div className="mb-16">
-        <h2 className="text-center mb-2">Nevoi de protecție #covid19 anunțate</h2>
+        <h2 className="text-center mb-2">Nevoi de protecție #covid19 raportate</h2>
         <h3 className="text-center mb-6 text-celeste">{`${count} servicii au publicat date până acum`}</h3>
         <div className="md:flex md:justify-center">
           <HsSlider settings={settings}>
-            {nodes.map(({ provider }: any) => (
+            {providers.map(({ provider }: any) => (
               <Link to={`harta/serviciu/${getSlug(provider.name)}/${provider.id}/`} key={provider.id} className="no-underline">
                 <div className=" rounded p-6 bg-celeste text-black ">
                   <strong className="ellipsis-clamp-1">{provider.name}</strong>
@@ -89,6 +87,9 @@ function Covid() {
           </HsSlider>
         </div>
       </div>
+      <Link to="/nevoi-covid" className="btn btn-celeste btn-full btn-arrow md:mx-auto ">
+        Toate raportările
+      </Link>
     </div>
   );
 }
