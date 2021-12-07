@@ -13,7 +13,7 @@ export const isBrowser = typeof window !== 'undefined';
 const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
   if (graphQLErrors)
     graphQLErrors.map(async ({ extensions }) => {
-      switch (extensions?.code) {
+      switch (extensions && extensions.code) {
         case 'data-exception':
         case 'validation-failed':
           navigate('/something-went-wrong');

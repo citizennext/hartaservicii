@@ -10,7 +10,6 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-offline',
     {
       resolve: `gatsby-plugin-facebook-pixel`,
       options: {
@@ -24,19 +23,11 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          {
-            family: `KoHo`,
-            subsets: [`latin-ext`],
-            variants: [`200i`, `400`, `400i`, `700`, `700i`],
-          },
-          {
-            family: `Montserrat`,
-            subsets: [`latin-ext`],
-            variants: [`400`, `400i`, `700`, `700i`],
-          },
+          `Montserrat\:400,400i,700,700i`,
+          `Koho\:200i,400,400i,700,700i`,
         ],
         display: 'swap',
       },
@@ -78,29 +69,6 @@ module.exports = {
         rel: `preload`,
       },
     },
-    {
-      resolve: `gatsby-plugin-netlify`,
-      options: {
-        headers: {}, // option to add more headers. `Link` headers are transformed by the below criteria
-        allPageHeaders: [], // option to add headers for all pages. `Link` headers are transformed by the below criteria
-        mergeSecurityHeaders: true, // boolean to turn off the default security headers
-        mergeLinkHeaders: true, // boolean to turn off the default gatsby js headers
-        mergeCachingHeaders: true, // boolean to turn off the default caching headers
-        transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
-        generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
-      },
-    },
-    {
-      resolve: `gatsby-plugin-netlify-cache`,
-      options: {
-        // this may cause builds to fail in the long run
-        cachePublic: true,
-      },
-    },
-    // {
-    //   resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
-    //   // options: {},
-    // },
     {
       resolve: `gatsby-plugin-sass`,
       options: {

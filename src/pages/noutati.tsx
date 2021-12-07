@@ -53,7 +53,7 @@ export default class Noutati extends React.Component<{ data: { hasura: Blogs } }
 export const pageQuery = graphql`
   query {
     hasura {
-      featured: blogs(last: 2, where: { featured: true, status: PUBLISHED }, orderBy: createdAt_DESC) {
+      featured: blogs(last: 2, where: { featured: true }, orderBy: createdAt_DESC) {
         id
         title
         summary
@@ -70,7 +70,7 @@ export const pageQuery = graphql`
           }
         }
       }
-      regular: blogs(last: 8, where: { featured: false, status: PUBLISHED }, orderBy: createdAt_DESC) {
+      regular: blogs(last: 8, where: { featured: false }, orderBy: createdAt_DESC) {
         id
         title
         summary

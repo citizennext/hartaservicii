@@ -26,7 +26,7 @@ export function InstaSearchPage(props: any) {
       <InstantSearch indexName={`${indexCommon}`} searchClient={client}>
         <div className="search-header">
           <SearchBox
-            defaultRefinement={props?.location?.state?.searchValue || ''}
+            defaultRefinement={(props && props.location?.state?.searchValue) || ''}
             translations={{
               placeholder: 'Cauta aici...',
             }}
@@ -82,7 +82,8 @@ function Hit(props: any) {
             ? `/noutati/${props.hit.slug}`
             : `/${props.hit.slug}`
         }
-        className="btn btn-tight w-1/4 hover:text-white">
+        className="btn btn-tight w-1/4 hover:text-white"
+      >
         Detalii
       </Link>
     </div>

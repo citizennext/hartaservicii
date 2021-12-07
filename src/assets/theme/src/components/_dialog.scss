@@ -1,0 +1,23 @@
+.page-admin {
+  [data-reach-dialog-overlay] {
+    background-color: rgba(135, 114, 114, 0.6);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+  }
+  [data-reach-dialog-content] {
+    width: 90vw;
+    margin: 30vh auto;
+    background: white;
+    padding: 2rem;
+    outline: none;
+    @apply rounded-lg;
+    @screen md {
+      width: 50vw;
+      margin: 20vw auto;
+    }
+  }
+}

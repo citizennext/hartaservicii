@@ -61,7 +61,7 @@ export default function NevoiCovid() {
       <Header />
       <AfterHeader header="CoVid 19" />
       <Layout>
-        <Content providers={data?.providers?.nodes} count={data?.providers?.aggregate?.count} />
+        <Content providers={data && data.providers?.nodes} count={data?.providers?.aggregate?.count} />
       </Layout>
       <Footer />
     </div>

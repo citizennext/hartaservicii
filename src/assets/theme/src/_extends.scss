@@ -1,0 +1,59 @@
+// Extend
+
+.clearfix {
+  display: block;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: left;
+  }
+}
+.date {
+  @apply text-celeste;
+  @apply text-xs;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: left;
+  }
+}
+.btn-arrowonly {
+  $size: 38px;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  clear: left;
+  height: $size;
+  @apply mt-2;
+
+  &:before {
+    @screen md {
+      content: '';
+      width: calc(100% - $size - 20px);
+      height: 6px;
+      display: block;
+      position: absolute;
+      top: calc($size / 2 - 3px);
+      left: 0;
+      @apply bg-snow;
+    }
+  }
+  &:after {
+    content: '';
+    background: url('../../images/icon_arrowg.svg') no-repeat 50% / 26px;
+    width: $size;
+    height: $size;
+    position: absolute;
+    top: 0;
+    right: 0;
+    @apply bg-snow;
+    @apply rounded-full;
+  }
+  span {
+    position: absolute;
+    left: 100%;
+    text-indent: 110%;
+  }
+}

@@ -1,0 +1,11 @@
+// Mixin
+
+// Ellipsis with set the Clamp Line - max clamp is 12
+@for $i from 1 through 12 {
+  .ellipsis-clamp-#{$i} {
+    display: -webkit-box !important;
+    -webkit-line-clamp: #{$i};
+    -webkit-box-orient: vertical;
+    overflow: hidden !important;
+  }
+}

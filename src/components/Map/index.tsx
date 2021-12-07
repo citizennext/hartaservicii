@@ -43,18 +43,8 @@ type Provider = {
 };
 
 const PROVIDERS = gql`
-  query Providers($district: String, $service: String, $supplierPrivate: Boolean, $category: String, $specialization: String) {
-    providers(
-      where: {
-        _and: [
-          { service: { category: { name: { _like: $category } } } }
-          { service: { category: { name: { _like: $service } } } }
-          { service: { name: { _like: $specialization } } }
-          { supplier: { supplier_type: { private: { _eq: $supplierPrivate } } } }
-          { district: { _like: $district } }
-        ]
-      }
-    ) {
+  query Providers($where: providers_bool_exp!) {
+    providers(where: $where) {
       id
       coordinates
       name
@@ -160,11 +150,15 @@ export default class Harta extends Component<any, State> {
     const position: LatLngTuple = [this.state.lat, this.state.lng];
     const filters = this.state.filters;
     const queryVariables = {
-      district: filters.district ? `%${filters.district}%` : null,
-      category: filters.category ? `%${filters.category}%` : null,
-      service: filters.service ? `%${filters.service}%` : null,
-      specialization: filters.specialization ? `%${filters.specialization}%` : null,
-      supplierPrivate: filters.administrator,
+      where: {
+        _and: [
+          { service: { category: { name: filters.category ? { _like: `%${filters.category}%` } : {} } } },
+          { service: { category: { name: filters.service ? { _like: `%${filters.service}%` } : {} } } },
+          { service: { name: filters.specialization ? { _like: `%${filters.specialization}%` } : {} } },
+          { supplier: { supplier_type: { private: filters.administrator ? { _eq: filters.administrator } : {} } } },
+          { district: filters.district ? { _like: `%${filters.district}%` } : {} },
+        ],
+      },
     };
     return (
       <>
@@ -177,7 +171,8 @@ export default class Harta extends Component<any, State> {
             maxZoom={20}
             zoomControl={false}
             scrollWheelZoom={this.state.scrollWheelZoom}
-            className="markercluster-map">
+            className="markercluster-map"
+          >
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -188,7 +183,8 @@ export default class Harta extends Component<any, State> {
                 variables={queryVariables}
                 onCompleted={(provider: { [key: string]: [] }) => {
                   this.setState({ totalResults: provider.providers.length });
-                }}>
+                }}
+              >
                 {({ loading, error, data }: any) => {
                   if (loading) return <Spinner />;
                   if (error) return <div>Error</div>;
@@ -206,7 +202,8 @@ export default class Harta extends Component<any, State> {
                           position={item.coordinates}
                           key={`marker-${item.id}-${index}`}
                           icon={this.createMarkerCustomIcon()}
-                          onClick={() => this.handleClick(item)}>
+                          onClick={() => this.handleClick(item)}
+                        >
                           <Tooltip>{item.name}</Tooltip>
                         </Marker>
                       ))}

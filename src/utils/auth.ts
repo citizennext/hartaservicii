@@ -18,7 +18,7 @@ export const getAccessToken = () => {
   if (!isBrowser) {
     return '';
   }
-  return Auth.currentAuthenticatedUser().then((user) => user?.signInUserSession.idToken.jwtToken || false);
+  return Auth.currentAuthenticatedUser().then((user) => (user && user.signInUserSession.idToken.jwtToken) || false);
 };
 export const getUser = () => {
   if (window.localStorage.gatsbyUser) {

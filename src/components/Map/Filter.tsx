@@ -28,8 +28,8 @@ type Props = {
 };
 
 const SERVICES = gql`
-  query MyQuery($selectedCategory: String) {
-    services: services(where: { category: { name: { _eq: $selectedCategory } } }) {
+  query MyQuery($where: services_bool_exp!) {
+    services: services(where: $where) {
       name
     }
     categories: categories {
@@ -53,7 +53,7 @@ const Filter: React.FC<Props> = (props) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const { loading, error, data } = useQuery(SERVICES, {
-    variables: { selectedCategory: selectedCategory },
+    variables: { where: { category: { name: selectedCategory ? { _eq: selectedCategory } : {} } } },
   });
   if (loading) return <Spinner />;
   if (error) {
@@ -63,17 +63,17 @@ const Filter: React.FC<Props> = (props) => {
   const districts = data?.districts?.map((item: { [name: string]: string }) => {
     return { value: item.district, label: item.district };
   });
-  districts.unshift({ value: null, label: 'Toate judetele' });
+  districts?.unshift({ value: null, label: 'Toate judetele' });
 
   const optionsService = data?.categories?.map((item: { [name: string]: string }) => {
     return { value: item.name, label: item.name };
   });
-  optionsService.unshift({ value: null, label: 'Toate categoriile de servicii' });
+  optionsService?.unshift({ value: null, label: 'Toate categoriile de servicii' });
 
   const optionsSpecialization = data?.services?.map((item: { [name: string]: string }) => {
     return { value: item.name, label: item.name };
   });
-  optionsSpecialization.unshift({ value: null, label: 'Toate specializarile' });
+  optionsSpecialization?.unshift({ value: null, label: 'Toate specializarile' });
 
   function handleChangeDistrict(newValue: any) {
     props.onFilterChange({ district: newValue.value });
@@ -113,11 +113,12 @@ const Filter: React.FC<Props> = (props) => {
               open={isOpen}
               closeButtonStyle={{}}
               toggleHandler={openDrawer}
-              closeButton={<FilterMenu className="close" size={20} />}>
+              closeButton={<FilterMenu className="close" size={20} />}
+            >
               <div className="select-options">
                 <div className="pin-number">{props.totalResults}</div>
                 <Select
-                  value={districts.filter(({ value }: any) => value === filters.district)}
+                  value={districts?.filter(({ value }: any) => value === filters.district)}
                   options={districts}
                   onChange={handleChangeDistrict}
                   theme={(theme) => ({

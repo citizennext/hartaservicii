@@ -1,0 +1,193 @@
+// Main
+
+.page-header {
+  $height: 165px;
+  $height-sm: 185px;
+  $height-xl: 250px;
+  width: 100%;
+  height: $height;
+  position: relative;
+  @apply bg-snow;
+  @screen sm {
+    height: $height-sm;
+  }
+  @screen xl {
+    height: $height-xl;
+  }
+
+  .blog-only {
+    @apply hidden;
+  }
+  &:not(.blog-single):before {
+    content: '';
+    width: 100%;
+    height: 6px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    @apply bg-leaf;
+  }
+  .wrapper {
+    position: relative;
+    width: calc(100% - 2.875rem);
+    height: $height;
+    @screen sm {
+      height: $height-sm;
+    }
+    @screen xl {
+      height: $height-xl;
+    }
+
+    &:before {
+      content: '';
+      width: 100%;
+      height: 6px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      @apply bg-white;
+    }
+    & > span {
+      text-shadow: 1px 1px #978585;
+      width: 100%;
+      font-family: $font-primary;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 14.375vw;
+      line-height: 75%;
+      text-align: center;
+      letter-spacing: -0.11em;
+      text-transform: uppercase;
+      position: absolute;
+      bottom: 4px;
+      @apply text-brown;
+      @screen sm {
+        letter-spacing: -0.07em;
+      }
+      @screen md {
+        letter-spacing: -0.06em;
+      }
+      @screen lg {
+        letter-spacing: -0.05em;
+      }
+      @screen xl {
+        font-size: 10.3125rem;
+        letter-spacing: -0.02em;
+        bottom: 0;
+      }
+    }
+  }
+}
+.wrapper {
+  @apply max-w-griddw;
+  @apply m-auto;
+}
+main {
+  @apply p-6;
+
+  @screen md {
+    @apply max-w-griddw;
+    @apply m-auto;
+    @apply flex;
+    @apply p-0;
+  }
+
+  .main {
+    @apply w-full;
+  }
+  &.two-columns-left {
+    padding-top: 1rem;
+
+    &.sidebar-left-push {
+      .main {
+        @screen md {
+          @apply ml-1/4;
+        }
+      }
+    }
+    .sidebar-left {
+      @apply py-6;
+
+      @screen md {
+        @apply p-4;
+      }
+
+      & > * {
+        @apply w-full;
+        display: inherit;
+        text-align: center;
+
+        @screen md {
+          text-align: left;
+        }
+
+        img {
+          text-align: center;
+          display: inline;
+
+          @screen md {
+            text-align: left;
+          }
+        }
+      }
+      @screen md {
+        @apply w-1/4;
+      }
+    }
+    .main {
+      @screen md {
+        @apply p-4;
+        @apply w-3/4;
+      }
+
+      .summary {
+        margin-bottom: 1.5rem;
+        font-family: Koho;
+        font-style: italic;
+        font-weight: 200;
+        font-size: 1.4rem;
+      }
+    }
+  }
+  &.two-columns-right {
+    padding-top: 1rem;
+
+    &.sidebar-right-push {
+      .main {
+        @screen md {
+          @apply mr-1/4;
+        }
+      }
+    }
+  }
+  &.three-columns {
+    padding-top: 1rem;
+
+    &.sidebar-left-push {
+      .main {
+        @screen md {
+          @apply ml-1/4;
+        }
+      }
+    }
+    &.sidebar-right-push {
+      .main {
+        @screen md {
+          @apply mr-1/4;
+        }
+      }
+    }
+  }
+  &.one-column {
+    @apply p-6;
+
+    @screen md {
+      @apply pt-4;
+    }
+
+    @screen xl {
+      @apply p-0;
+      @apply pt-4;
+    }
+  }
+}

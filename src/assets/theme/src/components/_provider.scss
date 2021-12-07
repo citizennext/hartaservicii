@@ -1,0 +1,214 @@
+.markercluster-map-single {
+  @apply w-full;
+  @apply max-w-screen;
+  @apply m-0;
+  height: 40vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding-top: 80px;
+
+  @screen sm {
+    height: 60vh;
+  }
+  @screen md {
+    height: 40vh;
+  }
+}
+.map-marker-popup-single {
+  margin: 0 auto;
+  z-index: 9999;
+  width: 100vw;
+  max-width: 375px;
+  position: relative;
+  @apply bg-transparent;
+
+  @screen md {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: none;
+    width: 94vw;
+    max-width: 717px;
+  }
+
+  @screen lg {
+    width: 86vw;
+    max-width: 1206px;
+  }
+
+  .close-map-marker-popup {
+    @apply bg-snow;
+    @apply rounded-full;
+    @apply absolute;
+    cursor: pointer;
+    padding: 20px;
+    width: auto;
+    top: 20px;
+    right: 20px;
+    transform: rotate(180deg);
+  }
+  header {
+    height: 100px;
+    @screen sm {
+      margin-top: -100px;
+      position: absolute;
+    }
+
+    .popup-logo img {
+      height: 55px;
+    }
+    .close-map-marker-popup img {
+      top: 12px;
+      height: 18px;
+      border: 0;
+    }
+  }
+}
+.content-box {
+  @apply bg-celeste;
+  width: 100vw;
+  height: auto;
+  position: absolute;
+  top: 35vh;
+  left: 0;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+
+  @screen sm {
+    top: 35vh;
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
+  }
+
+  @screen md {
+    top: 40vh;
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
+  }
+  // readonly rating;
+}
+.pin-eval {
+  font-size: 14px;
+  @apply text-black;
+
+  span.average-rateing {
+    @apply font-semibold;
+    @apply inline-block;
+    font-size: 22px;
+    @apply text-celeste;
+  }
+  .rating-parent {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 0;
+    position: relative;
+    border-radius: 10px;
+    margin-left: 20px;
+
+    &:before {
+      content: '';
+      border: 2px solid #6fbbb7;
+      line-height: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      @apply bg-snow;
+    }
+    .rating-child {
+      display: inline-block;
+      overflow-x: hidden;
+      line-height: 0;
+    }
+  }
+  .dv-star-rating {
+    display: inline-flex !important;
+    line-height: 0;
+
+    label {
+      line-height: 0;
+      position: relative;
+
+      &:after {
+        content: '';
+        width: 2px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        @apply bg-snow;
+      }
+      &:last-of-type {
+        &:after {
+          display: none;
+        }
+      }
+    }
+    .rating-icon {
+      line-height: 0;
+      display: inline-block;
+      color: inherit;
+      width: 18px;
+      height: 18px;
+      @apply bg-celeste;
+    }
+  }
+}
+footer {
+  .dv-star-rating {
+    @apply mb-10;
+
+    label {
+      padding-right: 9px;
+
+      span {
+        @apply relative;
+        @apply rounded-full;
+        border: 4px solid #ffffff;
+        padding: 0 3px;
+        line-height: 19px;
+        font-size: 20.5px;
+      }
+      &:first-of-type,
+      &:last-of-type {
+        span {
+          &:after {
+            content: '';
+            bottom: -48px;
+            left: -20%;
+            @apply absolute;
+            @apply text-white;
+            text-align: center;
+            font-family: 'Koho';
+            font-size: 14px;
+          }
+        }
+      }
+      &:first-of-type {
+        span {
+          &:after {
+            content: 'Foarte bine';
+          }
+        }
+      }
+      &:last-of-type {
+        span {
+          &:after {
+            content: 'Foarte rău';
+          }
+        }
+      }
+    }
+  }
+}
+.map-marker-popup {
+  header {
+    @apply bg-celeste;
+    z-index: 100000;
+    height: 130px;
+  }
+  .popup-logo img {
+    height: 88px;
+  }
+}

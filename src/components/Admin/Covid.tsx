@@ -17,10 +17,10 @@ const DELETE = gql`
 `;
 const Covid = ({ covid, providerId }: any) => {
   const userObject = getUser();
-  const userId = userObject?.username;
-  const token = userObject?.token;
-  const role = userObject?.role;
-  const isAdmin = userObject?.role === 'admin';
+  const userId = userObject && userObject.username;
+  const token = userObject && userObject.token;
+  const role = userObject && userObject.role;
+  const isAdmin = userObject && userObject.role === 'admin';
 
   const [showDialog, setShowDialog] = useState<string>('');
   const cancelRef = useRef();

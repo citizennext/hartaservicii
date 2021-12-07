@@ -3,6 +3,7 @@ import { ApolloProvider } from 'react-apollo';
 import { client } from './src/context/ApolloContext';
 import Auth from '@aws-amplify/auth';
 import { setUser } from './src/utils/auth';
+import './src/assets/theme/src/globals.scss';
 const admins = process.env.GATSBY_ADMIN_USER.split(',');
 
 export const onRouteUpdate = (state, page, pages) => {

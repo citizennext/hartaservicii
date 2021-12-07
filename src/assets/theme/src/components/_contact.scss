@@ -1,0 +1,86 @@
+.page-contact {
+  .contact-wrapper {
+    @apply flex;
+    @apply flex-wrap;
+    @apply mb-6;
+
+    @screen lg {
+      @apply max-w-gridt;
+      @apply m-auto;
+      @apply mb-20;
+    }
+  }
+  .contact-info {
+    @apply w-full;
+    @apply py-6;
+
+    @screen md {
+      @apply p-6;
+      @apply w-1/2;
+    }
+
+    @screen lg {
+      @apply pl-0;
+      @apply pr-6;
+    }
+
+    h4 {
+      @apply mt-10;
+      @apply mb-3;
+    }
+    span {
+      @extend .clearfix;
+      @apply mb-3;
+    }
+    a {
+      text-decoration: none;
+      @apply text-celeste;
+      &:hover {
+        @apply text-celeste;
+      }
+    }
+  }
+  .contact-form {
+    @apply w-full;
+    @apply py-6;
+    @apply mt-10;
+
+    @screen md {
+      @apply p-6;
+      @apply w-1/2;
+    }
+
+    @screen lg {
+      @apply pl-6;
+      @apply pr-0;
+    }
+
+    h4 {
+      @apply mb-3;
+    }
+  }
+  .page-header {
+    .wrapper {
+      @screen lg {
+        @apply max-w-gridt;
+        @apply m-auto;
+      }
+
+      @screen xl {
+        @apply max-w-griddw;
+      }
+
+      &:before {
+        // @todo St3phan - 150px is  after we have the field of search
+        //width: 150px
+        // @todo St3phan - this is a temporary
+        width: 100%;
+      }
+      // @todo St3phan - this is a temporary
+      span {
+        text-align: center;
+        display: block;
+      }
+    }
+  }
+}

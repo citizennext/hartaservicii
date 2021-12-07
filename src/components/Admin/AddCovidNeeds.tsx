@@ -115,13 +115,12 @@ const providerQuery = gql`
 function AddCovidNeeds() {
   const params = useParams();
   const userObject = getUser();
-  const userId = userObject?.username;
-  const token = userObject?.token;
-  const role = userObject?.role;
+  const userId = userObject && userObject.username;
+  const token = userObject && userObject.token;
+  const role = userObject && userObject.role;
 
-  const [addCovidNeeds, { data, loading, error }] = useMutation<{ insert_provider_covid_needs_one: CovidList }>(
-    covidNeedsMutation
-  );
+  const [addCovidNeeds, { data, loading, error }] =
+    useMutation<{ insert_provider_covid_needs_one: CovidList }>(covidNeedsMutation);
 
   const provider = useQuery<{ providers_by_pk: { name: string; supplier: { name: string } } }>(providerQuery, {
     variables: { id: params.id },
@@ -206,7 +205,8 @@ function AddCovidNeeds() {
                       NotificationManager.error(err.message);
                     }
                     actions.resetForm({ values: initialValues, errors: {}, touched: {} });
-                  }}>
+                  }}
+                >
                   {({ values, errors, touched, handleSubmit }) => (
                     <form className="w-full md:w-2/3 grid" onSubmit={handleSubmit}>
                       <div className="grid grid-cols-2  gap-4 items-center border-dotted border-celeste mb-5 border-b">
@@ -422,7 +422,8 @@ function AddCovidNeeds() {
                             loading ? 'running' : ''
                           }`}
                           type="submit"
-                          disabled={loading}>
+                          disabled={loading}
+                        >
                           Trimite
                           <div className="ld ld-ring ld-spin"></div>
                         </button>

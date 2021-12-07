@@ -14,7 +14,7 @@ type BlogProps = {
   location: Location;
 };
 const BlogPost = ({ data, pageContext, location }: BlogProps): JSX.Element => {
-  const { blog } = data?.hasura;
+  const { blog } = data && data.hasura;
   if (!blog) return <div />;
   const { previous, next } = pageContext;
   const { addToast } = useToasts();
@@ -84,7 +84,8 @@ const BlogPost = ({ data, pageContext, location }: BlogProps): JSX.Element => {
                 appearance: 'info',
                 autoDismiss: true,
               })
-            }>
+            }
+          >
             Distribuie
           </button>
         </CopyToClipboard>

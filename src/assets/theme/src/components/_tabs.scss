@@ -1,0 +1,36 @@
+.tabs {
+  @apply bg-snow;
+  display: flex;
+  margin: 0 -1.3em 45px;
+  max-width: 100vw;
+  height: 76px;
+  overflow-x: scroll;
+  overflow-y: unset;
+  position: relative;
+
+  .tab {
+    min-width: 270px;
+    margin-left: 26px;
+    z-index: 1;
+    cursor: pointer;
+    position: relative;
+
+    .ais-Menu-link {
+      display: flex;
+      flex-direction: row-reverse;
+      text-decoration: none;
+      position: relative;
+    }
+    &.ais-Menu-item--selected:before {
+      @apply bg-transparent;
+      @apply bg-white;
+      content: '';
+      width: 100%;
+      height: 60px;
+      display: block;
+      position: absolute;
+      z-index: 0;
+      bottom: 0;
+    }
+  }
+}

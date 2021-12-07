@@ -118,14 +118,13 @@ const providerCovidNeeds = gql`
   }
 `;
 function EditCovidNeeds() {
-  const [editCovidNeeds, { data, loading, error }] = useMutation<{ update_provider_covid_needs_by_pk: CovidList }>(
-    covidNeedsEditMutation
-  );
+  const [editCovidNeeds, { data, loading, error }] =
+    useMutation<{ update_provider_covid_needs_by_pk: CovidList }>(covidNeedsEditMutation);
   const params = useParams();
   const userObject = getUser();
-  const userId = userObject?.username;
-  const token = userObject?.token;
-  const role = userObject?.role;
+  const userId = userObject && userObject.username;
+  const token = userObject && userObject.token;
+  const role = userObject && userObject.role;
   const needs = useQuery<{
     provider_covid_needs_by_pk: CovidList & {
       provider: { name: string; supplier: { name: string } };
@@ -234,7 +233,8 @@ function EditCovidNeeds() {
                         } catch (err) {
                           NotificationManager.error(err.message);
                         }
-                      }}>
+                      }}
+                    >
                       {({ values, errors, touched, handleSubmit }) => (
                         <form className="w-full md:w-2/3 grid" onSubmit={handleSubmit}>
                           <div className="grid grid-cols-2  gap-4 items-center border-dotted border-celeste mb-5 border-b">
@@ -454,7 +454,8 @@ function EditCovidNeeds() {
                                 loading ? 'running' : ''
                               }`}
                               type="submit"
-                              disabled={loading}>
+                              disabled={loading}
+                            >
                               Trimite
                               <div className="ld ld-ring ld-spin"></div>
                             </button>

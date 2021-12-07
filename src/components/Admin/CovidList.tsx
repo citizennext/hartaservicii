@@ -26,9 +26,9 @@ export const GET_COVID_NEEDS = gql`
 export function CovidList() {
   const params = useParams();
   const userObject = getUser();
-  const userId = userObject?.username;
-  const token = userObject?.token;
-  const role = userObject?.role;
+  const userId = userObject && userObject.username;
+  const token = userObject && userObject.token;
+  const role = userObject && userObject.role;
 
   const { loading, error, data } = useQuery(GET_COVID_NEEDS, {
     variables: { provider: params.id, userId: role !== 'admin' ? userId : null },

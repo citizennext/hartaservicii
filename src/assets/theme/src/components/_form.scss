@@ -1,0 +1,49 @@
+// Form
+
+form {
+  @apply w-full;
+  display: block;
+}
+select,
+input:not([type='checkbox']):not([type='radio']),
+textarea {
+  @apply rounded-lg;
+  @apply border;
+  @apply border-solid;
+  @apply border-leaf;
+  @apply bg-snow;
+  @apply mb-5;
+  @apply px-3;
+  @apply py-2;
+}
+textarea {
+  height: 346px;
+}
+input,
+select,
+textarea {
+  box-shadow: unset !important;
+
+  &.field-validation-error {
+    border-color: #cc0000 !important;
+  }
+}
+.validation-passed,
+.validation-error {
+  display: block;
+  position: absolute;
+  bottom: -12px;
+  right: 0;
+  font-size: 14px;
+  font-style: italic;
+  border-radius: 5px 0 5px 5px;
+  padding: 0.1rem 0.5rem;
+}
+.validation-passed {
+  @apply bg-leaf;
+  @apply text-brown;
+}
+.validation-error {
+  @apply bg-error;
+  @apply text-white;
+}

@@ -1,0 +1,126 @@
+// @todo Seco - refactoring
+.autocomplete-search {
+  position: absolute;
+  bottom: 51px;
+  z-index: 9;
+  width: 330px;
+  max-width: 88vw;
+  left: 50%;
+  transform: translateX(-50%);
+  @screen md {
+    width: 600px;
+    max-width: 88vw;
+    bottom: 10px;
+    left: -23.3vw;
+    transform: translateX(0);
+  }
+  @screen xl {
+    bottom: 85px;
+    width: 770px;
+    max-width: 88vw;
+    left: -12.5%;
+  }
+
+  input.react-autosuggest__input {
+    max-width: 88vw;
+    width: 330px;
+    border: 6px solid #978585;
+    @apply rounded-full;
+    @apply bg-white;
+    font-size: 18px;
+    font-family: 'Koho';
+    @apply text-black;
+    padding-left: 40px;
+    padding-right: 86px;
+    box-shadow: 0px 0px 60px rgba(151, 133, 133, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @screen md {
+      width: 600px;
+      max-width: 88vw;
+    }
+    @screen xl {
+      width: 770px;
+      max-width: 88vw;
+    }
+  }
+  &:before {
+    content: '';
+    background-image: url('../../images/icon_search.svg');
+    background-size: 22.5px 22.5px;
+    height: 22.5px;
+    width: 22.5px;
+    position: absolute;
+    background-repeat: no-repeat;
+    bottom: 36px;
+    left: 4.5vw;
+    z-index: 9;
+    @screen md {
+      background-size: 23.5px 23.5px;
+      height: 23.5px;
+      width: 23.5px;
+      left: 2%;
+    }
+    @screen xl {
+      background-size: 27px 27px;
+      height: 27px;
+      width: 27px;
+    }
+  }
+  .ais-PoweredBy {
+    filter: grayscale(100%) invert(62%) sepia(16%) saturate(270%) hue-rotate(314deg) brightness(85%) contrast(80%);
+    position: absolute;
+    top: 2px;
+    right: 16px;
+
+    .ais-PoweredBy-text {
+      font-size: 12px;
+      margin-bottom: -6px;
+    }
+    .ais-PoweredBy-link {
+      svg {
+        width: 58px;
+        margin-top: -7px;
+      }
+    }
+    &.active {
+      filter: initial;
+    }
+  }
+  .react-autosuggest__suggestions-container--open {
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: 58px;
+    border: 1px solid;
+    @apply border-burg;
+    border-radius: 4px;
+    box-shadow: 0px 0px 60px rgba(151, 133, 133, 0.6);
+
+    li {
+      padding: 10px 10px 5px;
+      border-bottom: 1px solid;
+      @apply border-burg;
+
+      .hit-location-title,
+      .hit-page-title {
+        font-size: 20px;
+        font-family: 'Koho';
+      }
+      .hit-location-summary,
+      .hit-page-summary {
+        font-size: 16px;
+        font-family: 'Montserrat';
+
+        .hit-location {
+          font-size: 14px;
+        }
+      }
+      .ais-Highlight-highlighted {
+        @apply bg-leaf;
+        @apply italic;
+      }
+    }
+  }
+}

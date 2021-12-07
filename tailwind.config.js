@@ -1,5 +1,7 @@
 module.exports = {
-  purge: ['./src/**/*.tsx'],
+  purge: {
+    content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  },
   theme: {
     colors: {
       transparent: 'transparent',
