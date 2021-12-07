@@ -24,19 +24,11 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          {
-            family: `KoHo`,
-            subsets: [`latin-ext`],
-            variants: [`200i`, `400`, `400i`, `700`, `700i`],
-          },
-          {
-            family: `Montserrat`,
-            subsets: [`latin-ext`],
-            variants: [`400`, `400i`, `700`, `700i`],
-          },
+          `Montserrat\:400,400i,700,700i`,
+          `Koho\:200i,400,400i,700,700i`,
         ],
         display: 'swap',
       },
