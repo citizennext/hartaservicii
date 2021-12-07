@@ -43,18 +43,8 @@ type Provider = {
 };
 
 const PROVIDERS = gql`
-  query Providers($district: String, $service: String, $supplierPrivate: Boolean, $category: String, $specialization: String) {
-    providers(
-      where: {
-        _and: [
-          { service: { category: { name: { _like: $category } } } }
-          { service: { category: { name: { _like: $service } } } }
-          { service: { name: { _like: $specialization } } }
-          { supplier: { supplier_type: { private: { _eq: $supplierPrivate } } } }
-          { district: { _like: $district } }
-        ]
-      }
-    ) {
+  query Providers($where: providers_bool_exp!) {
+    providers(where: $where) {
       id
       coordinates
       name
@@ -160,11 +150,15 @@ export default class Harta extends Component<any, State> {
     const position: LatLngTuple = [this.state.lat, this.state.lng];
     const filters = this.state.filters;
     const queryVariables = {
-      district: filters.district ? `%${filters.district}%` : null,
-      category: filters.category ? `%${filters.category}%` : null,
-      service: filters.service ? `%${filters.service}%` : null,
-      specialization: filters.specialization ? `%${filters.specialization}%` : null,
-      supplierPrivate: filters.administrator,
+      where: {
+        _and: [
+          { service: { category: { name: filters.category ? { _like: `%${filters.category}%` } : {} } } },
+          { service: { category: { name: filters.service ? { _like: `%${filters.service}%` } : {} } } },
+          { service: { name: filters.specialization ? { _like: `%${filters.specialization}%` } : {} } },
+          { supplier: { supplier_type: { private: filters.administrator ? { _eq: filters.administrator } : {} } } },
+          { district: filters.district ? { _like: `%${filters.district}%` } : {} },
+        ],
+      },
     };
     return (
       <>
