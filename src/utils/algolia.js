@@ -3,7 +3,7 @@ require('dotenv').config({
 });
 const common = `query {
   hasura {
-    pages (where: { status: PUBLISHED }) {
+    pages {
       objectID: id
       slug
       title
@@ -13,7 +13,7 @@ const common = `query {
       }
       updatedAt
     }
-    blogs (where: { status: PUBLISHED }) {
+    blogs {
       objectID: id
       slug
       title
