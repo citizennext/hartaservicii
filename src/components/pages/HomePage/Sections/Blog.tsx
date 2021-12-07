@@ -6,7 +6,7 @@ import { graphql, StaticQuery, Link } from 'gatsby';
 const query = graphql`
   query {
     hasura {
-      blogs(last: 4, orderBy: publishedAt_DESC, where: { status: PUBLISHED }) {
+      blogs(last: 4, orderBy: publishedAt_DESC) {
         id
         publishedAt
         title
