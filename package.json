@@ -3,6 +3,9 @@
   "version": "1.1.0",
   "author": "Cezar Neaga <cezar.neaga@citizennext.ro>",
   "license": "MIT",
+  "engines": {
+    "node": ">=12"
+  },
   "scripts": {
     "clean": "rm -rf .cache && yarn start",
     "lint": "eslint . --ext ts --ext tsx",
