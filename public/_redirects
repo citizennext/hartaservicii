@@ -1,0 +1,11 @@
+# Pages removed in the Astro migration (COVID-19 needs, accounts, provider admin, ratings).
+/nevoi-covid                                        /harta                          301
+/nevoijudetecovid19                                 /harta                          301
+/harta/login                                        /harta                          301
+/harta/inregistrare                                 /harta                          301
+/harta/profile                                      /harta                          301
+/harta/serviciu/:provider/:id/rating                /harta/serviciu/:provider/:id/  301
+/harta/serviciu/:provider/:id/administrare          /harta/serviciu/:provider/:id/  301
+/harta/serviciu/:provider/:id/administrare/*        /harta/serviciu/:provider/:id/  301
+/network-error                                      /                               301
+/something-went-wrong                               /                               301
