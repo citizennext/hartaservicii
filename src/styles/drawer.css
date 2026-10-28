@@ -1,0 +1,41 @@
+/* Native <dialog> drawer replacing rc-drawer for the mobile navigation. */
+.nav-drawer {
+  margin: 0 0 0 auto;
+  height: 100dvh;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.nav-drawer::backdrop {
+  background-color: rgb(151 133 133 / 0.6);
+}
+
+.nav-drawer .drawer-content {
+  position: relative;
+  height: 100%;
+}
+
+.nav-drawer-close {
+  position: absolute;
+  top: 50px;
+  right: 30px;
+  color: var(--color-white);
+}
+
+.nav-drawer[open] {
+  animation: drawer-slide-in 200ms ease-out;
+}
+
+@keyframes drawer-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-drawer[open] {
+    animation: none;
+  }
+}

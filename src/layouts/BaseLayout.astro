@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+import Analytics from '../components/Analytics.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Seo, { type SeoProps } from '../components/Seo.astro';
+import { SITE } from '../data/site';
+
+interface Props extends SeoProps {
+  bodyClass?: string;
+  mapHeader?: boolean;
+  showFooter?: boolean;
+}
+
+const { bodyClass, mapHeader = false, showFooter = true, ...seo } = Astro.props;
+---
+
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="icon" type="image/png" href="/harta-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <Seo {...seo} />
+    <Analytics />
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <Header mapHeader={mapHeader} />
+    <main class="flex flex-wrap one-column">
+      <div class="main">
+        <slot />
+      </div>
+    </main>
+    {showFooter && <Footer />}
+  </body>
+</html>

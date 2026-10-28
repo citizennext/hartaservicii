@@ -1,0 +1,31 @@
+---
+import { SITE } from '../data/site';
+
+export interface SeoProps {
+  title?: string;
+  description?: string | null;
+  image?: string | null;
+  isArticle?: boolean;
+}
+
+const { title, description, image, isArticle = false } = Astro.props as SeoProps;
+const fullTitle = title ? `${title} | ${SITE.title}` : SITE.title;
+const metaDescription = description || SITE.description;
+const imageUrl = new URL(image || SITE.image, Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={metaDescription} />
+<link rel="canonical" href={canonical} />
+<meta property="og:url" content={canonical} />
+<meta property="og:type" content={isArticle ? 'article' : 'website'} />
+<meta property="og:title" content={title || SITE.title} />
+<meta property="og:description" content={metaDescription} />
+<meta property="og:image" content={imageUrl} />
+<meta property="fb:app_id" content={SITE.fbAppId} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content={`@${SITE.twitter}`} />
+<meta name="twitter:title" content={title || SITE.title} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={imageUrl} />

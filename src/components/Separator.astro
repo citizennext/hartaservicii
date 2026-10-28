@@ -1,0 +1,20 @@
+---
+// Tailwind only generates classes it can see literally, so colours are mapped explicitly.
+const COLOR_CLASSES = {
+  black: 'bg-black',
+  burg: 'bg-burg',
+  celeste: 'bg-celeste',
+  snow: 'bg-snow',
+} as const;
+
+interface Props {
+  color?: keyof typeof COLOR_CLASSES;
+  class?: string;
+  top?: string;
+  bottom?: string;
+  width?: string;
+}
+const { color = 'black', class: className = '', top, bottom, width } = Astro.props;
+---
+
+<div class:list={[className, 'separator', COLOR_CLASSES[color]]} style={{ top, bottom, width }}></div>

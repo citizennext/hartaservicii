@@ -1,0 +1,114 @@
+/* Native <select> filters (replacing react-select) and the mobile filter drawer for /harta. */
+.select-options select {
+  display: block;
+  width: 100%;
+  min-width: 170px;
+  max-width: 270px;
+  min-height: 40px;
+  margin: 0 0 15px;
+  padding: 6px 28px 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background-color: var(--color-white);
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  text-overflow: ellipsis;
+}
+
+.select-options select:focus-visible {
+  outline: 2px solid var(--color-celeste);
+  outline-offset: -2px;
+}
+
+.select-options select:disabled {
+  color: var(--color-lightbrown);
+}
+
+.select-options .select-container:first-of-type select {
+  border-top-left-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+  padding-left: 36px;
+}
+
+@media (width >= 1280px) {
+  .select-options select {
+    margin: 0 auto;
+  }
+}
+
+.map-status {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 500;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: var(--color-snow);
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+}
+
+.map-status-error {
+  background: var(--color-error);
+  color: var(--color-white);
+}
+
+/* Mobile: filters live in a right-hand drawer toggled by the .filter-menu tab. */
+@media (width < 768px) {
+  .map-filters-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    width: 260px;
+    padding: 79px 20px 0;
+    background-color: rgb(151 133 133 / 0.8);
+    transform: translateX(100%);
+    transition: transform 200ms ease-out;
+  }
+
+  .map-filters-panel[data-open='true'] {
+    transform: none;
+  }
+
+  .map-filters-close {
+    position: absolute;
+    top: 25px;
+    left: -60px;
+    width: 60px;
+    height: 50px;
+    border-top-left-radius: 9999px;
+    border-bottom-left-radius: 9999px;
+    background-color: var(--color-burg);
+  }
+
+  .map-filters-panel:not([data-open='true']) .map-filters-close {
+    display: none;
+  }
+
+  .map-filters-close svg {
+    margin-left: 14px;
+  }
+
+  .map-filters-panel .select-options label {
+    position: static;
+    display: block;
+    background: none;
+    color: var(--color-white);
+    font-size: 12px;
+  }
+}
+
+@media (width >= 375px) and (width < 768px) {
+  .map-filters-panel {
+    width: 300px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-filters-panel {
+    transition: none;
+  }
+}
