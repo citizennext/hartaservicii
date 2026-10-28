@@ -13,6 +13,7 @@ interface Props extends SeoProps {
 }
 
 const { bodyClass, mapHeader = false, showFooter = true, ...seo } = Astro.props;
+const hasSidebar = Astro.slots.has('sidebar-left');
 ---
 
 <html lang={SITE.lang}>
@@ -28,8 +29,14 @@ const { bodyClass, mapHeader = false, showFooter = true, ...seo } = Astro.props;
   </head>
   <body class={bodyClass}>
     <Header mapHeader={mapHeader} />
+    <slot name="before-main" />
     <div class="page-clip">
-      <main class="flex flex-wrap one-column">
+      <main class:list={['flex flex-wrap', hasSidebar ? 'two-columns-left' : 'one-column']}>
+        {hasSidebar && (
+          <div class="sidebar-left order-2 w-full md:order-none">
+            <slot name="sidebar-left" />
+          </div>
+        )}
         <div class="main">
           <slot />
         </div>

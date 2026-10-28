@@ -3,7 +3,7 @@ import { getViteConfig } from 'astro/config';
 
 export default getViteConfig({
   test: {
-    include: ['src/**/*.test.ts'],
+    include: ['src/**/*.test.ts', 'functions/**/*.test.ts'],
     exclude: ['e2e/**', 'node_modules/**'],
     coverage: {
       provider: 'v8',

@@ -1,0 +1,15 @@
+/* react-instantsearch v7 renders hits as an <ol> (v6 used <ul>); cancel the theme's global <ol> counters. */
+.ais-Hits-list {
+  margin-left: 0;
+  margin-right: 0;
+  counter-reset: none;
+}
+
+.ais-Hits-list > li {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.ais-Hits-list > li::before {
+  content: none;
+}

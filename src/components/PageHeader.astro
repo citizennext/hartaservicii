@@ -1,0 +1,28 @@
+---
+// Ported from the legacy AfterHeader: the snow band under the site header with an optional title/image.
+import { Image } from 'astro:assets';
+import Separator from './Separator.astro';
+
+interface Props {
+  header?: string | null;
+  imageUrl?: string | null;
+  class?: string;
+  topSeparator?: boolean;
+  bottomSeparator?: boolean;
+}
+
+const { header, imageUrl, class: className, topSeparator = true, bottomSeparator = true } = Astro.props;
+---
+
+<div class:list={['page-header', className]}>
+  {topSeparator && <Separator color="burg" />}
+  <div class="wrapper">
+    {header && <span>{header}</span>}
+    {imageUrl && (
+      <div class="duotone">
+        <Image src={imageUrl} alt="" width={770} height={350} fit="cover" loading="eager" />
+      </div>
+    )}
+  </div>
+  {bottomSeparator && <Separator color="burg" bottom="-6px" />}
+</div>

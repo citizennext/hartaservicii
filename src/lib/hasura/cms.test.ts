@@ -21,7 +21,7 @@ const PAGE = {
   summary: null,
   slug: 'despre-noi',
   header: 'despre noi',
-  additionalData: { images: [] },
+  additionalData: { images: [], buttons: [] },
   updatedAt: '2020-04-14T06:43:45.801+00:00',
   content: { html: '<p>Despre</p>', text: 'Despre' },
   image: null,
@@ -47,6 +47,28 @@ describe('fetchPages', () => {
   test('accepts pages without image or summary', async () => {
     const { client } = clientReturning({ cms: { pages: [PAGE] } });
     expect(await fetchPages(client)).toEqual([PAGE]);
+  });
+});
+
+describe('page additionalData', () => {
+  test('parses sidebar images and buttons', async () => {
+    const additionalData = {
+      images: [{ alt: 'Logo', url: 'https://media.graphcms.com/x', href: 'https://citizennext.ro' }],
+      buttons: [{ href: 'https://citizennext.ro', label: 'citizennext.ro' }],
+    };
+    const { client } = clientReturning({ cms: { pages: [{ ...PAGE, additionalData }] } });
+
+    const [page] = await fetchPages(client);
+
+    expect(page?.additionalData).toEqual(additionalData);
+  });
+
+  test('defaults missing additionalData to empty lists', async () => {
+    const { client } = clientReturning({ cms: { pages: [{ ...PAGE, additionalData: null }] } });
+
+    const [page] = await fetchPages(client);
+
+    expect(page?.additionalData).toEqual({ images: [], buttons: [] });
   });
 });
 

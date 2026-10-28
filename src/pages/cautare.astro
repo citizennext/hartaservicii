@@ -1,0 +1,14 @@
+---
+import SearchApp from '../islands/search/SearchApp';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Căutare" description="Găsești rapid serviciul social de care ai nevoie" bodyClass="page-search-reesult">
+  <h1 class="sr-only">Căutare</h1>
+  <SearchApp client:only="react" />
+  <noscript>
+    <p>
+      Căutarea necesită JavaScript. Poți folosi <a href="/harta">harta</a> pentru a găsi servicii.
+    </p>
+  </noscript>
+</BaseLayout>

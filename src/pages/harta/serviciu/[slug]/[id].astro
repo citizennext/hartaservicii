@@ -5,6 +5,7 @@ import iconDirections from '../../../../assets/images/icon_directions.svg';
 import hssLogo from '../../../../assets/images/icon_HSS_symbolleaf.svg';
 import iconShare from '../../../../assets/images/icon_share.svg';
 import ProviderMap from '../../../../islands/map/ProviderMap';
+import ShareButton from '../../../../components/ShareButton.astro';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import { SITE } from '../../../../data/site';
 import { getProviders } from '../../../../lib/hasura';
@@ -84,10 +85,9 @@ const updateMailto = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent(`
             <p>
               <strong>Distribuie</strong>
               <br />
-              <button type="button" class="bg-snow rounded-full p-2 w-12 h-12" title="Copiază linkul" data-share>
+              <ShareButton class="bg-snow rounded-full p-2 w-12 h-12" title="Copiază linkul">
                 <img src={iconShare.src} alt="Distribuie" class="m-auto" />
-              </button>
-              <span class="share-status text-sm text-celeste" role="status" aria-live="polite"></span>
+              </ShareButton>
             </p>
           </div>
           <div class="pin-address py-6">
@@ -180,25 +180,3 @@ const updateMailto = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent(`
     </section>
   </div>
 </BaseLayout>
-
-<script>
-  const button = document.querySelector<HTMLButtonElement>('[data-share]');
-  const status = document.querySelector<HTMLElement>('.share-status');
-
-  button?.addEventListener('click', async () => {
-    const url = window.location.href;
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: document.title, url });
-        return;
-      }
-      await navigator.clipboard.writeText(url);
-      if (status) status.textContent = 'Link copiat în clipboard!';
-    } catch (error) {
-      // AbortError means the user closed the share sheet; anything else is a real failure.
-      if (error instanceof DOMException && error.name === 'AbortError') return;
-      console.error('Sharing failed', error);
-      if (status) status.textContent = 'Nu am putut copia linkul.';
-    }
-  });
-</script>

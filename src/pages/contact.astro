@@ -1,0 +1,154 @@
+---
+import { PUBLIC_TURNSTILE_SITE_KEY } from 'astro:env/client';
+import PageHeader from '../components/PageHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+import { HONEYPOT_FIELD } from '../lib/contact';
+
+const SUPPORT = [
+  {
+    heading: 'Actualizare date platformă',
+    text: 'Dacă ai informații actualizate despre centrele de servicii sociale și nu le regăsești pe platforma noastră, nu ezita să ne contactezi la adresa:',
+  },
+  {
+    heading: 'Feedback platformă',
+    text: 'Dacă întâmpini probleme la accesarea site-ului, te rugăm să ne informezi la adresa de mai jos. Descrie-ne problema și eventual, include o captură de ecran pentru a înțelege și rezolva rapid situația.',
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Contact"
+  description="Așteptăm oricând sugestiile voastre pentru a îmbunătăți platforma!"
+  bodyClass="page-contact">
+  <script slot="head" is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <PageHeader slot="before-main" header="contact" />
+  <div class="wrapper">
+    <h1 class="sr-only">Contact</h1>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <div class="social-media">
+          <h2 class="text-lg">
+            Alătură-te comunității noastre de pe{' '}
+            <a href={SITE.facebookUrl} target="_blank" rel="noopener noreferrer">
+              Facebook
+            </a>{' '}
+            și{' '}
+            <a href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer">
+              Instagram
+            </a>
+          </h2>
+          <p>
+            Ai sugestii de îmbunătățire a platformei sau îți dorești să devii voluntar, pentru a dezvolta proiectul alături de
+            noi? Ne poți scrie oricând folosind unul dintre canalele noastre de comunicare.
+          </p>
+        </div>
+        {SUPPORT.map(({ heading, text }) => (
+          <div class="contact-support">
+            <h2 class="text-lg">{heading}</h2>
+            <span>{text}</span>
+            <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
+          </div>
+        ))}
+      </div>
+      <div class="contact-form">
+        <h2 class="text-lg">Folosește formularul de contact:</h2>
+        <div class="contact-result" role="status" aria-live="polite" data-result hidden></div>
+        <form method="post" action="/api/contact" data-contact-form>
+          <label for="contact-email" class="sr-only">
+            Adresa ta de email
+          </label>
+          <input
+            id="contact-email"
+            class="w-full"
+            type="email"
+            name="email"
+            placeholder="Adresa ta de email"
+            required
+            autocomplete="email"
+          />
+          <label for="contact-message" class="sr-only">
+            Mesajul tău
+          </label>
+          <textarea
+            id="contact-message"
+            class="w-full"
+            name="message"
+            placeholder="Mesajul tău"
+            required
+            minlength="10"
+            maxlength="5000"></textarea>
+          <!-- Honeypot: hidden from people, tempting for bots. -->
+          <div class="contact-honeypot" aria-hidden="true">
+            <label for="contact-website">Website</label>
+            <input id="contact-website" type="text" name={HONEYPOT_FIELD} tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="cf-turnstile" data-sitekey={PUBLIC_TURNSTILE_SITE_KEY} data-language="ro"></div>
+          <button class="btn btn-celeste btn-full" type="submit">
+            Trimite mesaj
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .contact-honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .cf-turnstile {
+    margin-bottom: 1.25rem;
+  }
+</style>
+
+<script>
+  const SUCCESS = 'Mesaj primit! Îți mulțumim pentru mesajul tău. În curând, un membru al echipei îți va răspunde!';
+  const FAILURE = 'Mesajul nu a putut fi trimis. Încearcă din nou sau scrie-ne la contact@serviciisociale.ro.';
+
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const result = document.querySelector<HTMLElement>('[data-result]');
+
+  const show = (message: string, isError: boolean) => {
+    if (!result) return;
+    result.hidden = false;
+    result.textContent = message;
+    result.classList.toggle('text-error', isError);
+    result.classList.toggle('text-celeste', !isError);
+  };
+
+  // Result of a no-JavaScript submission, passed back by the Pages Function redirect.
+  const sent = new URLSearchParams(window.location.search).get('trimis');
+  if (sent) show(sent === 'da' ? SUCCESS : FAILURE, sent !== 'da');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const button = form.querySelector('button');
+    if (button) button.disabled = true;
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { accept: 'application/json' },
+      });
+      const body = (await response.json()) as { success: boolean; error: string | null };
+      if (body.success) {
+        form.hidden = true;
+        show(SUCCESS, false);
+      } else {
+        show(body.error ?? FAILURE, true);
+      }
+    } catch (error) {
+      console.error('Contact form submission failed', error);
+      show(FAILURE, true);
+    } finally {
+      if (button) button.disabled = false;
+      (window as unknown as { turnstile?: { reset: () => void } }).turnstile?.reset();
+    }
+  });
+</script>

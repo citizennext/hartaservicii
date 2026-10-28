@@ -1,0 +1,19 @@
+---
+import PageHeader from '../components/PageHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Pagina nu există" bodyClass="page-404">
+  <PageHeader slot="before-main" header="hopa..." />
+  <div class="wrapper">
+    <div class="contact-wrapper">
+      <div class="summary">
+        <h1 style="margin-top: 100px">Această pagină nu există</h1>
+      </div>
+      <div class="content" style="margin-bottom: 100px">
+        Dacă e cumva o eroare, <a href="/contact">scrie-ne un mesaj</a>. Dacă ai ajuns aici de altundeva, folosește
+        <a href="/cautare">căutarea</a> sau <a href="/harta">harta</a>.
+      </div>
+    </div>
+  </div>
+</BaseLayout>

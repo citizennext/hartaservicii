@@ -1,0 +1,64 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Separator from '../../components/Separator.astro';
+import ShareButton from '../../components/ShareButton.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../lib/format';
+import { getBlogs, withNeighbours } from '../../lib/hasura';
+
+export const getStaticPaths = (async () => {
+  const blogs = await getBlogs();
+  return withNeighbours(blogs).map(({ item, previous, next }) => ({
+    params: { slug: item.slug },
+    props: { blog: item, previous, next },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { blog, previous, next } = Astro.props as Props;
+---
+
+<BaseLayout title={blog.title} description={blog.summary} image={blog.image?.url ?? null} isArticle>
+  <PageHeader
+    slot="before-main"
+    class="blog-single"
+    imageUrl={blog.image?.url ?? null}
+    topSeparator={false}
+    bottomSeparator={false}
+  />
+  <article class="blog-single section interior">
+    <h1>{blog.title}</h1>
+    <time class="date" datetime={blog.publishedAt ?? blog.createdAt}>
+      {formatDate(blog.publishedAt ?? blog.createdAt)}
+    </time>
+    <!-- CMS-authored HTML from the project's own GraphCMS content, rendered as on the legacy site. -->
+    <div class="blog-content" set:html={blog.content?.html ?? ''} />
+    <nav class="prev-next-buttons" aria-label="Alte articole">
+      {previous ? (
+        <a class="prev-button" href={`/noutati/${previous.slug}`}>
+          <span>articole mai vechi</span>
+          {previous.title}
+        </a>
+      ) : (
+        <span class="prev-button disabled">Nu mai sunt articole</span>
+      )}
+      {next ? (
+        <a class="next-button" href={`/noutati/${next.slug}`}>
+          <span>articole mai noi</span>
+          {next.title}
+        </a>
+      ) : (
+        <span class="next-button disabled">Nu mai sunt articole</span>
+      )}
+      <div class="read-more">
+        <Separator color="snow" width="100px" top="2px" />
+        <a class="read-more" href="/noutati">
+          Citește și alte articole
+        </a>
+      </div>
+    </nav>
+    <Separator color="snow" width="100px" />
+    <ShareButton class="btn btn-share">Distribuie</ShareButton>
+  </article>
+</BaseLayout>

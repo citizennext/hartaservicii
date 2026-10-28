@@ -67,13 +67,24 @@ const BLOG_SCHEMA = z.object({
   image: IMAGE_SCHEMA,
 });
 
+const EMPTY_ADDITIONAL_DATA = { images: [], buttons: [] };
+
+// Free-form JSON in the CMS: sidebar logos and call-to-action buttons for a page.
+const ADDITIONAL_DATA_SCHEMA = z
+  .object({
+    images: z.array(z.object({ alt: z.string(), url: z.url(), href: z.url() })).default([]),
+    buttons: z.array(z.object({ href: z.url(), label: z.string() })).default([]),
+  })
+  .nullable()
+  .transform((data) => data ?? EMPTY_ADDITIONAL_DATA);
+
 const PAGE_SCHEMA = z.object({
   id: z.string(),
   title: z.string(),
   summary: z.string().nullable(),
   slug: z.string(),
   header: z.string().nullable(),
-  additionalData: z.unknown(),
+  additionalData: ADDITIONAL_DATA_SCHEMA,
   updatedAt: z.string(),
   content: RICH_TEXT_SCHEMA.nullable(),
   image: IMAGE_SCHEMA,

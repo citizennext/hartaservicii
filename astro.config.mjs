@@ -10,7 +10,7 @@ export default defineConfig({
   trailingSlash: 'ignore',
   integrations: [react(), sitemap()],
   image: {
-    domains: ['eu-central-1.graphassets.com', 'media.graphcms.com'],
+    domains: ['eu-central-1.graphassets.com', 'media.graphassets.com', 'media.graphcms.com'],
   },
   env: {
     schema: {
@@ -19,6 +19,8 @@ export default defineConfig({
       PUBLIC_ALGOLIA_APP_ID: envField.string({ context: 'client', access: 'public' }),
       PUBLIC_ALGOLIA_SEARCH_KEY: envField.string({ context: 'client', access: 'public' }),
       PUBLIC_ALGOLIA_INDEX_NAME_COMMON: envField.string({ context: 'client', access: 'public' }),
+      // Cloudflare's always-pass test key; set the real site key in production.
+      PUBLIC_TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public', default: '1x00000000000000000000AA' }),
       PUBLIC_TILE_URL: envField.string({
         context: 'client',
         access: 'public',
