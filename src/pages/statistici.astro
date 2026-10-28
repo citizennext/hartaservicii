@@ -1,0 +1,72 @@
+---
+import CategoryBars from '../components/stats/CategoryBars.astro';
+import DistrictMap from '../components/stats/DistrictMap.astro';
+import PublicPrivateRing from '../components/stats/PublicPrivateRing.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getStatistics } from '../lib/hasura';
+
+const stats = await getStatistics();
+---
+
+<BaseLayout title="Statistici" description="Câteva statistici rezultate din datele din platformă" bodyClass="page-statistici">
+  <div class="wrapper">
+    <h1 class="sr-only">Statistici</h1>
+    <div class="grid-statistics grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid-statistic-item">
+        <PublicPrivateRing
+          class="centers-of-services"
+          publicCount={stats.providers.public}
+          privateCount={stats.providers.private}
+          title="Centre servicii sociale licențiate pe tot teritoriul țării"
+        />
+      </div>
+      <div class="grid-statistic-item">
+        <CategoryBars homeless={stats.homeless} children={stats.children} />
+      </div>
+      <div class="grid-statistic-item">
+        <DistrictMap
+          class="statistics-map"
+          title="Servicii sociale pe județe"
+          values={stats.byDistrict.all}
+          total={stats.providers.total}
+        />
+      </div>
+      <div class="grid-statistic-item last-item">
+        <PublicPrivateRing
+          class="supliers-of-services"
+          publicCount={stats.suppliers.public}
+          privateCount={stats.suppliers.private}
+          title="Furnizori de servicii sociale acreditați pe tot teritoriul țării"
+        />
+      </div>
+      <div class="grid-statistic-item last-item">
+        <div class="pie-chart">
+          <DistrictMap
+            class="statistics-map"
+            title="Servicii pentru persoane fără adăpost"
+            values={stats.byDistrict.homeless}
+            total={stats.homeless}
+          />
+        </div>
+      </div>
+      <div class="grid-statistic-item last-item">
+        <div class="pie-chart">
+          <DistrictMap
+            class="statistics-map"
+            title="Servicii pentru copii"
+            values={stats.byDistrict.children}
+            total={stats.children}
+          />
+        </div>
+      </div>
+      <div class="grid-statistic-item last-item">
+        <div class="pie-chart">
+          <DistrictMap class="statistics-map" title="Capacitate locuri servicii locale" values={stats.capacityByDistrict} />
+        </div>
+      </div>
+      <!-- Fillers completing the last row of the 3-column layout (legacy design). -->
+      <div class="grid-statistic-item invisible lg:visible" aria-hidden="true"></div>
+      <div class="grid-statistic-item invisible lg:visible" aria-hidden="true"></div>
+    </div>
+  </div>
+</BaseLayout>

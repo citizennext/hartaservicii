@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { PROVIDERS_RESPONSE_SCHEMA, toMapProvider, type Provider } from './providers';
+import { PROVIDERS_RESPONSE_SCHEMA, toMapProvider, toStatsProvider, type Provider } from './providers';
 
 const RAW_PROVIDER = {
   id: 'p-1',
@@ -61,6 +61,18 @@ describe('toMapProvider', () => {
       district: 'Brașov',
       categoryName: 'Servicii sociale pentru copii',
       serviceName: 'Centru de zi pentru copii',
+      isPrivate: false,
+    });
+  });
+});
+
+describe('toStatsProvider', () => {
+  test('keeps the fields the statistics need', () => {
+    const provider: Provider = PROVIDERS_RESPONSE_SCHEMA.parse({ providers: [RAW_PROVIDER] }).providers[0]!;
+    expect(toStatsProvider(provider)).toEqual({
+      district: 'Brașov',
+      capacity: '40',
+      categoryName: 'Servicii sociale pentru copii',
       isPrivate: false,
     });
   });

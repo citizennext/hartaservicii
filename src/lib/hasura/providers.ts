@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { MapProvider } from '../filters';
+import type { StatsProvider } from '../statistics';
 import type { HasuraClient } from './client';
 
 // Hasura auto-named the relationships `public_*`; alias them back to stable names here.
@@ -123,6 +124,15 @@ export function toMapProvider(provider: Provider): MapProvider {
     district: provider.district,
     categoryName: provider.service.category.name,
     serviceName: provider.service.name,
+    isPrivate: provider.supplier.supplier_type.private,
+  };
+}
+
+export function toStatsProvider(provider: Provider): StatsProvider {
+  return {
+    district: provider.district,
+    capacity: provider.capacity,
+    categoryName: provider.service.category.name,
     isPrivate: provider.supplier.supplier_type.private,
   };
 }

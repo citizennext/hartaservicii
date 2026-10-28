@@ -6,26 +6,32 @@ const isEnabled = import.meta.env.PROD;
 
 {isEnabled && (
   <>
-    <script is:inline define:vars={{ gtmId: SITE.gtmId }}>
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
-      const gtm = document.createElement('script');
-      gtm.async = true;
-      gtm.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
-      document.head.append(gtm);
-    </script>
-    <script is:inline define:vars={{ pixelId: SITE.facebookPixelId }}>
-      if (!window.fbq) {
-        const fbq = (...args) => (fbq.callMethod ? fbq.callMethod(...args) : fbq.queue.push(args));
-        Object.assign(fbq, { push: fbq, loaded: true, version: '2.0', queue: [] });
-        window.fbq = window._fbq = fbq;
-        const pixel = document.createElement('script');
-        pixel.async = true;
-        pixel.src = 'https://connect.facebook.net/en_US/fbevents.js';
-        document.head.append(pixel);
+    <script is:inline data-gtm-id={SITE.gtmId}>
+      {
+        const gtmId = document.currentScript.dataset.gtmId;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+        const gtm = document.createElement('script');
+        gtm.async = true;
+        gtm.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
+        document.head.append(gtm);
       }
-      window.fbq('init', pixelId);
-      window.fbq('track', 'PageView');
+    </script>
+    <script is:inline data-pixel-id={SITE.facebookPixelId}>
+      {
+        const pixelId = document.currentScript.dataset.pixelId;
+        if (!window.fbq) {
+          const fbq = (...args) => (fbq.callMethod ? fbq.callMethod(...args) : fbq.queue.push(args));
+          Object.assign(fbq, { push: fbq, loaded: true, version: '2.0', queue: [] });
+          window.fbq = window._fbq = fbq;
+          const pixel = document.createElement('script');
+          pixel.async = true;
+          pixel.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          document.head.append(pixel);
+        }
+        window.fbq('init', pixelId);
+        window.fbq('track', 'PageView');
+      }
     </script>
   </>
 )}

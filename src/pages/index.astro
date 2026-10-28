@@ -1,43 +1,19 @@
 ---
-// Temporary placeholder until pages are ported (step 4); exercises the build-time data layer.
+import Hero from '../components/home/Hero.astro';
+import JoinUs from '../components/home/JoinUs.astro';
+import LatestNews from '../components/home/LatestNews.astro';
+import Lists from '../components/home/Lists.astro';
+import Partners from '../components/home/Partners.astro';
+import StatisticsTeaser from '../components/home/StatisticsTeaser.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { fetchBlogs, fetchPages, fetchProviders, fetchSuppliers, getHasuraClient } from '../lib/hasura';
-import { computeStatistics } from '../lib/statistics';
-
-const client = getHasuraClient();
-const [blogs, pages, providers, suppliers] = await Promise.all([
-  fetchBlogs(client),
-  fetchPages(client),
-  fetchProviders(client),
-  fetchSuppliers(client),
-]);
-const stats = computeStatistics(
-  providers.map((p) => ({
-    district: p.district,
-    capacity: p.capacity,
-    categoryName: p.service.category.name,
-    isPrivate: p.supplier.supplier_type.private,
-  })),
-  suppliers
-);
+import { HOMEPAGE } from '../data/site';
 ---
 
-<BaseLayout>
-  <h1>Harta Serviciilor Sociale din România</h1>
-  <p>
-    {stats.providers.total} servicii ({stats.providers.public} publice, {stats.providers.private} private)
-  </p>
-  <p>{stats.suppliers.total} furnizori</p>
-  <h2>Noutăți</h2>
-  <ul>
-    {blogs.map((b) => (
-      <li>{b.title}</li>
-    ))}
-  </ul>
-  <h2>Pagini</h2>
-  <ul>
-    {pages.map((p) => (
-      <li>{p.title}</li>
-    ))}
-  </ul>
+<BaseLayout title={HOMEPAGE.title} bodyClass="page-homepage">
+  <Hero />
+  <Lists />
+  <StatisticsTeaser />
+  <LatestNews />
+  <Partners />
+  <JoinUs />
 </BaseLayout>

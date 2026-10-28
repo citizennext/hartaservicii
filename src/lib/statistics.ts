@@ -38,9 +38,10 @@ function sumByDistrict(providers: readonly StatsProvider[], valueOf: (p: StatsPr
   );
 }
 
+/** Capacities are free text in the source data; use the first number, as the legacy map did. */
 function parseCapacity(capacity: string | null): number {
-  const value = Number.parseInt(capacity ?? '', 10);
-  return Number.isNaN(value) ? 0 : value;
+  const firstNumber = capacity?.match(/\d+/)?.[0];
+  return firstNumber ? Number.parseInt(firstNumber, 10) : 0;
 }
 
 export function computeStatistics(providers: readonly StatsProvider[], suppliers: readonly { isPrivate: boolean }[]): Statistics {
@@ -59,5 +60,30 @@ export function computeStatistics(providers: readonly StatsProvider[], suppliers
       children: sumByDistrict(children, one),
     },
     capacityByDistrict: sumByDistrict(providers, (p) => parseCapacity(p.capacity)),
+  };
+}
+
+export interface ShadedDistrict {
+  name: string;
+  value: number;
+  fill: string;
+}
+
+// Legacy StatisticsMap colour ramp: celeste hue, lightness from 100% (none) down by up to 58 points.
+const CHOROPLETH_HUE_SATURATION = '177, 35%';
+const CHOROPLETH_LIGHTNESS_RANGE = 58;
+
+export function choropleth(values: DistrictCounts, districts: readonly string[]): { max: number; districts: ShadedDistrict[] } {
+  const max = Math.max(0, ...Object.values(values));
+  const shade = (value: number) => {
+    const lightness = max === 0 ? 100 : 100 - (value / max) * CHOROPLETH_LIGHTNESS_RANGE;
+    return `hsl(${CHOROPLETH_HUE_SATURATION}, ${Math.round(lightness)}%)`;
+  };
+  return {
+    max,
+    districts: districts.map((name) => {
+      const value = values[name] ?? 0;
+      return { name, value, fill: shade(value) };
+    }),
   };
 }

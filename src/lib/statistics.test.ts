@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { computeStatistics, type StatsProvider } from './statistics';
+import { choropleth, computeStatistics, type StatsProvider } from './statistics';
 
 const provider = (overrides: Partial<StatsProvider>): StatsProvider => ({
   district: 'Cluj',
@@ -40,9 +40,35 @@ describe('computeStatistics', () => {
     expect(computeStatistics(PROVIDERS, SUPPLIERS).capacityByDistrict).toEqual({ Cluj: 15, Iași: 20 });
   });
 
+  test('takes the first number from free-text capacities, like the legacy map', () => {
+    const stats = computeStatistics([provider({ capacity: 'aprox. 40 locuri' }), provider({ capacity: '12+3' })], []);
+    expect(stats.capacityByDistrict).toEqual({ Cluj: 52 });
+  });
+
   test('returns zeroed statistics for empty input', () => {
     const stats = computeStatistics([], []);
     expect(stats.providers).toEqual({ total: 0, public: 0, private: 0 });
     expect(stats.byDistrict.all).toEqual({});
+  });
+});
+
+describe('choropleth', () => {
+  const DISTRICTS = ['Cluj', 'Iași', 'Ilfov'];
+
+  test('shades each district by its share of the maximum, with missing districts at zero', () => {
+    const result = choropleth({ Cluj: 10, Iași: 5 }, DISTRICTS);
+
+    expect(result.max).toBe(10);
+    expect(result.districts).toEqual([
+      { name: 'Cluj', value: 10, fill: 'hsl(177, 35%, 42%)' },
+      { name: 'Iași', value: 5, fill: 'hsl(177, 35%, 71%)' },
+      { name: 'Ilfov', value: 0, fill: 'hsl(177, 35%, 100%)' },
+    ]);
+  });
+
+  test('renders every district white when there is no data', () => {
+    const result = choropleth({}, DISTRICTS);
+    expect(result.max).toBe(0);
+    expect(result.districts.every((d) => d.fill === 'hsl(177, 35%, 100%)')).toBe(true);
   });
 });

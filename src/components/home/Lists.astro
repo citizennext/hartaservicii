@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import faceProviders from '../../assets/images/hp_section2.png';
+import faceBeneficiaries from '../../assets/images/hp_section22.png';
+import { HOMEPAGE } from '../../data/site';
+
+const boxes = [
+  { ...HOMEPAGE.providers, image: faceProviders, class: 'mb-36 md:mb-0' },
+  { ...HOMEPAGE.beneficiaries, image: faceBeneficiaries, class: '' },
+];
+---
+
+<div id="section2" class="section">
+  <div class="my-32 md:flex md:max-w-gridt md:m-auto md:mt-48 md:mb-40 xl:max-w-gridd xl:pt-8 xl:mb-40 xl:pb-4">
+    {boxes.map((box) => (
+      <div class:list={['flex flex-col bg-snow md:w-1/2 md:ml-2 xl:ml-4 xl:mr-8', box.class]}>
+        <div class="sl-top">
+          <div class="list-image bg-white border-4 rounded-full border-burg -mt-20 p-2 content-center m-auto">
+            <Image src={box.image} alt="" width={120} height={120} />
+          </div>
+        </div>
+        <h2 class="border-white border-b-4 text-center pt-4 text-lg">{box.title}</h2>
+        <div class="flex flex-col interior my-8 p-6 md:p-0">
+          <ol class="list-none mb-0">
+            {box.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ol>
+        </div>
+        <a href={HOMEPAGE.mapLink.url} class="btn btn-celeste btn-full -mb-6">
+          {HOMEPAGE.mapLink.label}
+        </a>
+      </div>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,49 @@
+---
+// Ported from the legacy StatisticsMap / StatisticsMapCapacity: a choropleth of Romania's districts.
+// Hover details use native SVG <title> tooltips instead of client-side state.
+import { DISTRICT_PATHS, ROMANIA_OUTLINE } from '../../data/district-paths';
+import { slugify } from '../../lib/slug';
+import { choropleth, type DistrictCounts } from '../../lib/statistics';
+
+interface Props {
+  values: DistrictCounts;
+  title: string;
+  total?: number;
+  class?: string;
+}
+
+// Drawn with a stroke in the legacy map so these small districts stay distinguishable.
+const OUTLINED = new Set(['Ilfov', 'Prahova', 'Ialomița']);
+const { values, title, total, class: className } = Astro.props;
+const { max, districts } = choropleth(values, Object.keys(DISTRICT_PATHS));
+// Deterministic per chart so builds are reproducible and ids stay unique on a page.
+const gradientId = `gradient-${slugify(title)}`;
+---
+
+<div class={className}>
+  <svg width="360" height="257" viewBox="0 0 360 257" role="img" aria-label={title}>
+    <path d={ROMANIA_OUTLINE} fill="#CDE5C0" class="map"></path>
+    {districts.map(({ name, value, fill }) => (
+      <path class={name} d={DISTRICT_PATHS[name]} fill={fill} stroke={OUTLINED.has(name) ? '#CDE5C0' : undefined}>
+        <title>{`${name}: ${value}`}</title>
+      </path>
+    ))}
+  </svg>
+  <svg class="svg-gradient" width="263" height="32" viewBox="0 0 263 32" aria-hidden="true">
+    <path d="M262.68 1.91992H0.589844V30.2499H262.68V1.91992Z" fill={`url(#${gradientId})`}></path>
+    <path d="M262.68 30.25H0.600098" stroke="#968584" stroke-width="3" stroke-miterlimit="10"></path>
+    <path d="M262.68 1.91992H0.600098" stroke="#968584" stroke-width="3" stroke-miterlimit="10"></path>
+    <defs>
+      <linearGradient id={gradientId} x1="0.589844" y1="16.0799" x2="262.68" y2="16.0799" gradientUnits="userSpaceOnUse">
+        <stop stop-color="white"></stop>
+        <stop offset="1" stop-color="#6FBAB6"></stop>
+      </linearGradient>
+    </defs>
+  </svg>
+  <div class="progress-statistic-map">
+    <span class="map-min-amount">0</span>
+    <span class="map-max-amount">{max}</span>
+  </div>
+  {total !== undefined && <p class="circle-total-amount text-center block mt-4">{total}</p>}
+  <p class="statistics-map-title pb-20">{title}</p>
+</div>

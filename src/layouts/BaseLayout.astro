@@ -28,11 +28,13 @@ const { bodyClass, mapHeader = false, showFooter = true, ...seo } = Astro.props;
   </head>
   <body class={bodyClass}>
     <Header mapHeader={mapHeader} />
-    <main class="flex flex-wrap one-column">
-      <div class="main">
-        <slot />
-      </div>
-    </main>
+    <div class="page-clip">
+      <main class="flex flex-wrap one-column">
+        <div class="main">
+          <slot />
+        </div>
+      </main>
+    </div>
     {showFooter && <Footer />}
   </body>
 </html>

@@ -1,0 +1,60 @@
+---
+// Ported from the legacy ProgressBar. The legacy chart used raw counts as pixel lengths,
+// which overflows with today's data, so bar lengths are scaled to the larger value.
+import siluette from '../../assets/images/siluette.svg';
+
+interface Props {
+  homeless: number;
+  children: number;
+  class?: string;
+}
+
+const SIZE = 310;
+const STROKE = 42;
+const MAX_BAR = 250;
+const { homeless, children, class: className = '' } = Astro.props;
+const largest = Math.max(homeless, children, 1);
+const barLength = (value: number) => Math.max(2, (value / largest) * MAX_BAR);
+const rotate = `rotate(-90 ${SIZE / 2} ${SIZE / 2})`;
+---
+
+<div class:list={['progress-bar', className]}>
+  <div class="progress-bar-images m-auto">
+    <img class="progressbar-image absolute" src={siluette.src} alt="" />
+    <svg
+      width={SIZE}
+      height={SIZE}
+      viewBox={`0 0 ${SIZE} ${SIZE}`}
+      class="xl:m-auto"
+      role="img"
+      aria-label={`${homeless} pentru persoane fără adăpost, ${children} pentru copii`}>
+      <line
+        class="circle-background"
+        y1="260"
+        y2="260"
+        x1="0"
+        x2={barLength(children)}
+        transform={rotate}
+        stroke-width={STROKE}></line>
+      <line
+        class="circle-progress"
+        y1="165"
+        y2="165"
+        x1="0"
+        x2={barLength(homeless)}
+        transform={rotate}
+        stroke-width={STROKE}></line>
+      <text x="10%" y="55%" transform={rotate} class="block text-xl text-black">
+        pentru persoane fără adăpost
+      </text>
+      <text x="10%" y="85%" transform={rotate} class="block text-xl text-black">
+        pentru copii
+      </text>
+    </svg>
+  </div>
+  <div class="progress-amount-container m-auto">
+    <span class="progress-first-amount">{homeless}</span>
+    <span class="progress-second-amount">{children}</span>
+  </div>
+  <p class="progress-copy">Centre servicii sociale</p>
+</div>

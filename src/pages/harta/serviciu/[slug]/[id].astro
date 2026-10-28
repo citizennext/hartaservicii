@@ -1,0 +1,204 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import iconClose from '../../../../assets/images/icon_arrowg.svg';
+import iconDirections from '../../../../assets/images/icon_directions.svg';
+import hssLogo from '../../../../assets/images/icon_HSS_symbolleaf.svg';
+import iconShare from '../../../../assets/images/icon_share.svg';
+import ProviderMap from '../../../../islands/map/ProviderMap';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../../data/site';
+import { getProviders } from '../../../../lib/hasura';
+import { directionsUrl, fullAddress, licenseDate, orDash } from '../../../../lib/provider';
+import { slugify } from '../../../../lib/slug';
+
+export const getStaticPaths = (async () => {
+  const providers = await getProviders();
+  return providers.map((provider) => ({
+    params: { slug: slugify(provider.name), id: provider.id },
+    props: { provider },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { provider } = Astro.props as Props;
+const { supplier, service } = provider;
+
+const supplierRows = [
+  ['Administrator', supplier.supplier_type.private ? 'Privat' : 'Public'],
+  ['Tip furnizor', supplier.supplier_type.name],
+  ['Nume furnizor', orDash(supplier.name)],
+  ['CUI furnizor', orDash(supplier.cui_cif)],
+  ['Număr decizie', orDash(supplier.decision_no)],
+  ['Dată decizie', orDash(supplier.decision_date)],
+  ['Serie și număr certificat', orDash(supplier.certificate_serial_no)],
+] as const;
+const updateMailto = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent(`Actualizare date: ${provider.name}`)}`;
+---
+
+<BaseLayout
+  title={provider.name}
+  description={`${service.name} — ${fullAddress(provider)}`}
+  bodyClass="page-harta"
+  mapHeader
+  showFooter={false}
+  isArticle>
+  <ProviderMap client:only="react" coordinates={[...provider.coordinates]} />
+  <div class="content-box">
+    <section class="map-marker-popup-single">
+      <header class="px-6 py-5 md:px-12 relative rounded-t-lg bg-celeste border-b-6 border-leaf">
+        <div class="popup-logo">
+          <img src={hssLogo.src} alt="" />
+        </div>
+        <a href="/harta" class="close-map-marker-popup" title="Înapoi la hartă" aria-label="Înapoi la hartă">
+          <img src={iconClose.src} alt="" />
+        </a>
+      </header>
+      <div class="grid md:grid-cols-2 bg-white px-6 md:px-0">
+        <div class="px-0 md:px-12 pb-6 pt-3">
+          <h1 class="border-b border-snow py-6 text-1xl">{provider.name}</h1>
+          <p class="border-b border-snow py-6">{supplier.name}</p>
+          <div class="grid grid-cols-2 py-6 border-b border-snow">
+            <p>
+              <strong>Nr. licență</strong>
+              <br />
+              <span class="font-semibold text-celeste text-xl">{orDash(provider.license_no)}</span>
+            </p>
+            <p>
+              <strong>Capacitate</strong>
+              <br />
+              <span class="font-normal text-celeste text-4xl">{orDash(provider.capacity)}</span>
+            </p>
+          </div>
+          <div class="grid grid-cols-2 py-6 border-b border-snow">
+            <p>
+              <strong>Direcții</strong>
+              <br />
+              <a
+                href={directionsUrl(provider.coordinates)}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Direcții în Google Maps">
+                <img src={iconDirections.src} alt="Direcții" class="bg-snow rounded-full p-3 w-12 h-12" />
+              </a>
+            </p>
+            <p>
+              <strong>Distribuie</strong>
+              <br />
+              <button type="button" class="bg-snow rounded-full p-2 w-12 h-12" title="Copiază linkul" data-share>
+                <img src={iconShare.src} alt="Distribuie" class="m-auto" />
+              </button>
+              <span class="share-status text-sm text-celeste" role="status" aria-live="polite"></span>
+            </p>
+          </div>
+          <div class="pin-address py-6">
+            <p>
+              <strong>Adresă</strong>
+            </p>
+            <span>{fullAddress(provider)}</span>
+          </div>
+          {provider.email && (
+            <div class="pin-email py-6">
+              <p>
+                <strong>Email</strong>
+              </p>
+              <a href={`mailto:${provider.email}`}>{provider.email}</a>
+            </div>
+          )}
+          {provider.phones.length > 0 && (
+            <div class="pin-phone py-6">
+              <p>
+                <strong>Telefon</strong>
+              </p>
+              {provider.phones.map(({ number }) => (
+                <a class="block" href={`tel:${number.replace(/\s+/g, '')}`}>
+                  {number}
+                </a>
+              ))}
+            </div>
+          )}
+          <div class="pin-services py-6 font-body border-t border-snow">
+            <p>
+              <strong>Tip / cod serviciu</strong>
+            </p>
+            <span class="pb-6">
+              {service.name}
+              {service.code && ` (${service.code})`}
+            </span>
+            {service.service_offers.length > 0 && (
+              <>
+                <strong class="block pt-4">Servicii oferite:</strong>
+                <ul>
+                  {service.service_offers.map(({ offer }) => (
+                    <li>{offer.name}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+          <div class="pin-license grid grid-cols-2 py-6 border-t border-snow">
+            <div>
+              <p>
+                <strong>Dată licență</strong>
+              </p>
+              <span>{licenseDate(provider)}</span>
+            </div>
+            <div>
+              <p>
+                <strong>Instituția care a eliberat licența</strong>
+              </p>
+              <span>{orDash(provider.license_by)}</span>
+            </div>
+          </div>
+        </div>
+        <div class="-mx-6 px-6 md:mx-0 md:px-12 pb-6 pt-6 bg-snow">
+          <table class="table-auto font-body">
+            <tbody>
+              {supplierRows.map(([label, value]) => (
+                <tr class="h-16">
+                  <th scope="row" class="text-left font-normal pr-4">
+                    {label}:
+                  </th>
+                  <td class="font-bold">{value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <footer class="grid md:grid-cols-2">
+        <div class="p-6 md:p-12 border-b border-brown md:border-0">
+          <h2 class="text-white">Actualizare informații</h2>
+          <p>
+            Informațiile primite vor fi folosite pentru a completa și actualiza datele acestui centru - de exemplu număr de
+            telefon.
+          </p>
+          <a href={updateMailto} class="btn btn-celeste btn-full mt-4 md:ml-0">
+            Contactează-ne
+          </a>
+        </div>
+      </footer>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-share]');
+  const status = document.querySelector<HTMLElement>('.share-status');
+
+  button?.addEventListener('click', async () => {
+    const url = window.location.href;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: document.title, url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      if (status) status.textContent = 'Link copiat în clipboard!';
+    } catch (error) {
+      // AbortError means the user closed the share sheet; anything else is a real failure.
+      if (error instanceof DOMException && error.name === 'AbortError') return;
+      console.error('Sharing failed', error);
+      if (status) status.textContent = 'Nu am putut copia linkul.';
+    }
+  });
+</script>
