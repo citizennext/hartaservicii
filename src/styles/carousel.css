@@ -28,24 +28,10 @@
   }
 }
 
-/* Approximates the gatsby-image duotone (shadow #999, highlight #EDF7EF at 60%). */
-.duotone {
-  position: relative;
-  overflow: hidden;
-}
-
+/* Duotone treatment matching the old gatsby-image output; the filter lives in DuotoneFilter.astro. */
 .duotone img {
   display: block;
   width: 100%;
   height: auto;
-  filter: grayscale(1) contrast(0.85);
-}
-
-.duotone::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: rgb(237 247 239 / 0.6);
-  mix-blend-mode: multiply;
-  pointer-events: none;
+  filter: url(#duotone);
 }

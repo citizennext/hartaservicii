@@ -32,11 +32,11 @@ const postDate = (blog: (typeof blogs)[number]) => blog.publishedAt ?? blog.crea
                 </div>
               )}
               <div class="content">
-                <h2 class="title">
+                <h3 class="title">
                   <a href={`/noutati/${blog.slug}`}>
                     <span class="ellipsis-clamp-2">{blog.title}</span>
                   </a>
-                </h2>
+                </h3>
                 <div class="date">{formatDate(postDate(blog))}</div>
                 <div class="summary ellipsis-clamp-3">{blog.summary}</div>
                 <a href={`/noutati/${blog.slug}`} class="btn-arrowonly">
@@ -63,11 +63,11 @@ const postDate = (blog: (typeof blogs)[number]) => blog.publishedAt ?? blog.crea
               </div>
             )}
             <div class="content" data-image-exist={String(!!blog.image)}>
-              <h2 class="title">
+              <h3 class="title">
                 <a href={`/noutati/${blog.slug}`}>
                   <span class="ellipsis-clamp-3">{blog.title}</span>
                 </a>
-              </h2>
+              </h3>
               <span class="date">{formatDate(postDate(blog))}</span>
               <span class="summary ellipsis-clamp-3">{blog.summary}</span>
             </div>

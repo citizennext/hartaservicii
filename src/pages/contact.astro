@@ -28,7 +28,7 @@ const SUPPORT = [
     <div class="contact-wrapper">
       <div class="contact-info">
         <div class="social-media">
-          <h2 class="text-lg">
+          <h4>
             Alătură-te comunității noastre de pe{' '}
             <a href={SITE.facebookUrl} target="_blank" rel="noopener noreferrer">
               Facebook
@@ -37,7 +37,7 @@ const SUPPORT = [
             <a href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer">
               Instagram
             </a>
-          </h2>
+          </h4>
           <p>
             Ai sugestii de îmbunătățire a platformei sau îți dorești să devii voluntar, pentru a dezvolta proiectul alături de
             noi? Ne poți scrie oricând folosind unul dintre canalele noastre de comunicare.
@@ -45,14 +45,14 @@ const SUPPORT = [
         </div>
         {SUPPORT.map(({ heading, text }) => (
           <div class="contact-support">
-            <h2 class="text-lg">{heading}</h2>
+            <h4>{heading}</h4>
             <span>{text}</span>
             <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
           </div>
         ))}
       </div>
       <div class="contact-form">
-        <h2 class="text-lg">Folosește formularul de contact:</h2>
+        <h4>Folosește formularul de contact:</h4>
         <div class="contact-result" role="status" aria-live="polite" data-result hidden></div>
         <form method="post" action="/api/contact" data-contact-form>
           <label for="contact-email" class="sr-only">

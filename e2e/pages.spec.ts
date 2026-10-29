@@ -2,17 +2,33 @@ import { expect, test } from '@playwright/test';
 
 test('hero search leads to Algolia results', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('searchbox', { name: 'Caută un serviciu social' }).fill('cluj');
-  await page.getByRole('searchbox', { name: 'Caută un serviciu social' }).press('Enter');
+  // A searchbox before hydration, a combobox after: find it by its label.
+  const search = page.getByLabel('Caută un serviciu social');
+  await search.fill('cluj');
+  await search.press('Enter');
 
   await expect(page).toHaveURL(/\/cautare\?query=cluj/);
   await expect(page.locator('.ais-Hits-item').first()).toContainText(/cluj/i, { timeout: 15_000 });
   await expect(page.locator('.ais-Hits-item a').first()).toHaveAttribute('href', /^\/harta\/serviciu\/.+\/.+\/$/);
 });
 
+test('hero autocomplete suggests services and opens the chosen one', async ({ page }) => {
+  await page.goto('/');
+  const search = page.getByRole('combobox', { name: 'Caută un serviciu social' });
+  await search.fill('cluj');
+
+  const options = page.getByRole('option');
+  await expect(options.first()).toBeVisible({ timeout: 15_000 });
+  await search.press('ArrowDown');
+  await expect(options.first()).toHaveAttribute('aria-selected', 'true');
+  await search.press('Enter');
+
+  await expect(page).toHaveURL(/\/harta\/serviciu\/.+\/.+\/$/);
+});
+
 test('news index links to articles with prev/next navigation', async ({ page }) => {
   await page.goto('/noutati');
-  const firstArticle = page.locator('.blog-post-item h2 a').first();
+  const firstArticle = page.locator('.blog-post-item h3 a').first();
   const title = (await firstArticle.innerText()).trim();
   await firstArticle.click();
 

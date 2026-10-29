@@ -1,6 +1,6 @@
 ---
-// Ported from the legacy ProgressBar. The legacy chart used raw counts as pixel lengths,
-// which overflows with today's data, so bar lengths are scaled to the larger value.
+// Ported from the legacy ProgressBar. Like the live site, bars use the raw counts as lengths and
+// are clipped at the chart edge, so small categories stay visible next to large ones.
 import siluette from '../../assets/images/siluette.svg';
 
 interface Props {
@@ -11,10 +11,8 @@ interface Props {
 
 const SIZE = 310;
 const STROKE = 42;
-const MAX_BAR = 250;
 const { homeless, children, class: className = '' } = Astro.props;
-const largest = Math.max(homeless, children, 1);
-const barLength = (value: number) => Math.max(2, (value / largest) * MAX_BAR);
+const barLength = (value: number) => Math.min(value, SIZE);
 const rotate = `rotate(-90 ${SIZE / 2} ${SIZE / 2})`;
 ---
 

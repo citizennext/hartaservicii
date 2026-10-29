@@ -1,0 +1,26 @@
+/* Legacy rules that came after `@import "tailwindcss/utilities"` in the old style.sass: kept unlayered so they still win. */
+footer {
+  @apply bg-burg;
+  @apply text-snow;
+  @apply font-sans;
+}
+footer .text-copyright {
+  @apply text-white;
+}
+footer a {
+  @apply text-snow;
+  @apply font-semibold;
+}
+footer li a {
+  text-decoration: none;
+}
+@variant md {
+  footer li:before {
+    content: '¬ ';
+  }
+}
+@variant xl {
+  footer li:before {
+    content: '| ';
+  }
+}

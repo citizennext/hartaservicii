@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import heroImage from '../../assets/images/HSS_people_clean_2000.jpg';
 import { HOMEPAGE } from '../../data/site';
+import HeroSearch from '../../islands/search/HeroSearch';
 import Separator from '../Separator.astro';
 ---
 
@@ -26,23 +27,12 @@ import Separator from '../Separator.astro';
         />
       </div>
       <Separator color="celeste" class="xl:hidden" />
-      <div class="autocomplete-search">
-        <form action="/cautare" method="get" role="search">
-          <label for="hero-search" class="sr-only">
-            Caută un serviciu social
-          </label>
-          <!-- react-autosuggest__input: the legacy theme styles the hero search through this class. -->
-          <input
-            id="hero-search"
-            class="react-autosuggest__input"
-            type="search"
-            name="query"
-            placeholder="Caută serviciul de care ai nevoie"
-            autocomplete="off"
-          />
-        </form>
-      </div>
     </div>
     <Separator color="celeste" bottom="-6px" />
+  </div>
+  <!-- Positioned against the whole hero (not the image column) so it is centred on the page. -->
+  <div class="autocomplete-search">
+    <!-- Server-rendered as a plain GET form to /cautare; hydrates into the Algolia autocomplete. -->
+    <HeroSearch client:load />
   </div>
 </div>

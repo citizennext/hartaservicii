@@ -1,5 +1,4 @@
-import { PUBLIC_ALGOLIA_APP_ID, PUBLIC_ALGOLIA_INDEX_NAME_COMMON, PUBLIC_ALGOLIA_SEARCH_KEY } from 'astro:env/client';
-import { liteClient } from 'algoliasearch/lite';
+import { PUBLIC_ALGOLIA_INDEX_NAME_COMMON } from 'astro:env/client';
 import type { Hit } from 'instantsearch.js';
 import {
   Configure,
@@ -13,8 +12,8 @@ import {
   SearchBox,
 } from 'react-instantsearch';
 import { hitPath, type SearchRecord } from '../../lib/search';
+import { searchClient } from './client';
 
-const searchClient = liteClient(PUBLIC_ALGOLIA_APP_ID, PUBLIC_ALGOLIA_SEARCH_KEY);
 const HITS_PER_PAGE = 10;
 
 function SearchHit({ hit }: { hit: Hit<SearchRecord> }) {

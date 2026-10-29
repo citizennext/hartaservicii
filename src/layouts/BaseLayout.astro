@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
+import DuotoneFilter from '../components/DuotoneFilter.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Seo, { type SeoProps } from '../components/Seo.astro';
@@ -28,6 +29,7 @@ const hasSidebar = Astro.slots.has('sidebar-left');
     <slot name="head" />
   </head>
   <body class={bodyClass}>
+    <DuotoneFilter />
     <Header mapHeader={mapHeader} />
     <slot name="before-main" />
     <div class="page-clip">
