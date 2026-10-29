@@ -19,5 +19,8 @@ export default defineConfig({
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
+    // Cloudflare's always-pass Turnstile test key, so the contact form renders in tests. It ends up in
+    // this build's dist/, so never deploy dist/ from an e2e run — rebuild first.
+    env: { PUBLIC_TURNSTILE_SITE_KEY: '1x00000000000000000000AA' },
   },
 });

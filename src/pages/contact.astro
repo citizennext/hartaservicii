@@ -15,13 +15,16 @@ const SUPPORT = [
     text: 'Dacă întâmpini probleme la accesarea site-ului, te rugăm să ne informezi la adresa de mai jos. Descrie-ne problema și eventual, include o captură de ecran pentru a înțelege și rezolva rapid situația.',
   },
 ] as const;
+
+// The form only works with Turnstile; without a site key, point people to email instead.
+const isFormEnabled = Boolean(PUBLIC_TURNSTILE_SITE_KEY);
 ---
 
 <BaseLayout
   title="Contact"
   description="Așteptăm oricând sugestiile voastre pentru a îmbunătăți platforma!"
   bodyClass="page-contact">
-  <script slot="head" is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  {isFormEnabled && <script slot="head" is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />}
   <PageHeader slot="before-main" header="contact" />
   <div class="wrapper">
     <h1 class="sr-only">Contact</h1>
@@ -52,9 +55,18 @@ const SUPPORT = [
         ))}
       </div>
       <div class="contact-form">
-        <h4>Folosește formularul de contact:</h4>
+        {!isFormEnabled && (
+          <>
+            <h4>Scrie-ne un mesaj</h4>
+            <p>
+              Formularul de contact nu este disponibil momentan. Ne poți scrie la{' '}
+              <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+            </p>
+          </>
+        )}
+        {isFormEnabled && <h4>Folosește formularul de contact:</h4>}
         <div class="contact-result" role="status" aria-live="polite" data-result hidden></div>
-        <form method="post" action="/api/contact" data-contact-form>
+        <form method="post" action="/api/contact" data-contact-form hidden={!isFormEnabled}>
           <label for="contact-email" class="sr-only">
             Adresa ta de email
           </label>

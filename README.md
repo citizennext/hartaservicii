@@ -57,6 +57,9 @@ public/             static files incl. Cloudflare _headers/_redirects and the sw
 
 ## Deployment (Cloudflare Pages)
 
+> Always deploy from a fresh `pnpm build`: `pnpm test:e2e` writes its own build to `dist/` with Cloudflare's Turnstile _test_ key.
+> Without `PUBLIC_TURNSTILE_SITE_KEY` the contact page hides the form and shows the email address instead.
+
 Build settings: command `pnpm build`, output directory `dist`, Node version from `.nvmrc`.
 
 Environment variables in the Pages project:
@@ -68,7 +71,7 @@ Environment variables in the Pages project:
 | `PUBLIC_ALGOLIA_APP_ID`            | build (browser)         |                                                      |
 | `PUBLIC_ALGOLIA_SEARCH_KEY`        | build (browser)         | search-only key                                      |
 | `PUBLIC_ALGOLIA_INDEX_NAME_COMMON` | build (browser)         |                                                      |
-| `PUBLIC_TURNSTILE_SITE_KEY`        | build (browser)         | defaults to Cloudflare's always-pass test key        |
+| `PUBLIC_TURNSTILE_SITE_KEY`        | build (browser)         | without it the form is replaced by the email link    |
 | `TURNSTILE_SECRET_KEY`             | `functions/api/contact` | encrypted                                            |
 | `RESEND_API_KEY`                   | `functions/api/contact` | encrypted; sending domain must be verified in Resend |
 | `CONTACT_TO`, `CONTACT_FROM`       | `functions/api/contact` | optional overrides                                   |
