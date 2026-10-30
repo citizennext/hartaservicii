@@ -14,7 +14,7 @@ Built with **Astro 7** (static output) and **React 19 islands**, deployed to **C
 - Search (`/cautare`) uses Algolia directly from the browser with the search-only key.
 - The contact form posts to a Cloudflare Pages Function (`functions/api/contact.ts`): Turnstile + honeypot, delivered via Resend.
 
-Because the site is static, **content changes appear after a rebuild**. A nightly GitHub Action triggers a Cloudflare build and refreshes the Algolia index (see below).
+Because the site is static, **content changes appear after a rebuild**. A nightly GitHub Action rebuilds and redeploys the site and refreshes the Algolia index (see below).
 
 ## Development
 
@@ -57,33 +57,21 @@ public/             static files incl. Cloudflare _headers/_redirects and the sw
 
 ## Deployment (Cloudflare Pages)
 
+The site is built in **GitHub Actions** and uploaded to the Cloudflare Pages project `harta-servicii` (Direct Upload, account `cezar.neaga@civictech.ro`). Cloudflare does not build it.
+
+- `deploy.yml` builds, refuses to publish if `dist/` contains the Hasura secret or the Turnstile test key, then runs `wrangler pages deploy`.
+- **CI** (`ci.yml`) runs lint, type-check, unit tests, build + Playwright e2e on every PR, and calls `deploy.yml` after a push to `main` passes.
+- **Content refresh** (`content-refresh.yml`) rebuilds the Algolia index nightly, on push to `main` and on demand; the nightly/manual runs also redeploy so Hasura/CMS changes go live.
+- To deploy by hand: Actions → Deploy → Run workflow (or `pnpm build && pnpm exec wrangler pages deploy dist --project-name harta-servicii --branch main`).
+
 > Always deploy from a fresh `pnpm build`: `pnpm test:e2e` writes its own build to `dist/` with Cloudflare's Turnstile _test_ key.
 > Without `PUBLIC_TURNSTILE_SITE_KEY` the contact page hides the form and shows the email address instead.
 
-Build settings: command `pnpm build`, output directory `dist`, Node version from `.nvmrc`.
+GitHub repository secrets: `HASURA_URL`, `HASURA_ADMIN_SECRET`, `ALGOLIA_API_KEY`, `CLOUDFLARE_API_TOKEN` (custom token: Account → Cloudflare Pages → Edit).
 
-Environment variables in the Pages project:
+GitHub repository variables: `PUBLIC_ALGOLIA_APP_ID`, `PUBLIC_ALGOLIA_SEARCH_KEY`, `PUBLIC_ALGOLIA_INDEX_NAME_COMMON`, `PUBLIC_TURNSTILE_SITE_KEY`, `CLOUDFLARE_ACCOUNT_ID`. Optional: `PUBLIC_TILE_URL` to swap OSM for a commercial tile provider.
 
-| Variable                           | Used by                 | Notes                                                |
-| ---------------------------------- | ----------------------- | ---------------------------------------------------- |
-| `HASURA_URL`                       | build                   | `https://servicii-sociale.hasura.app/v1/graphql`     |
-| `HASURA_ADMIN_SECRET`              | build                   | encrypted                                            |
-| `PUBLIC_ALGOLIA_APP_ID`            | build (browser)         |                                                      |
-| `PUBLIC_ALGOLIA_SEARCH_KEY`        | build (browser)         | search-only key                                      |
-| `PUBLIC_ALGOLIA_INDEX_NAME_COMMON` | build (browser)         |                                                      |
-| `PUBLIC_TURNSTILE_SITE_KEY`        | build (browser)         | without it the form is replaced by the email link    |
-| `TURNSTILE_SECRET_KEY`             | `functions/api/contact` | encrypted                                            |
-| `RESEND_API_KEY`                   | `functions/api/contact` | encrypted; sending domain must be verified in Resend |
-| `CONTACT_TO`, `CONTACT_FROM`       | `functions/api/contact` | optional overrides                                   |
-| `PUBLIC_TILE_URL`                  | build (browser)         | optional; swap OSM for a commercial tile provider    |
-
-### GitHub Actions
-
-- **CI** (`ci.yml`): lint, type-check, unit tests with coverage, build + Playwright e2e, and a check that the Hasura secret is not in `dist/`.
-- **Content refresh** (`content-refresh.yml`): nightly, on push to `main` and on demand — rebuilds the Algolia index and triggers the Cloudflare deploy hook.
-
-Repository secrets: `HASURA_URL`, `HASURA_ADMIN_SECRET`, `ALGOLIA_API_KEY`, `CLOUDFLARE_PAGES_DEPLOY_HOOK`.
-Repository variables: `PUBLIC_ALGOLIA_APP_ID`, `PUBLIC_ALGOLIA_SEARCH_KEY`, `PUBLIC_ALGOLIA_INDEX_NAME_COMMON`.
+Cloudflare Pages project secrets (read at runtime by `functions/api/contact`, set with `wrangler pages secret put`): `RESEND_API_KEY` (sending domain must be verified in Resend), `TURNSTILE_SECRET_KEY`; optional `CONTACT_TO`, `CONTACT_FROM`.
 
 ## Map tiles
 

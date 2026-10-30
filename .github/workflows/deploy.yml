@@ -1,0 +1,56 @@
+# Builds the site and uploads it to the Cloudflare Pages project (Direct Upload).
+# Called by CI after tests pass on main and by the nightly content refresh; can also be run by hand.
+name: Deploy
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: https://harta-servicii-2v0.pages.dev
+    env:
+      HASURA_URL: ${{ secrets.HASURA_URL }}
+      HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
+      PUBLIC_ALGOLIA_APP_ID: ${{ vars.PUBLIC_ALGOLIA_APP_ID }}
+      PUBLIC_ALGOLIA_SEARCH_KEY: ${{ vars.PUBLIC_ALGOLIA_SEARCH_KEY }}
+      PUBLIC_ALGOLIA_INDEX_NAME_COMMON: ${{ vars.PUBLIC_ALGOLIA_INDEX_NAME_COMMON }}
+      PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Refuse to publish secrets or the Turnstile test key
+        run: |
+          if grep -rqF "$HASURA_ADMIN_SECRET" dist; then
+            echo "::error::HASURA_ADMIN_SECRET found in dist/"; exit 1
+          fi
+          if grep -rqF "1x00000000000000000000AA" dist; then
+            echo "::error::Turnstile test site key found in dist/"; exit 1
+          fi
+          if [ -z "$PUBLIC_TURNSTILE_SITE_KEY" ]; then
+            echo "::warning::PUBLIC_TURNSTILE_SITE_KEY is not set; /contact will show the email fallback"
+          fi
+      - name: Deploy to Cloudflare Pages
+        run: >-
+          pnpm exec wrangler pages deploy dist
+          --project-name harta-servicii
+          --branch main
+          --commit-hash "${{ github.sha }}"
+          --commit-message "${{ github.event_name }}: ${{ github.sha }}"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}

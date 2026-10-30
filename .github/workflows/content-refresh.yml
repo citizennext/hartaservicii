@@ -1,5 +1,6 @@
 # The site is static: Hasura/CMS changes reach it through a rebuild.
-# Nightly (and on demand) this triggers a Cloudflare Pages build and refreshes the Algolia index.
+# Nightly (and on demand) this refreshes the Algolia index and redeploys the site.
+# Pushes to main reindex too; the CI workflow deploys those.
 name: Content refresh
 
 on:
@@ -14,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  refresh:
+  reindex:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -33,9 +34,9 @@ jobs:
           ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
           PUBLIC_ALGOLIA_APP_ID: ${{ vars.PUBLIC_ALGOLIA_APP_ID }}
           PUBLIC_ALGOLIA_INDEX_NAME_COMMON: ${{ vars.PUBLIC_ALGOLIA_INDEX_NAME_COMMON }}
-      - name: Trigger Cloudflare Pages build
-        # Pushes to main already build via the Pages Git integration.
-        if: github.event_name != 'push'
-        run: curl --fail --silent --show-error -X POST "$DEPLOY_HOOK"
-        env:
-          DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
+
+  deploy:
+    needs: reindex
+    if: github.event_name != 'push'
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
