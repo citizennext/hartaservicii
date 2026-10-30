@@ -1,0 +1,26 @@
+---
+import { NAVIGATION } from '../data/site';
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (url: string) => current === url || current.startsWith(`${url}/`);
+---
+
+<nav class={className}>
+  <ul class="navigation">
+    {NAVIGATION.map((item) => (
+      <li>
+        <a
+          href={item.url}
+          title={item.label}
+          class:list={{ active: isActive(item.url) }}
+          aria-current={isActive(item.url) ? 'page' : undefined}>
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

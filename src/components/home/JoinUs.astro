@@ -1,0 +1,31 @@
+---
+import illustration from '../../assets/images/illu_partner.svg';
+import logoNoType from '../../assets/images/logo_notype.svg';
+import { SITE } from '../../data/site';
+---
+
+<div
+  id="contact"
+  class="section blogposts bg-white pt-12 md:pt-24 mt-10 md:mt-40 md:pb-32 md:m-auto md:max-w-gridt xl:max-w-gridt xl:m-auto xl:pt-24 xl:mt-40 xl:pb-48">
+  <div class="md:flex">
+    <div class="contact-left md:w-1/2 md:mr-2">
+      <h3 class="wide pl-4">Hai alături de noi!</h3>
+      <div class="flex justify-center xl:relative" aria-hidden="true">
+        <img class="illu-logo" src={illustration.src} alt="" />
+        <img class="no-type" src={logoNoType.src} alt="" />
+      </div>
+      <a class="btn btn-celeste btn-arrow btn-fb w-3/4 mx-auto" href={SITE.facebookUrl} target="_blank" rel="noopener noreferrer">
+        Comunitate
+      </a>
+    </div>
+    <div class="contact-right mb-32 md:w-1/2 md:mb-0 md:ml-2 md:self-end">
+      <p class="py-8 px-4">
+        Dacă dorești să fii voluntar sau să devii partener al proiectului, suntem nerăbdători să ne contactezi și să începem
+        colaborarea.
+      </p>
+      <a href="/contact" class="btn btn-celeste btn-arrow w-3/4 mx-auto">
+        Contact
+      </a>
+    </div>
+  </div>
+</div>

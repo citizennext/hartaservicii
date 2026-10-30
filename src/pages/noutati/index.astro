@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import PageHeader from '../../components/PageHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../lib/format';
+import { getBlogs } from '../../lib/hasura';
+
+const FEATURED_LIMIT = 2;
+const blogs = await getBlogs();
+const featured = blogs.filter((blog) => blog.featured).slice(0, FEATURED_LIMIT);
+const regular = blogs.filter((blog) => !featured.includes(blog));
+const postDate = (blog: (typeof blogs)[number]) => blog.publishedAt ?? blog.createdAt;
+---
+
+<BaseLayout
+  title="Noutăți"
+  description="Ultimele noutăți legate de serviciile sociale din România și de platforma noastră"
+  image="/ajutam.jpg"
+  bodyClass="page-blog">
+  {featured.length > 0 && <PageHeader slot="before-main" topSeparator={false} bottomSeparator={false} />}
+  <div class="wrapper">
+    {featured.length > 0 && (
+      <ul class="flex flex-wrap blog-posts-featured px-0 md:px-6">
+        {featured.map((blog) => (
+          <li class="blog-post-featured-item" data-items={featured.length}>
+            <div class="flex flex-wrap">
+              {blog.image && (
+                <div class="image duotone">
+                  <a href={`/noutati/${blog.slug}`} tabindex="-1" aria-hidden="true">
+                    <Image src={blog.image.url} alt="" width={1024} height={526} fit="cover" />
+                  </a>
+                </div>
+              )}
+              <div class="content">
+                <h3 class="title">
+                  <a href={`/noutati/${blog.slug}`}>
+                    <span class="ellipsis-clamp-2">{blog.title}</span>
+                  </a>
+                </h3>
+                <div class="date">{formatDate(postDate(blog))}</div>
+                <div class="summary ellipsis-clamp-3">{blog.summary}</div>
+                <a href={`/noutati/${blog.slug}`} class="btn-arrowonly">
+                  <span>Citește articolul</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+    <h1 class="flex flex-wrap mx-0 md:mx-6 lg:mx-48 xl:mx-56 mt-16 mb-4">
+      <span>Noutăți</span>
+    </h1>
+    <ul class="blog-posts flex flex-wrap">
+      {regular.map((blog) => (
+        <li class="blog-post-item">
+          <div class="flex flex-wrap">
+            {blog.image && (
+              <div class="image duotone">
+                <a href={`/noutati/${blog.slug}`} tabindex="-1" aria-hidden="true">
+                  <Image src={blog.image.url} alt="" width={1024} height={526} fit="cover" />
+                </a>
+              </div>
+            )}
+            <div class="content" data-image-exist={String(!!blog.image)}>
+              <h3 class="title">
+                <a href={`/noutati/${blog.slug}`}>
+                  <span class="ellipsis-clamp-3">{blog.title}</span>
+                </a>
+              </h3>
+              <span class="date">{formatDate(postDate(blog))}</span>
+              <span class="summary ellipsis-clamp-3">{blog.summary}</span>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>

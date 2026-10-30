@@ -1,0 +1,19 @@
+---
+import Hero from '../components/home/Hero.astro';
+import JoinUs from '../components/home/JoinUs.astro';
+import LatestNews from '../components/home/LatestNews.astro';
+import Lists from '../components/home/Lists.astro';
+import Partners from '../components/home/Partners.astro';
+import StatisticsTeaser from '../components/home/StatisticsTeaser.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { HOMEPAGE } from '../data/site';
+---
+
+<BaseLayout title={HOMEPAGE.title} bodyClass="page-homepage">
+  <Hero />
+  <Lists />
+  <StatisticsTeaser />
+  <LatestNews />
+  <Partners />
+  <JoinUs />
+</BaseLayout>

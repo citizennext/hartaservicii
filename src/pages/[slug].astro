@@ -1,0 +1,49 @@
+---
+// CMS-managed pages (e.g. /despre-noi, /parteneri).
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import PageHeader from '../components/PageHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPages } from '../lib/hasura';
+
+export const getStaticPaths = (async () => {
+  const pages = await getPages();
+  return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { page } = Astro.props as Props;
+const { images, buttons } = page.additionalData;
+---
+
+<BaseLayout title={page.title} description={page.summary} image={page.image?.url ?? null} bodyClass={`page-${page.slug}`}>
+  <PageHeader slot="before-main" header={page.header} />
+  {images.length > 0 && (
+    <Fragment slot="sidebar-left">
+      {images.map((image) => (
+        <a
+          href={image.href}
+          title={image.alt}
+          style="margin-bottom: 20px"
+          class="hover:bg-white"
+          target="_blank"
+          rel="noopener noreferrer">
+          <img src={image.url} alt={image.alt} width="200" loading="lazy" />
+        </a>
+      ))}
+    </Fragment>
+  )}
+  <h1 class="sr-only">{page.title}</h1>
+  {page.summary && <div class="summary">{page.summary}</div>}
+  <!-- CMS-authored HTML from the project's own GraphCMS content, rendered as on the legacy site. -->
+  <div class="content" set:html={page.content?.html ?? ''} />
+  {buttons.map((button) => (
+    <a
+      href={button.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={button.label}
+      class="btn btn-celeste btn-arrow w-full sm:mx-auto sm:w-2/3 lg:w-1/2 my-4">
+      {button.label}
+    </a>
+  ))}
+</BaseLayout>

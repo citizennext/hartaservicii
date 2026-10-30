@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+@import '@fontsource/montserrat/400.css';
+@import '@fontsource/montserrat/400-italic.css';
+@import '@fontsource/montserrat/600.css';
+@import '@fontsource/montserrat/700.css';
+@import '@fontsource/montserrat/700-italic.css';
+@import '@fontsource/koho/200-italic.css';
+@import '@fontsource/koho/400.css';
+@import '@fontsource/koho/400-italic.css';
+@import '@fontsource/koho/700.css';
+@import '@fontsource/koho/700-italic.css';
+
+/* Design tokens ported from the legacy tailwind.config.js (which replaced the default palette). */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-black: #3a3a3a;
+  --color-white: #ffffff;
+  --color-grey: #e5e5e5;
+  --color-celeste: #6fbbb7;
+  --color-leaf: #cee6c1;
+  --color-leaf2: #cde5c0;
+  --color-brown: #877272;
+  --color-lightbrown: #c4c3c3;
+  --color-snow: #edf7ef;
+  --color-burg: #978585;
+  --color-error: #cc0000;
+  --color-link: #1c847e;
+
+  --breakpoint-*: initial;
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 48px;
+
+  --container-screen: 100vw;
+  --container-gridt: 717px;
+  --container-griddw: 1206px;
+  --container-gridd: 1036px;
+
+  --text-1xl: 1.375rem;
+  --text-3xl: 1.625rem;
+  --text-3xxl: 1.875rem;
+
+  --font-display: 'Montserrat', sans-serif;
+  --font-body: 'KoHo', sans-serif;
+}
+
+/* Tailwind v1 → v4 compatibility (border colour default, button cursor). */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-grey, currentColor);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@import './theme.css';
+@import './theme-after-utilities.css';
+
+/* Decorative full-bleed bands (e.g. /statistici) extend past the viewport. Clip them at a
+   full-width wrapper: unlike overflow on <html>, this can't be scrolled by touch or script. */
+.page-clip {
+  width: 100%;
+  overflow-x: clip;
+}
+@import './drawer.css';
+@import './map.css';
+@import './carousel.css';
+@import './hero.css';
+@import './search.css';

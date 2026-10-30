@@ -1,0 +1,20 @@
+---
+import { getBlogs } from '../../lib/hasura';
+import BlogCard from '../BlogCard.astro';
+
+const LATEST_COUNT = 4;
+const blogs = (await getBlogs()).slice(0, LATEST_COUNT);
+---
+
+<div id="blog" class="mb-16 bg-white md:mb-24 xl:max-w-griddw xl:m-auto xl:mb-32">
+  <div class="mb-16">
+    <div class="carousel" aria-label="Ultimele noutăți">
+      {blogs.map((blog) => (
+        <BlogCard blog={blog} />
+      ))}
+    </div>
+  </div>
+  <a href="/noutati" class="btn btn-celeste btn-full btn-arrow md:mx-auto -mb-6">
+    Toate noutățile
+  </a>
+</div>

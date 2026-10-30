@@ -1,0 +1,62 @@
+---
+// Ported from the legacy CircularProgressBar: a ring showing the public share of a total.
+interface Props {
+  publicCount: number;
+  privateCount: number;
+  title: string;
+  class?: string;
+}
+
+const SIZE = 310;
+const STROKE = 30;
+const { publicCount, privateCount, title, class: className } = Astro.props;
+const radius = (SIZE - STROKE) / 2;
+const center = SIZE / 2;
+const circumference = radius * Math.PI * 2;
+const total = publicCount + privateCount;
+const publicShare = total === 0 ? 0 : publicCount / total;
+const dashOffset = circumference * (1 - publicShare);
+---
+
+<div class={className}>
+  <svg
+    width={SIZE}
+    height={SIZE}
+    viewBox={`0 0 ${SIZE} ${SIZE}`}
+    role="img"
+    aria-label={`${publicCount} publice, ${privateCount} private`}>
+    <circle class="circle-background" cx={center} cy={center} r={radius} stroke-width={STROKE}></circle>
+    <circle
+      class="circle-progress"
+      cx={center}
+      cy={center}
+      r={radius}
+      stroke-width={STROKE}
+      transform={`rotate(-90 ${center} ${center})`}
+      style={{ strokeDasharray: circumference, strokeDashoffset: dashOffset }}></circle>
+    <text class="circle-private" x="30%" y="45%" dy=".3em" text-anchor="middle">
+      {privateCount}
+    </text>
+    <text x="15%" y="55%" class="block uppercase text-base text-black">
+      private
+    </text>
+    <text class="circle-public" x="70%" y="45%" dy=".3em" text-anchor="middle">
+      {publicCount}
+    </text>
+    <text x="65%" y="55%" class="block uppercase text-base text-black">
+      publice
+    </text>
+  </svg>
+  <svg width="272" height="67" viewBox="0 0 272 67" fill="none" class="-mt-10 m-auto" aria-hidden="true">
+    <path
+      d="M2.92 2.58984C19.4702 21.6343 39.9151 36.9048 62.8735 47.3697C85.832 57.8345 110.769 63.2498 136 63.2498C161.231 63.2498 186.168 57.8345 209.126 47.3697C232.085 36.9048 252.53 21.6343 269.08 2.58984"
+      stroke="#968584"
+      stroke-width="7"
+      stroke-miterlimit="10"></path>
+  </svg>
+  <div class="circle-total-container">
+    <p class="circle-total pt-4">TOTAL</p>
+    <span class="circle-total-amount">{total}</span>
+    <p class="circle-total pb-20">{title}</p>
+  </div>
+</div>

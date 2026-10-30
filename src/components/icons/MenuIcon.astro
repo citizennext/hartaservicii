@@ -1,0 +1,15 @@
+---
+interface Props {
+  class?: string;
+  size?: number;
+}
+const { class: className, size = 20 } = Astro.props;
+---
+
+<svg class={className} width={size} height={size} viewBox="0 0 20 18" aria-hidden="true">
+  <g fill="currentColor">
+    <rect x="11" y="-6" width="3" height="15" rx="1.5" transform="rotate(-90 12.5 1.5)"></rect>
+    <rect x="8.5" y="-1" width="3" height="20" rx="1.5" transform="rotate(-90 10 9)"></rect>
+    <rect x="9.5" y="7.5" width="3" height="18" rx="1.5" transform="rotate(-90 11 16.5)"></rect>
+  </g>
+</svg>

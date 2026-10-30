@@ -1,0 +1,42 @@
+# The site is static: Hasura/CMS changes reach it through a rebuild.
+# Nightly (and on demand) this refreshes the Algolia index and redeploys the site.
+# Pushes to main reindex too; the CI workflow deploys those.
+name: Content refresh
+
+on:
+  schedule:
+    - cron: '30 2 * * *' # 02:30 UTC daily
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: content-refresh
+  cancel-in-progress: false
+
+jobs:
+  reindex:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Rebuild Algolia index
+        run: pnpm index:algolia
+        env:
+          HASURA_URL: ${{ secrets.HASURA_URL }}
+          HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          PUBLIC_ALGOLIA_APP_ID: ${{ vars.PUBLIC_ALGOLIA_APP_ID }}
+          PUBLIC_ALGOLIA_INDEX_NAME_COMMON: ${{ vars.PUBLIC_ALGOLIA_INDEX_NAME_COMMON }}
+
+  deploy:
+    needs: reindex
+    if: github.event_name != 'push'
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit

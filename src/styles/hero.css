@@ -1,0 +1,60 @@
+/* Home hero: restores the gatsby-image crop and centres the search on the page. */
+
+/* The old gatsby-image wrapper filled the image box and cropped with object-fit: cover. */
+#hero .hero-image .duotone {
+  height: 100%;
+}
+
+#hero .hero-image .duotone img {
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (width >= 1280px) {
+  #hero .hero-image .duotone {
+    aspect-ratio: 870 / 500;
+    height: auto;
+  }
+}
+
+/* The theme offset the search box inside the image column (left: -23.3vw / -12.5%), which only
+   approximated the page centre. Anchor it to the hero instead and centre it at every width. */
+#hero {
+  position: relative;
+}
+
+#hero .autocomplete-search {
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+}
+
+@media (width >= 768px) {
+  #hero .autocomplete-search {
+    bottom: 10px;
+  }
+}
+
+@media (width >= 1280px) {
+  #hero .autocomplete-search {
+    bottom: 85px;
+  }
+}
+
+/* v7's PoweredBy is a single "Search by algolia" SVG (v6 had a separate text span), so size it as one
+   line and centre it vertically inside the input's right padding. */
+#hero .autocomplete-search .ais-PoweredBy {
+  top: 23px;
+  right: 22px;
+}
+
+#hero .autocomplete-search .ais-PoweredBy .ais-PoweredBy-link svg {
+  display: block;
+  width: 76px;
+  margin-top: 0;
+}
+
+/* The legacy field had no native clear button; it would collide with the badge. */
+#hero .autocomplete-search input::-webkit-search-cancel-button {
+  appearance: none;
+}

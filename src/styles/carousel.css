@@ -1,0 +1,37 @@
+/* CSS scroll-snap carousel replacing react-slick (3 / 2 / 1 items per view, like the legacy settings). */
+.carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  padding-bottom: 1rem;
+}
+
+.carousel > * {
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+@media (width >= 480px) {
+  .carousel {
+    grid-auto-columns: calc((100% - 1rem) / 2);
+  }
+}
+
+@media (width >= 1025px) {
+  .carousel {
+    grid-auto-columns: calc((100% - 2rem) / 3);
+  }
+}
+
+/* Duotone treatment matching the old gatsby-image output; the filter lives in DuotoneFilter.astro. */
+.duotone img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: url(#duotone);
+}

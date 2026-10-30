@@ -1,0 +1,70 @@
+---
+import logo from '../assets/images/logo.svg';
+import logoWhite from '../assets/images/logo_notypewhite.svg';
+import { SITE } from '../data/site';
+import CloseIcon from './icons/CloseIcon.astro';
+import MenuIcon from './icons/MenuIcon.astro';
+import Navigation from './Navigation.astro';
+import Separator from './Separator.astro';
+
+interface Props {
+  mapHeader?: boolean;
+}
+const { mapHeader = false } = Astro.props;
+---
+
+<header class:list={{ 'page-harta': mapHeader }}>
+  <Separator class="hidden md:block" color="snow" />
+  <div class="interior">
+    <a href="/" title="Prima pagină">
+      {mapHeader ? (
+        <>
+          <img src={logoWhite.src} alt="Harta Serviciilor Sociale" class="mobile-map-logo md:hidden" />
+          <img src={logo.src} alt="Harta Serviciilor Sociale" class="hidden md:block" />
+        </>
+      ) : (
+        <img src={logo.src} alt="Harta Serviciilor Sociale" />
+      )}
+    </a>
+
+    <Navigation class="nav-header hidden md:block" />
+
+    <div class="hamburger-menu md:hidden">
+      <MenuIcon class="menu_icon text-brown" />
+      <div>
+        <button
+          type="button"
+          class="block size-full"
+          aria-label="Deschide meniul"
+          aria-controls="mobile-nav"
+          data-drawer-open></button>
+      </div>
+    </div>
+  </div>
+  {!mapHeader && <Separator class="md:hidden" color="burg" width="88vw" />}
+
+  <dialog id="mobile-nav" class="drawer nav-drawer" aria-label="Meniu">
+    <div class="drawer-content">
+      <button type="button" class="nav-drawer-close" aria-label="Închide meniul" data-drawer-close>
+        <CloseIcon size={22} />
+      </button>
+      <Navigation class="nav-header" />
+      <a
+        class="btn btn-fb mt-20 absolute right-0 mr-12"
+        href={SITE.facebookUrl}
+        target="_blank"
+        title="Pagina Facebook"
+        rel="noopener noreferrer"></a>
+    </div>
+  </dialog>
+</header>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#mobile-nav');
+  document.querySelector('[data-drawer-open]')?.addEventListener('click', () => dialog?.showModal());
+  document.querySelector('[data-drawer-close]')?.addEventListener('click', () => dialog?.close());
+  // Close when clicking the backdrop.
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>

@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import type { Blog } from '../lib/hasura';
+import { formatDate } from '../lib/format';
+import Separator from './Separator.astro';
+
+interface Props {
+  blog: Blog;
+  class?: string;
+}
+
+const { blog, class: className = '' } = Astro.props;
+const href = `/noutati/${blog.slug}`;
+---
+
+<article class:list={[className, 'relative blog-post md:px-2 xl:px-4']}>
+  {blog.image && (
+    <div class="blog-image">
+      <a href={href} tabindex="-1" aria-hidden="true" class="duotone block">
+        <Image src={blog.image.url} alt="" width={770} height={350} fit="cover" class="md:w-full" />
+      </a>
+    </div>
+  )}
+  <h3 class="pt-4">
+    <a href={href} class="no-underline">
+      {blog.title}
+    </a>
+  </h3>
+  <p class="date">{formatDate(blog.publishedAt ?? blog.createdAt)}</p>
+  <p class="ellipsis-clamp-5 pb-16 md:pb-0">{blog.summary}</p>
+  <div class="blog-bottom flex items-center">
+    <Separator color="burg" />
+    <a href={href} class="md:ml-auto" aria-label={`Citește articolul: ${blog.title}`}>
+      <span class="btn btn-arrow-only relative" aria-hidden="true"></span>
+    </a>
+  </div>
+</article>

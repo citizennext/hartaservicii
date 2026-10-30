@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MapApp from '../../islands/map/MapApp';
+---
+
+<BaseLayout title="Harta Serviciilor" bodyClass="page-harta" mapHeader showFooter={false}>
+  <!-- The theme makes the Leaflet container fixed/full-screen; filters position against the page. -->
+  <MapApp client:only="react" />
+  <noscript>
+    <p>
+      Harta necesită JavaScript. Poți folosi <a href="/cautare">căutarea</a>.
+    </p>
+  </noscript>
+</BaseLayout>
